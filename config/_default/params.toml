@@ -11,12 +11,12 @@ logo_height = "32px"
 # if logo_webp set false, will not generate WEBP version of logo | default is true
 logo_webp = true
 # logo text will only show when logo is missing.
-logo_text = "catdev"
+logo_text = "CatDev"
 # navbar fixed to top
 navbar_fixed = true
 # theme-mode
 theme_switcher = false
-theme_default = "dark" # available options [light/dark/system]
+theme_default = "light" # available options [light/dark/system]
 # Main Sections
 mainSections = ["blog"]
 # contact form action
@@ -27,7 +27,7 @@ google_adsense = ""     # example: ca-pub-xxxxxxxxxxxxxxxx
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
-copyright = "[catdev LLC](https://catdev.io)"
+copyright = "[CatDev LLC](https://catdev.io)"
 
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
@@ -38,14 +38,14 @@ preloader = "" # use jpg, png, svg or gif format.
 # Navigation button
 [navigation_button]
 enable = true
-label = "get a quote"
+label = "Contact Us"
 link = "contact"
 
 # search
 # search module: https://github.com/gethugothemes/hugo-modules/tree/master/search
 [search]
 enable = true
-primary_color = "#121212"
+primary_color = "#2169B3"
 include_sections = ["blog"]
 show_image = true
 show_description = true
@@ -56,9 +56,9 @@ show_categories = true
 # seo meta data for OpenGraph / Twitter Card
 # seo module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo
 [metadata]
-keywords = ["Cybersecurity", "catdev", "Penetration testing"]
-description = "catdev penetration testing services"
-author = "catdev LLC"
+keywords = ["Cybersecurity", "Penetration Testing", "Cloud Migration", "Kubernetes", "DevOps", "AI", "Managed Services", "Software Development"]
+description = "CatDev delivers enterprise-grade IT services with a security-first mindset. Cybersecurity, cloud platforms, AI, and managed services."
+author = "CatDev LLC"
 image = "images/og-image.png"
 
 

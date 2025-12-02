@@ -1,0 +1,72 @@
+{{ define "main" }}
+  <!-- Page Header -->
+  {{ with .Params.header }}
+    <section class="section bg-theme-light dark:bg-darkmode-theme-light">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="lg:col-8 text-center">
+            <h1 class="mb-4">{{ .title }}</h1>
+            <p class="text-lg text-text">{{ .subtitle }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+
+  <!-- Case Studies List -->
+  <section class="section">
+    <div class="container">
+      {{ $pages := where .RegularPages "Draft" false }}
+      {{ if $pages }}
+        <div class="row">
+          {{ range $pages }}
+            <div class="lg:col-6 mb-8">
+              <a href="{{ .Permalink }}" class="block h-full">
+                <div class="bg-theme-light dark:bg-darkmode-theme-light rounded-lg p-8 h-full transition-all duration-300 hover:shadow-lg">
+                  <div class="flex items-center gap-2 text-sm text-text mb-4">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">{{ .Params.project.type }}</span>
+                    <span>{{ .Params.client.industry }}</span>
+                  </div>
+                  <h2 class="h4 mb-3">{{ .Title }}</h2>
+                  <p class="text-text mb-4">{{ .Params.description }}</p>
+                  {{ with .Params.results.metrics }}
+                    <div class="flex gap-6 pt-4 border-t border-border dark:border-darkmode-border">
+                      {{ range (first 2 .) }}
+                        <div>
+                          <div class="text-2xl font-bold text-primary">{{ .value }}</div>
+                          <div class="text-xs text-text">{{ .label }}</div>
+                        </div>
+                      {{ end }}
+                    </div>
+                  {{ end }}
+                </div>
+              </a>
+            </div>
+          {{ end }}
+        </div>
+      {{ else }}
+        <div class="row justify-center">
+          <div class="lg:col-8">
+            <div class="content">{{ .Content }}</div>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-primary">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-8 text-center text-white">
+          <h2 class="mb-4 text-white">Have a Similar Challenge?</h2>
+          <p class="mb-8 text-white/80">Let's discuss how we can help your organization achieve similar results.</p>
+          <a href="{{ "contact/" | absURL }}" class="btn bg-white text-primary hover:bg-white/90">
+            Start a Conversation
+            <i class="fa fa-arrow-right pl-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

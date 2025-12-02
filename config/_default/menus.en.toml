@@ -7,32 +7,106 @@ url = "/"
 weight = 1
 
 [[main]]
+name = "Services"
+url = "services/"
+weight = 2
+hasChildren = true
+
+  [[main]]
+  parent = "Services"
+  name = "Cybersecurity"
+  url = "services/cybersecurity/"
+  weight = 1
+
+  [[main]]
+  parent = "Services"
+  name = "Cloud Platforms"
+  url = "services/cloud-platforms/"
+  weight = 2
+
+  [[main]]
+  parent = "Services"
+  name = "AI & Agentic Systems"
+  url = "services/ai-systems/"
+  weight = 3
+
+  [[main]]
+  parent = "Services"
+  name = "Software Development"
+  url = "services/software-development/"
+  weight = 4
+
+  [[main]]
+  parent = "Services"
+  name = "DevOps"
+  url = "services/devops/"
+  weight = 5
+
+  [[main]]
+  parent = "Services"
+  name = "Cloud Migrations"
+  url = "services/cloud-migrations/"
+  weight = 6
+
+  [[main]]
+  parent = "Services"
+  name = "Kubernetes"
+  url = "services/kubernetes/"
+  weight = 7
+
+  [[main]]
+  parent = "Services"
+  name = "Managed Services"
+  url = "services/managed-services/"
+  weight = 8
+
+[[main]]
 name = "About"
 url = "about/"
 weight = 3
+
+[[main]]
+name = "Trust Center"
+url = "trust/"
+weight = 4
+
+[[main]]
+name = "Case Studies"
+url = "case-studies/"
+weight = 5
 
 [[main]]
 name = "Contact"
 url = "contact/"
-weight = 4
-
-[[main]]
-weight = 5
-name = "Blog"
-url = "blog/"
+weight = 6
 
 # footer menu
 [[footer]]
+name = "Services"
+url = "services/"
+weight = 1
+
+[[footer]]
 name = "About"
 url = "about/"
-weight = 1
+weight = 2
+
+[[footer]]
+name = "Trust Center"
+url = "trust/"
+weight = 3
+
+[[footer]]
+name = "Contact"
+url = "contact/"
+weight = 4
 
 [[footer]]
 name = "Imprint"
 url = "imprint/"
-weight = 2
+weight = 5
 
 [[footer]]
 name = "Privacy Policy"
 url = "privacy-policy/"
-weight = 3
+weight = 6

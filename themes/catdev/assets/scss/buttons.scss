@@ -1,15 +1,17 @@
 .btn {
-  @apply inline-block rounded border border-transparent px-5 py-2 font-semibold capitalize transition;
+  @apply inline-block rounded-lg border border-transparent px-6 py-3 font-semibold transition duration-200;
 }
 
 .btn-sm {
-  @apply rounded-sm px-4 py-1.5 text-sm;
+  @apply rounded px-4 py-2 text-sm;
 }
 
 .btn-primary {
-  @apply border-primary bg-primary dark:border-darkmode-primary dark:text-dark text-white dark:bg-white;
+  @apply border-primary bg-primary text-white hover:bg-primary/90 hover:border-primary/90;
+  @apply dark:border-darkmode-primary dark:bg-white dark:text-dark dark:hover:bg-white/90;
 }
 
 .btn-outline-primary {
-  @apply border-dark text-dark hover:bg-dark dark:hover:text-dark bg-transparent hover:text-white dark:border-white dark:text-white dark:hover:bg-white;
+  @apply border-primary text-primary bg-transparent hover:bg-primary hover:text-white;
+  @apply dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-dark;
 }

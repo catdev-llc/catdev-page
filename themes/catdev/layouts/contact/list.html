@@ -1,120 +1,154 @@
 {{ define "main" }}
-  {{ partial "page-header" . }}
-
-
-  <section class="section-sm">
+  <!-- Page Header -->
+  <section class="section bg-theme-light dark:bg-darkmode-theme-light">
     <div class="container">
-      <div class="row">
-        <div class="md:col-10 lg:col-6 mx-auto">
-          <form action="{{ site.Params.contact_form_action }}" method="POST">
-            <div class="mb-6">
-              <label for="name" class="form-label">
-                Full Name <span class="text-red-500">*</span>
-              </label>
-              <input
-                id="name"
-                name="name"
-                class="form-input"
-                placeholder="John Doe"
-                type="text" />
-            </div>
-            <div class="mb-6">
-              <label for="email" class="form-label">
-                Working Mail <span class="text-red-500">*</span>
-              </label>
-              <input
-                id="email"
-                name="email"
-                class="form-input"
-                placeholder="john.doe@email.com"
-                type="email" />
-            </div>
-            <div class="mb-6">
-              <label for="message" class="form-label">
-                Anything else? <span class="text-red-500">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                class="form-input"
-                placeholder="Message goes here..."
-                rows="8"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+      <div class="row justify-center">
+        <div class="lg:col-8 text-center">
+          <h1 class="mb-4">{{ .Title }}</h1>
+          <p class="text-lg text-text">{{ .Params.description }}</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- google map -->
-  {{ with site.Params.google_map }}
-    {{ if .enable }}
-      <div
-        id="map"
-        style="height: 400px;"
-        data-latitude="{{ .map_latitude }}"
-        data-longitude="{{ .map_longitude }}"
-        data-marker="{{ .map_marker | relURL }}"
-        data-marker-name="{{ site.Title }}"></div>
-    {{ end }}
-  {{ end }}
+  <!-- Contact Form & Info -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        <!-- Contact Info -->
+        <div class="lg:col-4 mb-8 lg:mb-0">
+          {{ with .Params.info }}
+            <h2 class="h4 mb-4">{{ .title }}</h2>
+            <p class="text-text mb-6">{{ .description }}</p>
 
-  {{ with site.Params.subscription }}
-    {{ if .enable }}
-      <!-- subscription form -->
-      <form
-        action="{{ .mailchimp_form_action | safeURL }}"
-        method="post"
-        id="mc-embedded-subscribe-form"
-        novalidate="novalidate">
-        <div class="input-group w-75 mx-auto mb-3">
-          <input
-            type="email"
-            name="EMAIL"
-            placeholder="Email"
-            class="form-control required email mce_inline_error"
-            id="mce-EMAIL"
-            aria-required="true"
-            autocomplete="off"
-            required />
-          <button
-            class="input-group-text"
-            name="subscribe"
-            id="mc-embedded-subscribe">
-            {{ .button_label }}
-          </button>
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <i class="fa-solid fa-envelope text-primary"></i>
+                </div>
+                <div>
+                  <div class="text-sm text-text">Email</div>
+                  <a href="mailto:{{ .email }}" class="font-medium hover:text-primary">{{ .email }}</a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <i class="fa-solid fa-clock text-primary"></i>
+                </div>
+                <div>
+                  <div class="text-sm text-text">Response Time</div>
+                  <div class="font-medium">{{ .response_time }}</div>
+                </div>
+              </div>
+            </div>
+          {{ end }}
         </div>
-        <input
-          type="hidden"
-          name="EMAILTYPE"
-          id="mce-EMAILTYPE-0"
-          value="html" />
-        <div style="position:absolute;left:-5000px" aria-hidden="true">
-          <input type="text" name="{{ .name }}" tabindex="-1" />
+
+        <!-- Contact Form -->
+        <div class="lg:col-6">
+          <div class="bg-theme-light dark:bg-darkmode-theme-light rounded-lg p-8">
+            <h2 class="h4 mb-6">Send us a message</h2>
+            <form action="{{ site.Params.contact_form_action }}" method="POST">
+              <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="name" class="form-label">
+                    Full Name <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    class="form-input"
+                    placeholder="Your name"
+                    type="text"
+                    required />
+                </div>
+                <div>
+                  <label for="email" class="form-label">
+                    Work Email <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    placeholder="you@company.com"
+                    type="email"
+                    required />
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="company" class="form-label">
+                  Company
+                </label>
+                <input
+                  id="company"
+                  name="company"
+                  class="form-input"
+                  placeholder="Your company name"
+                  type="text" />
+              </div>
+              <div class="mb-6">
+                <label for="service" class="form-label">
+                  What can we help with?
+                </label>
+                <select id="service" name="service" class="form-input">
+                  <option value="">Select a service area</option>
+                  <option value="security">Cybersecurity & Penetration Testing</option>
+                  <option value="cloud-platforms">Cloud File Platforms (ownCloud/Nextcloud)</option>
+                  <option value="ai">AI & Agentic Systems</option>
+                  <option value="development">Software Development</option>
+                  <option value="devops">DevOps & Platform Engineering</option>
+                  <option value="cloud-migration">Cloud Migration</option>
+                  <option value="kubernetes">Kubernetes & Containers</option>
+                  <option value="managed">Managed Services</option>
+                  <option value="other">Other / Not sure</option>
+                </select>
+              </div>
+              <div class="mb-6">
+                <label for="message" class="form-label">
+                  Tell us about your project <span class="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  class="form-input"
+                  placeholder="Describe your challenge, timeline, and any relevant context..."
+                  rows="6"
+                  required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-full">
+                Send Message
+                <i class="fa fa-arrow-right pl-2"></i>
+              </button>
+            </form>
+          </div>
         </div>
-      </form>
-      <div id="mce-responses" class="clear">
-        <div
-          class="response text-white"
-          id="mce-error-response"
-          style="display:none"></div>
-        <div
-          class="response text-white"
-          id="mce-success-response"
-          style="display:none"></div>
       </div>
-      <script
-        type="text/javascript"
-        src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-      <!-- /subscription form -->
-    {{ end }}
-  {{ end }}
+    </div>
+  </section>
 
-  {{ if site.Params.google_map.enable }}
-    {{ $gmap:= resources.Get "plugins/maps/google-map.js" }}
-    <script defer src="{{ $gmap.RelPermalink }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.google_map.map_api_key }}&libraries=places"></script>
+  <!-- FAQ Section -->
+  {{ with .Params.faq }}
+    <section class="section bg-theme-light dark:bg-darkmode-theme-light">
+      <div class="container">
+        <div class="row justify-center mb-12">
+          <div class="lg:col-8 text-center">
+            <h2 class="mb-4">{{ .title }}</h2>
+          </div>
+        </div>
+        <div class="row justify-center">
+          <div class="lg:col-8">
+            <div class="space-y-4">
+              {{ range .items }}
+                <div class="bg-body dark:bg-darkmode-body rounded-lg p-6">
+                  <h3 class="h5 mb-2">{{ .question }}</h3>
+                  <p class="text-text">{{ .answer }}</p>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   {{ end }}
-
 {{ end }}
