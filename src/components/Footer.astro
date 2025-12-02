@@ -3,15 +3,14 @@ const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   services: [
-    { name: 'Software Development', href: '#services' },
-    { name: 'AI & Agentic Systems', href: '#services' },
-    { name: 'Kubernetes Platforms', href: '#services' },
-    { name: 'DevOps Engineering', href: '#services' },
-    { name: 'Cybersecurity', href: '#services' },
+    { name: 'AI & Intelligent Systems', href: '#services' },
+    { name: 'Cloud & Infrastructure', href: '#services' },
+    { name: 'Security Engineering', href: '#services' },
   ],
   company: [
     { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Imprint', href: '/imprint' },
   ],
 };
 ---
@@ -21,18 +20,20 @@ const footerLinks = {
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
       <!-- Brand -->
       <div class="md:col-span-2">
-        <a href="/" class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10">
-            <img src="/logo-icon.png" alt="catdev" class="w-full h-full object-contain" />
-          </div>
-          <span class="text-xl font-bold tracking-tight">catdev</span>
+        <a href="/" class="flex items-center mb-6">
+          <img src="/logo.png" alt="catdev" class="h-10 w-auto" />
         </a>
-        <p class="text-steel max-w-md mb-6">
-          Full-stack engineering for organizations building the future.
+        <p class="text-steel max-w-md mb-4">
+          Engineering secure, AI-driven cloud solutions.
           Modern tools, senior engineers, no BS.
         </p>
-        <a href="mailto:hello@catdev.io" class="text-cyan hover:text-white transition-colors">
-          hello@catdev.io
+        <p class="text-steel text-sm mb-4">
+          CATDEV LLC<br />
+          7901 4th St N STE 300<br />
+          St. Petersburg, FL 33702, USA
+        </p>
+        <a href="mailto:info@catdev.io" class="text-cyan hover:text-white transition-colors">
+          info@catdev.io
         </a>
       </div>
 
@@ -72,7 +73,7 @@ const footerLinks = {
     <!-- Bottom Bar -->
     <div class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
       <p class="text-steel text-sm">
-        &copy; {currentYear} catdev. All rights reserved.
+        &copy; {currentYear} CATDEV LLC. All rights reserved.
       </p>
       <div class="flex items-center gap-6">
         <a href="/privacy" class="text-steel hover:text-white transition-colors text-sm">
