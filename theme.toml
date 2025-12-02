@@ -1,0 +1,24 @@
+name = "catdev"
+license = "MIT"
+description = "catdev cybersecurity company website"
+homepage = "https://github.com/catdev-llc/catdev-page"
+min_version = "0.121.2"
+
+tags = [
+  "cybersecurity",
+  "business",
+  "responsive",
+  "dark",
+  "tailwindcss",
+]
+
+features = [
+  "Blog",
+  "Search",
+  "Dark Mode",
+  "Contact Form",
+]
+
+[author]
+name = "catdev LLC"
+homepage = "https://catdev.io"
