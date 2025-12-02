@@ -1,0 +1,87 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  services: [
+    { name: 'Software Development', href: '#services' },
+    { name: 'AI & Agentic Systems', href: '#services' },
+    { name: 'Kubernetes Platforms', href: '#services' },
+    { name: 'DevOps Engineering', href: '#services' },
+    { name: 'Cybersecurity', href: '#services' },
+  ],
+  company: [
+    { name: 'About', href: '#about' },
+    { name: 'Contact', href: '#contact' },
+  ],
+};
+---
+
+<footer class="border-t border-white/5 bg-midnight/50">
+  <div class="container-custom py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <a href="/" class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10">
+            <img src="/logo-icon.png" alt="catdev" class="w-full h-full object-contain" />
+          </div>
+          <span class="text-xl font-bold tracking-tight">catdev</span>
+        </a>
+        <p class="text-steel max-w-md mb-6">
+          Full-stack engineering for organizations building the future.
+          Modern tools, senior engineers, no BS.
+        </p>
+        <a href="mailto:hello@catdev.io" class="text-cyan hover:text-white transition-colors">
+          hello@catdev.io
+        </a>
+      </div>
+
+      <!-- Services Links -->
+      <div>
+        <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+          Services
+        </h4>
+        <ul class="space-y-3">
+          {footerLinks.services.map(link => (
+            <li>
+              <a href={link.href} class="text-steel hover:text-white transition-colors text-sm">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Company Links -->
+      <div>
+        <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+          Company
+        </h4>
+        <ul class="space-y-3">
+          {footerLinks.company.map(link => (
+            <li>
+              <a href={link.href} class="text-steel hover:text-white transition-colors text-sm">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-steel text-sm">
+        &copy; {currentYear} catdev. All rights reserved.
+      </p>
+      <div class="flex items-center gap-6">
+        <a href="/privacy" class="text-steel hover:text-white transition-colors text-sm">
+          Privacy
+        </a>
+        <a href="/imprint" class="text-steel hover:text-white transition-colors text-sm">
+          Imprint
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

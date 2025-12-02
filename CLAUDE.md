@@ -4,57 +4,87 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is **catdev** - a cybersecurity company website built with Hugo and TailwindCSS, based on the Hugoplate template. The site provides information about penetration testing, MDR, and SIEM services.
+This is **catdev** - a modern, cutting-edge website for a full-stack IT services company. Built with Astro and TailwindCSS, featuring a dark theme with animated gradients, glassmorphism effects, and smooth scroll animations.
+
+**Important**: The company name is always lowercase: `catdev` (not CatDev or CATDEV).
 
 ## Development Commands
 
 ```bash
-npm run dev          # Start Hugo development server
-npm run build        # Production build with minification and PurgeCSS
-npm run preview      # Preview production build locally
-npm run format       # Format code with Prettier
-npm run update-modules  # Update Hugo modules
+npm run dev      # Start development server
+npm run build    # Production build (outputs to ./dist)
+npm run preview  # Preview production build locally
 ```
 
 ## Architecture
 
-### Configuration Hierarchy
-- `hugo.toml` - Main Hugo configuration (base URL, theme, plugins, services)
-- `config/_default/params.toml` - Site parameters (logo, SEO, contact form, cookies)
-- `config/_default/menus.en.toml` - Navigation menus
-- `config/_default/languages.toml` - Language settings
-- `data/theme.json` - Colors and fonts (consumed by TailwindCSS)
-- `data/social.json` - Social media links
+### Tech Stack
+- **Astro 4.x** - Static site generator with component islands
+- **TailwindCSS 3.x** - Utility-first CSS with custom design system
+- **TypeScript** - Type-safe development
 
-### Content Structure
-Content lives in `content/english/`:
-- `_index.md` - Homepage (banner, features/services)
-- `blog/` - Blog posts
-- `about/`, `contact/`, `pages/` - Static pages
-- `sections/` - Reusable content sections
+### Project Structure
+```
+src/
+├── assets/images/     # Source images (logos, etc.)
+├── components/
+│   ├── Header.astro   # Fixed navigation with mobile menu
+│   ├── Footer.astro   # Site footer
+│   └── sections/      # Page sections
+│       ├── Hero.astro
+│       ├── Services.astro
+│       ├── Approach.astro
+│       ├── About.astro
+│       └── Contact.astro
+├── layouts/
+│   └── Layout.astro   # Base layout with global styles
+├── pages/
+│   └── index.astro    # Homepage
+└── styles/
+    └── global.css     # Global styles, Tailwind directives
+public/
+├── CNAME              # GitHub Pages custom domain
+├── favicon.png
+├── logo-icon.png
+└── og-image.png
+```
 
-### Theme & Layouts
-The custom `catdev` theme extends Hugoplate at `themes/catdev/`:
-- `layouts/index.html` - Homepage template
-- `layouts/partials/essentials/` - Header, footer, styles, scripts
-- `layouts/partials/components/` - Reusable UI components
-- `layouts/_default/` - Base templates (baseof, single, list)
+### Design System
 
-### Styling System
-- TailwindCSS configured via `tailwind.config.js`
-- Colors/fonts read dynamically from `data/theme.json`
-- PostCSS with PurgeCSS for production (`postcss.config.js`)
-- Custom SCSS in `assets/scss/`
+**Colors** (defined in `tailwind.config.mjs`):
+- `electric`: #2169B3 (primary brand blue)
+- `ocean`: #094E96 (dark accent)
+- `midnight`: #0A0E27 (dark background)
+- `deep-space`: #151B3B (card backgrounds)
+- `steel`: #8B92A8 (secondary text)
+- `cyan`: #00D4FF (interaction highlights)
+- `purple`: #6B4FFF (secondary accents)
 
-### Hugo Modules
-Uses gethugothemes modules for: search, SEO, cookie consent, icons, image handling, accordion, tabs, modals, and more. Modules defined in `go.mod`.
+**Key CSS Classes** (in `global.css`):
+- `.text-gradient` - Gradient text effect
+- `.btn-primary` - Primary CTA button with glow
+- `.btn-secondary` - Ghost button style
+- `.card-glass` - Glassmorphism card
+- `.glow-effect` - Hover glow overlay
+- `.reveal` - Scroll-triggered fade-in animation
+- `.section-padding` - Consistent section spacing
+- `.container-custom` - Max-width container
 
-## Key Files to Know
-- `hugo.toml:127-170` - Plugin definitions (CSS/JS)
-- `tailwind.config.js` - Tailwind theme extends colors/fonts from theme.json
-- `content/english/_index.md` - Homepage content (banner, service features)
-- `config/_default/params.toml` - Site-wide settings (contact form, theme mode)
+### Animations
+- Scroll reveal animations trigger on `.reveal` elements
+- Floating animations on decorative elements
+- Gradient pulse effects on accent elements
+- Smooth scroll behavior built-in
 
 ## Deployment
 
-Deployed via GitHub Pages using GitHub Actions (`.github/workflows/deploy.yaml`). Pushes to `main` automatically trigger a build and deploy.
+Deployed via GitHub Pages using GitHub Actions (`.github/workflows/deploy.yaml`).
+- Pushes to `main` automatically trigger build and deploy
+- Output directory: `./dist`
+- Custom domain: catdev.io (via CNAME file)
+
+## Key Files
+- `astro.config.mjs` - Astro configuration
+- `tailwind.config.mjs` - Tailwind theme and custom colors
+- `src/styles/global.css` - Global styles and custom components
+- `src/layouts/Layout.astro` - Base HTML template with scroll scripts

@@ -1,0 +1,82 @@
+---
+const approaches = [
+  {
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`,
+    title: 'Engineering-First',
+    description: "We're engineers, not a consultancy that cosplays as one. Code, infrastructure, and systems are what we do.",
+  },
+  {
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+    title: 'Modern Stack',
+    description: 'Kubernetes, Terraform, React, Go, Python, TypeScript—tools built for 2025, not 2015.',
+  },
+  {
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>`,
+    title: 'Built to Scale',
+    description: 'From startup MVP to enterprise platform. We build systems that grow with you, not against you.',
+  },
+];
+---
+
+<section id="approach" class="section-padding relative overflow-hidden">
+  <!-- Background Gradient -->
+  <div class="absolute inset-0 bg-gradient-radial from-electric/5 via-transparent to-transparent"></div>
+
+  <div class="container-custom relative">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="text-white">How we</span>
+        <span class="text-gradient"> build</span>
+      </h2>
+      <p class="text-xl text-steel max-w-2xl mx-auto">
+        Opinionated. Pragmatic. Future-focused.
+      </p>
+    </div>
+
+    <!-- Approach Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {approaches.map((approach, index) => (
+        <div
+          class="group text-center reveal"
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <div class="card-glass p-8 h-full transition-all duration-500 hover:scale-105">
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-hero mb-6 text-white">
+                <div set:html={approach.icon} />
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">
+                {approach.title}
+              </h3>
+              <p class="text-steel leading-relaxed">
+                {approach.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Stats -->
+    <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
+      <div class="text-center">
+        <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">10+</div>
+        <div class="text-steel">Years Experience</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">50+</div>
+        <div class="text-steel">Projects Delivered</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">24/7</div>
+        <div class="text-steel">Support Available</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">100%</div>
+        <div class="text-steel">Senior Engineers</div>
+      </div>
+    </div>
+  </div>
+</section>
