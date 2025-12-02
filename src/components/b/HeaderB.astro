@@ -1,0 +1,71 @@
+---
+---
+
+<header class="nav-fixed">
+  <nav class="container-tech">
+    <div class="flex items-center justify-between" style="padding: 1rem 0;">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2" style="text-decoration: none;">
+        <img src="/logo-icon.png" alt="catdev" style="width: 32px; height: 32px;" />
+        <span class="mono" style="font-size: 1.125rem; font-weight: 600; color: var(--color-text-primary);">catdev</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav" style="display: none;">
+        <div class="flex items-center gap-lg">
+          <a href="#hero" class="nav-link">01_HERO</a>
+          <a href="#services" class="nav-link">02_SERVICES</a>
+          <a href="#metrics" class="nav-link">03_METRICS</a>
+          <a href="#approach" class="nav-link">04_APPROACH</a>
+          <a href="#about" class="nav-link">05_ABOUT</a>
+          <a href="#contact" class="nav-link">06_CONTACT</a>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="mobile-menu-btn"
+        aria-label="Open menu"
+        style="display: flex; background: none; border: none; cursor: pointer; padding: 0.5rem;"
+      >
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="mobile-menu" style="display: none;">
+  <button
+    id="mobile-menu-close"
+    aria-label="Close menu"
+    style="position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: var(--color-text-primary); font-size: 2rem; cursor: pointer; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;"
+  >
+    &times;
+  </button>
+
+  <div class="flex flex-col items-center gap-lg">
+    <a href="#hero" class="nav-link">01_HERO</a>
+    <a href="#services" class="nav-link">02_SERVICES</a>
+    <a href="#metrics" class="nav-link">03_METRICS</a>
+    <a href="#approach" class="nav-link">04_APPROACH</a>
+    <a href="#about" class="nav-link">05_ABOUT</a>
+    <a href="#contact" class="nav-link">06_CONTACT</a>
+  </div>
+</div>
+
+<style>
+  @media (min-width: 768px) {
+    .desktop-nav {
+      display: block !important;
+    }
+    .mobile-menu-btn {
+      display: none !important;
+    }
+  }
+</style>
