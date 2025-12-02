@@ -56,8 +56,8 @@ show_categories = true
 # seo meta data for OpenGraph / Twitter Card
 # seo module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo
 [metadata]
-keywords = ["Cybersecurity", "Penetration Testing", "Cloud Migration", "Kubernetes", "DevOps", "AI", "Managed Services", "Software Development"]
-description = "CatDev delivers enterprise-grade IT services with a security-first mindset. Cybersecurity, cloud platforms, AI, and managed services."
+keywords = ["Full-Stack IT Services", "Software Development", "DevOps", "Cloud Migration", "Kubernetes", "Cybersecurity", "Penetration Testing", "Managed Services", "AI Implementation", "Platform Engineering", "Infrastructure Modernization", "Security Engineering"]
+description = "Modern engineering for organizations that build the future. CatDev delivers full-stack IT services across four pillars: BUILD, OPERATE, TRANSFORM, and SECURE."
 author = "CatDev LLC"
 image = "images/og-image.png"
 

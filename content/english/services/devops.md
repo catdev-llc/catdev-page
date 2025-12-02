@@ -84,6 +84,19 @@ ideal_for:
     - "Development and operations teams work in silos"
     - "You want to adopt cloud-native practices"
 
+# Pillar Reference
+pillar:
+  name: "OPERATE"
+  description: "DevOps & Platform Engineering is a core capability within our OPERATE pillar, focused on running infrastructure reliably at any scale."
+  link: "/what-we-do/operate/"
+  related_pillars:
+    - name: "BUILD"
+      description: "DevOps automation often supports application development and deployment processes."
+      link: "/what-we-do/build/"
+    - name: "TRANSFORM"
+      description: "Infrastructure transformation projects modernize operational practices and tooling."
+      link: "/what-we-do/transform/"
+
 cta:
   title: "Accelerate Your Delivery"
   description: "Let's discuss how DevOps practices can help your organization deliver software faster and more reliably."

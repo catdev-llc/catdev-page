@@ -84,6 +84,19 @@ ideal_for:
     - "You want to improve developer productivity with a platform approach"
     - "You're evaluating cloud-managed vs. self-managed Kubernetes"
 
+# Pillar Reference
+pillar:
+  name: "BUILD"
+  description: "Kubernetes & Container Platforms is a core capability within our BUILD pillar, focused on creating production-ready infrastructure."
+  link: "/what-we-do/build/"
+  related_pillars:
+    - name: "OPERATE"
+      description: "We provide managed Kubernetes services for ongoing platform operations and support."
+      link: "/what-we-do/operate/"
+    - name: "SECURE"
+      description: "Container security and Kubernetes hardening are critical parts of platform design."
+      link: "/what-we-do/secure/"
+
 cta:
   title: "Build Your Container Platform"
   description: "Let's discuss your container platform needs and design a Kubernetes environment that serves your organization."

@@ -84,6 +84,19 @@ ideal_for:
     - "You need to modernize legacy systems"
     - "You want to augment your team with senior engineering expertise"
 
+# Pillar Reference
+pillar:
+  name: "BUILD"
+  description: "Software Development is a core capability within our BUILD pillar, which focuses on creating systems that solve real problems."
+  link: "/what-we-do/build/"
+  related_pillars:
+    - name: "OPERATE"
+      description: "After building your software, we can provide ongoing operational support and managed services."
+      link: "/what-we-do/operate/"
+    - name: "SECURE"
+      description: "Security reviews and penetration testing ensure your software is protected from vulnerabilities."
+      link: "/what-we-do/secure/"
+
 cta:
   title: "Build Something That Lasts"
   description: "Let's discuss your software needs and how we can help you build systems that serve your business for years to come."

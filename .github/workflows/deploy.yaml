@@ -16,8 +16,8 @@ concurrency:
 
 env:
   HUGO_ENV: production
-  HUGO_VERSION: "0.121.2"
-  GO_VERSION: "1.20.5"
+  HUGO_VERSION: "0.140.0"
+  GO_VERSION: "1.22"
   NODE_VERSION: "20"
 
 jobs:

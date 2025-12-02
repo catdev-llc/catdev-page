@@ -83,6 +83,22 @@ ideal_for:
     - "You've experienced a security incident and want to prevent recurrence"
     - "You're evaluating the security of acquired companies or third-party vendors"
 
+# Pillar Reference
+pillar:
+  name: "SECURE"
+  description: "Cybersecurity & Security Engineering is the foundation of our SECURE pillar, focused on protecting what you've built."
+  link: "/what-we-do/secure/"
+  related_pillars:
+    - name: "BUILD"
+      description: "Security is embedded in our software development practices from day one."
+      link: "/what-we-do/build/"
+    - name: "OPERATE"
+      description: "Security operations, monitoring, and patch management are part of our managed services."
+      link: "/what-we-do/operate/"
+    - name: "TRANSFORM"
+      description: "Migrations and modernization projects are ideal times to improve security posture."
+      link: "/what-we-do/transform/"
+
 cta:
   title: "Protect Your Organization"
   description: "Schedule a discovery call to discuss your security requirements and how we can help identify and address vulnerabilities."

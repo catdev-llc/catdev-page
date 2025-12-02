@@ -7,72 +7,60 @@ url = "/"
 weight = 1
 
 [[main]]
-name = "Services"
-url = "services/"
+name = "What We Do"
+url = "what-we-do/"
 weight = 2
 hasChildren = true
 
   [[main]]
-  parent = "Services"
-  name = "Cybersecurity"
-  url = "services/cybersecurity/"
+  parent = "What We Do"
+  name = "Overview"
+  url = "what-we-do/"
   weight = 1
 
   [[main]]
-  parent = "Services"
-  name = "Cloud Platforms"
-  url = "services/cloud-platforms/"
+  parent = "What We Do"
+  name = "BUILD"
+  url = "what-we-do/build/"
   weight = 2
 
   [[main]]
-  parent = "Services"
-  name = "AI & Agentic Systems"
-  url = "services/ai-systems/"
+  parent = "What We Do"
+  name = "OPERATE"
+  url = "what-we-do/operate/"
   weight = 3
 
   [[main]]
-  parent = "Services"
-  name = "Software Development"
-  url = "services/software-development/"
+  parent = "What We Do"
+  name = "TRANSFORM"
+  url = "what-we-do/transform/"
   weight = 4
 
   [[main]]
-  parent = "Services"
-  name = "DevOps"
-  url = "services/devops/"
+  parent = "What We Do"
+  name = "SECURE"
+  url = "what-we-do/secure/"
   weight = 5
 
   [[main]]
-  parent = "Services"
-  name = "Cloud Migrations"
-  url = "services/cloud-migrations/"
+  parent = "What We Do"
+  name = "All Services"
+  url = "services/"
   weight = 6
 
-  [[main]]
-  parent = "Services"
-  name = "Kubernetes"
-  url = "services/kubernetes/"
-  weight = 7
-
-  [[main]]
-  parent = "Services"
-  name = "Managed Services"
-  url = "services/managed-services/"
-  weight = 8
-
 [[main]]
-name = "About"
-url = "about/"
+name = "How We Work"
+url = "how-we-work/"
 weight = 3
-
-[[main]]
-name = "Trust Center"
-url = "trust/"
-weight = 4
 
 [[main]]
 name = "Case Studies"
 url = "case-studies/"
+weight = 4
+
+[[main]]
+name = "About"
+url = "about/"
 weight = 5
 
 [[main]]
@@ -82,31 +70,36 @@ weight = 6
 
 # footer menu
 [[footer]]
+name = "What We Do"
+url = "what-we-do/"
+weight = 1
+
+[[footer]]
 name = "Services"
 url = "services/"
-weight = 1
+weight = 2
 
 [[footer]]
 name = "About"
 url = "about/"
-weight = 2
+weight = 3
 
 [[footer]]
 name = "Trust Center"
 url = "trust/"
-weight = 3
+weight = 4
 
 [[footer]]
 name = "Contact"
 url = "contact/"
-weight = 4
+weight = 5
 
 [[footer]]
 name = "Imprint"
 url = "imprint/"
-weight = 5
+weight = 6
 
 [[footer]]
 name = "Privacy Policy"
 url = "privacy-policy/"
-weight = 6
+weight = 7

@@ -84,6 +84,22 @@ ideal_for:
     - "Disaster recovery improvements are a priority"
     - "You're consolidating from multiple locations or acquired companies"
 
+# Pillar Reference
+pillar:
+  name: "TRANSFORM"
+  description: "Cloud Migrations is a core capability within our TRANSFORM pillar, focused on modernizing infrastructure without disrupting your business."
+  link: "/what-we-do/transform/"
+  related_pillars:
+    - name: "BUILD"
+      description: "Modernization often requires rebuilding components with cloud-native architecture."
+      link: "/what-we-do/build/"
+    - name: "OPERATE"
+      description: "After migration, ongoing operations ensure your cloud environment remains optimized."
+      link: "/what-we-do/operate/"
+    - name: "SECURE"
+      description: "Cloud migrations are ideal opportunities to improve security posture and hardening."
+      link: "/what-we-do/secure/"
+
 cta:
   title: "Plan Your Cloud Journey"
   description: "Let's discuss your migration objectives and develop a strategy that sets you up for success."

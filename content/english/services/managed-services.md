@@ -84,6 +84,22 @@ ideal_for:
     - "You're running critical systems that require high availability"
     - "You've experienced operational challenges that are difficult to solve"
 
+# Pillar Reference
+pillar:
+  name: "OPERATE"
+  description: "Managed Services is the foundation of our OPERATE pillar, providing complete infrastructure operations and support."
+  link: "/what-we-do/operate/"
+  related_pillars:
+    - name: "BUILD"
+      description: "We can manage infrastructure we build or take over existing systems."
+      link: "/what-we-do/build/"
+    - name: "SECURE"
+      description: "Security monitoring, patch management, and incident response are core managed services."
+      link: "/what-we-do/secure/"
+    - name: "TRANSFORM"
+      description: "Post-migration managed services ensure continued optimization of new environments."
+      link: "/what-we-do/transform/"
+
 cta:
   title: "Focus on Your Business"
   description: "Let's discuss how managed services can provide the operational reliability you need while freeing your team to focus on what matters most."

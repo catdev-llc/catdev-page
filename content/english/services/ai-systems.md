@@ -84,6 +84,19 @@ ideal_for:
     - "You want AI systems that can be maintained and improved over time"
     - "Security and compliance are important considerations"
 
+# Pillar Reference
+pillar:
+  name: "BUILD"
+  description: "AI & Agentic Systems is a core capability within our BUILD pillar, focused on implementing AI that delivers real business value."
+  link: "/what-we-do/build/"
+  related_pillars:
+    - name: "OPERATE"
+      description: "AI systems require ongoing operations, monitoring, and continuous improvement."
+      link: "/what-we-do/operate/"
+    - name: "SECURE"
+      description: "AI implementations require security considerations around data, model access, and prompt injection."
+      link: "/what-we-do/secure/"
+
 cta:
   title: "Build AI That Delivers Value"
   description: "Let's discuss your AI objectives and design an approach that delivers measurable business outcomes."

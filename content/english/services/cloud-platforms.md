@@ -83,6 +83,22 @@ ideal_for:
     - "You're replacing an aging file server infrastructure"
     - "You need collaboration features beyond basic file storage"
 
+# Pillar Reference
+pillar:
+  name: "OPERATE"
+  description: "Cloud File & Collaboration Platforms is part of our OPERATE pillar, providing secure, self-hosted solutions you control."
+  link: "/what-we-do/operate/"
+  related_pillars:
+    - name: "BUILD"
+      description: "Platform deployment and customization require development expertise."
+      link: "/what-we-do/build/"
+    - name: "SECURE"
+      description: "File sharing platforms require careful security configuration and access controls."
+      link: "/what-we-do/secure/"
+    - name: "TRANSFORM"
+      description: "Migrating from legacy file servers or commercial services to self-hosted solutions."
+      link: "/what-we-do/transform/"
+
 cta:
   title: "Take Control of Your Data"
   description: "Let's discuss your file sharing requirements and design a solution that meets your security and compliance needs."
