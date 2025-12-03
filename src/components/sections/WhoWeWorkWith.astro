@@ -1,0 +1,65 @@
+---
+const audiences = [
+  {
+    title: 'SaaS & Cloud-Native Startups',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>`,
+  },
+  {
+    title: 'Fintech & Regulated Industries',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>`,
+  },
+  {
+    title: 'High-Velocity Engineering Teams',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+  },
+  {
+    title: 'AI/ML Startups with GPU Workloads',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`,
+  },
+  {
+    title: 'Companies Requiring SOC2/ISO/PCI Compliance',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
+  },
+];
+---
+
+<section id="who-we-work-with" class="section-padding relative overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+  <div class="absolute inset-0 bg-gradient-radial from-cyan/5 via-transparent to-transparent"></div>
+
+  <div class="container-custom relative">
+    <div class="max-w-5xl mx-auto reveal">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          <span class="text-white">Who We</span>
+          <span class="text-gradient"> Work With</span>
+        </h2>
+        <p class="text-steel text-lg">
+          We specialize in cloud-native platforms for engineering teams that ship fast and need production-grade infrastructure.
+        </p>
+      </div>
+
+      <!-- Audience Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        {audiences.map((audience, index) => (
+          <div
+            class="card-glass p-6 text-center transition-all duration-500 hover:-translate-y-1"
+            style={`transition-delay: ${index * 50}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-hero mb-3 text-white">
+                <div set:html={audience.icon} />
+              </div>
+              <h3 class="text-white text-sm font-semibold leading-tight">
+                {audience.title}
+              </h3>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
