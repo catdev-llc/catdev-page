@@ -178,13 +178,13 @@ const caseStudies = [
 
     <!-- Case Studies Carousel (Desktop) / Stack (Mobile) -->
     <div class="relative">
-      <!-- Desktop: Horizontal Scroll Container -->
-      <div class="hidden lg:block overflow-x-auto pb-8 case-studies-carousel" id="case-studies-carousel">
-        <div class="flex gap-8 w-max">
+      <!-- Desktop: Centered Carousel -->
+      <div class="hidden lg:block relative" id="case-studies-carousel">
+        <div class="flex items-stretch justify-center gap-4">
           {caseStudies.map((study, index) => (
             <div
-              class="w-[700px] flex-shrink-0 reveal"
-              style={`transition-delay: ${index * 100}ms`}
+              class={`case-study-card transition-all duration-500 ${index === 0 ? 'active' : 'inactive'}`}
+              data-index={index}
             >
               <div class="card-glass p-8 md:p-10 h-full">
                 <div class="glow-effect"></div>
@@ -296,13 +296,24 @@ const caseStudies = [
             </div>
           ))}
         </div>
+
+        <!-- Carousel Indicators -->
+        <div class="flex justify-center gap-2 mt-8" id="carousel-indicators">
+          {caseStudies.map((_, index) => (
+            <button
+              class={`w-2 h-2 rounded-full transition-all duration-300 ${index === 0 ? 'bg-cyan w-8' : 'bg-white/30 hover:bg-white/50'}`}
+              data-index={index}
+              aria-label={`Go to case study ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
-      <!-- Scroll Navigation Arrows (Desktop) -->
+      <!-- Navigation Arrows (Desktop) -->
       <button
         id="scroll-left"
-        class="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 items-center justify-center rounded-full bg-electric/80 hover:bg-electric text-white shadow-lg transition-all z-10"
-        aria-label="Scroll left"
+        class="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-electric/80 hover:bg-electric text-white shadow-lg transition-all z-20"
+        aria-label="Previous case study"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -310,8 +321,8 @@ const caseStudies = [
       </button>
       <button
         id="scroll-right"
-        class="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 items-center justify-center rounded-full bg-electric/80 hover:bg-electric text-white shadow-lg transition-all z-10"
-        aria-label="Scroll right"
+        class="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-electric/80 hover:bg-electric text-white shadow-lg transition-all z-20"
+        aria-label="Next case study"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -451,75 +462,118 @@ const caseStudies = [
 </section>
 
 <style>
-  .case-studies-carousel {
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: #2169B3 #0A0E27;
+  /* Centered carousel with active card prominent */
+  .case-study-card {
+    flex-shrink: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .case-studies-carousel::-webkit-scrollbar {
-    height: 8px;
+  .case-study-card.active {
+    width: 80%;
+    max-width: 900px;
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+    z-index: 10;
   }
 
-  .case-studies-carousel::-webkit-scrollbar-track {
-    background: #0A0E27;
-    border-radius: 4px;
+  .case-study-card.inactive {
+    width: 5%;
+    max-width: 60px;
+    opacity: 0.15;
+    filter: blur(4px);
+    transform: scale(0.95);
+    z-index: 1;
+    overflow: hidden;
+    cursor: pointer;
   }
 
-  .case-studies-carousel::-webkit-scrollbar-thumb {
-    background: #2169B3;
-    border-radius: 4px;
+  .case-study-card.inactive:hover {
+    opacity: 0.25;
   }
 
-  .case-studies-carousel::-webkit-scrollbar-thumb:hover {
-    background: #094E96;
+  .case-study-card.inactive .card-glass {
+    pointer-events: none;
+  }
+
+  /* Hide content in inactive cards */
+  .case-study-card.inactive .relative.z-10 > *:not(:first-child) {
+    display: none;
   }
 </style>
 
 <script>
-  const carousel = document.getElementById('case-studies-carousel');
+  const cards = document.querySelectorAll('.case-study-card');
+  const indicators = document.querySelectorAll('#carousel-indicators button');
   const scrollLeftBtn = document.getElementById('scroll-left');
   const scrollRightBtn = document.getElementById('scroll-right');
+  let currentIndex = 0;
+  const totalCards = cards.length;
 
-  if (carousel && scrollLeftBtn && scrollRightBtn) {
-    const scrollAmount = 720; // Slightly more than card width to show next card
+  function updateCarousel(newIndex: number) {
+    // Clamp index
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= totalCards) newIndex = totalCards - 1;
 
-    scrollLeftBtn.addEventListener('click', () => {
-      carousel.scrollBy({
-        left: -scrollAmount,
-        behavior: 'smooth'
-      });
+    currentIndex = newIndex;
+
+    // Update cards
+    cards.forEach((card, i) => {
+      if (i === currentIndex) {
+        card.classList.remove('inactive');
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+        card.classList.add('inactive');
+      }
     });
 
-    scrollRightBtn.addEventListener('click', () => {
-      carousel.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
+    // Update indicators
+    indicators.forEach((indicator, i) => {
+      if (i === currentIndex) {
+        indicator.classList.remove('bg-white/30', 'w-2');
+        indicator.classList.add('bg-cyan', 'w-8');
+      } else {
+        indicator.classList.remove('bg-cyan', 'w-8');
+        indicator.classList.add('bg-white/30', 'w-2');
+      }
     });
 
-    // Update button visibility based on scroll position
-    const updateButtonVisibility = () => {
-      const { scrollLeft, scrollWidth, clientWidth } = carousel;
-
-      if (scrollLeft <= 0) {
-        scrollLeftBtn.style.opacity = '0.3';
-        scrollLeftBtn.style.pointerEvents = 'none';
-      } else {
-        scrollLeftBtn.style.opacity = '1';
-        scrollLeftBtn.style.pointerEvents = 'auto';
-      }
-
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        scrollRightBtn.style.opacity = '0.3';
-        scrollRightBtn.style.pointerEvents = 'none';
-      } else {
-        scrollRightBtn.style.opacity = '1';
-        scrollRightBtn.style.pointerEvents = 'auto';
-      }
-    };
-
-    carousel.addEventListener('scroll', updateButtonVisibility);
-    updateButtonVisibility(); // Initial check
+    // Update button states
+    if (scrollLeftBtn && scrollRightBtn) {
+      scrollLeftBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+      scrollLeftBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+      scrollRightBtn.style.opacity = currentIndex === totalCards - 1 ? '0.3' : '1';
+      scrollRightBtn.style.pointerEvents = currentIndex === totalCards - 1 ? 'none' : 'auto';
+    }
   }
+
+  // Arrow navigation
+  if (scrollLeftBtn && scrollRightBtn) {
+    scrollLeftBtn.addEventListener('click', () => updateCarousel(currentIndex - 1));
+    scrollRightBtn.addEventListener('click', () => updateCarousel(currentIndex + 1));
+  }
+
+  // Indicator navigation
+  indicators.forEach((indicator, i) => {
+    indicator.addEventListener('click', () => updateCarousel(i));
+  });
+
+  // Click on inactive card to navigate
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      if (card.classList.contains('inactive')) {
+        updateCarousel(i);
+      }
+    });
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') updateCarousel(currentIndex - 1);
+    if (e.key === 'ArrowRight') updateCarousel(currentIndex + 1);
+  });
+
+  // Initial state
+  updateCarousel(0);
 </script>
