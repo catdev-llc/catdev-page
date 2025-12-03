@@ -109,7 +109,7 @@ const colorClasses = {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       {serviceCategories.map((category, catIndex) => (
         <div
-          class={`card-glass p-8 transition-all duration-500 hover:-translate-y-2 reveal ${category.badge ? 'border-2 border-cyan relative' : ''}`}
+          class={`card-glass p-8 transition-all duration-500 hover:-translate-y-2 reveal ${category.badge ? 'border-2 border-cyan relative !overflow-visible' : ''}`}
           style={`transition-delay: ${catIndex * 100}ms`}
         >
           <div class="glow-effect"></div>
