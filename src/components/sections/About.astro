@@ -1,16 +1,16 @@
 ---
 const values = [
   {
-    title: 'No Corporate Fluff',
-    description: 'Direct communication, honest assessments, realistic timelines.',
+    title: 'Senior Platform Engineers Only',
+    description: 'Every engineer on your project has 10+ years building and operating production systems at scale.',
   },
   {
-    title: 'No Offshore Handoffs',
-    description: 'The engineers you meet are the engineers who do the work.',
+    title: 'Direct Communication, No BS',
+    description: 'Honest assessments, realistic timelines, and technical depth. We speak engineering, not sales.',
   },
   {
-    title: 'No Junior Resources',
-    description: 'Every team member has 10+ years of hands-on experience.',
+    title: 'We Own the Outcome',
+    description: 'Not consultants who vanish after handoff. We build it, we run it, we optimize it—long-term partners.',
   },
 ];
 ---
@@ -21,19 +21,17 @@ const values = [
       <!-- Content -->
       <div class="reveal">
         <h2 class="text-4xl md:text-5xl font-bold mb-6">
-          <span class="text-white">Built by engineers</span>
+          <span class="text-white">Platform engineering</span>
           <br />
-          <span class="text-gradient">who give a damn</span>
+          <span class="text-gradient">for teams who ship</span>
         </h2>
 
         <p class="text-xl text-steel mb-8 leading-relaxed">
-          We're a team of senior engineers who got tired of seeing organizations
-          struggle with mediocre vendors, outdated approaches, and solutions that don't scale.
+          We're platform engineers who watched too many SaaS teams burn cycles fighting infrastructure instead of building products.
         </p>
 
         <p class="text-lg text-steel mb-12 leading-relaxed">
-          So we built catdev—a company that engineers the way we'd want to be engineered for.
-          Modern tools, battle-tested expertise, and a genuine investment in your success.
+          So we built catdev—a team that designs, deploys, and operates secure cloud-native platforms. We handle Kubernetes, CI/CD, supply chain security, and operational firefighting so your engineering team can focus on shipping features that matter.
         </p>
 
         <!-- Values -->
@@ -65,24 +63,23 @@ const values = [
                 <span class="w-3 h-3 rounded-full bg-red-500"></span>
                 <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
                 <span class="w-3 h-3 rounded-full bg-green-500"></span>
-                <span class="text-steel ml-2">catdev.config.ts</span>
+                <span class="text-steel ml-2">platform.yaml</span>
               </div>
-              <pre class="text-steel leading-relaxed overflow-x-auto"><code><span class="text-purple">const</span> <span class="text-cyan">catdev</span> = {'{'}
-  <span class="text-electric">approach</span>: <span class="text-green-400">"engineering-first"</span>,
-  <span class="text-electric">stack</span>: <span class="text-green-400">"modern"</span>,
-  <span class="text-electric">team</span>: <span class="text-green-400">"senior-only"</span>,
-  <span class="text-electric">bs</span>: <span class="text-cyan">false</span>,
-
-  <span class="text-electric">services</span>: [
-    <span class="text-green-400">"software-development"</span>,
-    <span class="text-green-400">"ai-systems"</span>,
-    <span class="text-green-400">"kubernetes"</span>,
-    <span class="text-green-400">"devops"</span>,
-    <span class="text-green-400">"cybersecurity"</span>,
-  ],
-
-  <span class="text-electric">mission</span>: <span class="text-green-400">"build the future"</span>
-{'}'}</code></pre>
+              <pre class="text-steel leading-relaxed overflow-x-auto"><code><span class="text-purple">apiVersion</span>: catdev.io/v1
+<span class="text-purple">kind</span>: Platform
+<span class="text-purple">spec</span>:
+  <span class="text-electric">infrastructure</span>:
+    <span class="text-cyan">provider</span>: <span class="text-green-400">multi-cloud</span>
+    <span class="text-cyan">iac</span>: <span class="text-green-400">terraform</span>
+  <span class="text-electric">orchestration</span>:
+    <span class="text-cyan">runtime</span>: <span class="text-green-400">kubernetes</span>
+    <span class="text-cyan">gitops</span>: <span class="text-green-400">argocd</span>
+  <span class="text-electric">security</span>:
+    <span class="text-cyan">supplyChain</span>: <span class="text-green-400">slsa-compliant</span>
+    <span class="text-cyan">imageSigning</span>: <span class="text-green-400">sigstore</span>
+  <span class="text-electric">operations</span>:
+    <span class="text-cyan">managed</span>: <span class="text-cyan">true</span>
+    <span class="text-cyan">sla</span>: <span class="text-green-400">24x7</span></code></pre>
             </div>
           </div>
         </div>
@@ -93,35 +90,77 @@ const values = [
       </div>
     </div>
 
-    <!-- Certifications -->
+    <!-- Technology Stack Expertise -->
     <div class="mt-20 reveal">
-      <p class="text-center text-steel text-sm mb-8 uppercase tracking-wider">Our engineers hold industry-leading certifications</p>
+      <p class="text-center text-steel text-sm mb-8 uppercase tracking-wider">Cloud-Native Ecosystem Expertise</p>
 
-      <!-- Row 1: Offensive Security (5) -->
-      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8 mb-8">
-        <img src="/badges/c9155f6d-c8b2-4040-be89-b76ce4cd8749.png" alt="OSCP" class="h-20 md:h-24 opacity-80 hover:opacity-100 transition-opacity" title="OffSec OSCP - Offensive Security Certified Professional" />
-        <img src="/badges/6bd53d84-479b-4fc8-a39d-e60aaed9a565.png" alt="OSEP" class="h-20 md:h-24 opacity-80 hover:opacity-100 transition-opacity" title="OffSec OSEP - Offensive Security Experienced Penetration Tester" />
-        <img src="/badges/e803785a-fcd0-41e6-aee8-81b81ab85aff.png" alt="OSWP" class="h-20 md:h-24 opacity-80 hover:opacity-100 transition-opacity" title="OffSec OSWP - Offensive Security Wireless Professional" />
-        <img src="/badges/3842119611.png" alt="CPTS" class="h-24 md:h-28 opacity-80 hover:opacity-100 transition-opacity" title="HTB CPTS - Certified Penetration Testing Specialist" />
-        <img src="/badges/blob.png" alt="CWES" class="h-24 md:h-28 opacity-80 hover:opacity-100 transition-opacity" title="HTB CWES - Certified Web Exploitation Specialist" />
+      <!-- Cloud Providers & Kubernetes -->
+      <div class="flex flex-wrap items-center justify-center gap-8 mb-8">
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">AWS</div>
+          <div class="text-steel/60 text-xs">EKS, EC2, RDS, S3</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">GCP</div>
+          <div class="text-steel/60 text-xs">GKE, Compute, CloudSQL</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Azure</div>
+          <div class="text-steel/60 text-xs">AKS, VMs, CosmosDB</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Kubernetes</div>
+          <div class="text-steel/60 text-xs">Production clusters at scale</div>
+        </div>
       </div>
 
-      <!-- Row 2: Kubernetes + Microsoft (5) -->
-      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8 mb-8">
-        <img src="/badges/twitter_thumb_201604_cka_from_cncfsite__281_29.png" alt="CKA" class="h-28 md:h-32 opacity-80 hover:opacity-100 transition-opacity" title="CKA - Certified Kubernetes Administrator" />
-        <img src="/badges/twitter_thumb_201604_blob.png" alt="CKAD" class="h-28 md:h-32 opacity-80 hover:opacity-100 transition-opacity" title="CKAD - Certified Kubernetes Application Developer" />
-        <img src="/badges/cks.png" alt="CKS" class="h-24 md:h-28 opacity-80 hover:opacity-100 transition-opacity" title="CKS - Certified Kubernetes Security Specialist" />
-        <img src="/badges/aws-solutions-architect.png" alt="AWS Solutions Architect" class="h-20 md:h-24 opacity-80 hover:opacity-100 transition-opacity" title="AWS Solutions Architect Associate" />
-        <img src="/badges/azure-administrator.png" alt="Azure Administrator" class="h-20 md:h-24 opacity-80 hover:opacity-100 transition-opacity" title="Microsoft Azure Administrator Associate" />
+      <!-- Infrastructure & GitOps -->
+      <div class="flex flex-wrap items-center justify-center gap-8 mb-8">
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Terraform</div>
+          <div class="text-steel/60 text-xs">Multi-cloud IaC</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Ansible</div>
+          <div class="text-steel/60 text-xs">Config management</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">ArgoCD</div>
+          <div class="text-steel/60 text-xs">GitOps deployments</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Helm</div>
+          <div class="text-steel/60 text-xs">K8s package management</div>
+        </div>
       </div>
 
-      <!-- Row 3: Cloud Security + Cisco (5) -->
-      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
-        <img src="/badges/Badge_v8.2_final-800x800.png" alt="OAWSP" class="h-24 md:h-28 opacity-80 hover:opacity-100 transition-opacity" title="CloudBreach OAWSP - Offensive AWS Security Professional" />
-        <img src="/badges/oasp_v2.1-800x800.png" alt="OASP" class="h-24 md:h-28 opacity-80 hover:opacity-100 transition-opacity" title="CloudBreach OASP - Offensive Azure Security Professional" />
-        <img src="/badges/ethical-hacker.png" alt="Ethical Hacker" class="h-20 md:h-24 opacity-80 hover:opacity-100 transition-opacity" title="Cisco Ethical Hacker" />
-        <img src="/badges/network-defense.png" alt="Network Defense" class="h-20 md:h-24 opacity-80 hover:opacity-100 transition-opacity" title="Cisco Network Defense" />
-        <img src="/badges/endpoint-security.png" alt="Endpoint Security" class="h-20 md:h-24 opacity-80 hover:opacity-100 transition-opacity" title="Cisco Endpoint Security" />
+      <!-- Security & Observability -->
+      <div class="flex flex-wrap items-center justify-center gap-8">
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Sigstore</div>
+          <div class="text-steel/60 text-xs">Image signing & provenance</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Prometheus</div>
+          <div class="text-steel/60 text-xs">Metrics & monitoring</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Grafana</div>
+          <div class="text-steel/60 text-xs">Observability dashboards</div>
+        </div>
+        <span class="text-steel/40">|</span>
+        <div class="text-center">
+          <div class="text-steel font-mono text-lg font-semibold mb-1">Vault</div>
+          <div class="text-steel/60 text-xs">Secrets management</div>
+        </div>
       </div>
     </div>
   </div>

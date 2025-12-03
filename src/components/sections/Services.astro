@@ -1,58 +1,83 @@
 ---
 const serviceCategories = [
   {
-    title: 'AI & Intelligent Systems',
-    tagline: 'Automation that thinks',
-    color: 'purple',
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`,
+    title: 'Secure Cloud-Native Delivery Platform',
+    tagline: 'End-to-end platform engineering',
+    badge: 'FLAGSHIP',
+    color: 'cyan',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>`,
     services: [
       {
-        title: 'AI & Agentic Systems',
-        description: 'Intelligent systems that reason, act, and adapt—from automation to autonomous agents.',
+        title: 'Infrastructure as Code (Terraform, Ansible)',
+        description: 'Reproducible, version-controlled infrastructure across AWS, GCP, and Azure.',
       },
       {
-        title: 'Software Development',
-        description: 'Custom applications engineered for scale, performance, and the problems only you face.',
+        title: 'Production Kubernetes Clusters',
+        description: 'Multi-cloud K8s with autoscaling, monitoring, disaster recovery, and security hardening.',
+      },
+      {
+        title: 'CI/CD Pipelines',
+        description: 'GitHub Actions, GitLab CI, ArgoCD, Tekton—automated testing, builds, and deployments.',
+      },
+      {
+        title: 'Container Security & SBOM',
+        description: 'Vulnerability scanning, image signing, provenance tracking, SLSA compliance.',
+      },
+      {
+        title: 'Deployment Automation',
+        description: 'GitOps workflows, blue/green deployments, canary releases, automated rollbacks.',
+      },
+      {
+        title: 'Observability & Monitoring',
+        description: 'Prometheus, Grafana, ELK/EFK stacks—full-stack visibility into your platform.',
       },
     ],
   },
   {
-    title: 'Cloud & Infrastructure',
-    tagline: 'Scale without limits',
-    color: 'cyan',
+    title: 'Software Supply Chain Hardening',
+    tagline: 'Zero-trust supply chain security',
+    color: 'electric',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
+    services: [
+      {
+        title: 'SLSA Framework Implementation',
+        description: 'Build provenance, artifact signing, verification chains for tamper-proof deployments.',
+      },
+      {
+        title: 'Dependency Security Audits',
+        description: 'Continuous scanning of third-party libraries, licenses, and CVE tracking.',
+      },
+      {
+        title: 'Image Signing & Verification (Sigstore)',
+        description: 'Cosign, Rekor, Fulcio integration for cryptographic proof of image integrity.',
+      },
+      {
+        title: 'Secrets Management',
+        description: 'HashiCorp Vault, AWS Secrets Manager, encrypted GitOps—no secrets in Git, ever.',
+      },
+    ],
+  },
+  {
+    title: 'Cloud Migration & Modernization',
+    tagline: 'Legacy to cloud-native',
+    color: 'purple',
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>`,
     services: [
       {
-        title: 'Kubernetes & Containers',
-        description: 'Cloud-native infrastructure that scales with your ambitions, not your headaches.',
+        title: 'Lift-and-Shift to Containerization',
+        description: 'Migrate VMs to Docker/Kubernetes with minimal downtime and risk.',
       },
       {
-        title: 'DevOps & Platform Engineering',
-        description: 'Internal platforms that make shipping to production feel like magic, not warfare.',
+        title: 'Re-Architecture for Cloud-Native',
+        description: 'Break monoliths into microservices, adopt cloud-native patterns (12-factor, service mesh).',
       },
       {
-        title: 'Cloud Migrations',
-        description: 'Move to the cloud without the chaos—strategic migrations that minimize risk.',
+        title: 'Multi-Cloud Strategy & Execution',
+        description: 'Avoid vendor lock-in with portable infrastructure across AWS, GCP, Azure.',
       },
       {
-        title: 'Managed Services',
-        description: '24/7 operations so your team builds tomorrow while we manage today.',
-      },
-    ],
-  },
-  {
-    title: 'Security Engineering',
-    tagline: 'Protection by design',
-    color: 'electric',
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>`,
-    services: [
-      {
-        title: 'Cybersecurity',
-        description: 'Security woven into architecture, not bolted on after breaches.',
-      },
-      {
-        title: 'Penetration Testing',
-        description: 'Find vulnerabilities before attackers do—comprehensive security assessments.',
+        title: 'Managed DevSecOps & Platform Ops',
+        description: 'Ongoing retainer-based operations—we run your platform so your team can ship features.',
       },
     ],
   },
@@ -72,11 +97,11 @@ const colorClasses = {
     <!-- Section Header -->
     <div class="text-center mb-16 reveal">
       <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="text-white">Secure, AI-Driven</span>
-        <span class="text-gradient"> Cloud Solutions</span>
+        <span class="text-white">What We</span>
+        <span class="text-gradient"> Build & Operate</span>
       </h2>
-      <p class="text-xl text-steel max-w-2xl mx-auto">
-        Three pillars of modern engineering. One partner, complete capabilities.
+      <p class="text-xl text-steel max-w-3xl mx-auto">
+        Production-grade platforms for SaaS companies and cloud-native teams. We design, build, secure, and operate your infrastructure—so you can focus on shipping features.
       </p>
     </div>
 
@@ -84,10 +109,15 @@ const colorClasses = {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       {serviceCategories.map((category, catIndex) => (
         <div
-          class="card-glass p-8 transition-all duration-500 hover:-translate-y-2 reveal"
+          class={`card-glass p-8 transition-all duration-500 hover:-translate-y-2 reveal ${category.badge ? 'border-2 border-cyan relative' : ''}`}
           style={`transition-delay: ${catIndex * 100}ms`}
         >
           <div class="glow-effect"></div>
+          {category.badge && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
+              <span class="px-3 py-1 bg-cyan text-midnight text-xs font-bold rounded-full shadow-lg shadow-cyan/30">{category.badge}</span>
+            </div>
+          )}
           <div class="relative z-10">
             <!-- Category Header -->
             <div class={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${colorClasses[category.color as keyof typeof colorClasses]} mb-6`}>
