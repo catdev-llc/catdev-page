@@ -12,6 +12,8 @@ const {
   title = 'catdev - Cloud-Native DevOps & DevSecOps Specialist',
   description = 'Production-grade delivery platforms for SaaS teams. We build, secure, and operate cloud-native infrastructure—Kubernetes, Terraform, CI/CD pipelines, and software supply chain security.'
 } = Astro.props;
+
+const GA_ID = 'G-4TDGDGK41V';
 ---
 
 <!doctype html>
@@ -37,6 +39,11 @@ const {
     <meta name="twitter:description" content={description} />
 
     <title>{title}</title>
+
+    <!-- Google Analytics - Only loaded after consent -->
+    <script define:vars={{ GA_ID }}>
+      window.GA_ID = GA_ID;
+    </script>
   </head>
   <body class="overflow-x-hidden">
     <Header />
@@ -44,6 +51,102 @@ const {
       <slot />
     </main>
     <Footer />
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 z-50 p-4 transform translate-y-full transition-transform duration-300">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-deep-space border border-white/10 rounded-2xl p-4 md:p-6 shadow-2xl backdrop-blur-xl">
+          <div class="flex flex-col md:flex-row md:items-center gap-4">
+            <div class="flex-1">
+              <p class="text-white text-sm font-medium mb-1">We value your privacy</p>
+              <p class="text-steel text-xs leading-relaxed">
+                We use cookies to analyze site traffic and improve your experience. By clicking "Accept", you consent to our use of analytics cookies.
+              </p>
+            </div>
+            <div class="flex gap-3 flex-shrink-0">
+              <button id="cookie-decline" class="px-4 py-2 text-xs font-medium text-steel hover:text-white border border-white/10 rounded-lg transition-colors">
+                Decline
+              </button>
+              <button id="cookie-accept" class="px-4 py-2 text-xs font-medium bg-cyan text-midnight rounded-lg hover:bg-cyan/90 transition-colors">
+                Accept
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Cookie consent and Google Analytics management
+      const CONSENT_KEY = 'catdev_cookie_consent';
+      const consentBanner = document.getElementById('cookie-consent');
+      const acceptBtn = document.getElementById('cookie-accept');
+      const declineBtn = document.getElementById('cookie-decline');
+
+      // Check for existing consent
+      function getConsent(): string | null {
+        return localStorage.getItem(CONSENT_KEY);
+      }
+
+      // Load Google Analytics
+      function loadGA() {
+        const GA_ID = (window as any).GA_ID;
+        if (!GA_ID) return;
+
+        // Load gtag.js
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+        document.head.appendChild(script);
+
+        // Initialize gtag
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        function gtag(...args: any[]) {
+          (window as any).dataLayer.push(args);
+        }
+        (window as any).gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_ID, {
+          anonymize_ip: true,
+          cookie_flags: 'SameSite=None;Secure'
+        });
+      }
+
+      // Show consent banner
+      function showBanner() {
+        setTimeout(() => {
+          consentBanner?.classList.remove('translate-y-full');
+          consentBanner?.classList.add('translate-y-0');
+        }, 1000);
+      }
+
+      // Hide consent banner
+      function hideBanner() {
+        consentBanner?.classList.add('translate-y-full');
+        consentBanner?.classList.remove('translate-y-0');
+      }
+
+      // Handle consent
+      function handleConsent(accepted: boolean) {
+        localStorage.setItem(CONSENT_KEY, accepted ? 'accepted' : 'declined');
+        hideBanner();
+        if (accepted) {
+          loadGA();
+        }
+      }
+
+      // Initialize
+      const consent = getConsent();
+      if (consent === 'accepted') {
+        loadGA();
+      } else if (consent === null) {
+        showBanner();
+      }
+
+      // Event listeners
+      acceptBtn?.addEventListener('click', () => handleConsent(true));
+      declineBtn?.addEventListener('click', () => handleConsent(false));
+    </script>
 
     <script>
       // Scroll reveal animation
