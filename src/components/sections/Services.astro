@@ -2,82 +2,130 @@
 const serviceCategories = [
   {
     title: 'Secure Cloud-Native Delivery Platform',
-    tagline: 'End-to-end platform engineering',
-    badge: 'FLAGSHIP',
+    tagline: 'Productized end-to-end platform engineering',
+    badge: 'FLAGSHIP OFFER',
     color: 'cyan',
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>`,
     services: [
       {
-        title: 'Infrastructure as Code (Terraform, Ansible)',
-        description: 'Reproducible, version-controlled infrastructure across AWS, GCP, and Azure.',
+        title: 'Infrastructure as Code',
+        description: 'Terraform and Ansible for reproducible, version-controlled infrastructure. Multi-cloud ready: Hetzner, Vultr, AWS, Azure.',
       },
       {
-        title: 'Production Kubernetes Clusters',
-        description: 'Multi-cloud K8s with autoscaling, monitoring, disaster recovery, and security hardening.',
+        title: 'Kubernetes Cluster Design & Operations',
+        description: 'Production-grade clusters with autoscaling, disaster recovery, security hardening, and operational runbooks.',
       },
       {
         title: 'CI/CD Pipelines',
-        description: 'GitHub Actions, GitLab CI, ArgoCD, Tekton—automated testing, builds, and deployments.',
+        description: 'GitHub Actions, GitLab CI, or Azure DevOps. Automated testing, builds, and deployments with full observability.',
       },
       {
-        title: 'Container Security & SBOM',
-        description: 'Vulnerability scanning, image signing, provenance tracking, SLSA compliance.',
+        title: 'Container Security & SBOM Generation',
+        description: 'Vulnerability scanning at build and runtime. SBOM generation, VEX documents, and compliance-ready artifacts.',
+      },
+      {
+        title: 'Image Signing & Provenance',
+        description: 'SLSA-aligned supply chain security. Sigstore integration (Cosign, Rekor, Fulcio) for cryptographic image verification.',
       },
       {
         title: 'Deployment Automation',
-        description: 'GitOps workflows, blue/green deployments, canary releases, automated rollbacks.',
+        description: 'GitOps workflows, blue/green deployments, canary releases, and automated rollbacks with ArgoCD or Flux.',
       },
       {
-        title: 'Observability & Monitoring',
-        description: 'Prometheus, Grafana, ELK/EFK stacks—full-stack visibility into your platform.',
+        title: 'Observability Stack',
+        description: 'Prometheus, Grafana, Loki, Tempo—metrics, logs, traces, and alerting configured for your platform.',
+      },
+      {
+        title: 'Secure Operational Runbooks',
+        description: 'Documented incident response procedures, backup/restore processes, and disaster recovery plans.',
       },
     ],
   },
   {
     title: 'Software Supply Chain Hardening',
-    tagline: 'Zero-trust supply chain security',
+    tagline: 'Zero-trust pipeline and artifact security',
     color: 'electric',
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
     services: [
       {
-        title: 'SLSA Framework Implementation',
-        description: 'Build provenance, artifact signing, verification chains for tamper-proof deployments.',
+        title: 'CI/CD Security & Pipeline Hardening',
+        description: 'Harden GitHub Actions, GitLab CI, or Azure DevOps workflows. Enforce branch protections, require signed commits, and audit pipeline access.',
       },
       {
-        title: 'Dependency Security Audits',
-        description: 'Continuous scanning of third-party libraries, licenses, and CVE tracking.',
+        title: 'VEX/SBOM Workflows',
+        description: 'Generate SBOMs for every build. Create VEX documents to document vulnerability status and mitigations.',
       },
       {
-        title: 'Image Signing & Verification (Sigstore)',
-        description: 'Cosign, Rekor, Fulcio integration for cryptographic proof of image integrity.',
+        title: 'Image Signing & Verification',
+        description: 'Sign container images with Sigstore. Enforce signature verification at runtime using OPA or Kyverno policies.',
       },
       {
         title: 'Secrets Management',
-        description: 'HashiCorp Vault, AWS Secrets Manager, encrypted GitOps—no secrets in Git, ever.',
+        description: 'HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault. Rotate secrets automatically, never commit to Git.',
+      },
+      {
+        title: 'Runtime Security',
+        description: 'Falco for runtime threat detection. Enforce least-privilege containers and restrict syscalls.',
+      },
+      {
+        title: 'Kubernetes Security Policies',
+        description: 'OPA Gatekeeper or Kyverno for policy enforcement. Pod Security Standards, NetworkPolicies, and admission control.',
       },
     ],
   },
   {
-    title: 'Cloud Migration & Modernization',
-    tagline: 'Legacy to cloud-native',
+    title: 'Cloud Migration & Infrastructure Modernization',
+    tagline: 'VPS to Kubernetes, Jenkins to modern CI/CD',
     color: 'purple',
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>`,
     services: [
       {
-        title: 'Lift-and-Shift to Containerization',
-        description: 'Migrate VMs to Docker/Kubernetes with minimal downtime and risk.',
+        title: 'VPS → Kubernetes Migrations',
+        description: 'Containerize legacy applications and migrate to Kubernetes clusters with zero-downtime deployments.',
       },
       {
-        title: 'Re-Architecture for Cloud-Native',
-        description: 'Break monoliths into microservices, adopt cloud-native patterns (12-factor, service mesh).',
+        title: 'On-Prem → Cloud Transitions',
+        description: 'Lift-and-shift or re-architecture from on-premises infrastructure to AWS, Azure, GCP, or cost-effective alternatives like Hetzner and Vultr.',
       },
       {
-        title: 'Multi-Cloud Strategy & Execution',
-        description: 'Avoid vendor lock-in with portable infrastructure across AWS, GCP, Azure.',
+        title: 'Jenkins → Modern CI/CD Migration',
+        description: 'Migrate from Jenkins to GitHub Actions, GitLab CI, or Azure DevOps. Eliminate plugin hell and embrace declarative pipelines.',
       },
       {
-        title: 'Managed DevSecOps & Platform Ops',
-        description: 'Ongoing retainer-based operations—we run your platform so your team can ship features.',
+        title: 'Infrastructure as Code Adoption',
+        description: 'Replace ClickOps with Terraform or OpenTofu. Version-control your infrastructure and enable peer review.',
+      },
+    ],
+  },
+  {
+    title: 'Managed DevSecOps & Platform Operations',
+    tagline: 'We build it, we run it, you ship features',
+    color: 'cyan',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
+    services: [
+      {
+        title: 'Monthly Vulnerability Management',
+        description: 'Continuous scanning and remediation. We triage CVEs, patch systems, and update dependencies on your behalf.',
+      },
+      {
+        title: 'Monitoring & Observability',
+        description: 'We monitor your platform 24/7 and respond to alerts. Dashboards, SLIs, and alerting rules tuned to your workload.',
+      },
+      {
+        title: 'Pipeline Maintenance',
+        description: 'Keep CI/CD pipelines up to date with the latest tooling, best practices, and security patches.',
+      },
+      {
+        title: 'Cluster Operations & Patching',
+        description: 'Kubernetes upgrades, node patching, certificate rotation, and capacity planning handled by our team.',
+      },
+      {
+        title: 'Incident Support (L1/L2)',
+        description: 'First and second-level incident response. We troubleshoot platform issues so your team can focus on features.',
+      },
+      {
+        title: 'Compliance-Ready Documentation',
+        description: 'Maintain up-to-date runbooks, architecture diagrams, and compliance artifacts for SOC2, ISO 27001, or GDPR.',
       },
     ],
   },
@@ -97,16 +145,16 @@ const colorClasses = {
     <!-- Section Header -->
     <div class="text-center mb-16 reveal">
       <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="text-white">What We</span>
-        <span class="text-gradient"> Build & Operate</span>
+        <span class="text-white">How We</span>
+        <span class="text-gradient"> Deliver Value</span>
       </h2>
       <p class="text-xl text-steel max-w-3xl mx-auto">
-        Production-grade platforms for SaaS companies and cloud-native teams. We design, build, secure, and operate your infrastructure—so you can focus on shipping features.
+        From infrastructure to CI/CD to software supply chain security—we handle the entire value chain so your engineering team can focus on building products, not platforms.
       </p>
     </div>
 
     <!-- Service Categories -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {serviceCategories.map((category, catIndex) => (
         <div
           class={`card-glass p-8 transition-all duration-500 hover:-translate-y-2 reveal ${category.badge ? 'border-2 border-cyan relative !overflow-visible' : ''}`}

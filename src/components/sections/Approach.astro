@@ -2,19 +2,28 @@
 const approaches = [
   {
     icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
-    title: 'Security-First Architecture',
-    description: "Zero-trust by default. We bake security into every layer—from infrastructure provisioning to container runtime to software supply chains.",
+    title: 'Security Baked In, Not Bolted On',
+    description: "From image signing to secrets rotation to runtime policies—we build security into the foundation. Compliance and hardening aren't afterthoughts.",
   },
   {
     icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`,
-    title: 'Infrastructure as Code, Always',
-    description: 'No ClickOps. Every resource is version-controlled, peer-reviewed, and reproducible. Your infrastructure is code, not tribal knowledge.',
+    title: 'Everything as Code',
+    description: 'Infrastructure, pipelines, policies, runbooks—all version-controlled and peer-reviewed. No ClickOps, no tribal knowledge, no configuration drift.',
   },
   {
     icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>`,
-    title: 'We Build AND Operate',
-    description: 'Not just consultants who disappear after deployment. We run your platform, handle incidents, optimize costs, and evolve with your product.',
+    title: 'Build It, Run It, Own It',
+    description: 'We design your platform, deploy it, monitor it, patch it, and respond to incidents. Not consultants who vanish—long-term operational partners.',
   },
+];
+
+const valueChain = [
+  'Infrastructure (IaC)',
+  'CI/CD Pipelines',
+  'Containers & K8s',
+  'Supply Chain Security',
+  'Observability',
+  'Operations'
 ];
 ---
 
@@ -26,12 +35,28 @@ const approaches = [
     <!-- Section Header -->
     <div class="text-center mb-16 reveal">
       <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="text-white">Our</span>
-        <span class="text-gradient"> Approach</span>
+        <span class="text-white">How We</span>
+        <span class="text-gradient"> Work</span>
       </h2>
-      <p class="text-xl text-steel max-w-2xl mx-auto">
-        Platform engineering driven by security, automation, and operational excellence.
+      <p class="text-xl text-steel max-w-3xl mx-auto mb-8">
+        We own the entire value chain—from infrastructure to operations. Engineer-to-engineer, no fluff, no hand-waving.
       </p>
+
+      <!-- Value Chain -->
+      <div class="flex flex-wrap items-center justify-center gap-3 max-w-3xl mx-auto">
+        {valueChain.map((item, index) => (
+          <>
+            <span class="px-4 py-2 bg-white/5 border border-cyan/30 rounded-lg text-cyan text-sm font-semibold">
+              {item}
+            </span>
+            {index < valueChain.length - 1 && (
+              <svg class="w-4 h-4 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            )}
+          </>
+        ))}
+      </div>
     </div>
 
     <!-- Approach Cards -->

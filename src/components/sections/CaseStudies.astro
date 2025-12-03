@@ -1,157 +1,308 @@
 ---
 const caseStudies = [
   {
-    id: 'fintech-security',
-    category: 'Security Engineering',
-    title: 'Security Assessment for Fintech Platform',
-    client: {
-      industry: 'Financial Technology',
-      size: '50-100 employees',
-      location: 'Europe',
-    },
-    challenge: 'Series B-stage fintech platform needed comprehensive security due diligence before closing their funding round. Investors required evidence of robust security practices.',
+    title: 'Open-Source Company CI Overhaul',
+    clientType: 'High-Velocity Open Source Organization',
+    problem: 'Running approximately 200 Drone CI jobs per hour for Go microservices across a Hetzner VM fleet. Infrastructure was provisioned manually, CI pipelines lacked security scanning, and container images were unsigned. Scaling was becoming painful, and there was no visibility into supply chain security.',
     solution: [
-      'Web application penetration testing',
-      'API security assessment',
-      'Cloud infrastructure review (AWS)',
-      'Source code security audit',
+      'Migrated infrastructure to Terraform + Ansible for reproducible VM provisioning',
+      'Re-architected Drone CI pipelines with parallelization and caching optimizations',
+      'Integrated Trivy for vulnerability scanning in every build',
+      'Implemented Sigstore (Cosign) for container image signing',
+      'Set up SBOM generation for all artifacts',
+      'Deployed Prometheus + Grafana for CI/CD observability',
+      'Created automated alerting for pipeline failures and security issues'
     ],
-    results: [
-      { metric: '12', label: 'Critical/High findings identified' },
-      { metric: '100%', label: 'Critical issues remediated' },
-      { metric: '4 weeks', label: 'Assessment duration' },
+    stack: ['Drone CI', 'Terraform', 'Ansible', 'Hetzner Cloud', 'Go', 'Docker', 'Trivy', 'Sigstore/Cosign', 'Prometheus', 'Grafana'],
+    security: [
+      'Vulnerability scanning integrated into every pipeline',
+      'Container images cryptographically signed with Sigstore',
+      'SBOM generated for every build artifact',
+      'Secrets moved to HashiCorp Vault (no credentials in Git)',
+      'Pipeline access restricted with RBAC'
     ],
-    outcome: 'Client successfully closed their Series B funding round with full investor confidence in their security posture.',
-    tags: ['Penetration Testing', 'Cloud Security', 'Fintech', 'Due Diligence'],
+    outcome: [
+      '40% faster CI pipeline execution through optimization',
+      '100% of container images now signed and verified',
+      'Zero manual infrastructure provisioning (full IaC adoption)',
+      'Complete vulnerability visibility across all builds',
+      'Team can confidently scale to 500+ builds/hour'
+    ],
+    whyCatdev: 'The client needed a team that understood both high-velocity CI/CD and supply chain security. Generic DevOps consultants would have optimized pipelines but missed the security gaps. catdev delivered both speed and security without compromising either.'
   },
   {
-    id: 'rag-knowledge-base',
-    category: 'AI & Intelligent Systems',
-    title: 'On-Premise RAG Knowledge Base with Local LLMs',
-    client: {
-      industry: 'Manufacturing',
-      size: '500+ employees',
-      location: 'Germany',
-    },
-    challenge: 'Enterprise needed an AI-powered knowledge base for internal documentation but required full data sovereignty—no cloud dependencies or data leaving their premises.',
+    title: 'European Bank Migration to Azure',
+    clientType: 'Tier 2 European Banking Institution',
+    problem: 'Legacy on-premises infrastructure running critical banking services. Jenkins pipelines were fragile and undocumented. Migration to Azure Cloud required meeting strict regulatory compliance (PSD2, GDPR, local data residency). Team lacked cloud-native expertise and needed a secure, compliant landing zone.',
     solution: [
-      'Deployed local LLM infrastructure (Ollama + Llama 3)',
-      'Built RAG pipeline with vector database (Milvus)',
-      'Integrated with existing document management system',
-      'Custom fine-tuning on domain-specific terminology',
+      'Designed and deployed Azure landing zone with Terraform (hub-and-spoke architecture)',
+      'Migrated Jenkins pipelines to Azure DevOps with declarative YAML pipelines',
+      'Implemented Azure Policy for compliance enforcement (PSD2, GDPR)',
+      'Set up Azure Key Vault for secrets management',
+      'Integrated vulnerability scanning (Qualys) into Azure DevOps',
+      'Configured Azure Monitor + Log Analytics for compliance auditing',
+      'Created documentation and runbooks for SOC2 and ISO 27001 readiness',
+      'Trained internal team on Azure best practices and IaC workflows'
     ],
-    results: [
-      { metric: '85%', label: 'Query accuracy rate' },
-      { metric: '10x', label: 'Faster document retrieval' },
-      { metric: '0', label: 'External API dependencies' },
+    stack: ['Azure', 'Terraform', 'Azure DevOps', 'Azure Key Vault', 'Azure Policy', 'Qualys', 'Azure Monitor', 'Log Analytics'],
+    security: [
+      'Azure landing zone built with security and compliance from day one',
+      'All secrets stored in Azure Key Vault with automatic rotation',
+      'Vulnerability scanning enforced in every pipeline',
+      'Azure Policy enforcing encryption at rest and in transit',
+      'Network segmentation with NSGs and Azure Firewall',
+      'Audit logs and compliance reporting for regulators'
     ],
-    outcome: 'Engineers now find answers to technical questions in seconds instead of hours, with complete data privacy and no ongoing cloud costs.',
-    tags: ['RAG', 'Local LLM', 'On-Premise', 'Knowledge Management'],
+    outcome: [
+      'Successfully migrated 15 critical banking services to Azure with zero downtime',
+      'Achieved PSD2 and GDPR compliance certification',
+      'Reduced Jenkins maintenance overhead by 70%',
+      'Infrastructure changes now peer-reviewed and version-controlled',
+      'Audit-ready compliance documentation delivered to regulators'
+    ],
+    whyCatdev: 'Banking migrations require deep understanding of both cloud infrastructure and regulatory compliance. catdev brought experience with financial services, Azure landing zones, and compliance frameworks—delivering a secure, audit-ready platform that passed regulatory scrutiny on the first review.'
   },
+  {
+    title: 'U.S. Bank Core Banking Exchange Pipeline',
+    clientType: 'Major U.S. Banking Institution',
+    problem: 'Building a new core banking transaction exchange interface (NDA-protected details). No existing CI/CD pipeline for this greenfield project. Extremely high compliance requirements (PCI DSS, SOC2, FFIEC). Needed end-to-end pipeline with full audit trails, secrets management, and deployment automation for a highly sensitive transactional system.',
+    solution: [
+      'Designed and implemented secure CI/CD pipeline from scratch',
+      'Built multi-stage pipeline with automated testing, security scanning, and approval gates',
+      'Integrated HashiCorp Vault for secrets management',
+      'Implemented SBOM generation and image signing for all artifacts',
+      'Set up automated compliance reporting and audit logging',
+      'Created deployment automation with blue/green releases and automated rollbacks',
+      'Delivered comprehensive documentation for compliance audits (PCI DSS, SOC2, FFIEC)',
+      'Established pipeline governance with role-based access and approval workflows'
+    ],
+    stack: ['GitHub Actions', 'Terraform', 'HashiCorp Vault', 'Docker', 'Kubernetes', 'Sigstore', 'Trivy', 'SonarQube'],
+    security: [
+      'Full supply chain security: SBOM + VEX + image signing',
+      'Secrets never stored in Git—automated Vault integration',
+      'Every pipeline run audited and logged for compliance',
+      'Multi-level approval gates for production deployments',
+      'Static and dynamic security testing (SAST/DAST)',
+      'Compliance artifacts generated automatically for auditors'
+    ],
+    outcome: [
+      'Delivered production-ready pipeline meeting all PCI DSS and FFIEC requirements',
+      'Zero security findings during external audit',
+      'Deployment time reduced from days (manual) to minutes (automated)',
+      'Full audit trail and compliance documentation for regulators',
+      'Established repeatable pattern for future banking projects'
+    ],
+    whyCatdev: 'Building pipelines for core banking systems requires understanding financial regulations, security frameworks, and high-stakes operational discipline. catdev delivered a pipeline that satisfied auditors, security teams, and compliance officers—while still being fast and developer-friendly.'
+  },
+  {
+    title: 'Fiber Monitoring Startup Kubernetes Platform',
+    clientType: 'Dark Fiber Network Monitoring SaaS Startup',
+    problem: 'Early-stage startup building a monitoring platform for dark fiber networks. Development environment pipelines needed for Go backend services and TypeScript frontend. Required Kubernetes cluster on Vultr for cost efficiency. Team lacked DevOps expertise and needed a production-ready platform quickly to focus on product development.',
+    solution: [
+      'Deployed Kubernetes cluster on Vultr with Terraform',
+      'Built GitHub Actions CI/CD pipelines for Go and TypeScript components',
+      'Integrated Trivy for vulnerability scanning (build + runtime)',
+      'Implemented GitOps deployments with ArgoCD',
+      'Set up observability stack: Prometheus, Grafana, Loki',
+      'Developed custom Kubernetes operator in Go for domain-specific automation',
+      'Created secure secrets management workflow',
+      'Delivered operational runbooks and incident response procedures'
+    ],
+    stack: ['Kubernetes', 'Vultr', 'Terraform', 'GitHub Actions', 'Go', 'TypeScript', 'ArgoCD', 'Trivy', 'Prometheus', 'Grafana', 'Loki'],
+    security: [
+      'Vulnerability scanning in CI/CD and Kubernetes runtime',
+      'Secrets managed with Sealed Secrets (GitOps-friendly)',
+      'Pod Security Standards enforced cluster-wide',
+      'Network policies isolating tenant workloads',
+      'Automated certificate management with cert-manager'
+    ],
+    outcome: [
+      'Production-ready Kubernetes platform delivered in 6 weeks',
+      'Dev team able to deploy 10+ times per day with confidence',
+      '60% cost savings vs. AWS EKS',
+      'Full observability and alerting from day one',
+      'Custom operator automated domain-specific operational tasks'
+    ],
+    whyCatdev: 'Startups need fast execution without cutting corners on security or reliability. catdev delivered a production-grade platform quickly, allowing the founding team to focus on product-market fit instead of infrastructure firefighting. The custom operator in Go showed deep technical expertise beyond standard tooling.'
+  },
+  {
+    title: 'AI Startup GPU Kubernetes Platform',
+    clientType: 'AI/ML SaaS Startup',
+    problem: 'AI startup needed production Kubernetes infrastructure on Vultr with managed GPU nodes for machine learning workloads. Existing PHP application needed containerization and modern CI/CD. No security scanning or image signing in place. Required fast iteration for AI model training and deployment.',
+    solution: [
+      'Provisioned Kubernetes cluster on Vultr with GPU node pools using Terraform',
+      'Containerized legacy PHP application and built Docker images',
+      'Implemented GitHub Actions pipelines: build, test, scan, deploy',
+      'Integrated Trivy for vulnerability scanning in build and runtime',
+      'Set up image signing and verification with Sigstore',
+      'Deployed Prometheus + Grafana for GPU utilization monitoring',
+      'Configured autoscaling for GPU workloads based on demand',
+      'Created CI/CD workflow for ML model deployments'
+    ],
+    stack: ['Kubernetes', 'Vultr GPU Nodes', 'Terraform', 'GitHub Actions', 'PHP', 'Docker', 'Trivy', 'Sigstore', 'Prometheus', 'Grafana'],
+    security: [
+      'Container images scanned for vulnerabilities before deployment',
+      'All images cryptographically signed with Sigstore',
+      'Secrets stored in external secrets operator (AWS Secrets Manager)',
+      'GPU workloads isolated with Kubernetes namespaces and RBAC',
+      'Runtime security monitoring for anomalous GPU usage'
+    ],
+    outcome: [
+      'Production Kubernetes platform with GPU support live in 5 weeks',
+      'PHP application modernized and containerized',
+      'CI/CD pipelines reduced deployment time from hours to minutes',
+      '100% of container images signed and verified',
+      'Cost-optimized GPU autoscaling saved 40% on infrastructure spend'
+    ],
+    whyCatdev: 'AI startups need specialized infrastructure expertise—GPU orchestration, cost optimization, and fast iteration cycles. catdev delivered a platform that handled GPU workloads efficiently while maintaining security standards that would scale with the company\'s growth and eventual SOC2 certification.'
+  }
 ];
 ---
 
-<section id="case-studies" class="section-padding relative">
-  <div class="container-custom">
+<section id="case-studies" class="section-padding relative overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+  <div class="absolute inset-0 bg-gradient-radial from-purple/5 via-transparent to-transparent"></div>
+
+  <div class="container-custom relative">
     <!-- Section Header -->
     <div class="text-center mb-16 reveal">
-      <span class="text-cyan text-sm font-semibold tracking-wider uppercase mb-4 block">Case Studies</span>
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">
-        <span class="text-white">Real results for</span>
-        <span class="text-gradient"> real clients</span>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="text-white">Real Platforms,</span>
+        <span class="text-gradient"> Real Results</span>
       </h2>
-      <p class="text-xl text-steel max-w-2xl mx-auto">
-        See how we've helped organizations solve complex technical challenges and deliver measurable business outcomes.
+      <p class="text-xl text-steel max-w-3xl mx-auto">
+        From startups to banks—here's how we've built secure, scalable delivery platforms for teams that ship.
       </p>
     </div>
 
     <!-- Case Studies Grid -->
-    <div class="grid lg:grid-cols-2 gap-8">
+    <div class="space-y-8">
       {caseStudies.map((study, index) => (
-        <div class="card-glass p-8 reveal" style={`transition-delay: ${index * 100}ms`}>
+        <div
+          class="card-glass p-8 md:p-10 reveal"
+          style={`transition-delay: ${index * 100}ms`}
+        >
           <div class="glow-effect"></div>
           <div class="relative z-10">
-            <!-- Category Badge -->
-            <span class="inline-block px-3 py-1 bg-electric/20 text-electric text-xs font-semibold rounded-full mb-4">
-              {study.category}
-            </span>
-
-            <!-- Title -->
-            <h3 class="text-2xl font-bold text-white mb-4">{study.title}</h3>
-
-            <!-- Client Info -->
-            <div class="flex flex-wrap gap-4 text-sm text-steel mb-6">
-              <span class="flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-                {study.client.industry}
-              </span>
-              <span class="flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                {study.client.size}
-              </span>
-              <span class="flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                {study.client.location}
-              </span>
+            <!-- Header -->
+            <div class="mb-6">
+              <div class="inline-block px-3 py-1 bg-cyan/10 border border-cyan/30 rounded-full text-cyan text-xs font-semibold uppercase tracking-wider mb-4">
+                {study.clientType}
+              </div>
+              <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
+                {study.title}
+              </h3>
             </div>
 
-            <!-- Challenge -->
+            <!-- Problem -->
             <div class="mb-6">
-              <h4 class="text-white font-semibold mb-2">The Challenge</h4>
-              <p class="text-steel">{study.challenge}</p>
+              <h4 class="text-electric font-semibold mb-2 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                The Problem
+              </h4>
+              <p class="text-steel leading-relaxed">
+                {study.problem}
+              </p>
             </div>
 
             <!-- Solution -->
             <div class="mb-6">
-              <h4 class="text-white font-semibold mb-2">Our Solution</h4>
-              <ul class="space-y-2">
-                {study.solution.map((item) => (
-                  <li class="flex items-start gap-2 text-steel">
-                    <svg class="w-5 h-5 text-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              <h4 class="text-cyan font-semibold mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                What We Built
+              </h4>
+              <ul class="grid md:grid-cols-2 gap-2">
+                {study.solution.map(item => (
+                  <li class="flex items-start gap-2 text-steel text-sm">
+                    <svg class="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                     </svg>
-                    {item}
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <!-- Results -->
+            <!-- Stack -->
             <div class="mb-6">
-              <h4 class="text-white font-semibold mb-3">Results</h4>
-              <div class="grid grid-cols-3 gap-4">
-                {study.results.map((result) => (
-                  <div class="text-center p-3 bg-midnight/50 rounded-lg">
-                    <div class="text-2xl font-bold text-cyan">{result.metric}</div>
-                    <div class="text-xs text-steel">{result.label}</div>
-                  </div>
+              <h4 class="text-steel text-sm font-semibold mb-2 uppercase tracking-wider">Technology Stack</h4>
+              <div class="flex flex-wrap gap-2">
+                {study.stack.map(tech => (
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-steel text-xs font-mono">
+                    {tech}
+                  </span>
                 ))}
               </div>
             </div>
 
-            <!-- Outcome -->
-            <div class="p-4 bg-gradient-to-r from-electric/10 to-purple/10 rounded-lg border-l-4 border-cyan mb-6">
-              <p class="text-white text-sm italic">"{study.outcome}"</p>
+            <!-- Security -->
+            <div class="mb-6">
+              <h4 class="text-purple font-semibold mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                Security & Compliance
+              </h4>
+              <ul class="space-y-1">
+                {study.security.map(item => (
+                  <li class="flex items-start gap-2 text-steel text-sm">
+                    <svg class="w-4 h-4 text-purple flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2">
-              {study.tags.map((tag) => (
-                <span class="px-2 py-1 bg-steel/10 text-steel text-xs rounded">
-                  {tag}
-                </span>
-              ))}
+            <!-- Outcome -->
+            <div class="mb-6">
+              <h4 class="text-green-400 font-semibold mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                Results
+              </h4>
+              <ul class="space-y-2">
+                {study.outcome.map(item => (
+                  <li class="flex items-start gap-2 text-white text-sm font-medium">
+                    <svg class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Why catdev -->
+            <div class="pt-6 border-t border-white/10">
+              <h4 class="text-white font-semibold mb-2">Why catdev?</h4>
+              <p class="text-steel leading-relaxed italic">
+                {study.whyCatdev}
+              </p>
             </div>
           </div>
         </div>
       ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-16 reveal">
+      <p class="text-xl text-steel mb-6">
+        Need a platform like these?
+      </p>
+      <a href="#contact" class="btn-primary inline-flex">
+        <span>Book Your Architecture Review</span>
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
     </div>
   </div>
 </section>
