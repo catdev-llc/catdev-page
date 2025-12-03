@@ -179,28 +179,21 @@ const caseStudies = [
     <!-- Case Studies Carousel (Desktop) / Stack (Mobile) -->
     <div class="relative">
       <!-- Desktop: 3-Card Infinite Carousel -->
-      <div class="hidden lg:flex items-center justify-center gap-4 relative min-h-[700px]" id="carousel-container">
-        <!-- Left Card (Blurred) -->
-        <div class="carousel-card carousel-side-card" id="card-left">
-          <div class="card-glass p-6 h-full overflow-hidden">
-            <div class="glow-effect"></div>
-            <div class="relative z-10 card-content"></div>
+      <div class="hidden lg:block relative overflow-hidden" id="carousel-container">
+        <div class="flex items-start justify-center transition-transform duration-500 ease-out" id="carousel-track">
+          <!-- Left Card (Blurred) -->
+          <div class="carousel-card carousel-side-card flex-shrink-0" id="card-left">
+            <div class="card-glass p-8 card-content"></div>
           </div>
-        </div>
 
-        <!-- Center Card (Active) -->
-        <div class="carousel-card carousel-center-card" id="card-center">
-          <div class="card-glass p-8 h-full overflow-y-auto max-h-[650px]">
-            <div class="glow-effect"></div>
-            <div class="relative z-10 card-content"></div>
+          <!-- Center Card (Active) -->
+          <div class="carousel-card carousel-center-card flex-shrink-0" id="card-center">
+            <div class="card-glass p-8 card-content"></div>
           </div>
-        </div>
 
-        <!-- Right Card (Blurred) -->
-        <div class="carousel-card carousel-side-card" id="card-right">
-          <div class="card-glass p-6 h-full overflow-hidden">
-            <div class="glow-effect"></div>
-            <div class="relative z-10 card-content"></div>
+          <!-- Right Card (Blurred) -->
+          <div class="carousel-card carousel-side-card flex-shrink-0" id="card-right">
+            <div class="card-glass p-8 card-content"></div>
           </div>
         </div>
       </div>
@@ -327,14 +320,17 @@ const caseStudies = [
 
 <style>
   /* 3-Card Carousel Layout */
+  #carousel-track {
+    gap: 1.5rem;
+  }
+
   .carousel-card {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    flex-shrink: 0;
+    width: 800px;
+    max-width: 800px;
   }
 
   .carousel-center-card {
-    width: 75%;
-    max-width: 850px;
     opacity: 1;
     filter: blur(0);
     transform: scale(1);
@@ -342,11 +338,9 @@ const caseStudies = [
   }
 
   .carousel-side-card {
-    width: 8%;
-    max-width: 80px;
-    opacity: 0.15;
-    filter: blur(4px);
-    transform: scale(0.9);
+    opacity: 0.08;
+    filter: blur(3px);
+    transform: scale(0.95);
     z-index: 1;
     pointer-events: none;
   }
@@ -374,23 +368,8 @@ const caseStudies = [
     return ((index % totalStudies) + totalStudies) % totalStudies;
   }
 
-  // Generate card HTML for a case study
-  function generateCardHTML(study: typeof caseStudies[0], isCenter: boolean): string {
-    if (!isCenter) {
-      // Side cards - minimal content
-      return `
-        <div class="mb-4">
-          <div class="inline-block px-2 py-0.5 bg-cyan/10 border border-cyan/30 rounded-full text-cyan text-[10px] font-semibold uppercase tracking-wider mb-2">
-            ${study.clientType}
-          </div>
-          <h3 class="text-sm font-bold text-white leading-tight">
-            ${study.title}
-          </h3>
-        </div>
-      `;
-    }
-
-    // Center card - full content
+  // Generate full card HTML for a case study
+  function generateCardHTML(study: typeof caseStudies[0]): string {
     return `
       <!-- Header -->
       <div class="mb-6">
@@ -503,14 +482,14 @@ const caseStudies = [
     const centerIndex = currentIndex;
     const rightIndex = wrapIndex(currentIndex + 1);
 
-    // Update card contents
+    // Update card contents - all cards get full content
     const leftContent = cardLeft?.querySelector('.card-content');
     const centerContent = cardCenter?.querySelector('.card-content');
     const rightContent = cardRight?.querySelector('.card-content');
 
-    if (leftContent) leftContent.innerHTML = generateCardHTML(caseStudies[leftIndex], false);
-    if (centerContent) centerContent.innerHTML = generateCardHTML(caseStudies[centerIndex], true);
-    if (rightContent) rightContent.innerHTML = generateCardHTML(caseStudies[rightIndex], false);
+    if (leftContent) leftContent.innerHTML = generateCardHTML(caseStudies[leftIndex]);
+    if (centerContent) centerContent.innerHTML = generateCardHTML(caseStudies[centerIndex]);
+    if (rightContent) rightContent.innerHTML = generateCardHTML(caseStudies[rightIndex]);
 
     // Update indicators
     indicators.forEach((indicator, i) => {
