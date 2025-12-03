@@ -1,64 +1,30 @@
 ---
 const audiences = [
-  {
-    title: 'SaaS Teams Scaling Faster Than Their Platform',
-    description: 'Product-led teams outgrowing scripts and ad-hoc infrastructure, needing a stable, secure delivery platform to maintain velocity.',
-  },
-  {
-    title: 'Fintech & Regulated Companies Under Compliance Pressure',
-    description: 'Organizations preparing for SOC2, ISO 27001, PCI DSS, or PSD2 where auditability and security are non-negotiable.',
-  },
-  {
-    title: 'Teams Drowning in Slow or Fragile CI/CD',
-    description: 'Pipelines that are brittle, slow, or hard to change—blocking developer velocity and increasing risk with every release.',
-  },
-  {
-    title: 'AI/ML Teams Struggling with GPU Infrastructure',
-    description: 'Startups needing secure, cost-efficient GPU clusters and reliable delivery for models and services.',
-  },
-  {
-    title: 'Companies Without a Dedicated Platform Team',
-    description: 'Engineering orgs that need senior DevSecOps capability but can\'t hire a full in-house team of specialists.',
-  },
-  {
-    title: 'Companies Preparing for Audits & Certifications',
-    description: 'Teams that need pipelines, infrastructure, and documentation aligned with compliance frameworks from day one.',
-  },
+  'SaaS teams at scale',
+  'Fintech & regulated',
+  'CI/CD-heavy teams',
+  'AI/ML on GPUs',
+  'No in-house DevOps',
 ];
 ---
 
-<section id="who-we-work-with" class="section-padding relative overflow-hidden">
-  <!-- Background -->
-  <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
-  <div class="absolute inset-0 bg-gradient-radial from-cyan/5 via-transparent to-transparent"></div>
+<section id="who-we-work-with" class="py-12 relative">
+  <div class="container-custom">
+    <div class="max-w-4xl mx-auto text-center reveal">
+      <!-- Tiny heading -->
+      <p class="text-cyan text-xs font-semibold tracking-wide uppercase mb-2">Who we work with</p>
 
-  <div class="container-custom relative">
-    <div class="max-w-6xl mx-auto reveal">
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <p class="text-cyan text-sm font-semibold tracking-wide uppercase mb-3">Who We Work With</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Teams that ship fast and need production-grade platforms
-        </h2>
-        <p class="text-steel text-lg max-w-3xl mx-auto">
-          We specialize in engineering organizations where infrastructure, security, and delivery pipelines are critical to growth—not an afterthought.
-        </p>
-      </div>
+      <!-- Short copy -->
+      <p class="text-steel text-sm mb-5">
+        Engineering teams that ship fast and can't afford fragile platforms.
+      </p>
 
-      <!-- Audience Grid - 2x3 on desktop, 1 col on mobile -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {audiences.map((audience, index) => (
-          <div
-            class="rounded-2xl border border-white/10 bg-deep-space/60 p-5 transition-all duration-300 hover:border-cyan/30 hover:bg-deep-space/80"
-            style={`transition-delay: ${index * 50}ms`}
-          >
-            <h3 class="text-white text-sm font-semibold mb-2 leading-snug">
-              {audience.title}
-            </h3>
-            <p class="text-steel text-sm leading-relaxed">
-              {audience.description}
-            </p>
-          </div>
+      <!-- Chip row -->
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        {audiences.map((audience) => (
+          <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 bg-white/5 text-steel hover:border-cyan/30 hover:text-white transition-colors">
+            {audience}
+          </span>
         ))}
       </div>
     </div>

@@ -1,85 +1,37 @@
 ---
-// Compact 4-pillar architecture diagram for the secure delivery platform
+// Compact 4-pillar strip - sits directly above the offer cards as a light "legend"
 const pillars = [
   {
     label: 'Infrastructure',
-    tagline: 'Multi-cloud, codified foundations',
-    color: 'electric',
-    items: [
-      'Terraform for AWS, Azure, Hetzner, Vultr',
-      'Ansible for configuration & bootstrap',
-      'Secrets management with Vault / cloud KMS',
-    ],
+    description: 'Terraform, Ansible, multi-cloud networking, secrets and baseline security.',
   },
   {
-    label: 'Delivery Pipeline',
-    tagline: 'CI/CD that doesn\'t break at scale',
-    color: 'purple',
-    items: [
-      'GitHub / GitLab CI / Azure DevOps',
-      'Build → test → scan → deploy automation',
-      'Branch protections and gated releases',
-    ],
+    label: 'Delivery pipeline',
+    description: 'GitHub / GitLab CI or Azure DevOps—build, test, scan and deploy without friction.',
   },
   {
-    label: 'Supply Chain Security',
-    tagline: 'Signed, traceable artifacts',
-    color: 'cyan',
-    items: [
-      'SBOM + VEX for every build',
-      'Sigstore image signing & verification',
-      'SLSA-aligned provenance workflows',
-    ],
+    label: 'Supply-chain security',
+    description: 'SBOM + VEX, Sigstore signing and SLSA-aligned provenance for every artifact.',
   },
   {
-    label: 'Kubernetes Runtime',
-    tagline: 'GitOps-driven, observable clusters',
-    color: 'electric',
-    items: [
-      'GitOps with ArgoCD or Flux',
-      'Policy enforcement with OPA / Kyverno',
-      'Autoscaling, observability, and DR patterns',
-    ],
+    label: 'Kubernetes runtime',
+    description: 'GitOps, policies, observability and DR for production clusters.',
   },
 ];
-
-const colorMap = {
-  electric: 'text-electric',
-  purple: 'text-purple',
-  cyan: 'text-cyan',
-};
 ---
 
-<!-- Compact 4-Pillar Architecture Diagram -->
-<div class="rounded-3xl border border-white/10 bg-deep-space/60 p-6 sm:p-8">
-  <h3 class="sr-only">Secure Cloud-Native Delivery Platform</h3>
-
-  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-    {pillars.map((pillar, index) => (
-      <div class="flex flex-col gap-2">
-        <p class={`text-xs font-semibold tracking-wide uppercase ${colorMap[pillar.color as keyof typeof colorMap]}`}>
+<!-- Compact 4-Pillar Strip -->
+<div class="rounded-2xl border border-white/10 bg-deep-space/40 p-5 sm:p-6">
+  <div class="grid gap-5 md:grid-cols-4 md:gap-4">
+    {pillars.map((pillar) => (
+      <div>
+        <p class="text-xs font-semibold text-cyan uppercase tracking-wide mb-1.5">
           {pillar.label}
         </p>
-        <p class="text-sm font-semibold text-white">
-          {pillar.tagline}
+        <p class="text-sm text-steel leading-relaxed">
+          {pillar.description}
         </p>
-        <ul class="mt-2 space-y-1.5 text-sm text-steel">
-          {pillar.items.map(item => (
-            <li class="flex items-start gap-2">
-              <span class={`mt-1.5 w-1 h-1 rounded-full flex-shrink-0 ${pillar.color === 'electric' ? 'bg-electric' : pillar.color === 'purple' ? 'bg-purple' : 'bg-cyan'}`}></span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     ))}
-  </div>
-
-  <!-- Flow line / caption -->
-  <div class="mt-6 flex flex-col items-center gap-3 text-center">
-    <div class="h-px w-full bg-gradient-to-r from-transparent via-cyan/40 to-transparent"></div>
-    <p class="text-sm text-steel">
-      Fully automated, auditable delivery from code commit to running workload—with security controls embedded at every step.
-    </p>
   </div>
 </div>
