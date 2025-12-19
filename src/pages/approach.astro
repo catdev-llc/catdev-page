@@ -1,0 +1,302 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTASection from '../components/shared/CTASection.astro';
+
+const approaches = [
+  {
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
+    title: 'Security Baked In, Not Bolted On',
+    description: "From image signing to secrets rotation to runtime policies—we build security into the foundation. Compliance and hardening aren't afterthoughts.",
+  },
+  {
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`,
+    title: 'Everything as Code',
+    description: 'Infrastructure, pipelines, policies, runbooks—all version-controlled and peer-reviewed. No ClickOps, no tribal knowledge, no configuration drift.',
+  },
+  {
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>`,
+    title: 'Build It, Run It, Own It',
+    description: 'We design your platform, deploy it, monitor it, patch it, and respond to incidents. Not consultants who vanish—long-term operational partners.',
+  },
+];
+
+const valueChain = [
+  'Infrastructure (IaC)',
+  'CI/CD Pipelines',
+  'Containers & K8s',
+  'Supply Chain Security',
+  'Observability',
+  'Operations'
+];
+
+const engagementModels = [
+  {
+    title: 'Platform Build',
+    subtitle: 'Fixed Scope',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>`,
+    description: 'Complete secure delivery platform built from the ground up. Terraform infrastructure, Kubernetes cluster, CI/CD pipelines, supply chain security, observability stack, and operational runbooks.',
+    bestFor: 'Companies needing a complete platform built right the first time',
+    deliverables: [
+      'Full infrastructure as code (Terraform/Ansible)',
+      'Production-ready Kubernetes cluster',
+      'Secure CI/CD pipelines with scanning and signing',
+      'GitOps deployment automation',
+      'Observability stack (Prometheus, Grafana, Loki)',
+      'Security policies and runtime protection',
+      'Documentation and operational runbooks',
+    ],
+    timeline: 'Typically 6-12 weeks depending on scope',
+  },
+  {
+    title: 'Platform Operations',
+    subtitle: 'Monthly Retainer',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>`,
+    description: 'We run your platform so you can focus on features. Ongoing operations, monitoring, patching, incident response, vulnerability management, and continuous improvement.',
+    bestFor: 'Teams that want to ship products, not manage infrastructure',
+    deliverables: [
+      '24/7 monitoring and alerting',
+      'Incident response and troubleshooting (L1/L2)',
+      'Cluster upgrades and node patching',
+      'Vulnerability scanning and remediation',
+      'Pipeline maintenance and optimization',
+      'Capacity planning and cost optimization',
+      'Monthly compliance reporting',
+    ],
+    timeline: 'Ongoing monthly engagement',
+  },
+  {
+    title: 'Supply Chain Hardening',
+    subtitle: 'Assessment or Upgrade',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
+    description: 'Targeted engagement to harden your software supply chain. Add SBOM generation, image signing with Sigstore, runtime verification, and vulnerability workflows to existing pipelines.',
+    bestFor: 'Companies with existing CI/CD that need compliance-ready supply chain security',
+    deliverables: [
+      'Security assessment of current pipeline',
+      'SBOM and VEX generation workflows',
+      'Image signing and verification (Sigstore/Cosign)',
+      'Policy enforcement (OPA/Kyverno)',
+      'Runtime security monitoring',
+      'Compliance documentation (SOC2/ISO/PCI)',
+      'Developer training and handoff',
+    ],
+    timeline: 'Typically 3-6 weeks',
+  },
+];
+
+const process = [
+  {
+    step: '1',
+    title: 'Architecture Review',
+    description: '30-minute technical deep-dive with a senior platform engineer. We assess your current infrastructure, security posture, and identify gaps in your delivery pipeline.',
+  },
+  {
+    step: '2',
+    title: 'Proposal & Roadmap',
+    description: 'Detailed technical design, tech stack recommendations, delivery timeline, and transparent pricing. No hand-waving—concrete architecture and implementation plan.',
+  },
+  {
+    step: '3',
+    title: 'Build, Deploy, Operate',
+    description: 'We build your platform, deploy it to production, and optionally run it long-term. Full documentation, operational runbooks, and knowledge transfer included.',
+  },
+];
+---
+
+<Layout
+  title="How We Work"
+  description="Our approach to platform engineering: security-first, everything as code, and long-term operational ownership. Learn about our engagement models and process."
+>
+                </svg>
+              )}
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Principles -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Our</span>
+          <span class="text-gradient"> Principles</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Three core beliefs that guide every platform we build and every engagement we take on.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {approaches.map((approach, index) => (
+          <div
+            class="group text-center reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="card-glass p-8 h-full transition-all duration-500 hover:scale-105">
+              <div class="glow-effect"></div>
+              <div class="relative z-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-hero mb-6 text-white">
+                  <div set:html={approach.icon} />
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">
+                  {approach.title}
+                </h3>
+                <p class="text-steel leading-relaxed">
+                  {approach.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagement Models -->
+  <section class="section-padding relative overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-purple/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <!-- Section Header -->
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Engagement</span>
+          <span class="text-gradient"> Models</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Three ways to work with catdev—whether you need a full platform build, ongoing operations, or targeted security upgrades.
+        </p>
+      </div>
+
+      <!-- Engagement Models -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {engagementModels.map((model, index) => (
+          <div
+            class="card-glass p-8 flex flex-col reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10 flex flex-col h-full">
+              <!-- Icon & Header -->
+              <div class="mb-6">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-hero mb-4 text-white">
+                  <div set:html={model.icon} />
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-1">{model.title}</h3>
+                <p class="text-cyan text-sm font-semibold uppercase tracking-wider">{model.subtitle}</p>
+              </div>
+
+              <!-- Description -->
+              <p class="text-steel mb-6 leading-relaxed">
+                {model.description}
+              </p>
+
+              <!-- Best For -->
+              <div class="mb-6 p-4 bg-white/5 rounded-lg border border-white/10">
+                <h4 class="text-white text-sm font-semibold mb-2">Best for:</h4>
+                <p class="text-steel text-sm">{model.bestFor}</p>
+              </div>
+
+              <!-- Deliverables -->
+              <div class="mb-6 flex-grow">
+                <h4 class="text-white text-sm font-semibold mb-3">What you get:</h4>
+                <ul class="space-y-2">
+                  {model.deliverables.map(item => (
+                    <li class="flex items-start gap-2 text-steel text-sm">
+                      <svg class="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Timeline -->
+              <div class="mt-auto pt-4 border-t border-white/10">
+                <p class="text-steel text-sm">
+                  <span class="text-white font-semibold">Timeline:</span> {model.timeline}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The Process -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">The</span>
+          <span class="text-gradient"> Process</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          What happens when you engage with catdev—from initial review to production deployment.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto space-y-8">
+        {process.map((item, index) => (
+          <div
+            class="card-glass p-8 flex gap-6 reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10 flex gap-6 w-full">
+              <div class="flex-shrink-0">
+                <div class="w-16 h-16 rounded-full bg-gradient-hero text-white flex items-center justify-center text-2xl font-bold">
+                  {item.step}
+                </div>
+              </div>
+              <div class="flex-grow">
+                <h3 class="text-2xl font-bold text-white mb-3">{item.title}</h3>
+                <p class="text-steel leading-relaxed">{item.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">10+</div>
+          <div class="text-steel">Years Cloud-Native</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">Multi-Cloud</div>
+          <div class="text-steel">AWS / GCP / Azure</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">100%</div>
+          <div class="text-steel">Senior Platform Engineers</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">24/7</div>
+          <div class="text-steel">Managed Operations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection
+    headline="Ready to work with us?"
+    subheadline="Not sure which engagement model fits your needs? Book a free architecture review and we'll help you decide."
+    primaryCTA={{
+      text: 'Book Architecture Review',
+      href: '/contact'
+    }}
+  />
+</Layout>

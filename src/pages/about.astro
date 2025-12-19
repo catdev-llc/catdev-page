@@ -1,0 +1,542 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/shared/Breadcrumbs.astro';
+import CTASection from '../components/shared/CTASection.astro';
+
+const stats = [
+  { number: '10+', label: 'Years Building Production Systems' },
+  { number: '100%', label: 'Senior Platform Engineers' },
+  { number: '5', label: 'Industries Served' },
+  { number: '24/7', label: 'Operational Support' },
+];
+
+const differentiators = [
+  {
+    title: 'We Run What We Build',
+    description: 'Not consulting theater. We deploy your platform, monitor it, patch it, and wake up when it breaks. If we build it, we stand behind it—literally. This keeps our designs honest and our standards high.',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>`,
+  },
+  {
+    title: 'No Bait-and-Switch',
+    description: 'You talk to senior engineers from day one—not sales teams, not junior consultants learning on your dime. Every architect and operator on our team has 10+ years running production systems at scale. We\'ve been paged at 3 AM. We know what breaks.',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`,
+  },
+  {
+    title: 'Engineer-to-Engineer Communication',
+    description: 'We speak in PRs, SLOs, and runbooks—not PowerPoints and hand-waving. Honest technical conversations about what works, what doesn\'t, and why. No buzzwords, no inflated promises, no vendor lock-in pitches.',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>`,
+  },
+  {
+    title: 'Full-Stack Platform Ownership',
+    description: 'We handle the entire value chain—from Terraform infrastructure to Kubernetes clusters to CI/CD pipelines to supply chain security to 24/7 operations. One team, one accountability surface. No finger-pointing when something breaks.',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>`,
+  },
+  {
+    title: 'Security Is Not Optional',
+    description: 'Image signing, SBOM generation, runtime policies, secrets rotation—baked into every platform we build. Compliance-ready from day one because we\'ve lived through SOC2, ISO 27001, and PCI DSS audits. We know what auditors ask for.',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>`,
+  },
+  {
+    title: 'Remote-First, Globally Available',
+    description: 'Distributed team means follow-the-sun coverage and cost efficiency without sacrificing expertise. Time zones work in your favor—your platform is monitored and maintained around the clock by senior engineers, not offshore juniors.',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+  },
+];
+
+const expertise = [
+  {
+    area: 'Platform Engineering',
+    years: '10+ years',
+    description: 'Building production Kubernetes platforms for startups, SaaS companies, and enterprises. From bare metal to multi-cloud, we\'ve architected it.',
+  },
+  {
+    area: 'DevSecOps & Supply Chain',
+    years: '5+ years',
+    description: 'Early adopters of SLSA, Sigstore, and zero-trust pipelines. We were signing container images and generating SBOMs before it was trendy.',
+  },
+  {
+    area: 'Regulated Industries',
+    years: '8+ years',
+    description: 'Banking, healthcare, fintech—industries where "move fast and break things" isn\'t an option. PCI DSS, SOC2, ISO 27001, HIPAA compliance expertise.',
+  },
+  {
+    area: 'Cloud-Native Migrations',
+    years: '10+ years',
+    description: 'Migrated everything from VPS to Kubernetes, Jenkins to GitHub Actions, on-prem to multi-cloud. Zero-downtime cutover is our specialty.',
+  },
+];
+---
+
+<Layout
+  title="About catdev"
+  description="Senior platform engineers who build, deploy, and operate production systems. No consultants, no hand-offs—just engineers who've been on-call."
+>
+  <Breadcrumbs items={[{ label: 'About' }]} />
+
+  <!-- Hero Section -->
+  <section class="section-padding relative overflow-hidden pt-32">
+    <div class="absolute inset-0 hexagon-pattern opacity-30"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-electric/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto text-center reveal">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <span class="text-white">Built by engineers</span>
+          <br />
+          <span class="text-gradient">who've been on-call</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-steel mb-8 leading-relaxed">
+          We're not consultants who hand off documentation and disappear. We're platform engineers who build, deploy, and operate production systems—and wake up when they break.
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto mt-16 reveal">
+        {stats.map((stat, index) => (
+          <div class="text-center" style={`transition-delay: ${index * 100}ms`}>
+            <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">{stat.number}</div>
+            <div class="text-steel text-sm md:text-base">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Origin Story -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="card-glass p-8 md:p-12 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Why catdev exists</h2>
+
+            <div class="space-y-6 text-lg text-steel leading-relaxed">
+              <p>
+                catdev was born from frustration—watching talented engineering teams get stuck maintaining infrastructure instead of shipping products. Watching startups hire expensive consultants who deliver PowerPoint decks instead of working systems. Watching companies scramble during SOC2 audits because security was bolted on, not baked in.
+              </p>
+
+              <p>
+                We've been the engineers responding to 3 AM incidents. We've migrated banking platforms with zero downtime. We've hardened supply chains for open-source projects processing millions of builds per day. We've operated GPU clusters for AI startups burning through compute budgets.
+              </p>
+
+              <p>
+                Every platform we build reflects lessons learned the hard way—through production outages, compliance audits, and late-night war rooms. We know what breaks because we've been the ones fixing it.
+              </p>
+
+              <p class="text-white font-semibold">
+                catdev exists to give engineering teams what we wish we'd had: a partner who builds production-grade platforms, operates them long-term, and takes responsibility when things go wrong.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Makes Us Different -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-purple/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">What Makes</span>
+          <span class="text-gradient"> catdev Different</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          We're not your typical DevOps consultancy. Here's why clients choose us over the alternatives.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {differentiators.map((diff, index) => (
+          <div
+            class="card-glass p-8 reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <div class="w-16 h-16 rounded-xl bg-gradient-hero flex items-center justify-center mb-6 text-white">
+                <div set:html={diff.icon} />
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">{diff.title}</h3>
+              <p class="text-steel leading-relaxed">{diff.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Expertise -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Deep</span>
+          <span class="text-gradient"> Expertise</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Our team has battle-tested experience across industries and infrastructure scales.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {expertise.map((exp, index) => (
+          <div
+            class="card-glass p-8 reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <div class="flex items-start justify-between mb-4">
+                <h3 class="text-2xl font-bold text-white">{exp.area}</h3>
+                <span class="px-3 py-1 bg-cyan/20 border border-cyan/30 rounded-full text-cyan text-sm font-semibold">
+                  {exp.years}
+                </span>
+              </div>
+              <p class="text-steel leading-relaxed">{exp.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Experience Highlights -->
+      <div class="mt-16 max-w-4xl mx-auto reveal">
+        <div class="card-glass p-8 border-2 border-cyan/30">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold text-white mb-6">Experience Highlights</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-cyan font-semibold mb-3">Industries Served</h4>
+                <ul class="space-y-2 text-steel">
+                  <li>• Financial Services (Tier 1 & Tier 2 banks)</li>
+                  <li>• SaaS & B2B Software</li>
+                  <li>• AI/ML & Data Science</li>
+                  <li>• Healthcare & Life Sciences</li>
+                  <li>• Open Source & Developer Tools</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-cyan font-semibold mb-3">Technical Depth</h4>
+                <ul class="space-y-2 text-steel">
+                  <li>• Kubernetes clusters at scale (500+ nodes)</li>
+                  <li>• Multi-cloud architectures (AWS, Azure, GCP)</li>
+                  <li>• CI/CD pipelines (200+ builds/hour)</li>
+                  <li>• GPU workload orchestration</li>
+                  <li>• Zero-downtime migrations</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Technology</span>
+          <span class="text-gradient"> Stack</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Production-grade, cloud-native tooling. We choose battle-tested technologies over shiny new frameworks.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Cloud Providers -->
+        <div class="reveal">
+          <div class="card-glass p-6">
+            <h3 class="text-xl font-bold text-cyan mb-4">Cloud Providers</h3>
+            <ul class="space-y-2 text-steel">
+              <li>• Amazon Web Services (AWS)</li>
+              <li>• Microsoft Azure</li>
+              <li>• Google Cloud Platform (GCP)</li>
+              <li>• Hetzner / Vultr (cost-optimized)</li>
+              <li>• DigitalOcean</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Infrastructure & Orchestration -->
+        <div class="reveal">
+          <div class="card-glass p-6">
+            <h3 class="text-xl font-bold text-cyan mb-4">Infrastructure & Orchestration</h3>
+            <ul class="space-y-2 text-steel">
+              <li>• Kubernetes (production-hardened)</li>
+              <li>• Terraform / OpenTofu</li>
+              <li>• ArgoCD / Flux (GitOps)</li>
+              <li>• Helm (package management)</li>
+              <li>• Ansible (configuration)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CI/CD -->
+        <div class="reveal">
+          <div class="card-glass p-6">
+            <h3 class="text-xl font-bold text-cyan mb-4">CI/CD Pipelines</h3>
+            <ul class="space-y-2 text-steel">
+              <li>• GitHub Actions</li>
+              <li>• GitLab CI/CD</li>
+              <li>• Azure DevOps</li>
+              <li>• Drone CI</li>
+              <li>• Tekton (Kubernetes-native)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Security & Compliance -->
+        <div class="reveal">
+          <div class="card-glass p-6">
+            <h3 class="text-xl font-bold text-cyan mb-4">Security & Compliance</h3>
+            <ul class="space-y-2 text-steel">
+              <li>• Sigstore (Cosign, Rekor, Fulcio)</li>
+              <li>• Trivy / Grype (scanning)</li>
+              <li>• OPA Gatekeeper / Kyverno</li>
+              <li>• HashiCorp Vault</li>
+              <li>• Falco (runtime security)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Observability -->
+        <div class="reveal">
+          <div class="card-glass p-6">
+            <h3 class="text-xl font-bold text-cyan mb-4">Observability</h3>
+            <ul class="space-y-2 text-steel">
+              <li>• Prometheus / VictoriaMetrics</li>
+              <li>• Grafana / Loki</li>
+              <li>• OpenTelemetry (traces)</li>
+              <li>• Tempo (distributed tracing)</li>
+              <li>• Datadog (enterprise)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Databases & Storage -->
+        <div class="reveal">
+          <div class="card-glass p-6">
+            <h3 class="text-xl font-bold text-cyan mb-4">Databases & Storage</h3>
+            <ul class="space-y-2 text-steel">
+              <li>• PostgreSQL (HA clusters)</li>
+              <li>• MongoDB / CosmosDB</li>
+              <li>• Redis (caching & queues)</li>
+              <li>• MinIO / S3 (object storage)</li>
+              <li>• ClickHouse (analytics)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who We Work With -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Who We</span>
+            <span class="text-gradient"> Work With</span>
+          </h2>
+          <p class="text-xl text-steel">
+            From seed-stage startups to Fortune 500 banks—we work with teams that value production excellence.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+          <div class="card-glass p-6">
+            <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Startups & Scale-ups
+            </h3>
+            <ul class="space-y-2 text-steel text-sm">
+              <li>• SaaS companies shipping features daily</li>
+              <li>• AI/ML startups needing GPU orchestration</li>
+              <li>• Series A-C companies scaling infrastructure</li>
+              <li>• Open-source projects going enterprise</li>
+            </ul>
+          </div>
+
+          <div class="card-glass p-6">
+            <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              Regulated Industries
+            </h3>
+            <ul class="space-y-2 text-steel text-sm">
+              <li>• Banking & financial services (Tier 1 & 2)</li>
+              <li>• Healthcare & life sciences (HIPAA)</li>
+              <li>• Fintech (PCI DSS, SOC2)</li>
+              <li>• Any company facing compliance audits</li>
+            </ul>
+          </div>
+
+          <div class="card-glass p-6">
+            <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              Enterprises
+            </h3>
+            <ul class="space-y-2 text-steel text-sm">
+              <li>• Engineering teams lacking DevOps expertise</li>
+              <li>• Companies modernizing legacy infrastructure</li>
+              <li>• Teams migrating to Kubernetes</li>
+              <li>• Organizations needing 24/7 operations</li>
+            </ul>
+          </div>
+
+          <div class="card-glass p-6">
+            <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              CTOs & Engineering Leaders
+            </h3>
+            <ul class="space-y-2 text-steel text-sm">
+              <li>• Leaders needing platform expertise</li>
+              <li>• Teams outgrowing current infrastructure</li>
+              <li>• Companies preparing for audits</li>
+              <li>• Any team stuck maintaining vs. building</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Remote-First Culture -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-radial from-electric/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto text-center reveal">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-hero mb-6 text-white">
+          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+          <span class="text-white">Global Reach,</span>
+          <span class="text-gradient"> Remote-First</span>
+        </h2>
+
+        <div class="space-y-6 text-lg text-steel leading-relaxed mb-8">
+          <p>
+            Based in St. Petersburg, Florida, but serving clients globally. Our remote-first model means you get senior engineers without geographic limitations or relocation overhead.
+          </p>
+          <p>
+            Distributed teams aren't a compromise—they're an advantage. Follow-the-sun coverage means your platform is monitored around the clock. Time zones become a feature, not a bug.
+          </p>
+          <p class="text-white font-semibold">
+            Whether you're in Silicon Valley, London, Singapore, or São Paulo—we've worked with clients across every continent. Remote collaboration is our default, not an afterthought.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div class="text-3xl font-bold text-cyan mb-2">🇺🇸</div>
+            <div class="text-steel text-sm">North America</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-cyan mb-2">🇪🇺</div>
+            <div class="text-steel text-sm">Europe</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-cyan mb-2">🌏</div>
+            <div class="text-steel text-sm">Asia-Pacific</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-cyan mb-2">🌍</div>
+            <div class="text-steel text-sm">Middle East</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Information -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <div class="card-glass p-8 md:p-12 text-center reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <h2 class="text-3xl font-bold text-white mb-6">catdev LLC</h2>
+
+            <div class="space-y-3 text-steel mb-8">
+              <p>7901 4th St N STE 300</p>
+              <p>St. Petersburg, FL 33702</p>
+              <p>United States</p>
+            </div>
+
+            <div class="space-y-2 mb-8">
+              <p>
+                <a href="mailto:info@catdev.io" class="text-cyan hover:text-white transition-colors font-medium">
+                  info@catdev.io
+                </a>
+              </p>
+              <div class="flex items-center justify-center gap-4 mt-4">
+                <a
+                  href="https://www.linkedin.com/company/43311393/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-steel hover:text-cyan transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://facebook.com/catdevllc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-steel hover:text-cyan transition-colors"
+                  aria-label="Facebook"
+                >
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <p class="text-steel italic">
+              Serving clients globally since 2014. Remote-first, engineering-first, results-first.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection
+    headline="Ready to work with engineers who've been there?"
+    subheadline="Book a free architecture review. We'll have an honest, technical conversation about your infrastructure—no sales pitch, no hand-waving."
+    primaryCTA={{
+      text: 'Book Architecture Review',
+      href: '/contact'
+    }}
+    secondaryCTA={{
+      text: 'See Our Work',
+      href: '/case-studies'
+    }}
+  />
+</Layout>

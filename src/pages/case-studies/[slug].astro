@@ -1,0 +1,319 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTASection from '../../components/shared/CTASection.astro';
+import { caseStudies, getCaseStudyBySlug } from '../../data/caseStudies';
+
+export async function getStaticPaths() {
+  return caseStudies.map(study => ({
+    params: { slug: study.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const study = getCaseStudyBySlug(slug);
+
+if (!study) {
+  return Astro.redirect('/case-studies');
+}
+
+// Get related case studies (same industry or solution type, excluding current)
+const relatedStudies = caseStudies
+  .filter(cs =>
+    cs.slug !== study.slug &&
+    (cs.industry === study.industry ||
+     cs.solutionTypes.some(type => study.solutionTypes.includes(type)))
+  )
+  .slice(0, 2);
+---
+
+<Layout
+  title={study.title}
+  description={`${study.clientType}: ${study.problem.slice(0, 150)}...`}
+>
+
+  <!-- Hero Section -->
+  <section class="section-padding relative overflow-hidden pt-32">
+    <div class="absolute inset-0 hexagon-pattern opacity-30"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-purple/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto reveal">
+        <!-- Tags -->
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <span class="px-4 py-2 bg-cyan/10 border border-cyan/30 rounded-full text-cyan text-sm font-semibold uppercase tracking-wider">
+            {study.clientType}
+          </span>
+          <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-steel text-sm">
+            {study.industry}
+          </span>
+          {study.solutionTypes.map(type => (
+            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-steel text-xs">
+              {type.replace('-', ' ')}
+            </span>
+          ))}
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+          {study.title}
+        </h1>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="card-glass p-6">
+            <div class="text-steel text-sm mb-2">Industry</div>
+            <div class="text-white font-semibold">{study.industry}</div>
+          </div>
+          <div class="card-glass p-6">
+            <div class="text-steel text-sm mb-2">Solutions</div>
+            <div class="text-white font-semibold">{study.solutionTypes.length} Services</div>
+          </div>
+          <div class="card-glass p-6">
+            <div class="text-steel text-sm mb-2">Technologies</div>
+            <div class="text-white font-semibold">{study.technologies.length}+ Tools</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="card-glass p-8 md:p-12 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-6">
+              <svg class="w-8 h-8 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <h2 class="text-3xl md:text-4xl font-bold text-white">The Challenge</h2>
+            </div>
+            <p class="text-lg text-steel leading-relaxed">
+              {study.problem}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Built -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">What We</span>
+            <span class="text-gradient"> Built</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 reveal">
+          {study.solution.map((item, index) => (
+            <div class="flex items-start gap-3 p-4 bg-white/5 rounded-lg border border-white/10">
+              <svg class="w-5 h-5 text-cyan flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-steel text-sm leading-relaxed">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack -->
+  <section class="section-padding relative">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Technology</span>
+            <span class="text-gradient"> Stack</span>
+          </h2>
+        </div>
+
+        <div class="card-glass p-8 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <div class="flex flex-wrap gap-3">
+              {study.technologies.map(tech => (
+                <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-steel text-sm font-mono hover:border-cyan transition-colors">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & Compliance -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="card-glass p-8 md:p-12 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-6">
+              <svg class="w-8 h-8 text-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+              </svg>
+              <h2 class="text-3xl md:text-4xl font-bold text-white">Security & Compliance</h2>
+            </div>
+
+            <ul class="space-y-3">
+              {study.security.map(item => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-purple flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-steel leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-radial from-green-500/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">The</span>
+            <span class="text-gradient"> Results</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+          {study.outcome.map((result, index) => (
+            <div class="card-glass p-6">
+              <div class="glow-effect"></div>
+              <div class="relative z-10 flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <p class="text-white font-medium leading-relaxed">{result}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why catdev -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="card-glass p-8 md:p-12 reveal border-2 border-cyan/30">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Why catdev?</h2>
+            <p class="text-lg text-steel leading-relaxed italic">
+              {study.whyCatdev}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Case Studies -->
+  {relatedStudies.length > 0 && (
+    <section class="section-padding relative overflow-hidden">
+      <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+
+      <div class="container-custom relative">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Related</span>
+            <span class="text-gradient"> Case Studies</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {relatedStudies.map((relatedStudy, index) => (
+            <div
+              class="card-glass p-8 reveal"
+              style={`transition-delay: ${index * 100}ms`}
+            >
+              <div class="glow-effect"></div>
+              <div class="relative z-10">
+                <div class="inline-block px-3 py-1 bg-cyan/10 border border-cyan/30 rounded-full text-cyan text-xs font-semibold uppercase tracking-wider mb-4">
+                  {relatedStudy.clientType}
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">{relatedStudy.title}</h3>
+
+                <p class="text-steel mb-6 leading-relaxed line-clamp-3">
+                  {relatedStudy.problem}
+                </p>
+
+                <div class="mb-6">
+                  <ul class="space-y-2">
+                    {relatedStudy.outcome.slice(0, 2).map(result => (
+                      <li class="flex items-start gap-2 text-white text-sm">
+                        <svg class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <span>{result}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <a
+                  href={`/case-studies/${relatedStudy.slug}`}
+                  class="btn-secondary w-full justify-center"
+                >
+                  Read Full Story
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-12 reveal">
+          <a href="/case-studies" class="btn-secondary inline-flex">
+            View All Case Studies
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <CTASection
+    headline="Need similar results?"
+    subheadline="Book a free architecture review and we'll show you what a production-grade platform looks like."
+    primaryCTA={{
+      text: 'Book Architecture Review',
+      href: '/contact'
+    }}
+    secondaryCTA={{
+      text: 'Explore Solutions',
+      href: '/solutions'
+    }}
+  />
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+interface Props {
+  headline?: string;
+  subheadline?: string;
+  primaryCTA?: {
+    text: string;
+    href: string;
+  };
+  secondaryCTA?: {
+    text: string;
+    href: string;
+  };
+  variant?: 'default' | 'compact' | 'featured';
+}
+
+const {
+  headline = 'Ready to get started?',
+  subheadline = 'Book a free architecture review and see what a production-grade platform looks like.',
+  primaryCTA = {
+    text: 'Book Architecture Review',
+    href: '/contact',
+  },
+  secondaryCTA,
+  variant = 'default',
+} = Astro.props;
+---
+
+<section class={`relative overflow-hidden ${variant === 'compact' ? 'py-12' : 'section-padding'}`}>
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-radial from-electric/10 via-transparent to-transparent"></div>
+  <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+
+  <div class="container-custom relative">
+    <div class={`text-center reveal ${variant === 'featured' ? 'card-glass p-12' : ''}`}>
+      {variant === 'featured' && <div class="glow-effect"></div>}
+
+      <div class={variant === 'featured' ? 'relative z-10' : ''}>
+        <h2 class={`font-bold mb-4 ${variant === 'compact' ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl'}`}>
+          <span class="text-white">{headline}</span>
+        </h2>
+
+        {subheadline && (
+          <p class={`text-steel max-w-2xl mx-auto mb-8 ${variant === 'compact' ? 'text-lg' : 'text-xl'}`}>
+            {subheadline}
+          </p>
+        )}
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href={primaryCTA.href} class="btn-primary">
+            <span>{primaryCTA.text}</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+
+          {secondaryCTA && (
+            <a href={secondaryCTA.href} class="btn-secondary">
+              {secondaryCTA.text}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,275 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTASection from '../../components/shared/CTASection.astro';
+import { getSolutionById } from '../../data/solutions';
+import { getCaseStudiesBySolutionType } from '../../data/caseStudies';
+
+const solution = getSolutionById('cloud-migration');
+if (!solution) throw new Error('Solution not found');
+
+const caseStudies = getCaseStudiesBySolutionType('cloud-migration');
+---
+
+<Layout
+  title={solution.title}
+  description={solution.description}
+>
+
+  <!-- Hero Section -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-30"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-deep-space/50 to-transparent"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="max-w-4xl mx-auto text-center reveal">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-hero mb-6 text-white">
+          <div set:html={solution.icon} />
+        </div>
+
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <span class="text-gradient">{solution.heroHeadline}</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-steel mb-8">
+          {solution.heroSubheadline}
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/contact" class="btn-primary">
+            <span>Book Migration Assessment</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="#services" class="btn-secondary">
+            See What You Get
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Problem -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-5xl mx-auto">
+        <div class="card-glass p-8 md:p-12 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-6">
+              <svg class="w-8 h-8 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <h2 class="text-3xl md:text-4xl font-bold text-white">The Problem</h2>
+            </div>
+
+            <p class="text-xl text-steel mb-6 leading-relaxed">
+              {solution.problemStatement}
+            </p>
+
+            <ul class="space-y-4">
+              {solution.problems.map(problem => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span class="text-steel text-lg leading-relaxed">{problem}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Solution -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Our</span>
+            <span class="text-gradient"> Solution</span>
+          </h2>
+        </div>
+
+        <div class="space-y-6 reveal">
+          {solution.solutionOverview.map(paragraph => (
+            <p class="text-lg text-steel leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 reveal">
+          {solution.benefits.map(benefit => (
+            <div class="flex items-start gap-3 p-4 bg-white/5 rounded-lg border border-white/10">
+              <svg class="w-5 h-5 text-cyan flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-white font-medium">{benefit}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You Get -->
+  <section id="services" class="section-padding relative">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">What You</span>
+          <span class="text-gradient"> Get</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Complete cloud migration services—from assessment to cutover to validation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {solution.services.map((service, index) => (
+          <div
+            class="card-glass p-6 reveal"
+            style={`transition-delay: ${index * 50}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <h3 class="text-xl font-bold text-white mb-3">{service.title}</h3>
+              <p class="text-steel leading-relaxed">{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Technology</span>
+          <span class="text-gradient"> Stack</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Modern cloud platforms and migration tools for safe, successful transitions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {solution.techStack.map((category, index) => (
+          <div
+            class="card-glass p-8 reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <h3 class="text-2xl font-bold text-white mb-6">{category.category}</h3>
+              <div class="space-y-4">
+                {category.tools.map(tool => (
+                  <div class="border-l-2 border-cyan/30 pl-4 hover:border-cyan transition-colors">
+                    <h4 class="text-white font-semibold mb-1">{tool.name}</h4>
+                    <p class="text-steel text-sm">{tool.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  {caseStudies.length > 0 && (
+    <section class="section-padding relative overflow-hidden">
+      <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+      <div class="absolute inset-0 bg-gradient-radial from-purple/5 via-transparent to-transparent"></div>
+
+      <div class="container-custom relative">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Real</span>
+            <span class="text-gradient"> Results</span>
+          </h2>
+          <p class="text-xl text-steel max-w-3xl mx-auto">
+            See how we've delivered cloud migrations for companies like yours.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {caseStudies.slice(0, 2).map((study, index) => (
+            <div
+              class="card-glass p-8 reveal"
+              style={`transition-delay: ${index * 100}ms`}
+            >
+              <div class="glow-effect"></div>
+              <div class="relative z-10">
+                <div class="inline-block px-3 py-1 bg-cyan/10 border border-cyan/30 rounded-full text-cyan text-xs font-semibold uppercase tracking-wider mb-4">
+                  {study.clientType}
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">{study.title}</h3>
+
+                <p class="text-steel mb-6 leading-relaxed">
+                  {study.problem}
+                </p>
+
+                <div class="mb-6">
+                  <h4 class="text-green-400 font-semibold mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                    Results
+                  </h4>
+                  <ul class="space-y-2">
+                    {study.outcome.slice(0, 3).map(result => (
+                      <li class="flex items-start gap-2 text-white text-sm">
+                        <svg class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <span>{result}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                  {study.technologies.slice(0, 5).map(tech => (
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-steel text-xs font-mono">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-12 reveal">
+          <a href="/case-studies" class="btn-secondary inline-flex">
+            View All Case Studies
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <CTASection
+    headline="Ready to migrate to the cloud?"
+    subheadline="Book a free migration assessment. We'll review your infrastructure and create a zero-downtime migration plan."
+    primaryCTA={{
+      text: 'Book Migration Assessment',
+      href: '/contact'
+    }}
+    secondaryCTA={{
+      text: 'Explore Other Solutions',
+      href: '/solutions'
+    }}
+  />
+</Layout>
