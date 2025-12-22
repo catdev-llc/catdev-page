@@ -148,6 +148,116 @@ const caseStudies = getCaseStudiesBySolutionType('devsecops');
     </div>
   </section>
 
+  <!-- AI Penetration Testing Integration -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-radial from-electric/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="max-w-5xl mx-auto">
+        <div class="card-glass p-8 md:p-12 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <div class="flex items-start gap-4 mb-6">
+              <svg class="w-10 h-10 text-electric flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                  AI Penetration Testing as a <span class="text-gradient">Security Gate</span>
+                </h2>
+                <p class="text-xl text-steel">
+                  Autonomous adversarial testing integrated directly into your CI/CD pipeline—catching vulnerabilities before they reach production.
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-6 mb-8">
+              <p class="text-steel text-lg leading-relaxed">
+                Traditional vulnerability scanning flags known CVEs. AI penetration testing goes further—it thinks like an attacker, chains vulnerabilities together, and tests exploitability in context.
+              </p>
+              <p class="text-steel text-lg leading-relaxed">
+                Our AI pentest agents run automatically on every deployment, performing reconnaissance, vulnerability analysis, and attack vector validation against your staging environment. This isn't static analysis—it's autonomous adversarial testing with explainable AI reasoning.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div class="bg-white/5 rounded-lg p-6 border border-white/10">
+                <h4 class="text-white font-bold mb-3 flex items-center gap-2">
+                  <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  How It Works
+                </h4>
+                <ul class="space-y-2 text-steel text-sm">
+                  <li>• Runs as a CI/CD pipeline stage after build/test</li>
+                  <li>• AI agent performs automated recon on staging environment</li>
+                  <li>• Identifies attack surface and proposes attack vectors</li>
+                  <li>• Human approval gate before exploitation attempts</li>
+                  <li>• Generates detailed security report with remediation steps</li>
+                  <li>• Blocks deployment if critical vulnerabilities found</li>
+                </ul>
+              </div>
+
+              <div class="bg-white/5 rounded-lg p-6 border border-white/10">
+                <h4 class="text-white font-bold mb-3 flex items-center gap-2">
+                  <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  What It Catches
+                </h4>
+                <ul class="space-y-2 text-steel text-sm">
+                  <li>• Authentication bypasses and weak credentials</li>
+                  <li>• API injection vulnerabilities (SQL, NoSQL, command)</li>
+                  <li>• Broken access control and privilege escalation paths</li>
+                  <li>• Misconfigured security headers and CORS policies</li>
+                  <li>• Exposed secrets and sensitive data leaks</li>
+                  <li>• Container escape vectors and lateral movement paths</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-electric/10 to-cyan/10 rounded-lg p-6 border border-electric/30">
+              <h4 class="text-white font-bold mb-3">Integration with Supply Chain Security</h4>
+              <p class="text-steel mb-4">
+                AI penetration testing complements traditional DevSecOps controls by validating security in production-like environments:
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start gap-2">
+                  <span class="text-cyan font-bold">→</span>
+                  <span class="text-steel text-sm">SBOM generation identifies dependencies, AI pentest validates they're not exploitable</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-cyan font-bold">→</span>
+                  <span class="text-steel text-sm">Vulnerability scanning flags CVEs, AI pentest confirms exploitability and impact</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-cyan font-bold">→</span>
+                  <span class="text-steel text-sm">Image signing ensures provenance, AI pentest tests runtime security posture</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-cyan font-bold">→</span>
+                  <span class="text-steel text-sm">Policy enforcement blocks bad configs, AI pentest finds logic flaws and attack chains</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <a href="/solutions/ai-ops#services" class="btn-secondary inline-flex items-center justify-center">
+                <span>Learn More About AI Ops</span>
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a href="/contact" class="btn-primary inline-flex items-center justify-center">
+                <span>Discuss Implementation</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Technology Stack -->
   <section class="section-padding relative">
     <div class="container-custom">

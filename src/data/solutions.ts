@@ -158,6 +158,10 @@ export const solutions: Solution[] = [
         description: 'Harden GitHub Actions, GitLab CI, or Azure DevOps workflows. Enforce branch protections, require signed commits, and audit pipeline access.',
       },
       {
+        title: 'AI-Driven Penetration Testing in CI/CD',
+        description: 'Autonomous AI agent performs continuous security testing within your delivery pipeline. Thinks like an attacker, maps attack surfaces, proposes exploitation strategies, and executes tests with human approval gates. Every deployment is tested by an adversarial AI before production.',
+      },
+      {
         title: 'VEX/SBOM Workflows',
         description: 'Generate SBOMs for every build. Create VEX documents to document vulnerability status and mitigations.',
       },
@@ -197,12 +201,14 @@ export const solutions: Solution[] = [
         ],
       },
       {
-        category: 'Vulnerability Scanning',
+        category: 'Vulnerability Scanning & Penetration Testing',
         tools: [
+          { name: 'AI Pentest Agents', description: 'Autonomous adversarial testing' },
+          { name: 'Metasploit / Nuclei', description: 'Exploitation validation' },
           { name: 'Trivy', description: 'Build and runtime scanning' },
           { name: 'Grype', description: 'Vulnerability detection' },
           { name: 'Snyk', description: 'Dependency scanning' },
-          { name: 'Qualys', description: 'Enterprise scanning' },
+          { name: 'OWASP ZAP', description: 'Dynamic application testing' },
         ],
       },
       {
@@ -470,6 +476,10 @@ export const solutions: Solution[] = [
         description: 'Automated fiber network failure analysis with OTDR interpretation, root cause identification, and actionable repair instructions—all generated within minutes of alarm detection.',
       },
       {
+        title: 'AI-Driven Penetration Testing',
+        description: 'Autonomous security agent that thinks like an attacker, performs continuous reconnaissance, identifies vulnerabilities, and proposes attack vectors—running automatically in your CI/CD pipeline. Not just scanning, but intelligent adversarial testing with explainable AI reasoning.',
+      },
+      {
         title: 'AI-Based Security Assessments',
         description: 'Integrated into CI/CD pipelines for automated code security analysis, vulnerability detection, and compliance checking—no bottlenecks, no waiting.',
       },
@@ -518,12 +528,14 @@ export const solutions: Solution[] = [
         ],
       },
       {
-        category: 'Security Analysis',
+        category: 'Security Analysis & Penetration Testing',
         tools: [
-          { name: 'Semgrep / CodeQL', description: 'Static analysis integration' },
-          { name: 'Trivy / Grype', description: 'Vulnerability scanning' },
+          { name: 'Custom AI Pentest Agents', description: 'Autonomous adversarial testing' },
+          { name: 'Metasploit Framework', description: 'Exploitation and validation' },
           { name: 'OWASP ZAP', description: 'Dynamic security testing' },
-          { name: 'AI Code Review', description: 'Intelligent code analysis' },
+          { name: 'Nuclei', description: 'Vulnerability scanning templates' },
+          { name: 'Semgrep / CodeQL', description: 'Static analysis integration' },
+          { name: 'Trivy / Grype', description: 'Container vulnerability scanning' },
         ],
       },
       {
@@ -533,6 +545,7 @@ export const solutions: Solution[] = [
           { name: 'Temporal / Airflow', description: 'Workflow orchestration' },
           { name: 'Python / Go', description: 'Agent development' },
           { name: 'REST / gRPC APIs', description: 'System integration' },
+          { name: 'MITRE ATT&CK', description: 'Attack technique mapping' },
         ],
       },
     ],

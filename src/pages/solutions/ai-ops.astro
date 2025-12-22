@@ -148,6 +148,176 @@ const caseStudies = getCaseStudiesBySolutionType('ai-ops');
     </div>
   </section>
 
+  <!-- AI Penetration Testing in Action -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-radial from-purple/10 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">AI Penetration Testing</span>
+          <span class="text-gradient"> in Action</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Not traditional scanning—this is an AI agent that reasons about your attack surface like a real penetration tester, running automatically on every deployment.
+        </p>
+      </div>
+
+      <div class="max-w-5xl mx-auto space-y-8">
+        <!-- Workflow -->
+        <div class="card-glass p-8 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold text-white mb-6">Continuous Attack Surface Analytics in CI/CD</h3>
+
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center">
+                  <span class="text-cyan font-bold text-lg">1</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">Code Commit Triggers AI Recon</h4>
+                  <p class="text-steel">Developer pushes code. CI/CD pipeline triggers the AI penetration testing agent to analyze the deployment's attack surface.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center">
+                  <span class="text-cyan font-bold text-lg">2</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">Automated Reconnaissance</h4>
+                  <p class="text-steel">AI agent maps exposed services, enumerates endpoints, fingerprints technologies, and identifies potential entry points—thinking like an adversary.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center">
+                  <span class="text-cyan font-bold text-lg">3</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">Vulnerability Intelligence</h4>
+                  <p class="text-steel">Detected versions are cross-referenced against CVE databases. AI analyzes exploitability context, not just version numbers.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center">
+                  <span class="text-cyan font-bold text-lg">4</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">Attack Vector Proposal (Explainable AI)</h4>
+                  <p class="text-steel">AI proposes specific exploitation strategies with reasoning: "This API endpoint lacks rate limiting and accepts unvalidated JSON—potential for injection attacks." Approval gate ensures human oversight.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center">
+                  <span class="text-cyan font-bold text-lg">5</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">Gated Execution</h4>
+                  <p class="text-steel">With approval, AI executes safe exploitation attempts against staging environment. All actions logged with MITRE ATT&CK mapping.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center">
+                  <span class="text-cyan font-bold text-lg">6</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">Detailed Security Report</h4>
+                  <p class="text-steel">AI generates a comprehensive report with discovered vulnerabilities, successful attack chains, remediation steps, and risk scoring—ready for security team review before production deployment.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Scenario -->
+        <div class="card-glass p-8 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold text-white mb-6">Example: Real Attack Discovery</h3>
+
+            <div class="bg-midnight/50 rounded-lg p-6 border border-white/10 mb-4">
+              <h4 class="text-cyan font-semibold mb-3">Scenario: API Gateway Deployment</h4>
+              <p class="text-steel mb-4">New API gateway is deployed to staging with authentication service integration.</p>
+
+              <div class="space-y-3">
+                <div class="border-l-2 border-electric pl-4">
+                  <p class="text-white font-medium">AI Reconnaissance Finding:</p>
+                  <p class="text-steel text-sm">"Discovered /admin endpoint with basic auth. Service version nginx/1.18.0 has known vulnerabilities (CVE-2021-23017)."</p>
+                </div>
+
+                <div class="border-l-2 border-purple pl-4">
+                  <p class="text-white font-medium">AI Reasoning:</p>
+                  <p class="text-steel text-sm">"The /admin endpoint uses predictable paths and legacy authentication. Combined with outdated nginx version, this creates an attack chain: version exploit → authentication bypass → privilege escalation."</p>
+                </div>
+
+                <div class="border-l-2 border-red-500 pl-4">
+                  <p class="text-white font-medium">Attack Vector Proposed:</p>
+                  <p class="text-steel text-sm">"Attempt buffer overflow via off-by-one error in resolver (CVE-2021-23017), then test authentication bypass using known credential stuffing patterns."</p>
+                </div>
+
+                <div class="border-l-2 border-green-400 pl-4">
+                  <p class="text-white font-medium">Outcome:</p>
+                  <p class="text-steel text-sm">"AI successfully demonstrated vulnerability in staging. Security team notified pre-production. nginx upgraded to 1.24.0, /admin endpoint moved behind VPN, rate limiting implemented. Attack prevented before production exposure."</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-4 bg-cyan/5 rounded-lg border border-cyan/20">
+              <svg class="w-6 h-6 text-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p class="text-white font-semibold mb-1">Why This Matters</p>
+                <p class="text-steel text-sm">Traditional scanners would only flag the outdated nginx version. The AI agent reasoned about the attack chain, demonstrated exploitability, and caught the issue before production—saving the organization from a potential breach.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Differentiators -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="card-glass p-6 reveal">
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <svg class="w-10 h-10 text-electric mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <h4 class="text-white font-bold mb-2">Adversarial Reasoning</h4>
+              <p class="text-steel text-sm">Not pattern matching—AI thinks about attack chains and exploitation context like a real attacker.</p>
+            </div>
+          </div>
+
+          <div class="card-glass p-6 reveal">
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <svg class="w-10 h-10 text-cyan mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <h4 class="text-white font-bold mb-2">Continuous Testing</h4>
+              <p class="text-steel text-sm">Every deployment is tested automatically. No manual pentest scheduling or waiting.</p>
+            </div>
+          </div>
+
+          <div class="card-glass p-6 reveal">
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <svg class="w-10 h-10 text-purple mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <h4 class="text-white font-bold mb-2">Explainable AI</h4>
+              <p class="text-steel text-sm">Every decision documented with reasoning. Full audit trail mapped to MITRE ATT&CK.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Technology Stack -->
   <section class="section-padding relative">
     <div class="container-custom">
