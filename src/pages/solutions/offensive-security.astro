@@ -1,0 +1,503 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTASection from '../../components/shared/CTASection.astro';
+import { getSolutionById } from '../../data/solutions';
+import { getCaseStudiesBySolutionType } from '../../data/caseStudies';
+
+const solution = getSolutionById('offensive-security');
+if (!solution) throw new Error('Solution not found');
+
+const caseStudies = getCaseStudiesBySolutionType('offensive-security');
+---
+
+<Layout
+  title={solution.title}
+  description={solution.description}
+>
+
+  <!-- Hero Section -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-30"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-deep-space/50 to-transparent"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="max-w-4xl mx-auto text-center reveal">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-hero mb-6 text-white">
+          <div set:html={solution.icon} />
+        </div>
+
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <span class="text-gradient">{solution.heroHeadline}</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-steel mb-8">
+          {solution.heroSubheadline}
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/contact" class="btn-primary">
+            <span>Schedule Security Assessment</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="#services" class="btn-secondary">
+            See What You Get
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Problem -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-5xl mx-auto">
+        <div class="card-glass p-8 md:p-12 reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-6">
+              <svg class="w-8 h-8 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <h2 class="text-3xl md:text-4xl font-bold text-white">The Problem</h2>
+            </div>
+
+            <p class="text-xl text-steel mb-6 leading-relaxed">
+              {solution.problemStatement}
+            </p>
+
+            <ul class="space-y-4">
+              {solution.problems.map(problem => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span class="text-steel text-lg leading-relaxed">{problem}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Solution -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Our</span>
+            <span class="text-gradient"> Solution</span>
+          </h2>
+        </div>
+
+        <div class="space-y-6 reveal">
+          {solution.solutionOverview.map(paragraph => (
+            <p class="text-lg text-steel leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 reveal">
+          {solution.benefits.map(benefit => (
+            <div class="flex items-start gap-3 p-4 bg-white/5 rounded-lg border border-white/10">
+              <svg class="w-5 h-5 text-cyan flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-white font-medium">{benefit}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offensive Security Capabilities -->
+  <section id="services" class="section-padding relative">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Testing</span>
+          <span class="text-gradient"> Capabilities</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Manual penetration testing covering web applications, APIs, mobile apps, and enterprise networks—not automated scanning.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {solution.services.map((service, index) => (
+          <div class="card-glass p-6 reveal" style={`transition-delay: ${index * 50}ms`}>
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 mb-4 rounded-lg bg-gradient-hero flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">{service.title}</h3>
+              <p class="text-steel text-sm leading-relaxed">{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases in Action -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-radial from-purple/10 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Use Cases</span>
+          <span class="text-gradient"> in Action</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Real-world scenarios where manual penetration testing identifies critical vulnerabilities before attackers do.
+        </p>
+      </div>
+
+      <div class="max-w-6xl mx-auto space-y-8">
+
+        <!-- Use Case 1: Web Application Penetration Testing -->
+        <div class="reveal">
+          <div class="card-glass p-8">
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-lg bg-gradient-hero flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-white">Web Application Penetration Testing</h3>
+                  <p class="text-cyan text-sm font-medium">E-Commerce Platform / SaaS Application</p>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="border-l-2 border-red-500 pl-4">
+                  <h4 class="text-white font-semibold mb-2">Problem</h4>
+                  <p class="text-steel text-sm">E-commerce platform launching in 3 weeks needs pre-launch security assessment. Handles customer payment data and must pass PCI-DSS compliance audit.</p>
+                </div>
+                <div class="border-l-2 border-electric pl-4">
+                  <h4 class="text-white font-semibold mb-2">Solution</h4>
+                  <p class="text-steel text-sm">Manual penetration test covering OWASP Top 10, business logic flaws in checkout flow, authentication bypass attempts, payment processing vulnerabilities, and session management.</p>
+                </div>
+                <div class="border-l-2 border-green-400 pl-4">
+                  <h4 class="text-white font-semibold mb-2">Outcome</h4>
+                  <p class="text-steel text-sm">Critical authentication bypass fixed before launch. Business logic flaw in discount codes closed. Payment processing hardened. PCI-DSS compliance achieved.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-4 bg-green-500/10 rounded-lg border border-green-500/30">
+                <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <p class="text-steel text-sm"><span class="text-green-400 font-semibold">Impact:</span> 5 critical vulnerabilities fixed pre-launch • PCI-DSS compliance achieved • Reputation risk eliminated • Customer data protected from day one</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Case 2: API & Mobile App Penetration Testing -->
+        <div class="reveal">
+          <div class="card-glass p-8">
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-lg bg-gradient-hero flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-white">API & Mobile App Penetration Testing</h3>
+                  <p class="text-cyan text-sm font-medium">Fintech Mobile Banking Application</p>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="border-l-2 border-red-500 pl-4">
+                  <h4 class="text-white font-semibold mb-2">Problem</h4>
+                  <p class="text-steel text-sm">Fintech startup's mobile banking app handles sensitive financial data and account transfers. Regulators require security validation before production launch.</p>
+                </div>
+                <div class="border-l-2 border-electric pl-4">
+                  <h4 class="text-white font-semibold mb-2">Solution</h4>
+                  <p class="text-steel text-sm">Combined mobile app and API testing. Reverse engineering of iOS/Android apps, API endpoint fuzzing, authentication token testing, insecure storage checks, and certificate pinning validation.</p>
+                </div>
+                <div class="border-l-2 border-green-400 pl-4">
+                  <h4 class="text-white font-semibold mb-2">Outcome</h4>
+                  <p class="text-steel text-sm">API authorization flaw allowing account enumeration patched. Insecure token storage replaced with secure keychain. Certificate pinning properly implemented. Regulatory approval obtained.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-4 bg-green-500/10 rounded-lg border border-green-500/30">
+                <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <p class="text-steel text-sm"><span class="text-green-400 font-semibold">Impact:</span> Account enumeration vulnerability closed • Secure token handling implemented • Certificate pinning validated • Regulatory security requirements met</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Case 3: Active Directory Penetration Testing -->
+        <div class="reveal">
+          <div class="card-glass p-8">
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-lg bg-gradient-hero flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-white">Active Directory Penetration Testing</h3>
+                  <p class="text-cyan text-sm font-medium">Enterprise Internal Network</p>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="border-l-2 border-red-500 pl-4">
+                  <h4 class="text-white font-semibold mb-2">Problem</h4>
+                  <p class="text-steel text-sm">Enterprise with 2,500 employees needs to validate Active Directory security posture. Concerned about insider threat scenarios and lateral movement capabilities.</p>
+                </div>
+                <div class="border-l-2 border-electric pl-4">
+                  <h4 class="text-white font-semibold mb-2">Solution</h4>
+                  <p class="text-steel text-sm">Internal network pentest simulating compromised employee workstation. AD enumeration, privilege escalation attempts, Kerberos attacks, lateral movement testing, and domain admin compromise scenarios.</p>
+                </div>
+                <div class="border-l-2 border-green-400 pl-4">
+                  <h4 class="text-white font-semibold mb-2">Outcome</h4>
+                  <p class="text-steel text-sm">Unconstrained delegation misconfiguration allowing domain admin compromise fixed. GPO permissions hardened. Service account passwords rotated. Attack path to domain controllers eliminated.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-4 bg-green-500/10 rounded-lg border border-green-500/30">
+                <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <p class="text-steel text-sm"><span class="text-green-400 font-semibold">Impact:</span> Domain admin compromise path eliminated • AD misconfigurations remediated • Lateral movement capabilities restricted • Enterprise-wide security posture improved</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack -->
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Technology</span>
+          <span class="text-gradient"> Stack</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Professional penetration testing tools combined with custom exploit development and deep security expertise.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {solution.techStack.map((category, index) => (
+          <div
+            class="card-glass p-8 reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <h3 class="text-2xl font-bold text-white mb-6">{category.category}</h3>
+              <div class="space-y-4">
+                {category.tools.map(tool => (
+                  <div class="border-l-2 border-cyan/30 pl-4 hover:border-cyan transition-colors">
+                    <h4 class="text-white font-semibold mb-1">{tool.name}</h4>
+                    <p class="text-steel text-sm">{tool.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries We Serve -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-radial from-electric/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Industries</span>
+          <span class="text-gradient"> We Serve</span>
+        </h2>
+        <p class="text-xl text-steel max-w-3xl mx-auto">
+          Professional penetration testing for any industry handling sensitive data or requiring compliance validation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="card-glass p-6 text-center reveal">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <svg class="w-10 h-10 text-cyan mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="text-lg font-bold text-white mb-2">Fintech & Banking</h3>
+            <p class="text-steel text-sm">Payment systems, mobile banking, compliance validation</p>
+          </div>
+        </div>
+
+        <div class="card-glass p-6 text-center reveal" style="transition-delay: 50ms">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <svg class="w-10 h-10 text-cyan mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            <h3 class="text-lg font-bold text-white mb-2">E-Commerce</h3>
+            <p class="text-steel text-sm">Pre-launch testing, PCI-DSS compliance, payment security</p>
+          </div>
+        </div>
+
+        <div class="card-glass p-6 text-center reveal" style="transition-delay: 100ms">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <svg class="w-10 h-10 text-cyan mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+            <h3 class="text-lg font-bold text-white mb-2">Healthcare</h3>
+            <p class="text-steel text-sm">HIPAA compliance, patient data protection, EMR security</p>
+          </div>
+        </div>
+
+        <div class="card-glass p-6 text-center reveal" style="transition-delay: 150ms">
+          <div class="glow-effect"></div>
+          <div class="relative z-10">
+            <svg class="w-10 h-10 text-cyan mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <h3 class="text-lg font-bold text-white mb-2">SaaS & Software</h3>
+            <p class="text-steel text-sm">Web apps, APIs, pre-launch security assessments</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  {caseStudies.length > 0 && (
+    <section class="section-padding relative overflow-hidden">
+      <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+      <div class="absolute inset-0 bg-gradient-radial from-purple/5 via-transparent to-transparent"></div>
+
+      <div class="container-custom relative">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Real</span>
+            <span class="text-gradient"> Results</span>
+          </h2>
+          <p class="text-xl text-steel max-w-3xl mx-auto">
+            See how our penetration testing services have helped companies identify and fix critical vulnerabilities.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {caseStudies.slice(0, 2).map((study, index) => (
+            <div
+              class="card-glass p-8 reveal"
+              style={`transition-delay: ${index * 100}ms`}
+            >
+              <div class="glow-effect"></div>
+              <div class="relative z-10">
+                <div class="inline-block px-3 py-1 bg-cyan/10 border border-cyan/30 rounded-full text-cyan text-xs font-semibold uppercase tracking-wider mb-4">
+                  {study.clientType}
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">{study.title}</h3>
+
+                <p class="text-steel mb-6 leading-relaxed line-clamp-3">
+                  {study.problem}
+                </p>
+
+                <div class="mb-6">
+                  <h4 class="text-green-400 font-semibold mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                    Results
+                  </h4>
+                  <ul class="space-y-2">
+                    {study.outcome.slice(0, 3).map(result => (
+                      <li class="flex items-start gap-2 text-white text-sm">
+                        <svg class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <span>{result}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mb-6">
+                  {study.technologies.slice(0, 5).map(tech => (
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-steel text-xs font-mono">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  href={`/case-studies/${study.slug}`}
+                  class="btn-secondary w-full justify-center"
+                >
+                  Read Full Story
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-12 reveal">
+          <a href="/case-studies" class="btn-secondary inline-flex">
+            View All Case Studies
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <CTASection
+    headline="Ready to validate your security?"
+    subheadline="Book a free consultation. We'll discuss your security concerns and scope a penetration testing engagement that validates your defenses against real-world attacks."
+    primaryCTA={{
+      text: 'Schedule Security Assessment',
+      href: '/contact'
+    }}
+    secondaryCTA={{
+      text: 'Explore Other Solutions',
+      href: '/solutions'
+    }}
+  />
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

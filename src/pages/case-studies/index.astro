@@ -3,15 +3,26 @@ import Layout from '../../layouts/Layout.astro';
 import CTASection from '../../components/shared/CTASection.astro';
 import { caseStudies } from '../../data/caseStudies';
 
-// Get unique industries and solution types for filters
+// Get unique industries and solution types for filters with counts
 const industries = [...new Set(caseStudies.map(cs => cs.industry))];
-const solutionTypes = ['platform-engineering', 'devsecops', 'cloud-migration', 'managed-ops'];
+const solutionTypes = ['platform-engineering', 'devsecops', 'cloud-migration', 'managed-ops', 'ai-ops', 'offensive-security'];
 const solutionTypeLabels: Record<string, string> = {
   'platform-engineering': 'Platform Engineering',
-  'devsecops': 'DevSecOps & Security',
+  'devsecops': 'DevSecOps',
   'cloud-migration': 'Cloud Migration',
-  'managed-ops': 'Managed Operations',
+  'managed-ops': 'Managed Ops',
+  'ai-ops': 'AI Ops',
+  'offensive-security': 'Offensive Security',
 };
+
+// Calculate counts for each filter
+function getIndustryCount(industry: string): number {
+  return caseStudies.filter(cs => cs.industry === industry).length;
+}
+
+function getSolutionTypeCount(solutionType: string): number {
+  return caseStudies.filter(cs => cs.solutionTypes.includes(solutionType)).length;
+}
 ---
 
 <Layout
@@ -35,7 +46,13 @@ const solutionTypeLabels: Record<string, string> = {
   <!-- Filters -->
   <section class="py-8 relative">
     <div class="container-custom">
-      <div class="flex flex-wrap items-center gap-4 justify-center">
+      <div class="mb-6 text-center reveal">
+        <p class="text-steel">
+          Showing <span class="text-white font-bold" id="visible-count">{caseStudies.length}</span> of {caseStudies.length} case studies
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 justify-center">
         <span class="text-steel text-sm font-semibold uppercase tracking-wider">Filter by:</span>
 
         <!-- All Filter -->
@@ -43,28 +60,34 @@ const solutionTypeLabels: Record<string, string> = {
           class="filter-btn active"
           data-filter="all"
         >
-          All
+          All ({caseStudies.length})
         </button>
 
         <!-- Industry Filters -->
-        {industries.map(industry => (
-          <button
-            class="filter-btn"
-            data-filter={`industry:${industry}`}
-          >
-            {industry}
-          </button>
-        ))}
+        {industries.map(industry => {
+          const count = getIndustryCount(industry);
+          return count > 0 && (
+            <button
+              class="filter-btn"
+              data-filter={`industry:${industry}`}
+            >
+              {industry} ({count})
+            </button>
+          );
+        })}
 
         <!-- Solution Type Filters -->
-        {solutionTypes.map(type => (
-          <button
-            class="filter-btn"
-            data-filter={`solution:${type}`}
-          >
-            {solutionTypeLabels[type]}
-          </button>
-        ))}
+        {solutionTypes.map(type => {
+          const count = getSolutionTypeCount(type);
+          return count > 0 && (
+            <button
+              class="filter-btn"
+              data-filter={`solution:${type}`}
+            >
+              {solutionTypeLabels[type]} ({count})
+            </button>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -216,6 +239,7 @@ const solutionTypeLabels: Record<string, string> = {
   const filterButtons = document.querySelectorAll('.filter-btn');
   const caseStudyCards = document.querySelectorAll('.case-study-card');
   const noResults = document.getElementById('no-results');
+  const visibleCountElement = document.getElementById('visible-count');
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -251,6 +275,11 @@ const solutionTypeLabels: Record<string, string> = {
           card.classList.add('hidden');
         }
       });
+
+      // Update visible count
+      if (visibleCountElement) {
+        visibleCountElement.textContent = visibleCount.toString();
+      }
 
       // Show/hide no results message
       if (visibleCount === 0) {

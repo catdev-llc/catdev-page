@@ -215,7 +215,7 @@ const caseStudies = getCaseStudiesBySolutionType('cloud-migration');
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-4">{study.title}</h3>
 
-                <p class="text-steel mb-6 leading-relaxed">
+                <p class="text-steel mb-6 leading-relaxed line-clamp-3">
                   {study.problem}
                 </p>
 
@@ -238,13 +238,20 @@ const caseStudies = getCaseStudiesBySolutionType('cloud-migration');
                   </ul>
                 </div>
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 mb-6">
                   {study.technologies.slice(0, 5).map(tech => (
                     <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-steel text-xs font-mono">
                       {tech}
                     </span>
                   ))}
                 </div>
+
+                <a
+                  href={`/case-studies/${study.slug}`}
+                  class="btn-secondary w-full justify-center"
+                >
+                  Read Full Story
+                </a>
               </div>
             </div>
           ))}
@@ -273,3 +280,12 @@ const caseStudies = getCaseStudiesBySolutionType('cloud-migration');
     }}
   />
 </Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

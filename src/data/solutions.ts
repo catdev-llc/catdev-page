@@ -346,7 +346,7 @@ export const solutions: Solution[] = [
   },
   {
     id: 'managed-ops',
-    title: 'Managed Operations',
+    title: 'Managed Operations and Services',
     slug: '/solutions/managed-ops',
     tagline: 'We build it, we run it, you ship features',
     description: 'Ongoing platform operations, monitoring, patching, vulnerability management, and incident response—so your engineering team can focus on building products.',
@@ -449,14 +449,118 @@ export const solutions: Solution[] = [
     engagementModels: ['platform-operations'],
   },
   {
+    id: 'offensive-security',
+    title: 'Offensive Security & Penetration Testing',
+    slug: '/solutions/offensive-security',
+    tagline: 'Expert-led penetration testing for real-world security validation',
+    description: 'Manual penetration testing by experienced security professionals. Real-world attack simulation covering web applications, APIs, mobile apps, and enterprise networks—not automated scanning.',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" /></svg>`,
+    heroHeadline: 'Real attacks, real findings, real security',
+    heroSubheadline: 'Manual penetration testing by experienced security professionals who think like attackers. We validate your security posture with real-world attack simulation—not automated scanning.',
+    problemStatement: 'Automated scanners miss business logic flaws, authentication bypasses, and complex attack chains. Real security validation requires expert manual testing.',
+    problems: [
+      'Automated scanners produce false positives and miss business logic vulnerabilities that require human reasoning',
+      'Pre-launch security assessments reveal critical vulnerabilities too late, delaying product releases and damaging reputation',
+      'Compliance frameworks require professional penetration testing evidence, but scheduling external vendors causes 4-6 week delays',
+      'No visibility into how an actual attacker would chain vulnerabilities together to compromise your systems',
+      'API security flaws and mobile app vulnerabilities go undetected until exploited in production',
+    ],
+    solutionOverview: [
+      'We perform manual penetration testing that simulates real-world attacks against your web applications, APIs, mobile apps, and enterprise networks. Our security professionals think like attackers—mapping attack surfaces, identifying business logic flaws, and chaining vulnerabilities that automated tools miss.',
+      'Our approach combines reconnaissance, vulnerability identification, exploitation validation, and privilege escalation attempts to demonstrate real impact. We test for OWASP Top 10 vulnerabilities, authentication bypasses, authorization flaws, API security issues, and Active Directory misconfigurations.',
+      'Every engagement delivers a comprehensive report with CVSS-scored findings, proof-of-concept exploits, detailed remediation guidance, and executive summary suitable for compliance audits. You get actionable security intelligence that helps you fix vulnerabilities before attackers exploit them.',
+    ],
+    services: [
+      {
+        title: 'Web Application Penetration Testing',
+        description: 'Manual testing for OWASP Top 10, business logic flaws, authentication bypasses, injection attacks, and session management vulnerabilities.',
+      },
+      {
+        title: 'API Security Assessment',
+        description: 'REST and GraphQL API testing covering authentication, authorization, rate limiting, data exposure, and injection vulnerabilities.',
+      },
+      {
+        title: 'Mobile Application Security Testing',
+        description: 'iOS and Android app security assessment including reverse engineering, insecure storage, API abuse, and certificate pinning bypass.',
+      },
+      {
+        title: 'Internal Network Penetration Testing',
+        description: 'Simulate insider threats and lateral movement. Test network segmentation, privilege escalation paths, and internal service vulnerabilities.',
+      },
+      {
+        title: 'Active Directory Assessment',
+        description: 'Identify AD misconfigurations, weak delegation, Kerberos attacks, privilege escalation paths, and domain compromise scenarios.',
+      },
+      {
+        title: 'External Network Penetration Testing',
+        description: 'Internet-facing attack surface assessment. Test perimeter defenses, exposed services, and paths to internal network access.',
+      },
+      {
+        title: 'Compliance-Ready Reporting',
+        description: 'Professional reports with CVSS scoring, remediation guidance, and documentation suitable for PCI-DSS, ISO 27001, and SOC 2 audits.',
+      },
+      {
+        title: 'Remediation Validation Testing',
+        description: 'Re-test after fixes to validate remediation effectiveness and ensure vulnerabilities are properly addressed.',
+      },
+    ],
+    techStack: [
+      {
+        category: 'Penetration Testing Tools',
+        tools: [
+          { name: 'Burp Suite Pro', description: 'Web application security testing' },
+          { name: 'OWASP ZAP', description: 'Dynamic application scanning' },
+          { name: 'Metasploit Framework', description: 'Exploitation and validation' },
+          { name: 'BloodHound', description: 'Active Directory attack paths' },
+        ],
+      },
+      {
+        category: 'Reconnaissance & Enumeration',
+        tools: [
+          { name: 'Nmap / Masscan', description: 'Network discovery and port scanning' },
+          { name: 'Amass / Subfinder', description: 'Attack surface mapping' },
+          { name: 'Shodan / Censys', description: 'Internet-exposed asset discovery' },
+          { name: 'DNSRecon', description: 'DNS enumeration' },
+        ],
+      },
+      {
+        category: 'Exploitation & Validation',
+        tools: [
+          { name: 'Custom Exploits', description: 'Bespoke exploit development' },
+          { name: 'Public CVE Database', description: 'Known vulnerability testing' },
+          { name: 'Nuclei', description: 'Vulnerability scanning templates' },
+          { name: 'SQLMap', description: 'SQL injection testing' },
+        ],
+      },
+      {
+        category: 'Mobile & API Testing',
+        tools: [
+          { name: 'Frida / Objection', description: 'Mobile app instrumentation' },
+          { name: 'MobSF', description: 'Mobile security framework' },
+          { name: 'Postman / Insomnia', description: 'API testing and fuzzing' },
+          { name: 'APKTool / Hopper', description: 'Reverse engineering' },
+        ],
+      },
+    ],
+    benefits: [
+      'Identify critical vulnerabilities before attackers do—manual testing catches business logic flaws scanners miss',
+      'Compliance-ready reports with CVSS scoring and remediation guidance for PCI-DSS, ISO 27001, SOC 2',
+      'Real-world attack simulation shows how vulnerabilities chain together to compromise systems',
+      'Flexible engagement models—pre-launch assessments, recurring testing, or compliance-driven schedules',
+      'Expert remediation guidance accelerates fixes and reduces repeat vulnerabilities',
+    ],
+    caseStudySlugs: [],
+    engagementModels: ['security-assessment'],
+  },
+  {
     id: 'ai-ops',
     title: 'AI Ops & Intelligent Automation',
     slug: '/solutions/ai-ops',
     tagline: 'Autonomous operations powered by AI',
-    description: 'AI-powered operations automation, intelligent failure analysis, and autonomous incident response. From network analytics to security assessments—let AI handle the toil.',
+    description: 'Autonomous operations powered by AI. Automated failure analysis, intelligent incident response, and AI-driven network analytics that generate expert-level reports in minutes.',
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
     heroHeadline: 'AI Ops: Intelligence replaces toil',
-    heroSubheadline: 'Automated incident analysis, intelligent failure detection, and autonomous operations—powered by AI agents that never sleep.',
+    heroSubheadline: 'A versatile AI operations framework that adapts to your domain. From fiber network diagnostics to security testing to incident response—autonomous intelligence that delivers expert-level analysis in minutes.',
     problemStatement: 'Manual incident response, slow root cause analysis, and reactive monitoring waste engineering hours and delay recovery.',
     problems: [
       'Incident reports take hours or days to generate—by the time analysis is done, the damage is done',
@@ -466,46 +570,34 @@ export const solutions: Solution[] = [
       'Engineering teams spend more time analyzing failures than preventing them',
     ],
     solutionOverview: [
-      'We deploy AI-powered operations automation that transforms manual toil into autonomous intelligence. From network failure analysis to security assessments to incident reporting—AI agents handle the heavy lifting.',
-      'Our AI Ops approach combines machine learning models, agentic systems, and intelligent automation to deliver outcomes that were previously impossible: fiber network failure reports generated in minutes instead of hours, security assessments integrated directly into CI/CD, and autonomous incident response that doesn\'t require human intervention.',
-      'This isn\'t chatbot theater—these are production AI agents operating in the infrastructure and security domain, making real decisions, generating real analysis, and taking real actions. Fully auditable, fully explainable, fully accountable.',
+      'We deploy a versatile AI Ops framework that brings autonomous intelligence to any operational challenge. This isn\'t off-the-shelf automation—it\'s a customizable platform that adapts to your specific domain, whether that\'s telecommunications, application security, cloud infrastructure, or enterprise IT operations.',
+      'The framework combines advanced AI models with domain expertise to deliver capabilities that were previously impossible: expert-level technical analysis in minutes instead of hours, continuous autonomous monitoring that catches issues before they impact users, and intelligent decision-making that scales beyond human capacity.',
+      'This isn\'t chatbot theater—these are production AI agents operating in real operational environments, making real decisions, generating real analysis, and taking real actions. Every decision is auditable, every conclusion is explainable, and every action is traceable. The same framework that diagnoses fiber network failures can also perform adversarial security testing or analyze incident patterns—it adapts to your operational reality.',
     ],
     services: [
       {
-        title: 'AI-Powered Network Analytics',
-        description: 'Automated fiber network failure analysis with OTDR interpretation, root cause identification, and actionable repair instructions—all generated within minutes of alarm detection.',
+        title: 'Autonomous Reasoning & Decision Making',
+        description: 'AI agents that analyze complex operational data, reason about root causes, and make expert-level decisions—whether diagnosing network failures, identifying security vulnerabilities, or correlating incident patterns.',
       },
       {
-        title: 'AI-Driven Penetration Testing',
-        description: 'Autonomous security agent that thinks like an attacker, performs continuous reconnaissance, identifies vulnerabilities, and proposes attack vectors—running automatically in your CI/CD pipeline. Not just scanning, but intelligent adversarial testing with explainable AI reasoning.',
+        title: 'Continuous Monitoring & Analysis',
+        description: '24/7 intelligent observation of systems, networks, and applications. AI learns baseline behavior, detects anomalies humans would miss, and identifies emerging patterns before they become critical incidents.',
       },
       {
-        title: 'AI-Based Security Assessments',
-        description: 'Integrated into CI/CD pipelines for automated code security analysis, vulnerability detection, and compliance checking—no bottlenecks, no waiting.',
+        title: 'Expert-Level Technical Reports',
+        description: 'AI generates comprehensive technical documentation with the depth and accuracy of senior engineers—root cause analysis, remediation steps, audit reports, and post-mortems that would take humans hours to produce.',
       },
       {
-        title: 'Autonomous Incident Response',
-        description: 'AI agents that detect anomalies, analyze logs, correlate events, and generate detailed incident reports with root cause analysis and remediation steps.',
+        title: 'Explainable AI & Audit Trails',
+        description: 'Every decision documented with transparent reasoning. Full audit trails showing exactly how conclusions were reached, what data was analyzed, and why specific actions were recommended. MITRE ATT&CK mapping for security operations.',
       },
       {
-        title: 'Intelligent SLA Monitoring',
-        description: 'Automated breach detection with AI-generated audit reports. Know exactly when, where, and why SLAs were violated—with evidence and analysis ready for stakeholders.',
+        title: 'Adaptive Learning & Improvement',
+        description: 'AI agents improve over time, learning from historical incidents, false positives, and domain-specific patterns in your environment. The framework becomes more accurate and efficient with continued operation.',
       },
       {
-        title: 'AI Agentic Systems',
-        description: 'Autonomous AI agents operating in the platform/infrastructure domain. Self-healing systems, automated optimization, intelligent resource allocation.',
-      },
-      {
-        title: 'Predictive Failure Analysis',
-        description: 'Machine learning models trained on historical data to predict failures before they happen. Proactive maintenance instead of reactive firefighting.',
-      },
-      {
-        title: 'Anomaly Detection & Alerting',
-        description: 'AI-powered baseline learning and anomaly detection for networks, applications, and infrastructure. Reduce false positives, catch real issues faster.',
-      },
-      {
-        title: 'Automated Reporting & Documentation',
-        description: 'AI-generated reports, runbooks, and post-mortems. Complete audit trails with technical depth that would take humans hours to produce.',
+        title: 'Seamless Tool Integration',
+        description: 'Integrates with your existing monitoring, CI/CD, ticketing, and alerting tools. Works with OTDR systems, SIEM platforms, vulnerability scanners, Kubernetes clusters, and cloud providers—no rip-and-replace required.',
       },
     ],
     techStack: [
@@ -550,11 +642,11 @@ export const solutions: Solution[] = [
       },
     ],
     benefits: [
-      'Incident reports in minutes instead of hours—AI analyzes faster than humans',
-      'Zero bottlenecks in CI/CD—security assessments run automatically',
-      'Predictive maintenance—catch failures before they impact users',
-      'Reduced MTTR by 60-80%—autonomous analysis accelerates recovery',
-      'Audit-ready documentation—every decision explained and traceable',
+      'Expert-level analysis in minutes instead of hours—AI delivers technical depth at machine speed',
+      'Adaptable across domains—same framework handles network diagnostics, security testing, and incident response',
+      'Reduced MTTR by 60-80%—autonomous analysis accelerates recovery and root cause identification',
+      'Continuous improvement—AI agents learn from your environment and get better over time',
+      'Audit-ready documentation—every decision explained with full transparency and traceability',
     ],
     caseStudySlugs: ['fiber-ai-ops'],
     engagementModels: ['platform-build', 'platform-operations'],
