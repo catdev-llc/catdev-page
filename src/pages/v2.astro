@@ -1,0 +1,387 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrustedBy from '../components/sections/TrustedBy.astro';
+import CTASection from '../components/shared/CTASection.astro';
+import { caseStudies } from '../data/caseStudies';
+
+const pillars = [
+  {
+    label: 'DevOps',
+    title: 'Infrastructure as Code. GitOps. Zero ClickOps.',
+    description: 'Terraform, Kubernetes, ArgoCD — we build delivery platforms that let your team ship daily. Everything version-controlled, peer-reviewed, and reproducible.',
+    tools: ['Terraform', 'Kubernetes', 'Helm', 'ArgoCD', 'GitHub Actions'],
+    href: '/solutions/platform-engineering',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>`,
+  },
+  {
+    label: 'DevSecOps',
+    title: 'Security baked in. Not bolted on.',
+    description: 'Supply chain hardening, image signing, SBOM generation, runtime policies. We make SOC2, ISO 27001, and PCI DSS audits painless — not afterthoughts.',
+    tools: ['Sigstore', 'Trivy', 'Falco', 'OPA', 'Vault'],
+    href: '/solutions/devsecops',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
+  },
+  {
+    label: 'GitOps',
+    title: 'Git is the single source of truth.',
+    description: 'Declarative infrastructure, automated reconciliation, drift detection. Your cluster state lives in Git — every change auditable, every deployment traceable.',
+    tools: ['ArgoCD', 'Flux', 'Kustomize', 'Sealed Secrets', 'Renovate'],
+    href: '/solutions/platform-engineering',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`,
+  },
+  {
+    label: 'AIOps',
+    title: 'AI agents that do the toil.',
+    description: 'Autonomous failure analysis, intelligent incident response, AI-driven security testing. Expert-level reports in minutes, not hours. Auditable, explainable, production-ready.',
+    tools: ['Claude', 'LangGraph', 'Custom Agents', 'MITRE ATT&CK'],
+    href: '/solutions/ai-ops',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+  },
+];
+
+const differentiators = [
+  {
+    number: '01',
+    title: 'Senior engineers only',
+    description: '10+ years each. No juniors, no subcontracting, no bait-and-switch. You talk to the people who do the work.',
+  },
+  {
+    number: '02',
+    title: 'We run what we build',
+    description: 'Not advisory-only. We deploy platforms and operate them. Skin in the game, not slide decks.',
+  },
+  {
+    number: '03',
+    title: 'Everything as code',
+    description: 'Infrastructure, pipelines, policies, runbooks — version-controlled and peer-reviewed. Zero ClickOps.',
+  },
+  {
+    number: '04',
+    title: 'Compliance-native',
+    description: 'SOC2, ISO 27001, PCI DSS, HIPAA, GDPR. Security controls and audit trails from day one.',
+  },
+  {
+    number: '05',
+    title: 'Cloud-agnostic',
+    description: 'AWS, Azure, GCP, Hetzner, Vultr. We pick what fits your workload and budget, not our partnership deal.',
+  },
+  {
+    number: '06',
+    title: 'Contractor velocity',
+    description: 'Embed with your team, ship from week one. No 6-week discovery phases or 40-slide assessments.',
+  },
+];
+
+const engagements = [
+  {
+    title: 'Platform Build',
+    timeline: '6–12 weeks',
+    description: 'Complete delivery platform from infrastructure to CI/CD to observability. Fixed scope, clear deliverables.',
+    type: 'Fixed Scope',
+  },
+  {
+    title: 'Platform Operations',
+    timeline: 'Monthly',
+    description: 'We run your platform. Monitoring, patching, incident response, vulnerability management, compliance.',
+    type: 'Retainer',
+  },
+  {
+    title: 'Supply Chain Hardening',
+    timeline: '3–6 weeks',
+    description: 'SBOM, image signing, vulnerability scanning, runtime policies. Audit-ready in weeks, not quarters.',
+    type: 'Assessment + Upgrade',
+  },
+];
+
+const featuredStudies = caseStudies.slice(0, 3);
+---
+
+<Layout title="catdev consulting — DevOps, DevSecOps, GitOps, AIOps">
+
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-deep-space/50 to-transparent"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-electric/15 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple/15 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+
+    <div class="container-custom relative z-10 pt-24">
+      <div class="max-w-5xl">
+        <!-- Eyebrow -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8 animate-fade-in">
+          <span class="w-2 h-2 rounded-full bg-cyan animate-pulse"></span>
+          <span class="text-sm text-steel font-mono">catdev consulting</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-fade-in-up">
+          <span class="text-white">We build and operate</span><br />
+          <span class="text-gradient">cloud-native platforms.</span>
+        </h1>
+
+        <!-- Sub -->
+        <p class="text-xl md:text-2xl text-steel max-w-3xl mb-4 animate-fade-in-up animate-delay-200 leading-relaxed">
+          Senior DevOps and DevSecOps engineers who embed with your team. Kubernetes, Terraform, GitOps, supply chain security — from first commit to 3 AM incident response.
+        </p>
+
+        <!-- Audience line -->
+        <p class="text-lg text-cyan/80 font-medium mb-12 animate-fade-in-up animate-delay-300">
+          For SaaS teams, banks, AI startups, and regulated industries.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row items-start gap-4 animate-fade-in-up animate-delay-400">
+          <a href="/contact" class="btn-primary">
+            <span>Book Architecture Review</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="#pillars" class="btn-secondary">
+            What we do
+          </a>
+        </div>
+
+        <!-- Tech bar -->
+        <div class="mt-16 animate-fade-in animate-delay-600">
+          <div class="flex flex-wrap items-center gap-6 text-steel/50 font-mono text-sm">
+            <span>Kubernetes</span>
+            <span class="text-white/10">|</span>
+            <span>Terraform</span>
+            <span class="text-white/10">|</span>
+            <span>ArgoCD</span>
+            <span class="text-white/10">|</span>
+            <span>Sigstore</span>
+            <span class="text-white/10">|</span>
+            <span>Prometheus</span>
+            <span class="text-white/10">|</span>
+            <span>Falco</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in animate-delay-600 z-10">
+      <a href="#pillars" class="flex flex-col items-center gap-2 text-steel hover:text-white transition-colors">
+        <span class="text-sm">Explore</span>
+        <div class="w-6 h-10 rounded-full border-2 border-current flex items-start justify-center p-1">
+          <div class="w-1.5 h-3 bg-current rounded-full animate-bounce"></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <TrustedBy />
+
+  <!-- Four Pillars -->
+  <section id="pillars" class="section-padding relative">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-16 reveal">
+        <p class="text-cyan font-mono text-sm uppercase tracking-widest mb-4">What we do</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Four pillars.</span>
+          <span class="text-gradient"> One team.</span>
+        </h2>
+        <p class="text-xl text-steel max-w-2xl mx-auto">
+          Automation, security, and operational excellence across the entire delivery lifecycle.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {pillars.map((pillar, i) => (
+          <div
+            class="card-glass p-8 group hover:-translate-y-1 transition-all duration-300 reveal"
+            style={`transition-delay: ${i * 75}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <!-- Label -->
+              <div class="flex items-center gap-3 mb-4">
+                <div class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-cyan to-electric text-white">
+                  <div set:html={pillar.icon} />
+                </div>
+                <span class="text-cyan font-mono text-sm font-semibold uppercase tracking-wider">{pillar.label}</span>
+              </div>
+
+              <h3 class="text-xl font-bold text-white mb-3">{pillar.title}</h3>
+              <p class="text-steel leading-relaxed mb-5">{pillar.description}</p>
+
+              <!-- Tools -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                {pillar.tools.map(tool => (
+                  <span class="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-steel text-xs font-mono">
+                    {tool}
+                  </span>
+                ))}
+              </div>
+
+              <a href={pillar.href} class="inline-flex items-center text-cyan hover:text-white transition-colors text-sm font-semibold">
+                Learn more
+                <svg class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-radial from-purple/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="mb-16 reveal">
+        <p class="text-cyan font-mono text-sm uppercase tracking-widest mb-4">Why catdev consulting</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Engineers, not consultants.</span>
+        </h2>
+        <p class="text-xl text-steel max-w-2xl">
+          We've been the ones on-call at 3 AM. That's why we build platforms differently.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {differentiators.map((diff, i) => (
+          <div
+            class="reveal group"
+            style={`transition-delay: ${i * 50}ms`}
+          >
+            <div class="h-full p-6 border border-white/5 rounded-xl bg-white/[0.02] hover:border-cyan/20 hover:bg-white/[0.04] transition-all duration-300">
+              <span class="text-cyan/40 font-mono text-sm">{diff.number}</span>
+              <h3 class="text-lg font-bold text-white mt-2 mb-2">{diff.title}</h3>
+              <p class="text-steel text-sm leading-relaxed">{diff.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section class="section-padding relative">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+
+    <div class="container-custom relative">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 reveal">
+        <div>
+          <p class="text-cyan font-mono text-sm uppercase tracking-widest mb-4">Proof, not promises</p>
+          <h2 class="text-4xl md:text-5xl font-bold">
+            <span class="text-white">Real platforms.</span>
+            <span class="text-gradient"> Real results.</span>
+          </h2>
+        </div>
+        <a href="/case-studies" class="btn-secondary mt-4 md:mt-0">
+          All case studies
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {featuredStudies.map((study, i) => (
+          <a
+            href={`/case-studies/${study.slug}`}
+            class="card-glass p-6 group hover:-translate-y-1 transition-all duration-300 reveal block"
+            style={`transition-delay: ${i * 75}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10 flex flex-col h-full">
+              <div class="inline-block px-3 py-1 bg-cyan/10 border border-cyan/30 rounded-full text-cyan text-xs font-semibold uppercase tracking-wider mb-3 w-fit">
+                {study.clientType}
+              </div>
+              <span class="text-steel/60 text-xs mb-2">{study.industry}</span>
+              <h3 class="text-lg font-bold text-white mb-3 group-hover:text-cyan transition-colors">
+                {study.title}
+              </h3>
+              <p class="text-steel text-sm mb-4 leading-relaxed flex-grow line-clamp-3">
+                {study.problem}
+              </p>
+              <ul class="space-y-1 mb-4">
+                {study.outcome.slice(0, 2).map(result => (
+                  <li class="flex items-start gap-2 text-white text-xs">
+                    <svg class="w-3 h-3 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    <span>{result}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="flex flex-wrap gap-1 mt-auto">
+                {study.technologies.slice(0, 3).map(tech => (
+                  <span class="px-2 py-0.5 bg-white/5 border border-white/10 rounded text-steel text-xs font-mono">
+                    {tech}
+                  </span>
+                ))}
+                {study.technologies.length > 3 && (
+                  <span class="px-2 py-0.5 text-steel/50 text-xs">+{study.technologies.length - 3}</span>
+                )}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagement Models -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-radial from-electric/5 via-transparent to-transparent"></div>
+
+    <div class="container-custom relative">
+      <div class="text-center mb-12 reveal">
+        <p class="text-cyan font-mono text-sm uppercase tracking-widest mb-4">How we work</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-white">Flexible engagement.</span>
+          <span class="text-gradient"> Clear scope.</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {engagements.map((eng, i) => (
+          <div
+            class="card-glass p-8 reveal"
+            style={`transition-delay: ${i * 75}ms`}
+          >
+            <div class="glow-effect"></div>
+            <div class="relative z-10 h-full flex flex-col">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-cyan font-mono text-xs uppercase tracking-wider">{eng.type}</span>
+                <span class="text-steel text-sm font-mono">{eng.timeline}</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">{eng.title}</h3>
+              <p class="text-steel leading-relaxed flex-grow">{eng.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection
+    headline="Ready to ship without platform headaches?"
+    subheadline="Book a free architecture review. We'll assess your current infrastructure, identify gaps, and show you what a production-grade platform looks like."
+    primaryCTA={{
+      text: 'Book Architecture Review',
+      href: '/contact'
+    }}
+    secondaryCTA={{
+      text: 'Explore Solutions',
+      href: '/solutions'
+    }}
+  />
+
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
