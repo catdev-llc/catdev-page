@@ -46,7 +46,7 @@
   }
 
   .card-glass {
-    @apply relative rounded-2xl overflow-hidden;
+    @apply relative rounded-lg overflow-hidden;
     background: rgba(21, 27, 59, 0.6);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);

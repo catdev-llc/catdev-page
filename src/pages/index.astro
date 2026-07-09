@@ -1,270 +1,424 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/sections/Hero.astro';
-import TrustedBy from '../components/sections/TrustedBy.astro';
-import CTASection from '../components/shared/CTASection.astro';
-import { solutions } from '../data/solutions';
-import { caseStudies } from '../data/caseStudies';
 
-// Show all case studies on homepage (we have 6 total)
-const displayedCaseStudies = caseStudies;
+const focusAreas = [
+  'AI systems',
+  'Cybersecurity',
+  'Programming',
+  'DevOps',
+  'Infrastructure',
+  'Agentic workflows',
+];
 
-const approaches = [
+const projects = [
   {
-    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
-    title: 'Security Baked In, Not Bolted On',
-    description: "From image signing to secrets rotation to runtime policies—we build security into the foundation.",
+    name: 'cyb3r',
+    status: 'Active build',
+    theme: 'AI for offensive security',
+    image: null,
+    imageAlt: '',
+    logo: '/projects/cyb3r-logo.png',
+    logoAlt: 'cyb3r logo',
+    logoMode: 'dark',
+    description:
+      'A cybersecurity AI project built around an operator-oriented model and a Pi-based pentesting tool layer. The goal is not a generic chatbot, but a disciplined offensive-security assistant that can reason, plan, execute tool calls, reassess, and avoid getting stuck in shallow attack paths.',
+    details: [
+      'Includes pi-pen-kit extensions for Sliver C2, Metasploit RPC, and controlled listener workflows',
+      'QLoRA fine-tuning work for a Qwen 27B security model focused on branch ranking, global reassessment, and tool-call competence',
+      'Training pipeline includes curated security corpora, policy rows, eval samples, and Hugging Face release preparation',
+    ],
+    tags: ['Pi', 'Sliver', 'Metasploit', 'QLoRA', 'Qwen', 'Security AI'],
+    links: [
+      { label: 'cyb3r repo', href: 'https://github.com/Cyb3rDudu/cyb3r-qlora' },
+      { label: 'GitHub profile', href: 'https://github.com/Cyb3rDudu' },
+    ],
   },
   {
-    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`,
-    title: 'Everything as Code',
-    description: 'Infrastructure, pipelines, policies, runbooks—all version-controlled and peer-reviewed. No ClickOps.',
+    name: 'AXIOM',
+    status: 'Research platform',
+    theme: 'Self-hosted AI research',
+    image: '/projects/axiom-logo.png',
+    imageAlt: 'AXIOM logo',
+    logo: '/projects/axiom-logo.png',
+    logoAlt: 'AXIOM logo',
+    logoMode: 'dark',
+    description:
+      'A self-hosted RAG and research-agent platform for document-heavy work. AXIOM can ingest PDFs and web sources, run agentic research missions, keep citations visible, and turn gathered evidence into structured research drafts and papers.',
+    details: [
+      'PDF and web-source research workflows with document Q&A, mission planning, notes, drafts, and writing assistance',
+      'Hybrid retrieval with vector search, BM25/OpenSearch, entity extraction, knowledge graph expansion, and citation profiles',
+      'Self-hosted deployment work includes GPU worker isolation, local hardware support, OpenAI-compatible APIs, and Go backend experiments',
+    ],
+    tags: ['RAG', 'OpenSearch', 'pgvector', 'GPU workers', 'Go', 'Research'],
+    links: [
+      { label: 'Public reference', href: 'https://github.com/Cyb3rDudu/axiom' },
+    ],
   },
   {
-    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>`,
-    title: 'Build It, Run It, Own It',
-    description: 'We design your platform, deploy it, monitor it, and respond to incidents. Long-term operational partners.',
+    name: 'Hikari',
+    status: 'Working prototype',
+    theme: 'AI agent for OTDR monitoring',
+    image: null,
+    imageAlt: '',
+    logo: '/projects/hikari-logo.svg',
+    logoAlt: 'Hikari logo',
+    logoMode: 'dark',
+    description:
+      'An autonomous OTDR fault-analysis layer for dark-fiber operations. Hikari ingests ALM telemetry, SNMP traps, REST data, OTDR traces, and event streams, then uses deterministic normalization plus agentic analysis to localize faults and draft incident packages.',
+    details: [
+      'MCP adapter exposing OTDR device operations, alarm queries, port management, trace downloads, and trace analysis',
+      'Event loop for ALM alarms and operator messages, with baseline comparison, confidence scoring, and root-cause hypotheses',
+      'Firmware-derived ALM simulators for local testing of measurements, alarm transitions, monitoring cycles, and fault injection',
+    ],
+    tags: ['MCP', 'OTDR', 'SNMP', 'ALM', 'Fault analysis', 'Simulators'],
+    links: [],
+  },
+  {
+    name: 'Theia',
+    status: 'B2B SaaS PoC',
+    theme: 'Agentic product delivery',
+    image: null,
+    imageAlt: '',
+    logo: '/projects/theia-logo.png',
+    logoAlt: 'Theia Fiber logo',
+    logoMode: 'light',
+    description:
+      'A dark-fiber monitoring SaaS proof of concept designed and implemented end-to-end with agentic engineering workflows: product design, frontend, backend, ingestors, infrastructure, operators, and delivery artifacts.',
+    details: [
+      'Svelte/TypeScript frontend with Go backend services and admin workflows',
+      'Single-device ingestor model for ALM devices with gRPC control streams, health checks, and Kubernetes-friendly deployment',
+      'Platform pieces include infra, protobuf contracts, an operator, and an MCP device integration layer',
+    ],
+    tags: ['Svelte', 'Go', 'gRPC', 'Kubernetes', 'OTDR', 'SaaS'],
+    links: [],
+  },
+  {
+    name: 'Container-Compose',
+    status: 'Maintainer',
+    theme: 'Open source container tooling',
+    image: null,
+    imageAlt: '',
+    logo: null,
+    logoAlt: '',
+    logoMode: 'dark',
+    description:
+      'An open-source Swift tool that brings Docker Compose-like workflows to Apple Container. I currently help maintain it while it evolves around service orchestration, env files, dependencies, volumes, networks, and Apple platform behavior.',
+    details: [
+      'Compose file interpretation for Apple Container',
+      'Multi-service orchestration and service dependency handling',
+      'Open-source maintenance, issue triage, review, and implementation work',
+    ],
+    tags: ['Swift', 'Apple Container', 'Compose', 'Open Source'],
+    links: [
+      { label: 'Project repo', href: 'https://github.com/Mcrich23/Container-Compose' },
+    ],
+  },
+];
+
+const experience = [
+  {
+    title: 'Systems that behave',
+    text: 'I care about infrastructure that is understandable under pressure: Kubernetes, Linux, storage, Active Directory, backups, observability, incident response, and the operational details that decide whether recovery is calm or chaotic.',
+  },
+  {
+    title: 'Security with hands on keyboard',
+    text: 'My security work is practical: red-team tooling, pentest automation, malware and exploit lab work, C2 integrations, AD attack paths, web security, and the constraints that keep testing controlled and useful.',
+  },
+  {
+    title: 'AI as engineering material',
+    text: 'I use agents and LLMs as parts of systems, not as magic. That means datasets, tool contracts, eval loops, model behavior, policy layers, and the boring glue that makes AI useful in real workflows.',
+  },
+];
+
+const signals = [
+  {
+    title: 'Offensive security',
+    text: 'OSCP, OSCE, Hack The Box CPTS, CWES, OSWP, red-team tooling, C2 integrations, and lab work that turns security ideas into usable workflows.',
+  },
+  {
+    title: 'Production operations',
+    text: 'Kubernetes, Linux, storage, Active Directory, cloud operations, backup strategy, observability, and incident response across real production environments.',
+  },
+  {
+    title: 'AI engineering',
+    text: 'Agent workflows, tool contracts, RAG systems, fine-tuning datasets, evaluation loops, and local/self-hosted inference setups.',
+  },
+  {
+    title: 'Hardware tinkering',
+    text: 'Comfortable around the physical layer too: Raspberry Pi builds, network devices, lab hardware, soldering, firmware-derived simulators, and debugging with tools in hand.',
   },
 ];
 ---
 
-<Layout>
-  <Hero />
-  <TrustedBy />
-
-  <!-- Solutions Overview -->
-  <section id="services" class="section-padding relative">
+<Layout
+  title="catdev - Jan Mueller"
+  description="Jan Mueller builds and tinkers with AI, cybersecurity, programming, DevOps, infrastructure, hardware, and agentic systems. Projects include cyb3r, AXIOM, Hikari, Theia, and Container-Compose."
+>
+  <section id="top" class="relative min-h-[92vh] overflow-hidden pt-28 flex items-center">
     <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/70 to-transparent"></div>
 
     <div class="container-custom relative">
-      <!-- Section Header -->
-      <div class="text-center mb-12 reveal">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">
-          <span class="text-white">How We</span>
-          <span class="text-gradient"> Deliver Value</span>
-        </h2>
-        <p class="text-xl text-steel max-w-3xl mx-auto">
-          From infrastructure to CI/CD to software supply chain security—we handle the entire value chain so your engineering team can focus on building products.
-        </p>
-      </div>
+      <div class="grid lg:grid-cols-[1.02fr_0.98fr] gap-12 lg:gap-16 items-center">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-5">AI / cybersecurity / systems engineering</p>
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.03] mb-7">
+            <span class="text-white">I build systems, test assumptions,</span>
+            <span class="text-gradient"> and follow the interesting problems.</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-steel leading-relaxed max-w-3xl mb-8">
+            I am Jan Mueller, a multi-interested systems geek working across AI, cybersecurity,
+            programming, DevOps, infrastructure, and hardware-adjacent experiments.
+          </p>
 
-      <!-- Solution Cards -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {solutions.map((solution, index) => (
-          <div
-            class="card-glass p-8 transition-all duration-500 hover:-translate-y-2 reveal group"
-            style={`transition-delay: ${index * 100}ms`}
-          >
-            <div class="glow-effect"></div>
-            <div class="relative z-10">
-              <!-- Icon & Header -->
-              <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-cyan to-electric mb-6">
-                <div class="text-white" set:html={solution.icon} />
+          <div class="flex flex-wrap gap-3 mb-10">
+            {focusAreas.map(area => (
+              <span class="rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-steel">
+                {area}
+              </span>
+            ))}
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#projects" class="btn-primary">See Projects</a>
+            <a href="#collaborate" class="btn-secondary">Collaborate</a>
+          </div>
+        </div>
+
+        <div class="reveal" style="transition-delay: 120ms">
+          <div class="rounded-lg border border-white/10 bg-deep-space/70 overflow-hidden shadow-2xl shadow-black/30">
+            <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3 bg-white/[0.03]">
+              <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
+              <span class="h-3 w-3 rounded-full bg-amber-300/80"></span>
+              <span class="h-3 w-3 rounded-full bg-emerald-400/80"></span>
+              <span class="ml-3 text-xs font-mono text-steel">~/catdev/profile</span>
+            </div>
+            <div class="p-5 md:p-7 font-mono text-sm md:text-base leading-relaxed">
+              <p><span class="text-emerald-300">$</span> whoami</p>
+              <p class="text-white mt-1">red teamer / programmer / infra person / AI tinkerer</p>
+              <p class="mt-5"><span class="text-emerald-300">$</span> current-work --summary</p>
+              <div class="mt-3 grid gap-3">
+                <div class="rounded-md bg-midnight/80 border border-cyan/20 p-4">
+                  <div class="text-cyan">cyb3r</div>
+                  <div class="text-steel text-sm">pentesting agent tooling paired with a security reasoning model</div>
+                </div>
+                <div class="rounded-md bg-midnight/80 border border-emerald-400/20 p-4">
+                  <div class="text-emerald-300">Hikari</div>
+                  <div class="text-steel text-sm">agentic monitoring, MCP device adapters, dark-fiber failure analysis</div>
+                </div>
+                <div class="rounded-md bg-midnight/80 border border-amber-300/20 p-4">
+                  <div class="text-amber-200">AXIOM</div>
+                  <div class="text-steel text-sm">self-hosted RAG, research agents, PDF/web evidence, papers</div>
+                </div>
               </div>
-
-              <h3 class="text-2xl font-bold text-white mb-2">{solution.title}</h3>
-              <p class="text-cyan text-sm font-medium mb-4">{solution.tagline}</p>
-
-              <p class="text-steel mb-6 leading-relaxed">
-                {solution.description}
-              </p>
-
-              <a
-                href={solution.slug}
-                class="inline-flex items-center text-cyan hover:text-white transition-colors font-semibold"
-              >
-                Learn More
-                <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
+              <p class="mt-5 text-steel">// Open to serious collaboration where systems, security, and AI meet.</p>
             </div>
           </div>
-        ))}
-      </div>
-
-      <!-- View All Solutions CTA -->
-      <div class="text-center mt-12 reveal">
-        <a href="/solutions" class="btn-secondary inline-flex">
-          View All Solutions
-        </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Case Studies -->
-  <section id="case-studies" class="section-padding relative overflow-hidden">
-    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
-    <div class="absolute inset-0 bg-gradient-radial from-purple/5 via-transparent to-transparent"></div>
+  <section id="about" class="section-padding relative">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-start">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">profile</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">
+            <span class="text-white">Systems, security, AI,</span>
+            <br />
+            <span class="text-gradient">and the glue between them.</span>
+          </h2>
+          <p class="text-lg text-steel leading-relaxed">
+            My work usually starts where domains overlap: agents that need real tools, infrastructure
+            that has to survive failure, security research that should become usable software, and
+            hardware that needs to be understood before it can be automated.
+          </p>
+        </div>
 
+        <div class="grid md:grid-cols-3 gap-5">
+          {experience.map((item, index) => (
+            <div class="card-glass p-6 reveal" style={`transition-delay: ${index * 90}ms`}>
+              <div class="glow-effect"></div>
+              <div class="relative z-10">
+                <h3 class="text-xl font-bold text-white mb-3">{item.title}</h3>
+                <p class="text-steel leading-relaxed text-sm">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
     <div class="container-custom relative">
-      <!-- Section Header -->
-      <div class="text-center mb-16 reveal">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">
-          <span class="text-white">Real Platforms,</span>
-          <span class="text-gradient"> Real Results</span>
+      <div class="max-w-4xl mb-14 reveal">
+        <p class="text-cyan font-mono text-sm mb-4">recent projects</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-5">
+          <span class="text-white">Things I am building,</span>
+          <span class="text-gradient"> maintaining, and testing.</span>
         </h2>
-        <p class="text-xl text-steel max-w-3xl mx-auto">
-          From startups to banks—here's how we've built secure, scalable delivery platforms for teams that ship.
+        <p class="text-xl text-steel leading-relaxed">
+          A selection of current and recent work across offensive AI, research automation,
+          dark-fiber monitoring, product prototypes, and open-source infrastructure tooling.
         </p>
       </div>
 
-      <!-- Case Study Cards Grid - Show All 6 Studies -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        {displayedCaseStudies.map((study, index) => (
-          <div
-            class="card-glass p-6 reveal group hover:-translate-y-1 transition-all duration-300"
-            style={`transition-delay: ${index * 75}ms`}
-          >
+      <div class="grid gap-6">
+        {projects.map((project, index) => (
+          <article class="card-glass p-6 md:p-8 reveal" style={`transition-delay: ${index * 70}ms`}>
             <div class="glow-effect"></div>
-            <div class="relative z-10 flex flex-col h-full">
-              <!-- Header -->
-              <div class="mb-4">
-                <div class="inline-block px-3 py-1 bg-cyan/10 border border-cyan/30 rounded-full text-cyan text-xs font-semibold uppercase tracking-wider mb-3">
-                  {study.clientType}
+            <div class="relative z-10 grid lg:grid-cols-[0.85fr_1.15fr] gap-8">
+              <div>
+                {project.logo && (
+                  <div class="mb-5 flex items-center gap-4">
+                    <div class={`h-24 w-24 rounded-lg border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 ${
+                      project.logoMode === 'light' ? 'bg-white p-3' : 'bg-black/70 p-3'
+                    }`}>
+                      <img src={project.logo} alt={project.logoAlt} class="max-h-full max-w-full object-contain" loading="lazy" />
+                    </div>
+                    <div>
+                      <div class="text-sm text-steel">{project.theme}</div>
+                      <div class="text-2xl font-bold text-white">{project.name}</div>
+                    </div>
+                  </div>
+                )}
+                {project.image && !project.logo && project.name !== 'AXIOM' && (
+                  <div class="mb-6 overflow-hidden rounded-lg border border-white/10 bg-midnight/50">
+                    <img src={project.image} alt={project.imageAlt} class="w-full h-auto object-cover" loading="lazy" />
+                  </div>
+                )}
+                {project.image && !project.logo && project.name === 'AXIOM' && (
+                  <div class="mb-6 rounded-lg border border-white/10 bg-midnight/50 p-6 flex items-center justify-center">
+                    <img src={project.image} alt={project.imageAlt} class="h-32 w-32 object-contain" loading="lazy" />
+                  </div>
+                )}
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                  <span class="rounded-md bg-cyan/10 border border-cyan/25 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan">
+                    {project.status}
+                  </span>
+                  <span class="text-steel text-sm">{project.theme}</span>
                 </div>
-                <span class="text-steel/60 text-xs block mb-2">{study.industry}</span>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors">
-                  {study.title}
-                </h3>
+                {!project.logo && <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">{project.name}</h3>}
+                <p class="text-steel leading-relaxed mb-5">{project.description}</p>
+                {project.links.length > 0 && (
+                  <div class="flex flex-wrap gap-3">
+                    {project.links.map(link => (
+                      <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-cyan hover:text-white transition-colors text-sm font-semibold">
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              <!-- Problem -->
-              <p class="text-steel text-sm mb-4 line-clamp-3 leading-relaxed flex-grow">
-                {study.problem}
-              </p>
-
-              <!-- Key Results -->
-              <div class="mb-4">
-                <h4 class="text-green-400 font-semibold mb-2 flex items-center gap-2 text-xs">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
-                  Key Results
-                </h4>
-                <ul class="space-y-1">
-                  {study.outcome.slice(0, 2).map(result => (
-                    <li class="flex items-start gap-2 text-white text-xs">
-                      <svg class="w-3 h-3 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                      </svg>
-                      <span>{result}</span>
+              <div>
+                <ul class="space-y-3 mb-5">
+                  {project.details.map(detail => (
+                    <li class="flex gap-3 text-sm text-steel leading-relaxed">
+                      <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-300"></span>
+                      <span>{detail}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              <!-- Technologies -->
-              <div class="mb-4">
-                <div class="flex flex-wrap gap-1">
-                  {study.technologies.slice(0, 4).map(tech => (
-                    <span class="px-2 py-0.5 bg-white/5 border border-white/10 rounded text-steel text-xs font-mono">
-                      {tech}
+                <div class="flex flex-wrap gap-2">
+                  {project.tags.map(tag => (
+                    <span class="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs text-steel">
+                      {tag}
                     </span>
                   ))}
-                  {study.technologies.length > 4 && (
-                    <span class="px-2 py-0.5 text-steel/60 text-xs">+{study.technologies.length - 4}</span>
-                  )}
                 </div>
               </div>
-
-              <!-- CTA -->
-              <a
-                href={`/case-studies/${study.slug}`}
-                class="text-cyan hover:text-white transition-colors text-sm font-semibold inline-flex items-center mt-auto"
-              >
-                Read Full Story
-                <svg class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
             </div>
-          </div>
+          </article>
         ))}
-      </div>
-
-      <!-- Explore All Case Studies CTA -->
-      <div class="text-center mt-12 reveal">
-        <a href="/case-studies" class="btn-secondary inline-flex">
-          <span>Explore All Case Studies</span>
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- Why catdev consulting (Our Approach) -->
-  <section id="approach" class="section-padding relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-radial from-electric/5 via-transparent to-transparent"></div>
+  <section id="proof" class="section-padding relative">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">background</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">
+            <span class="text-white">Fifteen-plus years around</span>
+            <span class="text-gradient"> production systems and security.</span>
+          </h2>
+          <div class="space-y-5 text-lg text-steel leading-relaxed">
+            <p>
+              My work has crossed software engineering, cloud and infrastructure operations,
+              storage, Kubernetes, Active Directory, offensive security, and recovery planning.
+              That mix keeps me pragmatic: I like systems that can be reasoned about when they fail.
+            </p>
+            <p>
+              I also maintain and contribute to open source, study continuously, and use agentic
+              workflows heavily in my own engineering process. I also like the hands-on edge of
+              computing: small devices, lab networks, soldering, firmware behavior, and simulators
+              that make hardware-dependent systems testable.
+            </p>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="https://github.com/Cyb3rDudu" target="_blank" rel="noopener noreferrer" class="btn-secondary">GitHub</a>
+            <a href="https://www.linkedin.com/in/%E2%96%BAjan-m%C3%BCller-3b0a18177/" target="_blank" rel="noopener noreferrer" class="btn-secondary">LinkedIn</a>
+          </div>
+        </div>
 
+        <div class="reveal" style="transition-delay: 120ms">
+          <div class="rounded-lg border border-white/10 bg-white/[0.03] p-6 md:p-8">
+            <h3 class="text-xl font-bold text-white mb-6">Signals</h3>
+            <div class="grid gap-4">
+              {signals.map(signal => (
+                <div class="rounded-lg border border-white/10 bg-midnight/60 p-5">
+                  <h4 class="text-white font-semibold mb-2">{signal.title}</h4>
+                  <p class="text-steel text-sm leading-relaxed">{signal.text}</p>
+                </div>
+              ))}
+            </div>
+            <div class="mt-6 grid sm:grid-cols-3 gap-3 text-center">
+              <div class="rounded-lg bg-midnight/70 border border-white/10 p-4">
+                <div class="text-2xl font-bold text-white">15+</div>
+                <div class="text-xs text-steel">years in IT</div>
+              </div>
+              <div class="rounded-lg bg-midnight/70 border border-white/10 p-4">
+                <div class="text-2xl font-bold text-white">OSS</div>
+                <div class="text-xs text-steel">maintainer work</div>
+              </div>
+              <div class="rounded-lg bg-midnight/70 border border-white/10 p-4">
+                <div class="text-2xl font-bold text-white">HW</div>
+                <div class="text-xs text-steel">lab and hardware tinkering</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="collaborate" class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
     <div class="container-custom relative">
-      <!-- Section Header -->
-      <div class="text-center mb-16 reveal">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">
-          <span class="text-white">Why</span>
-          <span class="text-gradient"> catdev consulting</span>
-        </h2>
-        <p class="text-xl text-steel max-w-3xl mx-auto">
-          Engineer-to-engineer, no fluff, no hand-waving. Three core beliefs that guide every platform we build.
-        </p>
-      </div>
-
-      <!-- Approach Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {approaches.map((approach, index) => (
-          <div
-            class="group text-center reveal"
-            style={`transition-delay: ${index * 100}ms`}
-          >
-            <div class="card-glass p-8 h-full transition-all duration-500 hover:scale-105">
-              <div class="glow-effect"></div>
-              <div class="relative z-10">
-                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-hero mb-6 text-white">
-                  <div set:html={approach.icon} />
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-4">
-                  {approach.title}
-                </h3>
-                <p class="text-steel leading-relaxed">
-                  {approach.description}
-                </p>
-              </div>
-            </div>
+      <div class="rounded-lg border border-cyan/25 bg-deep-space/70 p-8 md:p-12 reveal">
+        <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+          <div>
+            <p class="text-cyan font-mono text-sm mb-4">collaboration</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-5">
+              <span class="text-white">Open to collaborate where</span>
+              <span class="text-gradient"> AI, security, and systems overlap.</span>
+            </h2>
+            <p class="text-xl text-steel leading-relaxed">
+              I am interested in serious technical work: agent tooling, security automation,
+              infrastructure, product prototypes, research systems, and operationally grounded AI.
+            </p>
           </div>
-        ))}
-      </div>
-
-      <!-- Learn More Link -->
-      <div class="text-center mt-12 reveal">
-        <a href="/approach" class="btn-secondary inline-flex">
-          Learn About Our Approach
-        </a>
+          <div class="flex flex-col gap-4">
+            <a href="/contact" class="btn-primary justify-center">Start a Conversation</a>
+            <a href="mailto:info@catdev.io" class="btn-secondary justify-center">info@catdev.io</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- Final CTA -->
-  <CTASection
-    headline="Ready to ship without platform headaches?"
-    subheadline="Book a free architecture review. We'll assess your current infrastructure, identify security gaps and operational risks, and show you what a production-grade platform looks like."
-    primaryCTA={{
-      text: 'Book Architecture Review',
-      href: '/contact'
-    }}
-    secondaryCTA={{
-      text: 'Explore Solutions',
-      href: '/solutions'
-    }}
-  />
 </Layout>
-
-<style>
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>
