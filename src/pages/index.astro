@@ -12,26 +12,24 @@ const focusAreas = [
 
 const projects = [
   {
-    name: 'cyb3r',
-    status: 'Active build',
-    theme: 'AI for offensive security',
+    name: 'Hikari',
+    status: 'Working prototype',
+    theme: 'AI agent for OTDR monitoring',
     image: null,
     imageAlt: '',
-    logo: '/projects/cyb3r-logo.png',
-    logoAlt: 'cyb3r logo',
+    logo: '/projects/hikari-logo.svg',
+    logoAlt: 'Hikari logo',
     logoMode: 'dark',
     description:
-      'A cybersecurity AI project built around an operator-oriented model and a Pi-based pentesting tool layer. The goal is not a generic chatbot, but a disciplined offensive-security assistant that can reason, plan, execute tool calls, reassess, and avoid getting stuck in shallow attack paths.',
+      'An autonomous OTDR fault-analysis layer for dark-fiber operations. Hikari ingests ALM telemetry, SNMP traps, REST data, OTDR traces, and event streams, then uses deterministic normalization plus agentic analysis to localize faults and draft incident packages.',
     details: [
-      'Includes pi-pen-kit extensions for Sliver C2, Metasploit RPC, and controlled listener workflows',
-      'QLoRA fine-tuning work for a Qwen 27B security model focused on branch ranking, global reassessment, and tool-call competence',
-      'Training pipeline includes curated security corpora, policy rows, eval samples, and Hugging Face release preparation',
+      'MCP adapter exposing OTDR device operations, alarm queries, port management, trace downloads, and trace analysis',
+      'Event loop for ALM alarms and operator messages, with baseline comparison, confidence scoring, and root-cause hypotheses',
+      'Firmware-derived ALM simulators for local testing of measurements, alarm transitions, monitoring cycles, and fault injection',
     ],
-    tags: ['Pi', 'Sliver', 'Metasploit', 'QLoRA', 'Qwen', 'Security AI'],
+    tags: ['MCP', 'OTDR', 'SNMP', 'ALM', 'Fault analysis', 'Simulators'],
     links: [
-      { label: 'How cyb3r works', href: '/projects/cyb3r' },
-      { label: 'cyb3r repo', href: 'https://github.com/Cyb3rDudu/cyb3r-qlora' },
-      { label: 'GitHub profile', href: 'https://github.com/Cyb3rDudu' },
+      { label: 'How Hikari works', href: '/projects/hikari' },
     ],
   },
   {
@@ -52,28 +50,30 @@ const projects = [
     ],
     tags: ['RAG', 'OpenSearch', 'pgvector', 'GPU workers', 'Go', 'Research'],
     links: [
-      { label: 'Public reference', href: 'https://github.com/Cyb3rDudu/axiom' },
+      { label: 'How AXIOM works', href: '/projects/axiom' },
     ],
   },
   {
-    name: 'Hikari',
-    status: 'Working prototype',
-    theme: 'AI agent for OTDR monitoring',
+    name: 'cyb3r',
+    status: 'Active build',
+    theme: 'AI-assisted security workflows',
     image: null,
     imageAlt: '',
-    logo: '/projects/hikari-logo.svg',
-    logoAlt: 'Hikari logo',
+    logo: '/projects/cyb3r-logo.png',
+    logoAlt: 'cyb3r logo',
     logoMode: 'dark',
     description:
-      'An autonomous OTDR fault-analysis layer for dark-fiber operations. Hikari ingests ALM telemetry, SNMP traps, REST data, OTDR traces, and event streams, then uses deterministic normalization plus agentic analysis to localize faults and draft incident packages.',
+      'An AI systems project built around an operator-oriented reasoning model and a Pi-based tool layer. The focus is controlled security research workflows: planning, evidence handling, tool-use discipline, reassessment, and clear operator oversight.',
     details: [
-      'MCP adapter exposing OTDR device operations, alarm queries, port management, trace downloads, and trace analysis',
-      'Event loop for ALM alarms and operator messages, with baseline comparison, confidence scoring, and root-cause hypotheses',
-      'Firmware-derived ALM simulators for local testing of measurements, alarm transitions, monitoring cycles, and fault injection',
+      'Pi-based tool integration layer for controlled lab workflows and repeatable operator actions',
+      'QLoRA fine-tuning work for a Qwen 27B model focused on branch ranking, global reassessment, and tool-use discipline',
+      'Training pipeline includes curated security corpora, policy rows, evaluation samples, and Hugging Face release preparation',
     ],
-    tags: ['MCP', 'OTDR', 'SNMP', 'ALM', 'Fault analysis', 'Simulators'],
+    tags: ['Pi', 'QLoRA', 'Qwen', 'Security AI', 'Agent workflows', 'Model training'],
     links: [
-      { label: 'How Hikari works', href: '/projects/hikari' },
+      { label: 'How cyb3r works', href: '/projects/cyb3r' },
+      { label: 'HF model card', href: 'https://huggingface.co/Cyb3rDudu/cyb3r' },
+      { label: 'cyb3r repo', href: 'https://github.com/Cyb3rDudu/cyb3r-qlora' },
     ],
   },
   {
@@ -124,8 +124,8 @@ const experience = [
     text: 'I care about infrastructure that is understandable under pressure: Kubernetes, Linux, storage, Active Directory, backups, observability, incident response, and the operational details that decide whether recovery is calm or chaotic.',
   },
   {
-    title: 'Security with hands on keyboard',
-    text: 'My security work is practical: red-team tooling, pentest automation, malware and exploit lab work, C2 integrations, AD attack paths, web security, and the constraints that keep testing controlled and useful.',
+    title: 'Practical security engineering',
+    text: 'My security work is hands-on: security automation, lab validation, identity and infrastructure risk, web security, and the constraints that keep testing controlled and useful.',
   },
   {
     title: 'AI as engineering material',
@@ -135,8 +135,8 @@ const experience = [
 
 const signals = [
   {
-    title: 'Offensive security',
-    text: 'OSCP, OSCE, Hack The Box CPTS, CWES, OSWP, red-team tooling, C2 integrations, and lab work that turns security ideas into usable workflows.',
+    title: 'Security background',
+    text: 'OSCP, OSCE, CPTS, CWES, OSWP, hands-on lab work, security automation, and practical validation workflows.',
   },
   {
     title: 'Production operations',
@@ -155,7 +155,7 @@ const signals = [
 
 <Layout
   title="catdev - Jan Mueller"
-  description="Jan Mueller builds and tinkers with AI, cybersecurity, programming, DevOps, infrastructure, hardware, and agentic systems. Projects include cyb3r, AXIOM, Hikari, Theia, and Container-Compose."
+  description="Jan Mueller builds and tinkers with AI, cybersecurity, programming, DevOps, infrastructure, hardware, and agentic systems. Projects include Hikari, AXIOM, cyb3r, Theia, and Container-Compose."
 >
   <section id="top" class="relative min-h-[92vh] overflow-hidden pt-28 flex items-center">
     <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
@@ -198,13 +198,9 @@ const signals = [
             </div>
             <div class="p-5 md:p-7 font-mono text-sm md:text-base leading-relaxed">
               <p><span class="text-emerald-300">$</span> whoami</p>
-              <p class="text-white mt-1">red teamer / programmer / infra person / AI tinkerer</p>
+              <p class="text-white mt-1">security engineer / programmer / infra person / AI tinkerer</p>
               <p class="mt-5"><span class="text-emerald-300">$</span> current-work --summary</p>
               <div class="mt-3 grid gap-3">
-                <div class="rounded-md bg-midnight/80 border border-cyan/20 p-4">
-                  <div class="text-cyan">cyb3r</div>
-                  <div class="text-steel text-sm">pentesting agent tooling paired with a security reasoning model</div>
-                </div>
                 <div class="rounded-md bg-midnight/80 border border-emerald-400/20 p-4">
                   <div class="text-emerald-300">Hikari</div>
                   <div class="text-steel text-sm">agentic monitoring, MCP device adapters, dark-fiber failure analysis</div>
@@ -212,6 +208,10 @@ const signals = [
                 <div class="rounded-md bg-midnight/80 border border-amber-300/20 p-4">
                   <div class="text-amber-200">AXIOM</div>
                   <div class="text-steel text-sm">self-hosted RAG, research agents, PDF/web evidence, papers</div>
+                </div>
+                <div class="rounded-md bg-midnight/80 border border-cyan/20 p-4">
+                  <div class="text-cyan">cyb3r</div>
+                  <div class="text-steel text-sm">AI security workflow tooling paired with a reasoning model</div>
                 </div>
               </div>
               <p class="mt-5 text-steel">// Open to serious collaboration where systems, security, and AI meet.</p>
@@ -264,8 +264,8 @@ const signals = [
           <span class="text-gradient"> maintaining, and testing.</span>
         </h2>
         <p class="text-xl text-steel leading-relaxed">
-          A selection of current and recent work across offensive AI, research automation,
-          dark-fiber monitoring, product prototypes, and open-source infrastructure tooling.
+          A selection of current and recent work across dark-fiber monitoring, research automation,
+          security AI, product prototypes, and open-source infrastructure tooling.
         </p>
       </div>
 
@@ -353,7 +353,7 @@ const signals = [
           <div class="space-y-5 text-lg text-steel leading-relaxed">
             <p>
               My work has crossed software engineering, cloud and infrastructure operations,
-              storage, Kubernetes, Active Directory, offensive security, and recovery planning.
+              storage, Kubernetes, Active Directory, security engineering, and recovery planning.
               That mix keeps me pragmatic: I like systems that can be reasoned about when they fail.
             </p>
             <p>

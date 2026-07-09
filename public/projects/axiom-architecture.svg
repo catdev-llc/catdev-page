@@ -1,0 +1,84 @@
+<svg width="1400" height="820" viewBox="0 0 1400 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="820" rx="30" fill="#0b0f16"/>
+  <defs>
+    <marker id="arrow-axiom" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+
+  <g opacity="0.14" stroke="#334155">
+    <path d="M80 140H1320M80 260H1320M80 380H1320M80 500H1320M80 620H1320M80 740H1320"/>
+    <path d="M160 90V760M320 90V760M480 90V760M640 90V760M800 90V760M960 90V760M1120 90V760M1280 90V760"/>
+  </g>
+
+  <text x="70" y="78" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">AXIOM System</text>
+  <text x="70" y="114" fill="#a7b0c2" font-family="Inter, Arial, sans-serif" font-size="18">Documents, web sources, research agents, model routing, and retrieval live in one self-hosted workspace.</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="80" y="190" width="250" height="125" rx="18" fill="#151b26" stroke="#334155"/>
+    <text x="112" y="242" fill="#f8fafc" font-size="24" font-weight="800">Researcher</text>
+    <text x="112" y="274" fill="#a7b0c2" font-size="16">chat, missions,</text>
+    <text x="112" y="298" fill="#a7b0c2" font-size="16">documents, writing</text>
+
+    <rect x="430" y="170" width="250" height="165" rx="20" fill="#151b26" stroke="#334155"/>
+    <text x="462" y="224" fill="#f8fafc" font-size="24" font-weight="800">Frontend</text>
+    <text x="462" y="255" fill="#fbbf24" font-size="15" font-weight="800">React workspace</text>
+    <text x="462" y="285" fill="#a7b0c2" font-size="16">library, chat,</text>
+    <text x="462" y="309" fill="#a7b0c2" font-size="16">missions, editor</text>
+
+    <rect x="430" y="455" width="250" height="165" rx="20" fill="#151b26" stroke="#334155"/>
+    <text x="462" y="509" fill="#f8fafc" font-size="24" font-weight="800">Documents</text>
+    <text x="462" y="540" fill="#fbbf24" font-size="15" font-weight="800">PDF / web / Word</text>
+    <text x="462" y="570" fill="#a7b0c2" font-size="16">metadata, pages,</text>
+    <text x="462" y="594" fill="#a7b0c2" font-size="16">chunks, images</text>
+
+    <rect x="770" y="130" width="300" height="565" rx="24" fill="#111827" stroke="#f59e0b" stroke-opacity="0.75"/>
+    <text x="812" y="192" fill="#fbbf24" font-size="30" font-weight="800">AXIOM backend</text>
+    <text x="812" y="224" fill="#a7b0c2" font-size="16">orchestration and APIs</text>
+
+    <rect x="820" y="268" width="200" height="58" rx="12" fill="#1f2937" stroke="#334155"/>
+    <text x="850" y="304" fill="#f8fafc" font-size="18" font-weight="700">Agent controller</text>
+
+    <rect x="820" y="356" width="200" height="58" rx="12" fill="#1f2937" stroke="#334155"/>
+    <text x="850" y="392" fill="#f8fafc" font-size="18" font-weight="700">Model dispatcher</text>
+
+    <rect x="820" y="444" width="200" height="58" rx="12" fill="#1f2937" stroke="#334155"/>
+    <text x="850" y="480" fill="#f8fafc" font-size="18" font-weight="700">RAG retrieval</text>
+
+    <rect x="820" y="532" width="200" height="58" rx="12" fill="#1f2937" stroke="#334155"/>
+    <text x="850" y="568" fill="#f8fafc" font-size="18" font-weight="700">Document queue</text>
+
+    <rect x="1140" y="170" width="180" height="130" rx="18" fill="#151b26" stroke="#334155"/>
+    <text x="1170" y="222" fill="#f8fafc" font-size="22" font-weight="800">LLM APIs</text>
+    <text x="1170" y="252" fill="#a7b0c2" font-size="15">hosted or local</text>
+    <text x="1170" y="276" fill="#a7b0c2" font-size="15">OpenAI-style</text>
+
+    <rect x="1140" y="385" width="180" height="130" rx="18" fill="#151b26" stroke="#334155"/>
+    <text x="1170" y="435" fill="#f8fafc" font-size="22" font-weight="800">GPU worker</text>
+    <text x="1170" y="465" fill="#a7b0c2" font-size="15">BGE, GLiNER,</text>
+    <text x="1170" y="489" fill="#a7b0c2" font-size="15">reranker RPC</text>
+
+    <rect x="1140" y="600" width="180" height="130" rx="18" fill="#151b26" stroke="#334155"/>
+    <text x="1170" y="650" fill="#f8fafc" font-size="22" font-weight="800">Storage</text>
+    <text x="1170" y="680" fill="#a7b0c2" font-size="15">Postgres,</text>
+    <text x="1170" y="704" fill="#a7b0c2" font-size="15">pgvector, search</text>
+  </g>
+
+  <g stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M330 252H430" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
+    <path d="M680 252H770" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
+    <path d="M680 538H770" marker-end="url(#arrow-axiom)"/>
+    <path d="M1070 235H1140" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
+    <path d="M1070 452H1140" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
+    <path d="M1070 665H1140" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
+  </g>
+
+  <g stroke="#22d3ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M920 326V356" marker-end="url(#arrow-cyan)"/>
+    <path d="M920 414V444" marker-end="url(#arrow-cyan)"/>
+    <path d="M920 502V532" marker-end="url(#arrow-cyan)"/>
+  </g>
+</svg>

@@ -16,7 +16,7 @@ export default {
         'purple': '#6B4FFF',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(ellipse at top, var(--tw-gradient-stops))',

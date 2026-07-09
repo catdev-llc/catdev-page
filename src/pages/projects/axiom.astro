@@ -1,0 +1,279 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const systemParts = [
+  {
+    title: 'Research workspace',
+    text: 'AXIOM gives one place to upload sources, chat with documents, start research missions, inspect notes, and turn evidence into structured drafts.',
+  },
+  {
+    title: 'Backend orchestration',
+    text: 'The backend owns missions, API calls, WebSocket updates, queues, document state, report artifacts, and the controller that coordinates the agent workflow.',
+  },
+  {
+    title: 'Model dispatcher',
+    text: 'LLM calls are routed through role-based model slots: fast, mid, intelligent, and verifier. Providers can be hosted or local as long as they expose an OpenAI-compatible API.',
+  },
+  {
+    title: 'Evidence layer',
+    text: 'Documents become chunks with metadata, page labels, dense and sparse embeddings, BM25 search records, entities, relationships, and image embeddings.',
+  },
+  {
+    title: 'Document processor',
+    text: 'A background processor converts PDFs, Word files, Markdown, and web material into searchable evidence with metadata enrichment and citation-ready page context.',
+  },
+  {
+    title: 'GPU worker boundary',
+    text: 'Embedding, reranking, and entity extraction are GPU-accelerated through an isolated worker, with device placement tuned for constrained local GPUs. Heavy PDF and relation models run in short-lived subprocesses so VRAM can be released cleanly.',
+  },
+];
+
+const llmRoles = [
+  {
+    title: 'Fast model',
+    text: 'Used for lower-latency work such as planning support, note assignment, query strategy, metadata extraction, and small structured decisions.',
+  },
+  {
+    title: 'Mid model',
+    text: 'Used for core research and writing tasks where AXIOM needs stronger synthesis without spending the most capable model on every step.',
+  },
+  {
+    title: 'Intelligent model',
+    text: 'Used for reflection, query preparation, deeper reasoning, and quality-sensitive parts of the mission loop.',
+  },
+  {
+    title: 'Verifier model',
+    text: 'Used for focused validation and checks where deterministic judgment matters more than broad generation.',
+  },
+];
+
+const localModels = [
+  {
+    name: 'BGE-M3',
+    job: 'Dense and sparse text embeddings for document chunks and queries.',
+  },
+  {
+    name: 'BGE-reranker-v2-m3',
+    job: 'Cross-encoder reranking after vector, BM25, and graph candidates are merged.',
+  },
+  {
+    name: 'GLiNER',
+    job: 'Zero-shot entity extraction for people, organizations, locations, concepts, works, and methods.',
+  },
+  {
+    name: 'mREBEL',
+    job: 'Multilingual relation extraction for knowledge-graph triples.',
+  },
+  {
+    name: 'CLIP',
+    job: 'Image embeddings for figures and extracted PDF images.',
+  },
+  {
+    name: 'Marker',
+    job: 'PDF-to-Markdown conversion with page markers, tables, formulas, and optional LLM-enhanced OCR.',
+  },
+];
+
+const pipelineSteps = [
+  {
+    title: 'Collect sources',
+    text: 'AXIOM works with uploaded PDFs, Word files, Markdown, document groups, web search results, fetched pages, and arXiv papers.',
+  },
+  {
+    title: 'Extract evidence',
+    text: 'Metadata extraction, CrossRef/OpenLibrary/OpenAlex enrichment, page-label detection, Markdown conversion, chunking, and image extraction happen before research starts.',
+  },
+  {
+    title: 'Index retrieval paths',
+    text: 'BGE-M3 creates dense and sparse vectors, pgvector stores semantic search data, OpenSearch adds BM25 matching, and graph extraction adds entity relationships.',
+  },
+  {
+    title: 'Run the mission loop',
+    text: 'Planning, research, reflection, note assignment, and writing agents use document search, web search, page fetching, file reading, and calculator tools.',
+  },
+  {
+    title: 'Produce cited output',
+    text: 'The result is not just a chat answer. AXIOM keeps notes, source references, page numbers, citation profiles, outlines, drafts, and report versions visible.',
+  },
+];
+
+const deploymentFacts = [
+  'React frontend behind Nginx as the browser-facing workspace',
+  'Python backend for APIs, WebSockets, mission orchestration, and model dispatch',
+  'PostgreSQL with pgvector for documents, chunks, embeddings, graph data, and state',
+  'OpenSearch for lexical BM25 retrieval when enabled',
+  'Background document processor for import and indexing jobs',
+  'GPU worker RPC over a Unix socket for shared embedder, reranker, and GLiNER access',
+  'Short-lived Marker and mREBEL subprocesses for heavy import-time model work',
+  'CPU, CUDA, ROCm, and Apple Silicon/MPS-oriented device configuration',
+];
+---
+
+<Layout
+  title="AXIOM - self-hosted AI research"
+  description="How AXIOM works: a self-hosted RAG and research-agent system for PDFs, web sources, hybrid retrieval, knowledge graphs, model routing, and cited research drafts."
+>
+  <section class="relative overflow-hidden pt-32 pb-20">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+    <div class="container-custom relative">
+      <a href="/#projects" class="text-cyan hover:text-white transition-colors text-sm font-semibold">Back to projects</a>
+
+      <div class="mt-10 grid lg:grid-cols-[0.86fr_1.14fr] gap-10 lg:gap-16 items-center">
+        <div class="reveal">
+          <div class="mb-6 flex items-center gap-4">
+            <div class="h-20 w-20 rounded-lg border border-white/10 bg-black/70 p-3 flex items-center justify-center">
+              <img src="/projects/axiom-logo.png" alt="AXIOM logo" class="h-full w-full object-contain" />
+            </div>
+            <div>
+              <p class="text-cyan font-mono text-sm">AXIOM</p>
+              <p class="text-steel text-sm">self-hosted AI research system</p>
+            </div>
+          </div>
+
+          <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+            <span class="text-white">A research system for</span>
+            <span class="text-gradient"> documents, web evidence, and cited drafts.</span>
+          </h1>
+          <p class="text-xl text-steel leading-relaxed">
+            AXIOM is the tool I built for document-heavy research. It ingests PDFs and web
+            sources, builds a searchable evidence layer, runs agentic research missions, and
+            helps turn the gathered material into structured papers and drafts with visible
+            citations.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 reveal" style="transition-delay: 120ms">
+          <img src="/projects/axiom-architecture.svg" alt="AXIOM system overview" class="w-full cursor-zoom-in rounded-md transition-opacity hover:opacity-90" data-expandable-diagram />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mb-12 reveal">
+        <p class="text-cyan font-mono text-sm mb-4">system</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-5">What connects inside AXIOM</h2>
+        <p class="text-xl text-steel leading-relaxed">
+          AXIOM is not just a chat interface over a vector database. It combines a document
+          pipeline, a retrieval layer, model routing, research agents, writing workflows, and
+          self-hosted deployment boundaries so the research process remains inspectable.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {systemParts.map((part, index) => (
+          <article class="card-glass p-6 reveal" style={`transition-delay: ${index * 70}ms`}>
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <h3 class="text-xl font-bold text-white mb-3">{part.title}</h3>
+              <p class="text-steel leading-relaxed text-sm">{part.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
+    <div class="container-custom relative">
+      <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">model stack</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-5">Models are selected by job</h2>
+          <p class="text-lg text-steel leading-relaxed mb-6">
+            AXIOM separates reasoning models from retrieval models. LLM providers are used through
+            role slots, while local ML models handle embeddings, reranking, entity extraction,
+            relation extraction, image search, and PDF conversion.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            {llmRoles.map(role => (
+              <div class="rounded-lg border border-white/10 bg-white/[0.03] p-5">
+                <h3 class="text-white font-semibold mb-2">{role.title}</h3>
+                <p class="text-steel text-sm leading-relaxed">{role.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 reveal" style="transition-delay: 120ms">
+          <img src="/projects/axiom-models.svg" alt="AXIOM model roles and local ML model overview" class="w-full cursor-zoom-in rounded-md transition-opacity hover:opacity-90" data-expandable-diagram />
+        </div>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {localModels.map((model, index) => (
+          <article class="rounded-lg border border-white/10 bg-midnight/70 p-5 reveal" style={`transition-delay: ${index * 60}ms`}>
+            <div class="text-sm font-mono text-amber-200 mb-2">{model.name}</div>
+            <p class="text-steel text-sm leading-relaxed">{model.job}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-[0.92fr_1.08fr] gap-10 lg:gap-14 items-center">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">evidence pipeline</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-5">From source material to research output</h2>
+          <p class="text-lg text-steel leading-relaxed mb-6">
+            A research mission can use local documents, web search, fetched web pages, and arXiv
+            imports. The output stays tied to the evidence layer: notes, page numbers, source
+            metadata, citation style, and draft versions remain visible instead of disappearing
+            into a single model response.
+          </p>
+          <ul class="space-y-3">
+            {pipelineSteps.map(step => (
+              <li class="flex gap-3 text-steel text-sm leading-relaxed">
+                <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-300"></span>
+                <span><strong class="text-white">{step.title}:</strong> {step.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 reveal" style="transition-delay: 120ms">
+          <img src="/projects/axiom-pipeline.svg" alt="AXIOM evidence to research draft pipeline" class="w-full cursor-zoom-in rounded-md transition-opacity hover:opacity-90" data-expandable-diagram />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
+    <div class="container-custom relative">
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-start">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">research agents</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">The mission loop</h2>
+          <div class="space-y-5 text-lg text-steel leading-relaxed">
+            <p>
+              AXIOM decomposes a research question into work that can be inspected: initial
+              questions, searches, relevant notes, reflection output, outline changes, note
+              assignments, writing passes, and report versions.
+            </p>
+            <p>
+              The agents are supported by tools rather than free-form prompting alone: document
+              search, web search, page fetching, arXiv ingestion, file reading, calculator calls,
+              structured document access, writing tools, and reference integration.
+            </p>
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-6 reveal" style="transition-delay: 120ms">
+          <h3 class="text-xl font-bold text-white mb-5">Self-hosted deployment shape</h3>
+          <div class="grid gap-3">
+            {deploymentFacts.map(fact => (
+              <div class="rounded-md border border-white/10 bg-midnight/70 p-3 text-sm text-steel">
+                {fact}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
