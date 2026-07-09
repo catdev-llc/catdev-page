@@ -29,6 +29,7 @@ const projects = [
     ],
     tags: ['Pi', 'Sliver', 'Metasploit', 'QLoRA', 'Qwen', 'Security AI'],
     links: [
+      { label: 'How cyb3r works', href: '/projects/cyb3r' },
       { label: 'cyb3r repo', href: 'https://github.com/Cyb3rDudu/cyb3r-qlora' },
       { label: 'GitHub profile', href: 'https://github.com/Cyb3rDudu' },
     ],
@@ -71,7 +72,9 @@ const projects = [
       'Firmware-derived ALM simulators for local testing of measurements, alarm transitions, monitoring cycles, and fault injection',
     ],
     tags: ['MCP', 'OTDR', 'SNMP', 'ALM', 'Fault analysis', 'Simulators'],
-    links: [],
+    links: [
+      { label: 'How Hikari works', href: '/projects/hikari' },
+    ],
   },
   {
     name: 'Theia',
@@ -306,7 +309,7 @@ const signals = [
                 {project.links.length > 0 && (
                   <div class="flex flex-wrap gap-3">
                     {project.links.map(link => (
-                      <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-cyan hover:text-white transition-colors text-sm font-semibold">
+                      <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined} class="text-cyan hover:text-white transition-colors text-sm font-semibold">
                         {link.label}
                       </a>
                     ))}

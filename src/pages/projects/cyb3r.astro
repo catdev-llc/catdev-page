@@ -1,0 +1,195 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const layers = [
+  {
+    title: 'Pi agent runtime',
+    text: 'Pi provides the runtime surface: package loading, shell interaction, user workflow, and the place where cyb3r can operate. Think of it as the operating-system layer of the stack.',
+  },
+  {
+    title: 'cyb3r agent harness',
+    text: 'cyb3r is the operator harness built on top of that runtime. It coordinates reasoning, plans, tool use, evidence handling, and the loop between actions and reassessment.',
+  },
+  {
+    title: 'Reasoning model',
+    text: 'The fine-tuned model provides dedicated penetration-testing reasoning, branch ranking, pivot decisions, rabbit-hole avoidance, and controlled tool-call behavior. Think of it as the CPU of the harness.',
+  },
+  {
+    title: 'pi-pen-kit tool layer',
+    text: 'pi-pen-kit exposes real offensive tooling to the harness: controlled reverse shells, Sliver, Metasploit, listener/session management, and operator-level C2 workflows.',
+  },
+];
+
+const toolExamples = [
+  'Start and manage controlled reverse-shell listeners from AI workflows',
+  'Catch interactive reverse shells and keep them usable across agent tool calls',
+  'Read, write, interrupt, probe, and execute commands inside shell sessions',
+  'Use Sliver C2 sessions, beacons, listeners, and implants through Pi tools',
+  'Use Metasploit RPC for modules, payloads, jobs, sessions, and exploitation workflows',
+];
+
+const modelGoals = [
+  'Structured security reasoning instead of generic assistant behavior',
+  'Global reassessment during multi-step pentest tasks',
+  'Ranking attack branches instead of brute-forcing the first idea',
+  'Knowing when to abort low-yield rabbit holes',
+  'Preserving tool-call competence while improving operator judgment',
+];
+---
+
+<Layout
+  title="cyb3r - offensive AI operator"
+  description="How cyb3r is built: a Pi-based agent harness, a penetration-testing reasoning model, and pi-pen-kit tooling for reverse shells, C2 frameworks, and operator-level AI workflows."
+>
+  <section class="relative overflow-hidden pt-32 pb-20">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+    <div class="container-custom relative">
+      <a href="/#projects" class="text-cyan hover:text-white transition-colors text-sm font-semibold">Back to projects</a>
+
+      <div class="mt-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
+        <div class="reveal">
+          <div class="mb-6 flex items-center gap-4">
+            <div class="h-20 w-20 rounded-lg border border-white/10 bg-black/70 p-3 flex items-center justify-center">
+              <img src="/projects/cyb3r-logo.png" alt="cyb3r logo" class="h-full w-full object-contain" />
+            </div>
+            <div>
+              <p class="text-cyan font-mono text-sm">cyb3r</p>
+              <p class="text-steel text-sm">offensive AI operator stack</p>
+            </div>
+          </div>
+
+          <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+            <span class="text-white">An agent harness for</span>
+            <span class="text-gradient"> penetration-testing workflows.</span>
+          </h1>
+          <p class="text-xl text-steel leading-relaxed">
+            cyb3r is the system I am building around Pi: an agent runtime, an operator harness,
+            a dedicated reasoning model, and pi-pen-kit tooling that lets AI workflows use real
+            pentesting capabilities without losing operator control.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 reveal" style="transition-delay: 120ms">
+          <img src="/projects/cyb3r-system.svg" alt="cyb3r architecture overview" class="w-full rounded-md" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mb-12 reveal">
+        <p class="text-cyan font-mono text-sm mb-4">system model</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-5">The stack has four layers</h2>
+        <p class="text-xl text-steel leading-relaxed">
+          I think about cyb3r less as “a model” and more as an operator system.
+          The model matters, but it only becomes useful when it can drive tools,
+          preserve context, and reason like an operator.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {layers.map((layer, index) => (
+          <article class="card-glass p-6 reveal" style={`transition-delay: ${index * 70}ms`}>
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <h3 class="text-xl font-bold text-white mb-3">{layer.title}</h3>
+              <p class="text-steel leading-relaxed text-sm">{layer.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
+    <div class="container-custom relative">
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-start">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">pi-pen-kit</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">Pentesting tools as agent-native capabilities</h2>
+          <p class="text-lg text-steel leading-relaxed mb-6">
+            pi-pen-kit is the bridge between cyb3r and the tools an operator actually uses.
+            It is not just a list of command wrappers. It keeps interactive state alive so the
+            agent can continue working across tool calls.
+          </p>
+          <ul class="space-y-3">
+            {toolExamples.map(item => (
+              <li class="flex gap-3 text-steel">
+                <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-8 reveal" style="transition-delay: 120ms">
+          <h3 class="text-2xl font-bold text-white mb-5">Controlled reverse-shell sessions</h3>
+          <p class="text-steel leading-relaxed mb-5">
+            A normal `nc -lvnp 4444` listener is awkward for an agent because the session belongs
+            to the shell process that started it. pi-netcat replaces that with a controlled shim and
+            daemon: the listener owns sockets, the agent can list sessions, read buffered output,
+            write commands, interrupt stuck processes, probe responsiveness, and close sessions.
+          </p>
+          <p class="text-steel leading-relaxed">
+            That turns a fragile interactive reverse shell into a tool-controlled workflow that the
+            harness can reason about.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">model</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-5">Training for operator reasoning</h2>
+          <p class="text-lg text-steel leading-relaxed mb-6">
+            The current training target is a Qwen-class 27B model with a reasoning-first
+            cybersecurity fine-tune. The first training pass spans epochs 01-03 and is running now.
+            The initial focus is behavior: planning, reassessment, branch ranking, and tool-use
+            discipline. Security knowledge expansion comes after the reasoning pass. In the stack,
+            the model is best understood as the CPU that drives operator judgment inside the harness.
+          </p>
+          <ul class="space-y-3">
+            {modelGoals.map(goal => (
+              <li class="flex gap-3 text-steel">
+                <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-red-400"></span>
+                <span>{goal}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="reveal" style="transition-delay: 120ms">
+          <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 mb-5">
+            <img src="/projects/cyb3r.png" alt="cyb3r model card teaser" class="w-full rounded-md" />
+          </div>
+          <div class="rounded-lg border border-red-400/30 bg-red-400/10 p-5">
+            <h3 class="text-white font-semibold mb-2">Partners wanted</h3>
+            <p class="text-steel text-sm leading-relaxed">
+              Training hardware is currently the limiting factor. I am actively looking for
+              partners who can help with compute, evaluation, applied security feedback, or
+              controlled real-world workflows.
+            </p>
+            <a
+              href="https://huggingface.co/Cyb3rDudu/cyb3r"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-4 inline-flex text-sm font-semibold text-red-300 transition-colors hover:text-white"
+            >
+              Hugging Face model card
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 rounded-lg border border-white/10 bg-deep-space/70 p-5 reveal">
+        <img src="/projects/cyb3r-training.svg" alt="cyb3r training direction overview" class="w-full rounded-md" />
+      </div>
+    </div>
+  </section>
+</Layout>

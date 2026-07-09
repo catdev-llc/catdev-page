@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiber Link Failure Analysis - Port MCH-1-3 | FLR-MCH-1-3-20260216-00001</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .report-container {
+            background: white;
+            padding: 40px 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .report-header {
+            border-bottom: 4px solid #2E86AB;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .report-header h1 {
+            color: #2E86AB;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        .report-header .report-id {
+            color: #777;
+            font-size: 13px;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .report-header .severity-banner {
+            display: inline-block;
+            background: #C73E1D;
+            color: white;
+            padding: 6px 18px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+        h2 {
+            color: #333;
+            font-size: 17px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2E86AB;
+            padding-left: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        h3 {
+            color: #2E86AB;
+            font-size: 14px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #2E86AB;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f0f7fa;
+        }
+        td:first-child {
+            font-weight: 600;
+            color: #444;
+            white-space: nowrap;
+        }
+        .two-col td:first-child {
+            width: 35%;
+            background: #f7fbfc;
+        }
+        .critical {
+            color: #C73E1D;
+            font-weight: 700;
+        }
+        .warning {
+            color: #F18F01;
+            font-weight: 700;
+        }
+        .good {
+            color: #6A994E;
+            font-weight: 700;
+        }
+        .status-active {
+            display: inline-block;
+            background: #C73E1D;
+            color: white;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .status-passed {
+            display: inline-block;
+            background: #6A994E;
+            color: white;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .status-exceeded {
+            display: inline-block;
+            background: #C73E1D;
+            color: white;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .diagram {
+            margin: 25px 0;
+            text-align: center;
+            padding: 15px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+        }
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+        }
+        .diagram-caption {
+            font-weight: 700;
+            margin-top: 12px;
+            color: #555;
+            font-size: 13px;
+        }
+        .diagram-description {
+            font-size: 12px;
+            color: #777;
+            margin-top: 6px;
+            line-height: 1.6;
+        }
+        .timeline {
+            margin: 15px 0;
+        }
+        .timeline-entry {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+        .timeline-entry:last-child {
+            border-bottom: none;
+        }
+        .timeline-time {
+            width: 180px;
+            flex-shrink: 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #666;
+            font-size: 12px;
+        }
+        .timeline-event {
+            flex-grow: 1;
+        }
+        .timeline-severity {
+            display: inline-block;
+            padding: 1px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .timeline-severity.crit {
+            background: #fde8e4;
+            color: #C73E1D;
+            border: 1px solid #C73E1D;
+        }
+        .timeline-severity.info {
+            background: #e8f4fd;
+            color: #2E86AB;
+            border: 1px solid #2E86AB;
+        }
+        .timeline-severity.sys {
+            background: #f0f0f0;
+            color: #666;
+            border: 1px solid #999;
+        }
+        .action-box {
+            background: #fff8f0;
+            border: 2px solid #F18F01;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        .action-box h4 {
+            color: #F18F01;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .action-box ol, .action-box ul {
+            margin-left: 20px;
+        }
+        .action-box li {
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        .critical-box {
+            background: #fdf2f0;
+            border: 2px solid #C73E1D;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        .critical-box h4 {
+            color: #C73E1D;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .metadata {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-top: 40px;
+            border-top: 3px solid #2E86AB;
+        }
+        .metadata strong {
+            color: #2E86AB;
+        }
+        .metadata table {
+            font-size: 12px;
+        }
+        .metadata th {
+            background: #ddd;
+            color: #333;
+        }
+        .file-manifest {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #f7f7f7;
+            padding: 15px;
+            border: 1px solid #ddd;
+            font-size: 12px;
+            line-height: 1.8;
+            white-space: pre;
+        }
+        .checkbox {
+            font-family: 'Segoe UI Symbol', sans-serif;
+        }
+        .separator {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 30px 0;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                font-size: 11pt;
+            }
+            .report-container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .diagram {
+                page-break-inside: avoid;
+            }
+            h2 {
+                page-break-after: avoid;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+
+        <!-- ============================================================ -->
+        <!-- HEADER                                                        -->
+        <!-- ============================================================ -->
+        <div class="report-header">
+            <h1>FIBER OPTIC LINK FAILURE ANALYSIS REPORT</h1>
+            <div class="report-id">Report ID: FLR-MCH-1-3-20260216-00001</div>
+            <div class="severity-banner">CRITICAL -- ACTIVE FAILURE -- FIBER BREAK</div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 1. EXECUTIVE SUMMARY                                          -->
+        <!-- ============================================================ -->
+        <h2>1. Executive Summary</h2>
+
+        <table class="two-col">
+            <tr><td>Port Identifier</td><td>MCH-1-3 (Port 3)</td></tr>
+            <tr><td>Link Designation</td><td>FTTH feeder &mdash; mixed build</td></tr>
+            <tr><td>Alarm Trigger</td><td>2026-02-15 18:49:31 UTC+8</td></tr>
+            <tr><td>Report Generated</td><td>2026-02-16 12:37:00 UTC+8</td></tr>
+            <tr><td>Investigation Status</td><td><span class="status-active">ACTIVE FAILURE</span></td></tr>
+            <tr><td>Severity Classification</td><td class="critical">CRITICAL</td></tr>
+            <tr><td>Failure Type</td><td class="critical">FIBER BREAK at 5.0 km (&plusmn;50 m)</td></tr>
+            <tr><td>Required Action</td><td class="critical">DISPATCH FIELD CREW IMMEDIATELY</td></tr>
+            <tr><td>Estimated Repair Time</td><td>4&ndash;8 hours (cable repair / emergency splice)</td></tr>
+        </table>
+
+        <p style="margin-top:15px; font-size:14px; line-height:1.7;">
+            <strong>Summary:</strong> A complete fiber break was detected on Port MCH-1-3 (FTTH feeder &mdash; mixed build)
+            at approximately <strong>5.0 km</strong> from the ALM port. The alarm was triggered on 2026-02-15 at 18:49:31
+            when the link loss exceeded the configured threshold, registering a total loss of 100.00 dB (sentinel value
+            indicating complete signal loss). The automatic fault analysis identified the break point at 5,000 m with a
+            fault loss of 93.86 dB. A confirmation OTDR shot and a full high-accuracy measurement both verified the
+            failure. The break is located on the feeder section between the ODF/patch-panel (150 m) and the
+            splitter-hub/cabinet (15,300 m). No signal is detectable beyond the fault point. Immediate dispatch of a
+            field crew is required to locate and repair the cable at the 5.0 km mark.
+        </p>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 2. LINK IDENTIFICATION AND CONFIGURATION                      -->
+        <!-- ============================================================ -->
+        <h2>2. Link Identification and Configuration</h2>
+
+        <h3>2.1 Port Configuration</h3>
+        <table class="two-col">
+            <tr><td>ALM Device</td><td>ADVA FSP3000 ALM Simulator &mdash; S/N: SIM0001</td></tr>
+            <tr><td>Firmware Version</td><td>6.6.1</td></tr>
+            <tr><td>Software Build</td><td>60501_202405141302</td></tr>
+            <tr><td>Port Number</td><td>MCH-1-3 (Port 3)</td></tr>
+            <tr><td>Port Name</td><td>FTTH feeder &mdash; mixed build</td></tr>
+            <tr><td>Administrative State</td><td>In-Service</td></tr>
+            <tr><td>Monitoring Mode</td><td>Fingerprint (continuous monitoring enabled)</td></tr>
+        </table>
+
+        <h3>2.2 Fiber Specification</h3>
+        <table class="two-col">
+            <tr><td>Fiber Type</td><td>ITU-T G.652.D (Corning SMF-28e+)</td></tr>
+            <tr><td>Refractive Index (IOR)</td><td>1.4682 @ 1550 nm</td></tr>
+            <tr><td>Core / Cladding</td><td>9 / 125 &micro;m</td></tr>
+            <tr><td>Operating Wavelength</td><td>1550 nm</td></tr>
+            <tr><td>Nominal Link Length</td><td>19,600 m (19.6 km)</td></tr>
+            <tr><td>Fiber Attenuation Coefficient</td><td>~0.20 dB/km @ 1550 nm (typical G.652.D)</td></tr>
+        </table>
+
+        <h3>2.3 Link Budget Configuration</h3>
+        <table class="two-col">
+            <tr><td>Link Budget Margin</td><td>5.0 dB</td></tr>
+            <tr><td>Link Budget Warning Margin</td><td>3.0 dB</td></tr>
+            <tr><td>Loss Budget Margin</td><td>2.0 dB</td></tr>
+            <tr><td>Loss Budget Warning Margin</td><td>1.5 dB</td></tr>
+            <tr><td>Maximum Laser Power</td><td>12.0 dBm</td></tr>
+            <tr><td>Coupler Loss</td><td>0.70 dB</td></tr>
+        </table>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 3. ALARM EVENT DETAILS                                        -->
+        <!-- ============================================================ -->
+        <h2>3. Alarm Event Details</h2>
+
+        <h3>3.1 Alarm Information</h3>
+        <table class="two-col">
+            <tr><td>Alarm Type</td><td class="critical">LINK LOSS HIGH</td></tr>
+            <tr><td>Severity</td><td class="critical">CRITICAL (Severity 2)</td></tr>
+            <tr><td>Detection Timestamp</td><td>2026-02-15 18:49:31 UTC+8</td></tr>
+            <tr><td>Measured Link Loss</td><td class="critical">100.00 dB (sentinel: complete signal loss)</td></tr>
+            <tr><td>Fault Loss</td><td class="critical">93.86 dB</td></tr>
+            <tr><td>Coupler Loss</td><td>0.70 dB</td></tr>
+            <tr><td>Alarm Status</td><td><span class="status-active">ACTIVE (not cleared)</span></td></tr>
+        </table>
+
+        <h3>3.2 Event Timeline</h3>
+        <div class="timeline">
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-15 18:49:31</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity crit">CRITICAL</span>
+                    Link Loss High alarm SET on Port 3 &mdash; measured loss 100.00 dB
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-15 18:49:33</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity sys">SYSTEM</span>
+                    Automatic Fault Analysis started on Port 3
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-15 18:49:36</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity sys">SYSTEM</span>
+                    Automatic Fault Analysis completed &mdash; saved as Measurement ID 143
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-15 18:50:23</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity info">INFO</span>
+                    OTDR Measurement started (admin-initiated)
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-15 18:50:26</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity info">INFO</span>
+                    OTDR Measurement completed &mdash; saved as Measurement ID 144
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-15 18:50:39</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity info">INFO</span>
+                    Manual Fault Analysis started (admin-initiated)
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-15 18:50:42</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity info">INFO</span>
+                    Manual Fault Analysis completed &mdash; saved as Measurement ID 145
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-16 04:35:xx</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity info">INVESTIGATION</span>
+                    Confirmation OTDR shot executed &mdash; Measurement ID 146 &mdash; failure confirmed
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-16 04:36:xx</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity info">INVESTIGATION</span>
+                    Full failure OTDR measurement executed &mdash; Measurement ID 147 &mdash; fiber break verified
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-time">2026-02-16 04:37:xx</div>
+                <div class="timeline-event">
+                    <span class="timeline-severity info">INVESTIGATION</span>
+                    Comparative Fault Analysis executed &mdash; Measurement ID 148 &mdash; break at 5,000 m confirmed
+                </div>
+            </div>
+        </div>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 4. BASELINE REFERENCE DATA                                    -->
+        <!-- ============================================================ -->
+        <h2>4. Baseline Reference Data</h2>
+
+        <h3>4.1 Historical Performance</h3>
+        <table>
+            <tr>
+                <th>Measurement</th>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Total Loss</th>
+                <th>Link Length</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Fingerprint (Reference)</td>
+                <td>118</td>
+                <td>2026-02-15 17:21:08</td>
+                <td>~6.14 dB</td>
+                <td>19,600 m</td>
+                <td><span class="status-passed">PASSED</span></td>
+            </tr>
+        </table>
+
+        <h3>4.2 Baseline Event Table</h3>
+        <table>
+            <tr>
+                <th>Event #</th>
+                <th>Distance (m)</th>
+                <th>Type</th>
+                <th>Loss (dB)</th>
+                <th>Reflectance (dB)</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>150</td>
+                <td>Connector</td>
+                <td>0.20</td>
+                <td>-45.0</td>
+                <td>ODF / patch-panel connector</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>15,300</td>
+                <td>Splice / Splitter</td>
+                <td>0.40</td>
+                <td>-60.0</td>
+                <td>Splitter-hub / street cabinet</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>19,600</td>
+                <td>End of Fiber</td>
+                <td>&mdash;</td>
+                <td>-5.0</td>
+                <td>End reflection (reflective termination)</td>
+            </tr>
+        </table>
+
+        <h3>4.3 Normal Operating Parameters</h3>
+        <table class="two-col">
+            <tr><td>Baseline Link Loss</td><td>~6.14 dB</td></tr>
+            <tr><td>Fiber Attenuation (19.6 km x 0.20 dB/km)</td><td>~3.92 dB</td></tr>
+            <tr><td>Number of Connectors</td><td>1 (ODF at 150 m)</td></tr>
+            <tr><td>Number of Splices / Passive Elements</td><td>1 (splitter-hub at 15,300 m)</td></tr>
+            <tr><td>Connector Loss (total)</td><td>0.20 dB</td></tr>
+            <tr><td>Splice / Splitter Loss (total)</td><td>0.40 dB</td></tr>
+            <tr><td>Excess Loss (other)</td><td>~1.62 dB</td></tr>
+            <tr><td>Available Link Budget Margin</td><td>&gt; 5.0 dB</td></tr>
+        </table>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 5. OTDR MEASUREMENT PROTOCOL                                  -->
+        <!-- ============================================================ -->
+        <h2>5. OTDR Measurement Protocol</h2>
+
+        <h3>5.1 Confirmation Shot (Initial Verification)</h3>
+        <p style="margin-bottom:10px; font-size:13px; color:#555;">
+            <strong>Purpose:</strong> Rapid verification of alarm condition before committing to full measurement cycle.
+        </p>
+        <table class="two-col">
+            <tr><td>Measurement ID</td><td>146</td></tr>
+            <tr><td>Timestamp</td><td>2026-02-16 ~04:35 UTC</td></tr>
+            <tr><td>Wavelength</td><td>1550 nm</td></tr>
+            <tr><td>Pulse Width</td><td>200 ns</td></tr>
+            <tr><td>Range</td><td>24,000 m (24 km)</td></tr>
+            <tr><td>Averaging Time</td><td>30 seconds</td></tr>
+            <tr><td>Refractive Index</td><td>1.4682</td></tr>
+            <tr><td>Result</td><td class="critical">FAILURE CONFIRMED &mdash; complete signal loss beyond 5,000 m</td></tr>
+        </table>
+
+        <h3>5.2 Full Failure Measurement (Detailed Analysis)</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Standard Reference</th>
+            </tr>
+            <tr>
+                <td>Measurement ID</td>
+                <td>147</td>
+                <td>&mdash;</td>
+            </tr>
+            <tr>
+                <td>Timestamp</td>
+                <td>2026-02-16 ~04:36 UTC</td>
+                <td>&mdash;</td>
+            </tr>
+            <tr>
+                <td>Wavelength</td>
+                <td>1550 nm</td>
+                <td>ITU-T G.650.1</td>
+            </tr>
+            <tr>
+                <td>Pulse Width</td>
+                <td>200 ns</td>
+                <td>TIA-455-8-B</td>
+            </tr>
+            <tr>
+                <td>Range</td>
+                <td>24,000 m (24 km)</td>
+                <td>&mdash;</td>
+            </tr>
+            <tr>
+                <td>Averaging Time</td>
+                <td>180 seconds (high accuracy)</td>
+                <td>&mdash;</td>
+            </tr>
+            <tr>
+                <td>Index of Refraction</td>
+                <td>1.4682</td>
+                <td>ITU-T G.652</td>
+            </tr>
+            <tr>
+                <td>Spatial Resolution</td>
+                <td>~20 m (200 ns pulse)</td>
+                <td>TIA-455-8-B</td>
+            </tr>
+            <tr>
+                <td>Measurement Uncertainty</td>
+                <td>&plusmn;1.0% distance, &plusmn;0.05 dB loss</td>
+                <td>ISO/IEC Guide 98-3</td>
+            </tr>
+            <tr>
+                <td>Result</td>
+                <td class="critical">Fiber break confirmed at ~5,000 m</td>
+                <td>&mdash;</td>
+            </tr>
+        </table>
+
+        <h3>5.3 Fault Analysis (Comparative)</h3>
+        <table class="two-col">
+            <tr><td>Measurement ID</td><td>148</td></tr>
+            <tr><td>Reference Baseline</td><td>Fingerprint ID 118 (2026-02-15 17:21:08)</td></tr>
+            <tr><td>Fault Position</td><td class="critical">5,000 m (5.0 km)</td></tr>
+            <tr><td>Fault Loss</td><td class="critical">93.86 dB</td></tr>
+            <tr><td>Total Link Loss</td><td class="critical">100.00 dB</td></tr>
+            <tr><td>Signal Beyond Fault</td><td class="critical">NONE (noise floor only)</td></tr>
+        </table>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 6. OTDR TRACE ANALYSIS                                        -->
+        <!-- ============================================================ -->
+        <h2>6. OTDR Trace Analysis</h2>
+
+        <h3>6.1 Baseline vs. Current &mdash; OTDR Comparison Diagram</h3>
+        <div class="diagram">
+            <img src="/projects/hikari-port3-comparison-cropped.png"
+                 alt="OTDR Trace Comparison - Baseline (green) vs Current Fault Analysis (red) for Port MCH-1-3"
+                 style="width:100%; max-width:1400px;">
+            <div class="diagram-caption">
+                Figure 1: OTDR Trace Comparison &mdash; Baseline Fingerprint (green) vs Current Fault Analysis (red) &mdash; Port MCH-1-3
+            </div>
+            <div class="diagram-description">
+                Professional ALM-style diagram showing the baseline fingerprint (green trace, healthy link state from 2026-02-15)
+                overlaid with the current fault analysis measurement (red trace). The baseline shows the complete 19.6 km link with
+                all events (ODF connector at 150 m, splitter-hub at 15,300 m, and end-of-fiber reflection at 19,600 m). The current
+                trace shows an abrupt signal termination at approximately 5.0 km, characteristic of a complete fiber break. No signal
+                is detectable beyond the break point. Numbered event markers and shaded uncertainty regions annotate the failure location.
+            </div>
+        </div>
+
+        <h3>6.2 Trace Interpretation</h3>
+        <p style="font-size:13px; line-height:1.7; margin-bottom:15px;">
+            The overlay comparison clearly reveals the catastrophic nature of this failure. The green baseline trace follows the
+            expected profile of the 19.6 km FTTH feeder link: a gradual linear attenuation of approximately 0.20 dB/km, punctuated
+            by discrete events at the ODF connector (150 m) and the splitter-hub (15,300 m), terminating with a strong end-of-fiber
+            reflection at 19,600 m.
+        </p>
+        <p style="font-size:13px; line-height:1.7; margin-bottom:15px;">
+            The red current trace tracks the baseline identically for the first ~5.0 km, confirming that the fiber section from the
+            ALM port to the break point remains intact and undamaged. At 5.0 km, the trace drops abruptly to the noise floor with a
+            measured fault loss of 93.86 dB. This signature &mdash; sudden signal termination with no recoverable backscatter beyond
+            the event &mdash; is the definitive OTDR signature of a <strong>complete fiber break</strong>.
+        </p>
+        <p style="font-size:13px; line-height:1.7;">
+            The ODF/patch-panel connector at 150 m shows identical characteristics in both traces (loss 0.20 dB, reflectance -45.0 dB),
+            confirming that all equipment at the headend is functioning normally. The splitter-hub at 15,300 m and end-of-fiber at
+            19,600 m are both beyond the break point and therefore not visible in the current measurement.
+        </p>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 7. FAILURE ANALYSIS                                           -->
+        <!-- ============================================================ -->
+        <h2>7. Failure Analysis</h2>
+
+        <h3>7.1 Link Loss Budget Analysis</h3>
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Baseline (dB)</th>
+                <th>Current (dB)</th>
+                <th>Delta (dB)</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Total Link Loss</td>
+                <td>~6.14</td>
+                <td class="critical">100.00</td>
+                <td class="critical">+93.86</td>
+                <td><span class="status-exceeded">EXCEEDED</span></td>
+            </tr>
+            <tr>
+                <td>Fiber Attenuation (0-5 km)</td>
+                <td>~1.00</td>
+                <td>~1.00</td>
+                <td>0.00</td>
+                <td><span class="status-passed">NORMAL</span></td>
+            </tr>
+            <tr>
+                <td>ODF Connector (150 m)</td>
+                <td>0.20</td>
+                <td>0.20</td>
+                <td>0.00</td>
+                <td><span class="status-passed">NORMAL</span></td>
+            </tr>
+            <tr>
+                <td>Splitter-hub (15,300 m)</td>
+                <td>0.40</td>
+                <td>N/A (beyond break)</td>
+                <td>&mdash;</td>
+                <td class="critical">NOT REACHABLE</td>
+            </tr>
+            <tr>
+                <td style="font-weight:700;">Fault Event at 5,000 m</td>
+                <td>&mdash;</td>
+                <td class="critical" style="font-weight:700;">93.86</td>
+                <td class="critical" style="font-weight:700;">+93.86</td>
+                <td><span class="status-exceeded">FIBER BREAK</span></td>
+            </tr>
+            <tr>
+                <td>Available Margin</td>
+                <td>&gt; 5.0 dB</td>
+                <td class="critical">0.00 dB</td>
+                <td>&mdash;</td>
+                <td><span class="status-exceeded">ZERO MARGIN</span></td>
+            </tr>
+        </table>
+
+        <h3>7.2 Failure Localization</h3>
+        <table class="two-col">
+            <tr><td>Failure Distance</td><td class="critical">5,000 m (5.0 km from ALM port)</td></tr>
+            <tr><td>Localization Uncertainty</td><td>&plusmn;50 m (based on 200 ns pulse width)</td></tr>
+            <tr><td>Failure Range</td><td>4,950 m to 5,050 m</td></tr>
+            <tr><td>Nearest Known Event (upstream)</td><td>ODF connector at 150 m (4,850 m before break)</td></tr>
+            <tr><td>Nearest Known Event (downstream)</td><td>Splitter-hub at 15,300 m (10,300 m after break)</td></tr>
+            <tr><td>Route Section</td><td>Feeder cable between ODF and splitter-hub</td></tr>
+            <tr><td>GPS Coordinates</td><td>N/A &mdash; requires GIS correlation with cable route map</td></tr>
+        </table>
+
+        <p style="margin-top:10px; font-size:12px; color:#666;">
+            <strong>Localization Method:</strong> Two-way transit time calculation per ITU-T G.650.1.
+            Distance = (Time &times; c &times; n) / 2, where c = 2.998 &times; 10<sup>8</sup> m/s, n = 1.4682.
+            Uncertainty based on pulse width and sampling resolution.
+        </p>
+
+        <h3>7.3 Failure Classification</h3>
+        <table class="two-col">
+            <tr><td>Failure Type</td><td class="critical">FIBER BREAK (Complete Fracture)</td></tr>
+            <tr><td>Event Loss</td><td class="critical">93.86 dB</td></tr>
+            <tr><td>Reflectance at Break</td><td>High (&gt; -40 dB) &mdash; consistent with cleaved/fractured glass face</td></tr>
+            <tr><td>Signal Beyond Event</td><td>NONE &mdash; noise floor only, no backscatter detectable</td></tr>
+            <tr><td>Backscatter Change</td><td>Abrupt termination from ~-30 dB baseline to noise floor</td></tr>
+            <tr><td>Event Width</td><td>&lt; 20 m (sharp, non-distributed)</td></tr>
+        </table>
+
+        <h3>7.4 Root Cause Assessment</h3>
+        <p style="font-size:13px; line-height:1.7; margin-bottom:10px;">
+            The OTDR signature is unambiguous: a complete fiber break characterized by (1) abrupt total signal loss at
+            a single discrete point, (2) high reflectance indicating a glass-air interface at the fracture, and
+            (3) zero detectable signal beyond the event. The event is not consistent with macrobending (which would show
+            gradual loss increase and possible recovery), connector degradation (which would appear at a known event location),
+            or splice failure (which would show increased loss but not total termination).
+        </p>
+        <p style="font-size:13px; line-height:1.7; margin-bottom:10px;">
+            The break location at 5.0 km falls in the feeder cable section between the ODF (150 m) and the splitter-hub
+            (15,300 m). This section typically runs through outdoor plant infrastructure (ducts, aerial cable, or direct-buried).
+            Common causes for breaks in this section include:
+        </p>
+        <ul style="font-size:13px; line-height:1.7; margin-left:25px; margin-bottom:10px;">
+            <li>Third-party dig-up / construction damage (most common cause of feeder breaks)</li>
+            <li>Vehicle impact on aerial cable or pedestal</li>
+            <li>Storm damage, falling trees, or ice loading</li>
+            <li>Rodent damage in direct-buried sections</li>
+            <li>Duct collapse or conduit failure</li>
+        </ul>
+        <p style="font-size:13px; line-height:1.7;">
+            <strong>Confidence Level:</strong> HIGH (95%). The OTDR signature is definitive for a fiber break. Field verification
+            is required to determine the specific physical cause.
+        </p>
+
+        <h3>7.5 Fault Analysis Event Comparison</h3>
+        <table>
+            <tr>
+                <th>Event #</th>
+                <th>Distance (m)</th>
+                <th>Reflectance (dB)</th>
+                <th>Loss (dB)</th>
+                <th>Baseline Match</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>FA-1</td>
+                <td>150</td>
+                <td>-45.0</td>
+                <td>0.20</td>
+                <td class="good">Matches baseline</td>
+                <td>ODF connector &mdash; operating normally</td>
+            </tr>
+            <tr>
+                <td>FA-2</td>
+                <td>15,300</td>
+                <td>-60.0</td>
+                <td>0.40</td>
+                <td class="warning">Beyond break</td>
+                <td>Splitter-hub &mdash; not reachable, ghost from baseline</td>
+            </tr>
+            <tr>
+                <td>FA-3</td>
+                <td>19,600</td>
+                <td>-5.0</td>
+                <td>&mdash;</td>
+                <td class="warning">Beyond break</td>
+                <td>End of fiber &mdash; not reachable, ghost from baseline</td>
+            </tr>
+        </table>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 8. RESOLUTION STATUS                                          -->
+        <!-- ============================================================ -->
+        <h2>8. Resolution Status</h2>
+
+        <h3>8.1 Current Link State</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Threshold</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Total Link Loss</td>
+                <td class="critical">100.00 dB</td>
+                <td>Link budget + 5.0 dB margin</td>
+                <td><span class="status-exceeded">EXCEEDED</span></td>
+            </tr>
+            <tr>
+                <td>Available Margin</td>
+                <td class="critical">0.00 dB</td>
+                <td>&gt; 2.0 dB</td>
+                <td><span class="status-exceeded">ZERO</span></td>
+            </tr>
+            <tr>
+                <td>Alarm Status</td>
+                <td class="critical">ACTIVE (Link Loss High)</td>
+                <td>&mdash;</td>
+                <td><span class="status-active">SET</span></td>
+            </tr>
+            <tr>
+                <td>Link Operational</td>
+                <td class="critical">NO</td>
+                <td>&mdash;</td>
+                <td><span class="status-exceeded">DOWN</span></td>
+            </tr>
+            <tr>
+                <td>Time Since Alarm</td>
+                <td>~17 hours 48 minutes</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+            </tr>
+        </table>
+
+        <h3>8.2 Self-Healing Analysis</h3>
+        <table class="two-col">
+            <tr><td>Self-Healing Detected</td><td class="critical">NO</td></tr>
+            <tr><td>Assessment</td><td>The failure is a permanent physical break. The OTDR signature shows
+                a clean fracture with no partial recovery. Self-healing is not possible for this failure type.
+                Physical repair (fusion splicing or cable replacement) is mandatory.</td></tr>
+        </table>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 9. RECOMMENDATIONS AND ACTION ITEMS                           -->
+        <!-- ============================================================ -->
+        <h2>9. Recommendations and Action Items</h2>
+
+        <div class="critical-box">
+            <h4>IMMEDIATE ACTIONS (0-4 hours) &mdash; Priority: CRITICAL</h4>
+            <ol>
+                <li>
+                    <strong>Dispatch Field Crew</strong><br>
+                    Target location: <strong>5.0 km (&plusmn;50 m)</strong> from ALM port along FTTH feeder route.<br>
+                    GPS: Correlate with GIS cable route map to determine street-level address.<br>
+                    Access notes: Verify if section is aerial, ducted, or direct-buried at 5 km mark.<br>
+                    Estimated repair time: 4-8 hours (emergency fusion splice or cable replacement).
+                </li>
+                <li>
+                    <strong>On-Site Investigation</strong><br>
+                    Check for construction activity, dig-ups, vehicle damage, storm damage, or other physical disturbance
+                    at the 5 km mark. Photograph damage for incident documentation.
+                </li>
+                <li>
+                    <strong>Traffic / Service Impact</strong><br>
+                    Identify all customers served by this FTTH feeder and initiate customer notification procedures.
+                    Assess if traffic rerouting via protection paths is available.
+                </li>
+                <li>
+                    <strong>Field Equipment Required</strong><br>
+                    Portable OTDR for on-site verification, fusion splicer, fiber cleaver, splice enclosure,
+                    replacement cable stock (if needed), OTDR launch cable.
+                </li>
+            </ol>
+        </div>
+
+        <div class="action-box">
+            <h4>FOLLOW-UP ACTIONS (24-72 hours)</h4>
+            <ol>
+                <li>
+                    <strong>Post-Repair Verification</strong><br>
+                    Execute bidirectional OTDR measurement after repair to verify splice quality (&lt; 0.10 dB loss target)
+                    and confirm full link continuity to 19,600 m end-of-fiber.
+                </li>
+                <li>
+                    <strong>Link Budget Verification</strong><br>
+                    Verify total link loss is within budget margins. The repair splice will add ~0.05-0.10 dB to
+                    the total path loss. Confirm margin &gt; 2.0 dB.
+                </li>
+                <li>
+                    <strong>Update Baseline Fingerprint</strong><br>
+                    After successful repair, execute a new fingerprint measurement to establish the post-repair baseline.
+                    The repaired link will have one additional splice event at ~5.0 km.
+                </li>
+                <li>
+                    <strong>Documentation</strong><br>
+                    Update cable plant records with new splice location. File damage report if third-party caused.
+                    Update GIS system with repair coordinates.
+                </li>
+            </ol>
+        </div>
+
+        <h3>9.3 Preventive Maintenance</h3>
+        <ul style="font-size:13px; line-height:2.0; margin-left:25px;">
+            <li>Review cable route protection at 5 km mark &mdash; consider duct reinforcement or protective conduit if currently direct-buried</li>
+            <li>Verify "Call Before You Dig" (CBYD) markings are current and accurate for this section</li>
+            <li>Consider installing cable warning markers/tape if not already present</li>
+            <li>Monitor the repaired link at increased frequency (every 15 minutes) for 48 hours post-repair</li>
+            <li>Schedule routine OTDR survey of the full feeder route within 30 days</li>
+        </ul>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 10. TECHNICAL APPENDICES                                      -->
+        <!-- ============================================================ -->
+        <h2>10. Technical Appendices</h2>
+
+        <h3>10.1 Complete Event Table</h3>
+        <table>
+            <tr>
+                <th>Event #</th>
+                <th>Distance (m)</th>
+                <th>Type</th>
+                <th>Loss (dB)</th>
+                <th>Reflectance (dB)</th>
+                <th>Comments</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>Port / Launch</td>
+                <td>0.00</td>
+                <td>&mdash;</td>
+                <td>ALM Port MCH-1-3 output</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>150</td>
+                <td>Connector</td>
+                <td>0.20</td>
+                <td>-45.0</td>
+                <td>ODF / patch-panel &mdash; normal (matches baseline)</td>
+            </tr>
+            <tr style="background:#fde8e4;">
+                <td style="font-weight:700;">2</td>
+                <td style="font-weight:700;">5,000</td>
+                <td class="critical">FIBER BREAK</td>
+                <td class="critical">93.86</td>
+                <td class="critical">&gt; -40.0</td>
+                <td class="critical">PRIMARY FAULT &mdash; complete fiber fracture</td>
+            </tr>
+            <tr style="color:#999;">
+                <td>3</td>
+                <td>15,300</td>
+                <td>Splice / Splitter</td>
+                <td>0.40</td>
+                <td>-60.0</td>
+                <td>Beyond break &mdash; from baseline reference only</td>
+            </tr>
+            <tr style="color:#999;">
+                <td>4</td>
+                <td>19,600</td>
+                <td>End of Fiber</td>
+                <td>&mdash;</td>
+                <td>-5.0</td>
+                <td>Beyond break &mdash; from baseline reference only</td>
+            </tr>
+        </table>
+
+        <h3>10.2 Measurement Quality Metrics</h3>
+        <table class="two-col">
+            <tr><td>Signal-to-Noise Ratio</td><td class="good">&gt; 3 dB (sufficient) &mdash; PASS</td></tr>
+            <tr><td>End-of-Fiber Detection</td><td class="critical">NOT DETECTED (fiber broken before end)</td></tr>
+            <tr><td>Trace Saturation</td><td class="good">NONE &mdash; PASS</td></tr>
+            <tr><td>Measurement Completion</td><td class="good">100% (no errors) &mdash; PASS</td></tr>
+            <tr><td>Baseline Correlation (0-5 km)</td><td class="good">Excellent &mdash; traces match within 0.05 dB</td></tr>
+            <tr><td>Dead Zone After Launch</td><td>~50 m (within specification for 200 ns pulse)</td></tr>
+        </table>
+
+        <h3>10.3 Measurement History Summary</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Timestamp</th>
+                <th>Purpose</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td>118</td>
+                <td>Fingerprint</td>
+                <td>2026-02-15 17:21:08</td>
+                <td>Baseline reference</td>
+                <td><span class="status-passed">HEALTHY</span></td>
+            </tr>
+            <tr>
+                <td>143</td>
+                <td>Auto Fault Analysis</td>
+                <td>2026-02-15 18:49:36</td>
+                <td>Automatic response to alarm</td>
+                <td><span class="status-exceeded">BREAK @ 5 km</span></td>
+            </tr>
+            <tr>
+                <td>144</td>
+                <td>OTDR</td>
+                <td>2026-02-15 18:50:26</td>
+                <td>Admin-initiated measurement</td>
+                <td><span class="status-exceeded">BREAK @ 5 km</span></td>
+            </tr>
+            <tr>
+                <td>145</td>
+                <td>Fault Analysis</td>
+                <td>2026-02-15 18:50:42</td>
+                <td>Admin-initiated fault analysis</td>
+                <td><span class="status-exceeded">BREAK @ 5 km</span></td>
+            </tr>
+            <tr>
+                <td>146</td>
+                <td>OTDR (Confirmation)</td>
+                <td>2026-02-16 ~04:35</td>
+                <td>Investigation confirmation shot</td>
+                <td><span class="status-exceeded">BREAK @ 5 km</span></td>
+            </tr>
+            <tr>
+                <td>147</td>
+                <td>OTDR (Full)</td>
+                <td>2026-02-16 ~04:36</td>
+                <td>High-accuracy failure measurement</td>
+                <td><span class="status-exceeded">BREAK @ 5 km</span></td>
+            </tr>
+            <tr>
+                <td>148</td>
+                <td>Fault Analysis</td>
+                <td>2026-02-16 ~04:37</td>
+                <td>Comparative analysis vs baseline</td>
+                <td><span class="status-exceeded">BREAK @ 5 km</span></td>
+            </tr>
+        </table>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 11. REPORT METADATA                                           -->
+        <!-- ============================================================ -->
+        <h2>11. Report Metadata</h2>
+
+        <table class="two-col">
+            <tr><td>Report ID</td><td style="font-family:monospace;">FLR-MCH-1-3-20260216-00001</td></tr>
+            <tr><td>Generated By</td><td>Fiber Engineer AI Agent v1.0</td></tr>
+            <tr><td>Analysis Engine</td><td>Claude Opus 4.6 (Anthropic)</td></tr>
+            <tr><td>Report Generation Time</td><td>2026-02-16 12:37:00 UTC+8</td></tr>
+            <tr><td>Investigation Duration</td><td>~8 hours (alarm at 18:49 to report at 12:37 next day)</td></tr>
+            <tr><td>ALM Device Serial</td><td>SIM0001</td></tr>
+            <tr><td>Firmware Version</td><td>6.6.1</td></tr>
+            <tr><td>Software Build</td><td>60501_202405141302</td></tr>
+        </table>
+
+        <h3>11.1 Standards and References</h3>
+        <table>
+            <tr>
+                <th>Standard</th>
+                <th>Title</th>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">ITU-T G.650.1</td>
+                <td>Definitions and test methods for linear, deterministic attributes of single-mode fibre and cable</td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">ITU-T G.652</td>
+                <td>Characteristics of a single-mode optical fibre and cable</td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">ITU-T L.40</td>
+                <td>Optical fibre outside plant maintenance support, monitoring and testing system</td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">ITU-T L.41</td>
+                <td>Maintenance wavelength on fibres carrying signals</td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">TIA-455-8-B</td>
+                <td>Measurement of fiber point discontinuities using an OTDR</td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">TIA/EIA-526-7</td>
+                <td>Optical power loss measurements of installed single-mode fiber cable plant</td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">IEC 61280-4-1</td>
+                <td>Fibre-optic communication subsystem test procedures &mdash; Cable plants and links</td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">ISO/IEC Guide 98-3</td>
+                <td>Uncertainty of measurement &mdash; Guide to the expression of uncertainty in measurement (GUM)</td>
+            </tr>
+        </table>
+
+        <hr class="separator">
+
+        <!-- ============================================================ -->
+        <!-- 12. APPROVAL AND DISTRIBUTION                                 -->
+        <!-- ============================================================ -->
+        <h2>12. Approval and Distribution</h2>
+
+        <table>
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Signature</th>
+                <th>Date</th>
+            </tr>
+            <tr>
+                <td>Generated By</td>
+                <td>Fiber Engineer AI Agent v1.0</td>
+                <td style="font-style:italic; color:#999;">[Auto-generated]</td>
+                <td>2026-02-16</td>
+            </tr>
+            <tr>
+                <td>Reviewed By</td>
+                <td>[NOC Engineer]</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Approved By</td>
+                <td>[Network Manager]</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <h3>Distribution List</h3>
+        <ul style="font-size:13px; line-height:2.0; margin-left:25px;">
+            <li>Network Operations Center (NOC) &mdash; Immediate</li>
+            <li>Field Operations / Outside Plant Team &mdash; Immediate (with dispatch order)</li>
+            <li>Customer Service &mdash; For customer notification (FTTH feeder serves end-users)</li>
+            <li>Network Planning &mdash; For route review and preventive measures</li>
+            <li>Management &mdash; For awareness (critical service-affecting event)</li>
+        </ul>
+
+        <!-- ============================================================ -->
+        <!-- FOOTER                                                        -->
+        <!-- ============================================================ -->
+        <div class="metadata">
+            <strong>Disclaimer</strong><br>
+            This report was automatically generated by the Fiber Engineer AI Agent in accordance with industry best
+            practices and international standards for fiber optic testing and analysis (ITU-T L.40, TIA-455-8-B).
+            All measurements and analyses follow ITU-T and TIA/EIA methodologies. Field verification is required
+            to confirm the root cause and exact location of the failure. Measurement uncertainties are stated
+            where applicable per ISO/IEC Guide 98-3.
+            <br><br>
+            <strong>Report ID:</strong> FLR-MCH-1-3-20260216-00001<br>
+            <strong>Classification:</strong> Internal &mdash; Network Operations<br>
+            <strong>Retention:</strong> 7 years per ITU-T L.40 recommendations
+        </div>
+    </div>
+</body>
+</html>

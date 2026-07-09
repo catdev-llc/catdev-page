@@ -1,0 +1,72 @@
+<svg width="1400" height="720" viewBox="0 0 1400 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="720" rx="30" fill="#07101f"/>
+  <defs>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#2ce8c0"/>
+      <stop offset="1" stop-color="#6ee9ff"/>
+    </linearGradient>
+    <marker id="arrow-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2ce8c0"/>
+    </marker>
+  </defs>
+
+  <g opacity="0.13" stroke="#2b3d61">
+    <path d="M80 150H1320M80 270H1320M80 390H1320M80 510H1320M80 630H1320"/>
+    <path d="M160 100V650M320 100V650M480 100V650M640 100V650M800 100V650M960 100V650M1120 100V650M1280 100V650"/>
+  </g>
+
+  <text x="70" y="78" fill="#e7f0ff" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">Alarm To Incident Output</text>
+  <text x="70" y="114" fill="#9ab0d3" font-family="Inter, Arial, sans-serif" font-size="18">A device alarm becomes a trace-backed incident analysis.</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="70" y="290" width="190" height="134" rx="18" fill="#111d35" stroke="#2b3d61"/>
+    <text x="104" y="340" fill="#2ce8c0" font-size="15" font-weight="800">01 EVENT</text>
+    <text x="104" y="378" fill="#e7f0ff" font-size="24" font-weight="800">Alarm</text>
+    <text x="104" y="407" fill="#9ab0d3" font-size="16">SNMP payload</text>
+
+    <rect x="320" y="290" width="210" height="134" rx="18" fill="#111d35" stroke="#2ce8c0" stroke-opacity="0.65"/>
+    <text x="354" y="340" fill="#2ce8c0" font-size="15" font-weight="800">02 CORE</text>
+    <text x="354" y="378" fill="#e7f0ff" font-size="24" font-weight="800">hikari-core</text>
+    <text x="354" y="407" fill="#9ab0d3" font-size="16">store + route</text>
+
+    <rect x="590" y="290" width="210" height="134" rx="18" fill="#111d35" stroke="#2b3d61"/>
+    <text x="624" y="340" fill="#2ce8c0" font-size="15" font-weight="800">03 AGENT</text>
+    <text x="624" y="378" fill="#e7f0ff" font-size="24" font-weight="800">Runtime</text>
+    <text x="624" y="407" fill="#9ab0d3" font-size="16">reason + plan</text>
+
+    <rect x="860" y="290" width="220" height="134" rx="18" fill="#111d35" stroke="#2b3d61"/>
+    <text x="894" y="340" fill="#2ce8c0" font-size="15" font-weight="800">04 TOOLS</text>
+    <text x="894" y="378" fill="#e7f0ff" font-size="24" font-weight="800">Connect</text>
+    <text x="894" y="407" fill="#9ab0d3" font-size="16">OTDR evidence</text>
+
+    <rect x="1140" y="290" width="200" height="134" rx="18" fill="#111d35" stroke="#2b3d61"/>
+    <text x="1174" y="340" fill="#2ce8c0" font-size="15" font-weight="800">05 OUTPUT</text>
+    <text x="1174" y="378" fill="#e7f0ff" font-size="24" font-weight="800">Report</text>
+    <text x="1174" y="407" fill="#9ab0d3" font-size="16">dispatch-ready</text>
+
+    <rect x="590" y="128" width="210" height="96" rx="16" fill="#0d1a31" stroke="#2b3d61"/>
+    <text x="624" y="170" fill="#e7f0ff" font-size="22" font-weight="800">LLM provider</text>
+    <text x="624" y="198" fill="#9ab0d3" font-size="15">reasoning layer</text>
+
+    <rect x="860" y="500" width="220" height="96" rx="16" fill="#0d1a31" stroke="#2b3d61"/>
+    <text x="894" y="542" fill="#e7f0ff" font-size="22" font-weight="800">ALM / OTDR</text>
+    <text x="894" y="570" fill="#9ab0d3" font-size="15">device or simulator</text>
+  </g>
+
+  <g stroke="#2ce8c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <path d="M260 357H320"/>
+    <path d="M530 357H590"/>
+    <path d="M800 357H860"/>
+    <path d="M1080 357H1140"/>
+    <path d="M695 224V290"/>
+    <path d="M970 424V500"/>
+  </g>
+  <g stroke="#2ce8c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M260 357H320" marker-end="url(#arrow-flow)"/>
+    <path d="M530 357H590" marker-end="url(#arrow-flow)"/>
+    <path d="M800 357H860" marker-start="url(#arrow-flow)" marker-end="url(#arrow-flow)"/>
+    <path d="M1080 357H1140" marker-end="url(#arrow-flow)"/>
+    <path d="M695 224V290" marker-start="url(#arrow-flow)" marker-end="url(#arrow-flow)"/>
+    <path d="M970 424V500" marker-start="url(#arrow-flow)" marker-end="url(#arrow-flow)"/>
+  </g>
+</svg>

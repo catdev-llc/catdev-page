@@ -1,0 +1,253 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const systemParts = [
+  {
+    title: 'hikari-core',
+    text: 'The durable event orchestration layer. It receives operator messages and device events, stores state, routes work to the right group, manages queues, and returns final analysis to the channel.',
+  },
+  {
+    title: 'hikari-connect',
+    text: 'The MCP bridge for ALM/OTDR devices. It exposes device operations as tools: ports, alarms, logbook, fingerprints, measurements, trace download, fault analysis, and generated diagrams.',
+  },
+  {
+    title: 'External LLM provider',
+    text: 'The reasoning layer used by the agent runtime. Hikari keeps model reasoning separate from event storage and device access, so the provider can be hosted or local.',
+  },
+  {
+    title: 'Isolated agent runtime',
+    text: 'Per-group agent execution with isolated sessions, mounted context, logs, skills, and IPC. The runtime lets investigations run with a controlled operational scope.',
+  },
+  {
+    title: 'Operator and event channels',
+    text: 'Telegram and Slack carry operator requests and reports. SNMP traps enter as fiber monitoring events, so human requests and device alarms follow the same durable workflow.',
+  },
+  {
+    title: 'ALM device boundary',
+    text: 'Physical ADVA/ADTRAN ALM devices and demo/test simulators are accessed through hikari-connect. Authentication, sessions, device APIs, and command status stay behind the tool boundary.',
+  },
+];
+
+const designPrinciples = [
+  {
+    title: 'Event-driven by default',
+    text: 'Alarms and operator requests become durable messages before any agent work starts. That keeps investigations recoverable, traceable, and safe to retry.',
+  },
+  {
+    title: 'Tool access over direct control',
+    text: 'The agent uses defined MCP tools to inspect ports, run measurements, compare traces, retrieve evidence, and build incident output.',
+  },
+  {
+    title: 'Clear responsibility boundaries',
+    text: 'hikari-core owns orchestration and delivery, hikari-connect owns ALM/OTDR access, and the LLM provider owns reasoning and report synthesis.',
+  },
+  {
+    title: 'Scoped agent execution',
+    text: 'Groups run with their own sessions, context, logs, and tool scope so production monitoring, demos, and tests do not blend state.',
+  },
+  {
+    title: 'Repeatable validation',
+    text: 'The simulator can create realistic device states and fault scenarios so the same workflow can be demonstrated and tested without physical hardware.',
+  },
+];
+
+const demoParts = [
+  'Demo environment for showing an alarm-to-report workflow without a physical ALM shelf',
+  'Test scenarios for fiber breaks, bends, cable pulls, and gradual degradation',
+  'OTDR trace generation with connectors, attenuation, reflectance, end-of-fiber events, and noise',
+  'Monitoring cycles with history rows, thresholds, alarm transitions, and queued fault analysis',
+  'ALM-like UI and state model for exercising hikari-connect against realistic device behavior',
+];
+
+const reportFacts = [
+  { label: 'Report ID', value: 'FLR-MCH-1-3-20260216-00001' },
+  { label: 'Port', value: 'MCH-1-3 / Port 3' },
+  { label: 'Port name', value: 'FTTH feeder - mixed build' },
+  { label: 'Detected fault', value: 'fiber break at 5.0 km (+/-50 m)' },
+  { label: 'Link loss', value: '100.00 dB' },
+  { label: 'Fault loss', value: '93.86 dB' },
+  { label: 'Signal beyond fault', value: 'none, noise floor only' },
+];
+---
+
+<Layout
+  title="Hikari - agentic dark-fiber monitoring"
+  description="Hikari is an agentic dark-fiber monitoring system built around hikari-core, hikari-connect, external LLM reasoning, ALM/OTDR tools, fault analysis, and simulator-backed demos."
+>
+  <section class="relative overflow-hidden pt-32 pb-20">
+    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
+    <div class="container-custom relative">
+      <a href="/#projects" class="text-cyan hover:text-white transition-colors text-sm font-semibold">Back to projects</a>
+
+      <div class="mt-10 grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-center">
+        <div class="reveal">
+          <div class="mb-6 flex items-center gap-4">
+            <div class="h-20 w-20 rounded-lg border border-white/10 bg-black/70 p-4 flex items-center justify-center">
+              <img src="/projects/hikari-logo.svg" alt="Hikari logo" class="h-full w-full object-contain" />
+            </div>
+            <div>
+              <p class="text-cyan font-mono text-sm">Hikari</p>
+              <p class="text-steel text-sm">AI agent for OTDR monitoring</p>
+            </div>
+          </div>
+
+          <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+            <span class="text-white">An agentic monitoring loop</span>
+            <span class="text-gradient"> for dark fiber faults.</span>
+          </h1>
+          <p class="text-xl text-steel leading-relaxed">
+            Hikari connects three important pieces: <code>hikari-core</code> for durable event orchestration,
+            <code>hikari-connect</code> for ALM/OTDR device access, and an external LLM provider for reasoning.
+            Together they let an agent investigate alarms, compare traces, and return an
+            operator-ready analysis.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 reveal" style="transition-delay: 120ms">
+          <img src="/projects/hikari-architecture.svg" alt="Hikari architecture overview" class="w-full rounded-md" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mb-12 reveal">
+        <p class="text-cyan font-mono text-sm mb-4">system</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-5">The moving parts</h2>
+        <p class="text-xl text-steel leading-relaxed">
+          Hikari is built around clear operational boundaries. Device events and operator messages
+          are handled as durable work items, agent reasoning is delegated to an external provider,
+          and all ALM/OTDR interaction passes through <code>hikari-connect</code>.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {systemParts.map((part, index) => (
+          <article class="card-glass p-6 reveal" style={`transition-delay: ${index * 70}ms`}>
+            <div class="glow-effect"></div>
+            <div class="relative z-10">
+              <h3 class="text-xl font-bold text-white mb-3">{part.title}</h3>
+              <p class="text-steel leading-relaxed text-sm">{part.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
+    <div class="container-custom relative">
+      <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">runtime flow</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-5">From alarm to analysis</h2>
+          <p class="text-lg text-steel leading-relaxed mb-6">
+            An ALM trap becomes a durable incident workflow. <code>hikari-core</code> wakes the correct
+            group, the agent runtime uses an external LLM provider for reasoning, <code>hikari-connect</code>
+            queries the ALM/OTDR layer, and the result returns as structured incident evidence.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex gap-3 text-steel"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan"></span><span>SNMP parser extracts device, port, action, alarm name, and severity.</span></li>
+            <li class="flex gap-3 text-steel"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan"></span><span>SQLite stores messages, cursors, registered groups, sessions, and scheduled tasks.</span></li>
+            <li class="flex gap-3 text-steel"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan"></span><span>The queue bounds concurrency and retries failed processing without duplicating already-sent output.</span></li>
+            <li class="flex gap-3 text-steel"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan"></span><span>The agent uses hikari-connect MCP tools to inspect alarms, run measurements, download traces, and generate diagrams.</span></li>
+          </ul>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 reveal" style="transition-delay: 120ms">
+          <img src="/projects/hikari-flow.svg" alt="Hikari alarm to incident package flow" class="w-full rounded-md" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-start">
+        <div class="reveal">
+          <p class="text-cyan font-mono text-sm mb-4">implementation model</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">Built for monitored infrastructure</h2>
+          <div class="space-y-4">
+            {designPrinciples.map((step, index) => (
+              <div class="rounded-lg border border-white/10 bg-white/[0.03] p-5" style={`transition-delay: ${index * 70}ms`}>
+                <h3 class="text-white font-semibold mb-2">{step.title}</h3>
+                <p class="text-steel text-sm leading-relaxed">{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="reveal" style="transition-delay: 120ms">
+          <p class="text-cyan font-mono text-sm mb-4">demo and testing</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">Simulator-backed validation</h2>
+          <p class="text-lg text-steel leading-relaxed mb-6">
+            Hikari includes an ALM/OTDR simulator for demos, integration testing, and repeatable
+            development when physical devices are not available. It can emulate ports, monitoring
+            cycles, OTDR traces, alarm transitions, and fault scenarios so the same
+            core/connect/LLM workflow can be exercised end to end.
+          </p>
+          <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 mb-6">
+            <img src="/projects/hikari-simulator.svg" alt="Hikari ALM simulator overview" class="w-full rounded-md" />
+          </div>
+          <ul class="space-y-3">
+            {demoParts.map(part => (
+              <li class="flex gap-3 text-steel text-sm leading-relaxed">
+                <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-300"></span>
+                <span>{part}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
+    <div class="container-custom relative">
+      <div class="max-w-4xl mb-12 reveal">
+        <p class="text-cyan font-mono text-sm mb-4">example output</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-5">Fiber-break analysis output</h2>
+        <p class="text-xl text-steel leading-relaxed">
+          This example shows the kind of data the Hikari agent can provide during a fiber incident:
+          route context, fault classification, OTDR trace comparison, likely fault location,
+          signal-loss evidence, and dispatch-ready conclusions.
+        </p>
+        <a
+          href="/projects/hikari-port3-report.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex rounded-md border border-cyan/40 px-5 py-3 text-sm font-semibold text-cyan transition-colors hover:border-cyan hover:text-white"
+        >
+          Open full sample report
+        </a>
+      </div>
+
+      <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-8 items-start">
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-6 reveal">
+          <h3 class="text-xl font-bold text-white mb-5">Report facts</h3>
+          <div class="space-y-3">
+            {reportFacts.map(fact => (
+              <div class="rounded-md border border-white/10 bg-midnight/70 p-3">
+                <div class="text-xs font-mono text-cyan mb-1">{fact.label}</div>
+                <div class="text-sm text-steel">{fact.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-deep-space/70 p-5 reveal" style="transition-delay: 120ms">
+          <img src="/projects/hikari-port3-comparison-cropped.png" alt="Cropped OTDR trace comparison for Hikari Port 3 fiber break report" class="w-full rounded-md bg-white" />
+          <p class="mt-4 text-sm text-steel leading-relaxed">
+            The comparison overlays a healthy baseline trace with the fault-analysis trace. The
+            current trace follows the baseline until the 5.0 km failure point, then drops to the
+            noise floor. The baseline continues toward the known end-of-fiber event at 19.6 km,
+            making the break location and service impact visible at a glance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

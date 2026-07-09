@@ -1,0 +1,62 @@
+<svg width="1200" height="680" viewBox="0 0 1200 680" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="680" rx="28" fill="#07101f"/>
+  <defs>
+    <linearGradient id="simAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#ffc57a"/>
+      <stop offset="1" stop-color="#2ce8c0"/>
+    </linearGradient>
+    <marker id="arrow-sim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffc57a"/>
+    </marker>
+  </defs>
+
+  <g opacity="0.13" stroke="#2b3d61">
+    <path d="M70 150H1130M70 270H1130M70 390H1130M70 510H1130M70 630H1130"/>
+    <path d="M150 100V630M300 100V630M450 100V630M600 100V630M750 100V630M900 100V630M1050 100V630"/>
+  </g>
+
+  <text x="70" y="76" fill="#e7f0ff" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="800">Simulator Demo / Testbed</text>
+  <text x="70" y="110" fill="#9ab0d3" font-family="Inter, Arial, sans-serif" font-size="17">Repeatable ALM/OTDR behavior for demos, integration tests, and fault scenarios.</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="450" y="150" width="300" height="118" rx="18" fill="#111d35" stroke="#2b3d61"/>
+    <text x="500" y="202" fill="#e7f0ff" font-size="24" font-weight="800">hikari-connect</text>
+    <text x="500" y="234" fill="#9ab0d3" font-size="16">MCP tool calls</text>
+
+    <rect x="450" y="330" width="300" height="146" rx="18" fill="#111d35" stroke="#ffc57a" stroke-opacity="0.75"/>
+    <text x="500" y="384" fill="#ffc57a" font-size="24" font-weight="800">Simulator engine</text>
+    <text x="500" y="416" fill="#9ab0d3" font-size="16">ports + monitoring</text>
+    <text x="500" y="444" fill="#9ab0d3" font-size="16">OTDR generation</text>
+
+    <rect x="80" y="340" width="240" height="126" rx="18" fill="#111d35" stroke="#2b3d61"/>
+    <text x="114" y="394" fill="#e7f0ff" font-size="24" font-weight="800">ALM-style UI</text>
+    <text x="114" y="426" fill="#9ab0d3" font-size="16">operator screens</text>
+
+    <rect x="880" y="340" width="240" height="126" rx="18" fill="#111d35" stroke="#2b3d61"/>
+    <text x="914" y="394" fill="#e7f0ff" font-size="24" font-weight="800">State database</text>
+    <text x="914" y="426" fill="#9ab0d3" font-size="16">ports + history</text>
+
+    <rect x="260" y="550" width="235" height="84" rx="16" fill="#0d1a31" stroke="#2b3d61"/>
+    <text x="292" y="588" fill="#e7f0ff" font-size="21" font-weight="800">Fault scenarios</text>
+    <text x="292" y="614" fill="#9ab0d3" font-size="15">breaks + bends</text>
+
+    <rect x="705" y="550" width="235" height="84" rx="16" fill="#0d1a31" stroke="#2b3d61"/>
+    <text x="737" y="588" fill="#e7f0ff" font-size="21" font-weight="800">Trace output</text>
+    <text x="737" y="614" fill="#9ab0d3" font-size="15">plots + reports</text>
+  </g>
+
+  <g stroke="#ffc57a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <path d="M600 268V330"/>
+    <path d="M320 403H450"/>
+    <path d="M750 403H880"/>
+    <path d="M495 592L545 476"/>
+    <path d="M655 476L705 592"/>
+  </g>
+  <g stroke="#ffc57a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M600 268V330" marker-start="url(#arrow-sim)" marker-end="url(#arrow-sim)"/>
+    <path d="M320 403H450" marker-start="url(#arrow-sim)" marker-end="url(#arrow-sim)"/>
+    <path d="M750 403H880" marker-start="url(#arrow-sim)" marker-end="url(#arrow-sim)"/>
+    <path d="M495 592L545 476" marker-end="url(#arrow-sim)"/>
+    <path d="M655 476L705 592" marker-end="url(#arrow-sim)"/>
+  </g>
+</svg>
