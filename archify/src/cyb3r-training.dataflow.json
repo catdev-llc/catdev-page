@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Training Direction",
+    "subtitle": "First target: penetration-testing reasoning. Next target: broader security knowledge."
+  },
+  "stages": [
+    { "label": "Data" },
+    { "label": "Training" },
+    { "label": "Behavior" },
+    { "label": "Next" }
+  ],
+  "nodes": [
+    { "id": "corpus", "type": "database", "label": "Security corpus", "sublabel": "~1.6B cybersec rows", "stage": 0, "row": 2, "width": 150 },
+    { "id": "training", "type": "backend", "label": "Training pass", "sublabel": "epochs 01–03 · reasoning-first", "stage": 1, "row": 2, "width": 150 },
+    { "id": "reasoning", "type": "frontend", "label": "Reasoning", "sublabel": "branch ranking · replans · restraint", "stage": 2, "row": 2, "width": 175 },
+    { "id": "knowledge", "type": "external", "label": "Knowledge", "sublabel": "tools · techniques · procedures", "stage": 3, "row": 2, "width": 150 }
+  ],
+  "flows": [
+    { "from": "corpus", "to": "training", "label": "tokens", "variant": "emphasis" },
+    { "from": "training", "to": "reasoning", "label": "tune", "variant": "emphasis" },
+    { "from": "reasoning", "to": "knowledge", "label": "next", "variant": "dashed" }
+  ],
+  "cards": []
+}

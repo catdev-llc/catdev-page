@@ -1,95 +1,168 @@
-<svg width="1400" height="820" viewBox="0 0 1400 820" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1400" height="820" rx="30" fill="#07101f"/>
-  <defs>
-    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#2ce8c0"/>
-      <stop offset="1" stop-color="#6ee9ff"/>
-    </linearGradient>
-    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#ffc57a"/>
-      <stop offset="1" stop-color="#ff8e6e"/>
-    </linearGradient>
-    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2ce8c0"/>
-    </marker>
-    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffc57a"/>
-    </marker>
-    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" class="archify-diagram" viewBox="0 0 1340 688" role="img" aria-label="Hikari System — Core handles events, chat-based control, device tools, state, and model-driven analysis. (architecture diagram)">
+        <style>
+  .archify-diagram {
+    --bg: #020617;
+    --grid: #1e293b;
+    --text: #ffffff;
+    --text-muted: #94a3b8;
+    --text-dim: #475569;
+    --lane-fill: rgba(15, 23, 42, 0.22);
+    --lane-stroke: #334155;
+    --arrow: #64748b;
+    --arrow-emphasis: #34d399;
+    --mask: #0f172a;
+    --frontend-fill: rgba(8, 51, 68, 0.4);
+    --frontend-stroke: #22d3ee;
+    --backend-fill: rgba(6, 78, 59, 0.4);
+    --backend-stroke: #34d399;
+    --database-fill: rgba(76, 29, 149, 0.4);
+    --database-stroke: #a78bfa;
+    --cloud-fill: rgba(120, 53, 15, 0.3);
+    --cloud-stroke: #fbbf24;
+    --security-fill: rgba(136, 19, 55, 0.4);
+    --security-stroke: #fb7185;
+    --messagebus-fill: rgba(251, 146, 60, 0.3);
+    --messagebus-stroke: #fb923c;
+    --external-fill: rgba(30, 41, 59, 0.5);
+    --external-stroke: #94a3b8;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace;
+  }
+  .c-bg { fill: var(--bg); }
+  .c-grid { stroke: var(--grid); fill: none; }
+  .c-mask { fill: var(--mask); stroke: none; }
+  .c-frontend { fill: var(--frontend-fill); stroke: var(--frontend-stroke); }
+  .c-backend { fill: var(--backend-fill); stroke: var(--backend-stroke); }
+  .c-database { fill: var(--database-fill); stroke: var(--database-stroke); }
+  .c-cloud { fill: var(--cloud-fill); stroke: var(--cloud-stroke); }
+  .c-security { fill: var(--security-fill); stroke: var(--security-stroke); }
+  .c-messagebus { fill: var(--messagebus-fill); stroke: var(--messagebus-stroke); }
+  .c-external { fill: var(--external-fill); stroke: var(--external-stroke); }
+  .c-security-group { fill: transparent; stroke: var(--security-stroke); stroke-dasharray: 4, 4; }
+  .c-region { fill: rgba(251, 191, 36, 0.05); stroke: var(--cloud-stroke); stroke-dasharray: 8, 4; }
+  .c-lane { fill: var(--lane-fill); stroke: var(--lane-stroke); stroke-dasharray: 6, 6; }
+  .t-primary { fill: var(--text); }
+  .t-muted { fill: var(--text-muted); }
+  .t-dim { fill: var(--text-dim); }
+  .t-frontend { fill: var(--frontend-stroke); }
+  .t-backend { fill: var(--backend-stroke); }
+  .t-database { fill: var(--database-stroke); }
+  .t-cloud { fill: var(--cloud-stroke); }
+  .t-security { fill: var(--security-stroke); }
+  .t-messagebus { fill: var(--messagebus-stroke); }
+  .t-external { fill: var(--external-stroke); }
+  .a-default { stroke: var(--arrow); fill: none; }
+  .a-emphasis { stroke: var(--arrow-emphasis); fill: none; }
+  .a-security { stroke: var(--security-stroke); fill: none; stroke-dasharray: 5, 5; }
+  .a-dashed { stroke: var(--database-stroke); fill: none; stroke-dasharray: 4, 4; }
+  .m-default { fill: var(--arrow); }
+  .m-emphasis { fill: var(--arrow-emphasis); }
+  .m-security { fill: var(--security-stroke); }
+  .m-dashed { fill: var(--database-stroke); }
+</style>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-security" />
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" class="c-bg"/>
+        <rect width="100%" height="100%" fill="url(#grid)" />
 
-  <g opacity="0.13" stroke="#2b3d61">
-    <path d="M80 140H1320M80 260H1320M80 380H1320M80 500H1320M80 620H1320M80 740H1320"/>
-    <path d="M160 90V760M320 90V760M480 90V760M640 90V760M800 90V760M960 90V760M1120 90V760M1280 90V760"/>
-  </g>
+        <!-- Boundaries (behind everything) -->
+        <rect x="406" y="262" width="280" height="340" rx="12" class="c-region" stroke-width="1"/>
+        <text x="414" y="280" class="t-cloud" font-size="9" font-weight="600">hikari-core — events + state + control</text>
 
-  <text x="70" y="78" fill="#e7f0ff" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">Hikari System</text>
-  <text x="70" y="114" fill="#9ab0d3" font-family="Inter, Arial, sans-serif" font-size="18">Core handles events, chat-based control, device tools, state, and model-driven analysis.</text>
+        <!-- Connection paths (before components for correct z-order) -->
+        <path d="M 280 240 L 350 240 Q 358 240 358 248 L 358 468 Q 358 476 366 476 L 436 476" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 280 548 L 350 548 Q 358 548 358 540 L 358 484 Q 358 476 366 476 L 436 476" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 656 554 L 720 554 Q 728 554 728 546 L 728 238 Q 728 230 736 230 L 800 230" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path d="M 1010 230 L 1090 230" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 905 290 L 905 500" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path d="M 1010 560 L 1090 560" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
 
-  <g font-family="Inter, Arial, sans-serif">
-    <rect x="80" y="190" width="240" height="118" rx="18" fill="#111d35" stroke="#2b3d61"/>
-    <text x="112" y="242" fill="#e7f0ff" font-size="24" font-weight="800">Operator</text>
-    <text x="112" y="274" fill="#9ab0d3" font-size="16">Slack / Telegram</text>
-    <text x="112" y="298" fill="#9ab0d3" font-size="16">chat + control</text>
+        <!-- Components -->
+        <rect x="80" y="190" width="200" height="100" rx="6" class="c-mask"/>
+        <rect x="80" y="190" width="200" height="100" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="180" y="238" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Operator</text>
+        <text x="180" y="254" class="t-muted" font-size="9" text-anchor="middle">Slack / Telegram</text>
+        <text x="180" y="282" class="t-frontend" font-size="7" text-anchor="middle">chat + control</text>
 
-    <rect x="80" y="498" width="240" height="118" rx="18" fill="#111d35" stroke="#2b3d61"/>
-    <text x="112" y="550" fill="#e7f0ff" font-size="24" font-weight="800">Device alarms</text>
-    <text x="112" y="582" fill="#9ab0d3" font-size="16">SNMP / ALM</text>
+        <rect x="80" y="498" width="200" height="100" rx="6" class="c-mask"/>
+        <rect x="80" y="498" width="200" height="100" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="180" y="546" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Device alarms</text>
+        <text x="180" y="562" class="t-muted" font-size="9" text-anchor="middle">SNMP / ALM</text>
 
-    <rect x="390" y="150" width="320" height="500" rx="24" fill="#0c172c" stroke="#2ce8c0" stroke-opacity="0.65"/>
-    <text x="432" y="210" fill="#2ce8c0" font-size="30" font-weight="800">hikari-core</text>
-    <text x="432" y="242" fill="#9ab0d3" font-size="16">events + state + control</text>
+        <rect x="436" y="292" width="220" height="56" rx="6" class="c-mask"/>
+        <rect x="436" y="292" width="220" height="56" rx="6" class="c-database" stroke-width="1.5"/>
+        <text x="546" y="324" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">State store</text>
 
-    <rect x="436" y="292" width="228" height="58" rx="12" fill="#14233d" stroke="#2b3d61"/>
-    <text x="468" y="329" fill="#e7f0ff" font-size="18" font-weight="700">State store</text>
-    <rect x="436" y="370" width="228" height="58" rx="12" fill="#14233d" stroke="#2b3d61"/>
-    <text x="468" y="407" fill="#e7f0ff" font-size="18" font-weight="700">Group router</text>
-    <rect x="436" y="448" width="228" height="58" rx="12" fill="#14233d" stroke="#2b3d61"/>
-    <text x="468" y="485" fill="#e7f0ff" font-size="18" font-weight="700">Queue</text>
-    <rect x="436" y="526" width="228" height="58" rx="12" fill="#14233d" stroke="#2b3d61"/>
-    <text x="468" y="563" fill="#e7f0ff" font-size="18" font-weight="700">Agent runner</text>
+        <rect x="436" y="370" width="220" height="56" rx="6" class="c-mask"/>
+        <rect x="436" y="370" width="220" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="546" y="402" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Group router</text>
 
-    <rect x="800" y="170" width="230" height="146" rx="18" fill="#111d35" stroke="#2b3d61"/>
-    <text x="832" y="226" fill="#e7f0ff" font-size="24" font-weight="800">Agent runtime</text>
-    <text x="832" y="258" fill="#9ab0d3" font-size="16">scoped sessions</text>
+        <rect x="436" y="448" width="220" height="56" rx="6" class="c-mask"/>
+        <rect x="436" y="448" width="220" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="546" y="480" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Queue</text>
 
-    <rect x="1090" y="170" width="230" height="146" rx="18" fill="#111d35" stroke="#2b3d61"/>
-    <text x="1122" y="226" fill="#e7f0ff" font-size="24" font-weight="800">LLM provider</text>
-    <text x="1122" y="258" fill="#9ab0d3" font-size="16">reason + synthesize</text>
+        <rect x="436" y="526" width="220" height="56" rx="6" class="c-mask"/>
+        <rect x="436" y="526" width="220" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="546" y="558" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Agent runner</text>
 
-    <rect x="800" y="500" width="230" height="146" rx="18" fill="#111d35" stroke="#2b3d61"/>
-    <text x="832" y="556" fill="#e7f0ff" font-size="24" font-weight="800">hikari-connect</text>
-    <text x="832" y="588" fill="#9ab0d3" font-size="16">MCP tool bridge</text>
+        <rect x="800" y="170" width="210" height="120" rx="6" class="c-mask"/>
+        <rect x="800" y="170" width="210" height="120" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="905" y="228" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Agent runtime</text>
+        <text x="905" y="244" class="t-muted" font-size="9" text-anchor="middle">scoped sessions</text>
 
-    <rect x="1090" y="500" width="230" height="146" rx="18" fill="#111d35" stroke="#2b3d61"/>
-    <text x="1122" y="556" fill="#e7f0ff" font-size="24" font-weight="800">ALM / OTDR</text>
-    <text x="1122" y="588" fill="#9ab0d3" font-size="16">device access</text>
+        <rect x="1090" y="170" width="210" height="120" rx="6" class="c-mask"/>
+        <rect x="1090" y="170" width="210" height="120" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="1195" y="228" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">LLM provider</text>
+        <text x="1195" y="244" class="t-muted" font-size="9" text-anchor="middle">reason + synthesize</text>
 
-    <rect x="800" y="700" width="520" height="62" rx="16" fill="#121a2d" stroke="#ffc57a" stroke-opacity="0.75" stroke-dasharray="8 8"/>
-    <text x="832" y="738" fill="#ffc57a" font-size="18" font-weight="800">Simulator option</text>
-    <text x="1012" y="738" fill="#9ab0d3" font-size="16">demo + integration testing</text>
-  </g>
+        <rect x="800" y="500" width="210" height="120" rx="6" class="c-mask"/>
+        <rect x="800" y="500" width="210" height="120" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="905" y="558" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">hikari-connect</text>
+        <text x="905" y="574" class="t-muted" font-size="9" text-anchor="middle">MCP tool bridge</text>
 
-  <g stroke="#2ce8c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
-    <path d="M320 249H390"/>
-    <path d="M320 557H390"/>
-    <path d="M710 243H800"/>
-    <path d="M1030 243H1090"/>
-    <path d="M710 573H800"/>
-    <path d="M1030 573H1090"/>
-  </g>
-  <g stroke="#2ce8c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M320 249H390" marker-start="url(#arrow-cyan)" marker-end="url(#arrow-cyan)"/>
-    <path d="M320 557H390" marker-end="url(#arrow-cyan)"/>
-    <path d="M710 243H800" marker-start="url(#arrow-cyan)" marker-end="url(#arrow-cyan)"/>
-    <path d="M1030 243H1090" marker-start="url(#arrow-cyan)" marker-end="url(#arrow-cyan)"/>
-    <path d="M710 573H800" marker-start="url(#arrow-cyan)" marker-end="url(#arrow-cyan)"/>
-    <path d="M1030 573H1090" marker-start="url(#arrow-cyan)" marker-end="url(#arrow-cyan)"/>
-  </g>
-  <g stroke="#ffc57a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7">
-    <path d="M915 646V700"/>
-  </g>
-</svg>
+        <rect x="1090" y="500" width="210" height="120" rx="6" class="c-mask"/>
+        <rect x="1090" y="500" width="210" height="120" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="1195" y="558" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">ALM / OTDR</text>
+        <text x="1195" y="574" class="t-muted" font-size="9" text-anchor="middle">device access</text>
+
+        <!-- Connection labels -->
+
+
+        <rect x="713" y="372" width="30" height="14" rx="3" class="c-mask"/>
+        <text x="728" y="382" class="t-muted" font-size="8" text-anchor="middle">run</text>
+        <rect x="1030.6" y="210" width="38.8" height="14" rx="3" class="c-mask"/>
+        <text x="1050" y="220" class="t-backend" font-size="8" text-anchor="middle">reason</text>
+        <rect x="888" y="300" width="34" height="14" rx="3" class="c-mask"/>
+        <text x="905" y="310" class="t-muted" font-size="8" text-anchor="middle">tools</text>
+        <rect x="1030.6" y="540" width="38.8" height="14" rx="3" class="c-mask"/>
+        <text x="1050" y="550" class="t-muted" font-size="8" text-anchor="middle">device</text>
+
+        <!-- Legend -->
+        <text x="40" y="659" class="t-primary" font-size="9" font-weight="600">Legend</text>
+        <rect x="40" y="664" width="14" height="9" rx="2" class="c-frontend" stroke-width="1"/>
+        <text x="60" y="672" class="t-muted" font-size="8">Frontend</text>
+        <rect x="138" y="664" width="14" height="9" rx="2" class="c-external" stroke-width="1"/>
+        <text x="158" y="672" class="t-muted" font-size="8">External</text>
+        <rect x="236" y="664" width="14" height="9" rx="2" class="c-database" stroke-width="1"/>
+        <text x="256" y="672" class="t-muted" font-size="8">Database</text>
+        <rect x="334" y="664" width="14" height="9" rx="2" class="c-backend" stroke-width="1"/>
+        <text x="354" y="672" class="t-muted" font-size="8">Backend</text>
+      </svg>

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Hikari System",
+    "subtitle": "Core handles events, chat-based control, device tools, state, and model-driven analysis."
+  },
+  "components": [
+    { "id": "operator", "type": "frontend", "label": "Operator", "sublabel": "Slack / Telegram", "tag": "chat + control", "pos": [80, 190], "size": [200, 100] },
+    { "id": "alarms", "type": "external", "label": "Device alarms", "sublabel": "SNMP / ALM", "pos": [80, 498], "size": [200, 100] },
+    { "id": "state-store", "type": "database", "label": "State store", "pos": [436, 292], "size": [220, 56] },
+    { "id": "group-router", "type": "backend", "label": "Group router", "pos": [436, 370], "size": [220, 56] },
+    { "id": "queue", "type": "backend", "label": "Queue", "pos": [436, 448], "size": [220, 56] },
+    { "id": "agent-runner", "type": "backend", "label": "Agent runner", "pos": [436, 526], "size": [220, 56] },
+    { "id": "agent-runtime", "type": "backend", "label": "Agent runtime", "sublabel": "scoped sessions", "pos": [800, 170], "size": [210, 120] },
+    { "id": "llm-provider", "type": "external", "label": "LLM provider", "sublabel": "reason + synthesize", "pos": [1090, 170], "size": [210, 120] },
+    { "id": "connect", "type": "frontend", "label": "hikari-connect", "sublabel": "MCP tool bridge", "pos": [800, 500], "size": [210, 120] },
+    { "id": "alm", "type": "external", "label": "ALM / OTDR", "sublabel": "device access", "pos": [1090, 500], "size": [210, 120] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "hikari-core — events + state + control", "wraps": ["state-store", "group-router", "queue", "agent-runner"] }
+  ],
+  "connections": [
+    { "from": "operator", "to": "queue", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "from": "alarms", "to": "queue", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "from": "agent-runner", "to": "agent-runtime", "label": "run", "fromSide": "right", "toSide": "left" },
+    { "from": "agent-runtime", "to": "llm-provider", "label": "reason", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "from": "agent-runtime", "to": "connect", "label": "tools", "fromSide": "bottom", "toSide": "top", "labelDy": 30 },
+    { "from": "connect", "to": "alm", "label": "device", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    { "dot": "amber", "title": "Simulator option", "items": ["Repeatable ALM/OTDR behavior for demos", "Integration testing and fault scenarios"] }
+  ]
+}

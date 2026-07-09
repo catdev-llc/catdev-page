@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Simulator Demo / Testbed",
+    "subtitle": "Repeatable ALM/OTDR behavior for demos, integration tests, and fault scenarios."
+  },
+  "components": [
+    { "id": "connect", "type": "frontend", "label": "hikari-connect", "sublabel": "MCP tool calls", "pos": [450, 150], "size": [300, 100] },
+    { "id": "engine", "type": "backend", "label": "Simulator engine", "sublabel": "ports + monitoring", "tag": "OTDR generation", "pos": [450, 330], "size": [300, 130] },
+    { "id": "ui", "type": "frontend", "label": "ALM-style UI", "sublabel": "operator screens", "pos": [80, 340], "size": [240, 110] },
+    { "id": "db", "type": "database", "label": "State database", "sublabel": "ports + history", "pos": [880, 340], "size": [240, 110] },
+    { "id": "faults", "type": "external", "label": "Fault scenarios", "sublabel": "breaks + bends", "pos": [470, 640], "size": [120, 80] },
+    { "id": "trace", "type": "external", "label": "Trace output", "sublabel": "plots + reports", "pos": [610, 640], "size": [120, 80] }
+  ],
+  "boundaries": [],
+  "connections": [
+    { "from": "connect", "to": "engine", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "from": "ui", "to": "engine", "fromSide": "right", "toSide": "left" },
+    { "from": "engine", "to": "db", "fromSide": "right", "toSide": "left" },
+    { "from": "faults", "to": "engine", "label": "inject", "fromSide": "top", "toSide": "bottom", "via": [ [530, 548], [600, 548] ], "labelDx": 18 },
+    { "from": "engine", "to": "trace", "label": "render", "fromSide": "bottom", "toSide": "top", "via": [ [600, 548], [670, 548] ], "labelDx": -18 }
+  ],
+  "cards": []
+}

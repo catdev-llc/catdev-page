@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Evidence To Research Draft",
+    "subtitle": "The same evidence layer powers chat, research missions, notes, citations, and writing."
+  },
+  "components": [
+    { "id": "sources", "type": "frontend", "label": "Sources", "sublabel": "PDF · web · Word", "tag": "01 INPUT", "pos": [60, 230], "size": [160, 110] },
+    { "id": "markdown", "type": "backend", "label": "Markdown", "sublabel": "pages · metadata", "tag": "02 PARSE", "pos": [270, 230], "size": [160, 110] },
+    { "id": "chunks", "type": "database", "label": "Chunks", "sublabel": "vectors + BM25", "tag": "03 INDEX", "pos": [480, 230], "size": [160, 110] },
+    { "id": "entities", "type": "database", "label": "Entities", "sublabel": "relations · images", "tag": "04 GRAPH", "pos": [690, 230], "size": [160, 110] },
+    { "id": "mission", "type": "backend", "label": "Mission", "sublabel": "plan · research", "tag": "05 AGENTS", "pos": [900, 230], "size": [160, 110] },
+    { "id": "draft", "type": "external", "label": "Draft", "sublabel": "cited", "tag": "06 OUTPUT", "pos": [1110, 230], "size": [160, 110] }
+  ],
+  "connections": [
+    { "from": "sources", "to": "markdown", "variant": "emphasis" },
+    { "from": "markdown", "to": "chunks", "variant": "emphasis" },
+    { "from": "chunks", "to": "entities", "variant": "emphasis" },
+    { "from": "entities", "to": "mission", "variant": "emphasis" },
+    { "from": "mission", "to": "draft", "variant": "emphasis" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Visible retrieval", "items": ["Document excerpts, page labels, source metadata", "Notes and citation profiles stay attached to evidence"] }
+  ]
+}

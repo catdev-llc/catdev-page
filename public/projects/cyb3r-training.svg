@@ -1,49 +1,143 @@
-<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="420" rx="28" fill="#080b12"/>
-  <defs>
-    <marker id="arrow-train" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff3154"/>
-    </marker>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" class="archify-diagram" viewBox="0 0 940 720" role="img" aria-label="Training Direction — First target: penetration-testing reasoning. Next target: broader security knowledge. (data-flow diagram)">
+        <style>
+  .archify-diagram {
+    --bg: #020617;
+    --grid: #1e293b;
+    --text: #ffffff;
+    --text-muted: #94a3b8;
+    --text-dim: #475569;
+    --lane-fill: rgba(15, 23, 42, 0.22);
+    --lane-stroke: #334155;
+    --arrow: #64748b;
+    --arrow-emphasis: #34d399;
+    --mask: #0f172a;
+    --frontend-fill: rgba(8, 51, 68, 0.4);
+    --frontend-stroke: #22d3ee;
+    --backend-fill: rgba(6, 78, 59, 0.4);
+    --backend-stroke: #34d399;
+    --database-fill: rgba(76, 29, 149, 0.4);
+    --database-stroke: #a78bfa;
+    --cloud-fill: rgba(120, 53, 15, 0.3);
+    --cloud-stroke: #fbbf24;
+    --security-fill: rgba(136, 19, 55, 0.4);
+    --security-stroke: #fb7185;
+    --messagebus-fill: rgba(251, 146, 60, 0.3);
+    --messagebus-stroke: #fb923c;
+    --external-fill: rgba(30, 41, 59, 0.5);
+    --external-stroke: #94a3b8;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace;
+  }
+  .c-bg { fill: var(--bg); }
+  .c-grid { stroke: var(--grid); fill: none; }
+  .c-mask { fill: var(--mask); stroke: none; }
+  .c-frontend { fill: var(--frontend-fill); stroke: var(--frontend-stroke); }
+  .c-backend { fill: var(--backend-fill); stroke: var(--backend-stroke); }
+  .c-database { fill: var(--database-fill); stroke: var(--database-stroke); }
+  .c-cloud { fill: var(--cloud-fill); stroke: var(--cloud-stroke); }
+  .c-security { fill: var(--security-fill); stroke: var(--security-stroke); }
+  .c-messagebus { fill: var(--messagebus-fill); stroke: var(--messagebus-stroke); }
+  .c-external { fill: var(--external-fill); stroke: var(--external-stroke); }
+  .c-security-group { fill: transparent; stroke: var(--security-stroke); stroke-dasharray: 4, 4; }
+  .c-region { fill: rgba(251, 191, 36, 0.05); stroke: var(--cloud-stroke); stroke-dasharray: 8, 4; }
+  .c-lane { fill: var(--lane-fill); stroke: var(--lane-stroke); stroke-dasharray: 6, 6; }
+  .t-primary { fill: var(--text); }
+  .t-muted { fill: var(--text-muted); }
+  .t-dim { fill: var(--text-dim); }
+  .t-frontend { fill: var(--frontend-stroke); }
+  .t-backend { fill: var(--backend-stroke); }
+  .t-database { fill: var(--database-stroke); }
+  .t-cloud { fill: var(--cloud-stroke); }
+  .t-security { fill: var(--security-stroke); }
+  .t-messagebus { fill: var(--messagebus-stroke); }
+  .t-external { fill: var(--external-stroke); }
+  .a-default { stroke: var(--arrow); fill: none; }
+  .a-emphasis { stroke: var(--arrow-emphasis); fill: none; }
+  .a-security { stroke: var(--security-stroke); fill: none; stroke-dasharray: 5, 5; }
+  .a-dashed { stroke: var(--database-stroke); fill: none; stroke-dasharray: 4, 4; }
+  .m-default { fill: var(--arrow); }
+  .m-emphasis { fill: var(--arrow-emphasis); }
+  .m-security { fill: var(--security-stroke); }
+  .m-dashed { fill: var(--database-stroke); }
+</style>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-security" />
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" class="c-bg"/>
+        <rect width="100%" height="100%" fill="url(#grid)" />
 
-  <text x="70" y="78" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">Training Direction</text>
-  <text x="70" y="112" fill="#9ca3af" font-family="Inter, Arial, sans-serif" font-size="17">First target: penetration-testing reasoning. Next target: broader security knowledge.</text>
+        <!-- Data Stages -->
+        <rect x="16" y="46" width="168" height="600" rx="10" class="c-lane" stroke-width="1"/>
+        <text x="100" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">01 / Data</text>
 
-  <g font-family="Inter, Arial, sans-serif">
-    <rect x="82" y="190" width="210" height="150" rx="16" fill="#111827" stroke="#27324a"/>
-    <text x="112" y="236" fill="#ff3154" font-size="15" font-weight="800">DATA</text>
-    <text x="112" y="274" fill="#f8fafc" font-size="22" font-weight="800">Security corpus</text>
-    <text x="112" y="304" fill="#9ca3af" font-size="15">~1.6B cybersec</text>
-    <text x="112" y="326" fill="#9ca3af" font-size="15">training rows</text>
+        <rect x="231" y="46" width="168" height="600" rx="10" class="c-lane" stroke-width="1"/>
+        <text x="315" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">02 / Training</text>
 
-    <rect x="360" y="190" width="210" height="150" rx="16" fill="#111827" stroke="#27324a"/>
-    <text x="390" y="236" fill="#ff3154" font-size="15" font-weight="800">EPOCH 01-03</text>
-    <text x="390" y="274" fill="#f8fafc" font-size="22" font-weight="800">Training pass</text>
-    <text x="390" y="304" fill="#9ca3af" font-size="15">reasoning-first</text>
-    <text x="390" y="326" fill="#9ca3af" font-size="15">fine-tuning</text>
+        <rect x="446" y="46" width="168" height="600" rx="10" class="c-lane" stroke-width="1"/>
+        <text x="530" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">03 / Behavior</text>
 
-    <rect x="638" y="190" width="210" height="150" rx="16" fill="#111827" stroke="#27324a"/>
-    <text x="668" y="236" fill="#ff3154" font-size="15" font-weight="800">BEHAVIOR</text>
-    <text x="668" y="274" fill="#f8fafc" font-size="22" font-weight="800">Reasoning</text>
-    <text x="668" y="304" fill="#9ca3af" font-size="15">branch ranking,</text>
-    <text x="668" y="326" fill="#9ca3af" font-size="15">replans, restraint</text>
+        <rect x="661" y="46" width="168" height="600" rx="10" class="c-lane" stroke-width="1"/>
+        <text x="745" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">04 / Next</text>
 
-    <rect x="916" y="190" width="210" height="150" rx="16" fill="#111827" stroke="#27324a"/>
-    <text x="946" y="236" fill="#ff3154" font-size="15" font-weight="800">NEXT</text>
-    <text x="946" y="274" fill="#f8fafc" font-size="22" font-weight="800">Knowledge</text>
-    <text x="946" y="304" fill="#9ca3af" font-size="15">tools, techniques,</text>
-    <text x="946" y="326" fill="#9ca3af" font-size="15">procedures</text>
-  </g>
+        <!-- Flow paths -->
+        <path d="M 175 385 L 240 385" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 390 385 L 442.5 385" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 617.5 385 L 670 385" class="a-dashed" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
 
-  <g stroke="#ff3154" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
-    <path d="M292 265H360"/>
-    <path d="M570 265H638"/>
-    <path d="M848 265H916"/>
-  </g>
-  <g stroke="#ff3154" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M292 265H360" marker-end="url(#arrow-train)"/>
-    <path d="M570 265H638" marker-end="url(#arrow-train)"/>
-    <path d="M848 265H916" marker-end="url(#arrow-train)"/>
-  </g>
+        <!-- Nodes -->
+        <rect x="25" y="356" width="150" height="58" rx="6" class="c-mask"/>
+        <rect x="25" y="356" width="150" height="58" rx="6" class="c-database" stroke-width="1.5"/>
+        <text x="100" y="377" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">Security corpus</text>
+        <text x="100" y="393" class="t-muted" font-size="7" text-anchor="middle">~1.6B cybersec rows</text>
 
-</svg>
+        <rect x="240" y="356" width="150" height="58" rx="6" class="c-mask"/>
+        <rect x="240" y="356" width="150" height="58" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="315" y="377" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">Training pass</text>
+        <text x="315" y="393" class="t-muted" font-size="7" text-anchor="middle">epochs 01–03 · reasoning-first</text>
+
+        <rect x="442.5" y="356" width="175" height="58" rx="6" class="c-mask"/>
+        <rect x="442.5" y="356" width="175" height="58" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="530" y="377" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">Reasoning</text>
+        <text x="530" y="393" class="t-muted" font-size="7" text-anchor="middle">branch ranking · replans · restraint</text>
+
+        <rect x="670" y="356" width="150" height="58" rx="6" class="c-mask"/>
+        <rect x="670" y="356" width="150" height="58" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="745" y="377" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">Knowledge</text>
+        <text x="745" y="393" class="t-muted" font-size="7" text-anchor="middle">tools · techniques · procedures</text>
+
+        <!-- Flow labels -->
+        <rect x="186.8" y="364" width="41.400000000000006" height="16" rx="4" class="c-mask"/>
+        <text x="207.5" y="375" class="t-backend" font-size="8" text-anchor="middle">tokens</text>
+        <rect x="399.25" y="364" width="34" height="16" rx="4" class="c-mask"/>
+        <text x="416.25" y="375" class="t-backend" font-size="8" text-anchor="middle">tune</text>
+        <rect x="626.75" y="364" width="34" height="16" rx="4" class="c-mask"/>
+        <text x="643.75" y="375" class="t-messagebus" font-size="8" text-anchor="middle">next</text>
+
+        <!-- Legend -->
+        <text x="214" y="664" class="t-primary" font-size="10" font-weight="600">Legend</text>
+        <path d="M 214 684 L 248 684" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <text x="257" y="687" class="t-muted" font-size="8">primary data</text>
+        <path d="M 340 684 L 374 684" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <text x="383" y="687" class="t-muted" font-size="8">policy / PII</text>
+        <path d="M 480 684 L 514 684" class="a-dashed" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
+        <text x="523" y="687" class="t-muted" font-size="8">async batch</text>
+        <rect x="625" y="676" width="14" height="9" rx="2" class="c-database" stroke-width="1"/>
+        <text x="646" y="684" class="t-muted" font-size="8">data store</text>
+      </svg>

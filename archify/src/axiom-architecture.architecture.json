@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "AXIOM System",
+    "subtitle": "Documents, web sources, research agents, model routing, and retrieval in one self-hosted workspace."
+  },
+  "components": [
+    {
+      "id": "researcher",
+      "type": "frontend",
+      "label": "Researcher",
+      "sublabel": "chat · missions · writing",
+      "pos": [
+        80,
+        190
+      ],
+      "size": [
+        200,
+        80
+      ]
+    },
+    {
+      "id": "frontend",
+      "type": "frontend",
+      "label": "Frontend",
+      "sublabel": "React workspace",
+      "tag": "library · editor",
+      "pos": [
+        380,
+        170
+      ],
+      "size": [
+        200,
+        120
+      ]
+    },
+    {
+      "id": "documents",
+      "type": "database",
+      "label": "Documents",
+      "sublabel": "PDF / web / Word",
+      "tag": "pages · chunks · images",
+      "pos": [
+        380,
+        455
+      ],
+      "size": [
+        200,
+        120
+      ]
+    },
+    {
+      "id": "agent-controller",
+      "type": "backend",
+      "label": "Agent controller",
+      "pos": [
+        720,
+        268
+      ],
+      "size": [
+        190,
+        56
+      ]
+    },
+    {
+      "id": "model-dispatcher",
+      "type": "backend",
+      "label": "Model dispatcher",
+      "pos": [
+        720,
+        356
+      ],
+      "size": [
+        190,
+        56
+      ]
+    },
+    {
+      "id": "rag-retrieval",
+      "type": "backend",
+      "label": "RAG retrieval",
+      "pos": [
+        720,
+        444
+      ],
+      "size": [
+        190,
+        56
+      ]
+    },
+    {
+      "id": "document-queue",
+      "type": "backend",
+      "label": "Document queue",
+      "pos": [
+        720,
+        532
+      ],
+      "size": [
+        190,
+        56
+      ]
+    },
+    {
+      "id": "llm-apis",
+      "type": "external",
+      "label": "LLM APIs",
+      "sublabel": "hosted or local",
+      "tag": "OpenAI-style",
+      "pos": [
+        1020,
+        180
+      ],
+      "size": [
+        170,
+        90
+      ]
+    },
+    {
+      "id": "gpu-worker",
+      "type": "backend",
+      "label": "GPU worker",
+      "sublabel": "BGE · GLiNER · reranker",
+      "pos": [
+        1020,
+        395
+      ],
+      "size": [
+        170,
+        90
+      ]
+    },
+    {
+      "id": "storage",
+      "type": "database",
+      "label": "Storage",
+      "sublabel": "Postgres · pgvector",
+      "tag": "search",
+      "pos": [
+        1020,
+        600
+      ],
+      "size": [
+        170,
+        90
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "AXIOM backend — orchestration & APIs",
+      "wraps": [
+        "agent-controller",
+        "model-dispatcher",
+        "rag-retrieval",
+        "document-queue"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "researcher",
+      "to": "frontend",
+      "variant": "emphasis"
+    },
+    {
+      "from": "frontend",
+      "to": "agent-controller",
+      "variant": "emphasis"
+    },
+    {
+      "from": "documents",
+      "to": "document-queue",
+      "label": "ingest"
+    },
+    {
+      "from": "agent-controller",
+      "to": "model-dispatcher",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "model-dispatcher",
+      "to": "rag-retrieval",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "rag-retrieval",
+      "to": "document-queue",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "model-dispatcher",
+      "to": "llm-apis",
+      "label": "route",
+      "variant": "emphasis"
+    },
+    {
+      "from": "rag-retrieval",
+      "to": "gpu-worker",
+      "label": "embed"
+    },
+    {
+      "from": "document-queue",
+      "to": "storage",
+      "label": "store"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Surfaces",
+      "items": [
+        "Researcher chat + missions",
+        "React workspace for library, chat, editor"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Backend",
+      "items": [
+        "Agent controller, model dispatcher, RAG retrieval, document queue",
+        "GPU worker for local ML models"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Data",
+      "items": [
+        "Documents ingested from PDF / web / Word",
+        "Postgres + pgvector storage and search"
+      ]
+    }
+  ]
+}

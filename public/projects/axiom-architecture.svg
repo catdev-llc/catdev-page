@@ -1,84 +1,177 @@
-<svg width="1400" height="820" viewBox="0 0 1400 820" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1400" height="820" rx="30" fill="#0b0f16"/>
-  <defs>
-    <marker id="arrow-axiom" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
-    </marker>
-    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
-    </marker>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" class="archify-diagram" viewBox="0 0 1230 758" role="img" aria-label="AXIOM System — Documents, web sources, research agents, model routing, and retrieval in one self-hosted workspace. (architecture diagram)">
+        <style>
+  .archify-diagram {
+    --bg: #020617;
+    --grid: #1e293b;
+    --text: #ffffff;
+    --text-muted: #94a3b8;
+    --text-dim: #475569;
+    --lane-fill: rgba(15, 23, 42, 0.22);
+    --lane-stroke: #334155;
+    --arrow: #64748b;
+    --arrow-emphasis: #34d399;
+    --mask: #0f172a;
+    --frontend-fill: rgba(8, 51, 68, 0.4);
+    --frontend-stroke: #22d3ee;
+    --backend-fill: rgba(6, 78, 59, 0.4);
+    --backend-stroke: #34d399;
+    --database-fill: rgba(76, 29, 149, 0.4);
+    --database-stroke: #a78bfa;
+    --cloud-fill: rgba(120, 53, 15, 0.3);
+    --cloud-stroke: #fbbf24;
+    --security-fill: rgba(136, 19, 55, 0.4);
+    --security-stroke: #fb7185;
+    --messagebus-fill: rgba(251, 146, 60, 0.3);
+    --messagebus-stroke: #fb923c;
+    --external-fill: rgba(30, 41, 59, 0.5);
+    --external-stroke: #94a3b8;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace;
+  }
+  .c-bg { fill: var(--bg); }
+  .c-grid { stroke: var(--grid); fill: none; }
+  .c-mask { fill: var(--mask); stroke: none; }
+  .c-frontend { fill: var(--frontend-fill); stroke: var(--frontend-stroke); }
+  .c-backend { fill: var(--backend-fill); stroke: var(--backend-stroke); }
+  .c-database { fill: var(--database-fill); stroke: var(--database-stroke); }
+  .c-cloud { fill: var(--cloud-fill); stroke: var(--cloud-stroke); }
+  .c-security { fill: var(--security-fill); stroke: var(--security-stroke); }
+  .c-messagebus { fill: var(--messagebus-fill); stroke: var(--messagebus-stroke); }
+  .c-external { fill: var(--external-fill); stroke: var(--external-stroke); }
+  .c-security-group { fill: transparent; stroke: var(--security-stroke); stroke-dasharray: 4, 4; }
+  .c-region { fill: rgba(251, 191, 36, 0.05); stroke: var(--cloud-stroke); stroke-dasharray: 8, 4; }
+  .c-lane { fill: var(--lane-fill); stroke: var(--lane-stroke); stroke-dasharray: 6, 6; }
+  .t-primary { fill: var(--text); }
+  .t-muted { fill: var(--text-muted); }
+  .t-dim { fill: var(--text-dim); }
+  .t-frontend { fill: var(--frontend-stroke); }
+  .t-backend { fill: var(--backend-stroke); }
+  .t-database { fill: var(--database-stroke); }
+  .t-cloud { fill: var(--cloud-stroke); }
+  .t-security { fill: var(--security-stroke); }
+  .t-messagebus { fill: var(--messagebus-stroke); }
+  .t-external { fill: var(--external-stroke); }
+  .a-default { stroke: var(--arrow); fill: none; }
+  .a-emphasis { stroke: var(--arrow-emphasis); fill: none; }
+  .a-security { stroke: var(--security-stroke); fill: none; stroke-dasharray: 5, 5; }
+  .a-dashed { stroke: var(--database-stroke); fill: none; stroke-dasharray: 4, 4; }
+  .m-default { fill: var(--arrow); }
+  .m-emphasis { fill: var(--arrow-emphasis); }
+  .m-security { fill: var(--security-stroke); }
+  .m-dashed { fill: var(--database-stroke); }
+</style>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-security" />
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" class="c-bg"/>
+        <rect width="100%" height="100%" fill="url(#grid)" />
 
-  <g opacity="0.14" stroke="#334155">
-    <path d="M80 140H1320M80 260H1320M80 380H1320M80 500H1320M80 620H1320M80 740H1320"/>
-    <path d="M160 90V760M320 90V760M480 90V760M640 90V760M800 90V760M960 90V760M1120 90V760M1280 90V760"/>
-  </g>
+        <!-- Boundaries (behind everything) -->
+        <rect x="690" y="238" width="250" height="370" rx="12" class="c-region" stroke-width="1"/>
+        <text x="698" y="256" class="t-cloud" font-size="9" font-weight="600">AXIOM backend — orchestration &amp; APIs</text>
 
-  <text x="70" y="78" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">AXIOM System</text>
-  <text x="70" y="114" fill="#a7b0c2" font-family="Inter, Arial, sans-serif" font-size="18">Documents, web sources, research agents, model routing, and retrieval live in one self-hosted workspace.</text>
+        <!-- Connection paths (before components for correct z-order) -->
+        <path d="M 280 230 L 380 230" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 580 230 L 642 230 Q 650 230 650 238 L 650 288 Q 650 296 658 296 L 720 296" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 580 515 L 642 515 Q 650 515 650 523 L 650 552 Q 650 560 658 560 L 720 560" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path d="M 815 324 L 815 356" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path d="M 815 412 L 815 444" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path d="M 815 500 L 815 532" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path d="M 910 384 L 957 384 Q 965 384 965 376 L 965 233 Q 965 225 973 225 L 1020 225" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 910 472 L 957 472 Q 965 472 965 464 L 965 448 Q 965 440 973 440 L 1020 440" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path d="M 910 560 L 957 560 Q 965 560 965 568 L 965 637 Q 965 645 973 645 L 1020 645" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
 
-  <g font-family="Inter, Arial, sans-serif">
-    <rect x="80" y="190" width="250" height="125" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="112" y="242" fill="#f8fafc" font-size="24" font-weight="800">Researcher</text>
-    <text x="112" y="274" fill="#a7b0c2" font-size="16">chat, missions,</text>
-    <text x="112" y="298" fill="#a7b0c2" font-size="16">documents, writing</text>
+        <!-- Components -->
+        <rect x="80" y="190" width="200" height="80" rx="6" class="c-mask"/>
+        <rect x="80" y="190" width="200" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="180" y="228" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Researcher</text>
+        <text x="180" y="244" class="t-muted" font-size="9" text-anchor="middle">chat · missions · writing</text>
 
-    <rect x="430" y="170" width="250" height="165" rx="20" fill="#151b26" stroke="#334155"/>
-    <text x="462" y="224" fill="#f8fafc" font-size="24" font-weight="800">Frontend</text>
-    <text x="462" y="255" fill="#fbbf24" font-size="15" font-weight="800">React workspace</text>
-    <text x="462" y="285" fill="#a7b0c2" font-size="16">library, chat,</text>
-    <text x="462" y="309" fill="#a7b0c2" font-size="16">missions, editor</text>
+        <rect x="380" y="170" width="200" height="120" rx="6" class="c-mask"/>
+        <rect x="380" y="170" width="200" height="120" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="480" y="228" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Frontend</text>
+        <text x="480" y="244" class="t-muted" font-size="9" text-anchor="middle">React workspace</text>
+        <text x="480" y="282" class="t-frontend" font-size="7" text-anchor="middle">library · editor</text>
 
-    <rect x="430" y="455" width="250" height="165" rx="20" fill="#151b26" stroke="#334155"/>
-    <text x="462" y="509" fill="#f8fafc" font-size="24" font-weight="800">Documents</text>
-    <text x="462" y="540" fill="#fbbf24" font-size="15" font-weight="800">PDF / web / Word</text>
-    <text x="462" y="570" fill="#a7b0c2" font-size="16">metadata, pages,</text>
-    <text x="462" y="594" fill="#a7b0c2" font-size="16">chunks, images</text>
+        <rect x="380" y="455" width="200" height="120" rx="6" class="c-mask"/>
+        <rect x="380" y="455" width="200" height="120" rx="6" class="c-database" stroke-width="1.5"/>
+        <text x="480" y="513" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Documents</text>
+        <text x="480" y="529" class="t-muted" font-size="9" text-anchor="middle">PDF / web / Word</text>
+        <text x="480" y="567" class="t-database" font-size="7" text-anchor="middle">pages · chunks · images</text>
 
-    <rect x="770" y="130" width="300" height="565" rx="24" fill="#111827" stroke="#f59e0b" stroke-opacity="0.75"/>
-    <text x="812" y="192" fill="#fbbf24" font-size="30" font-weight="800">AXIOM backend</text>
-    <text x="812" y="224" fill="#a7b0c2" font-size="16">orchestration and APIs</text>
+        <rect x="720" y="268" width="190" height="56" rx="6" class="c-mask"/>
+        <rect x="720" y="268" width="190" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="815" y="300" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Agent controller</text>
 
-    <rect x="820" y="268" width="200" height="58" rx="12" fill="#1f2937" stroke="#334155"/>
-    <text x="850" y="304" fill="#f8fafc" font-size="18" font-weight="700">Agent controller</text>
+        <rect x="720" y="356" width="190" height="56" rx="6" class="c-mask"/>
+        <rect x="720" y="356" width="190" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="815" y="388" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Model dispatcher</text>
 
-    <rect x="820" y="356" width="200" height="58" rx="12" fill="#1f2937" stroke="#334155"/>
-    <text x="850" y="392" fill="#f8fafc" font-size="18" font-weight="700">Model dispatcher</text>
+        <rect x="720" y="444" width="190" height="56" rx="6" class="c-mask"/>
+        <rect x="720" y="444" width="190" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="815" y="476" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">RAG retrieval</text>
 
-    <rect x="820" y="444" width="200" height="58" rx="12" fill="#1f2937" stroke="#334155"/>
-    <text x="850" y="480" fill="#f8fafc" font-size="18" font-weight="700">RAG retrieval</text>
+        <rect x="720" y="532" width="190" height="56" rx="6" class="c-mask"/>
+        <rect x="720" y="532" width="190" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="815" y="564" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Document queue</text>
 
-    <rect x="820" y="532" width="200" height="58" rx="12" fill="#1f2937" stroke="#334155"/>
-    <text x="850" y="568" fill="#f8fafc" font-size="18" font-weight="700">Document queue</text>
+        <rect x="1020" y="180" width="170" height="90" rx="6" class="c-mask"/>
+        <rect x="1020" y="180" width="170" height="90" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="1105" y="223" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">LLM APIs</text>
+        <text x="1105" y="239" class="t-muted" font-size="9" text-anchor="middle">hosted or local</text>
+        <text x="1105" y="262" class="t-external" font-size="7" text-anchor="middle">OpenAI-style</text>
 
-    <rect x="1140" y="170" width="180" height="130" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="1170" y="222" fill="#f8fafc" font-size="22" font-weight="800">LLM APIs</text>
-    <text x="1170" y="252" fill="#a7b0c2" font-size="15">hosted or local</text>
-    <text x="1170" y="276" fill="#a7b0c2" font-size="15">OpenAI-style</text>
+        <rect x="1020" y="395" width="170" height="90" rx="6" class="c-mask"/>
+        <rect x="1020" y="395" width="170" height="90" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="1105" y="438" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">GPU worker</text>
+        <text x="1105" y="454" class="t-muted" font-size="9" text-anchor="middle">BGE · GLiNER · reranker</text>
 
-    <rect x="1140" y="385" width="180" height="130" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="1170" y="435" fill="#f8fafc" font-size="22" font-weight="800">GPU worker</text>
-    <text x="1170" y="465" fill="#a7b0c2" font-size="15">BGE, GLiNER,</text>
-    <text x="1170" y="489" fill="#a7b0c2" font-size="15">reranker RPC</text>
+        <rect x="1020" y="600" width="170" height="90" rx="6" class="c-mask"/>
+        <rect x="1020" y="600" width="170" height="90" rx="6" class="c-database" stroke-width="1.5"/>
+        <text x="1105" y="643" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Storage</text>
+        <text x="1105" y="659" class="t-muted" font-size="9" text-anchor="middle">Postgres · pgvector</text>
+        <text x="1105" y="682" class="t-database" font-size="7" text-anchor="middle">search</text>
 
-    <rect x="1140" y="600" width="180" height="130" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="1170" y="650" fill="#f8fafc" font-size="22" font-weight="800">Storage</text>
-    <text x="1170" y="680" fill="#a7b0c2" font-size="15">Postgres,</text>
-    <text x="1170" y="704" fill="#a7b0c2" font-size="15">pgvector, search</text>
-  </g>
+        <!-- Connection labels -->
 
-  <g stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M330 252H430" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
-    <path d="M680 252H770" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
-    <path d="M680 538H770" marker-end="url(#arrow-axiom)"/>
-    <path d="M1070 235H1140" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
-    <path d="M1070 452H1140" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
-    <path d="M1070 665H1140" marker-start="url(#arrow-axiom)" marker-end="url(#arrow-axiom)"/>
-  </g>
 
-  <g stroke="#22d3ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M920 326V356" marker-end="url(#arrow-cyan)"/>
-    <path d="M920 414V444" marker-end="url(#arrow-cyan)"/>
-    <path d="M920 502V532" marker-end="url(#arrow-cyan)"/>
-  </g>
-</svg>
+        <rect x="630.6" y="517.5" width="38.8" height="14" rx="3" class="c-mask"/>
+        <text x="650" y="527.5" class="t-muted" font-size="8" text-anchor="middle">ingest</text>
+
+
+
+        <rect x="948" y="284.5" width="34" height="14" rx="3" class="c-mask"/>
+        <text x="965" y="294.5" class="t-backend" font-size="8" text-anchor="middle">route</text>
+        <rect x="948" y="436" width="34" height="14" rx="3" class="c-mask"/>
+        <text x="965" y="446" class="t-muted" font-size="8" text-anchor="middle">embed</text>
+        <rect x="948" y="582.5" width="34" height="14" rx="3" class="c-mask"/>
+        <text x="965" y="592.5" class="t-muted" font-size="8" text-anchor="middle">store</text>
+
+        <!-- Legend -->
+        <text x="40" y="729" class="t-primary" font-size="9" font-weight="600">Legend</text>
+        <rect x="40" y="734" width="14" height="9" rx="2" class="c-frontend" stroke-width="1"/>
+        <text x="60" y="742" class="t-muted" font-size="8">Frontend</text>
+        <rect x="138" y="734" width="14" height="9" rx="2" class="c-database" stroke-width="1"/>
+        <text x="158" y="742" class="t-muted" font-size="8">Database</text>
+        <rect x="236" y="734" width="14" height="9" rx="2" class="c-backend" stroke-width="1"/>
+        <text x="256" y="742" class="t-muted" font-size="8">Backend</text>
+        <rect x="329" y="734" width="14" height="9" rx="2" class="c-external" stroke-width="1"/>
+        <text x="349" y="742" class="t-muted" font-size="8">External</text>
+      </svg>

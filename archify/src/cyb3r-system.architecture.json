@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "cyb3r Architecture",
+    "subtitle": "Pi runtime, cyb3r harness, reasoning model, and pi-pen-kit tooling."
+  },
+  "components": [
+    { "id": "pi-agent", "type": "backend", "label": "Pi agent", "sublabel": "packages · shell · sessions", "tag": "runtime layer", "pos": [90, 222], "size": [210, 120] },
+    { "id": "plan", "type": "backend", "label": "Plan / execute / adapt", "pos": [470, 278], "size": [230, 56] },
+    { "id": "policies", "type": "security", "label": "Operator policies", "pos": [470, 356], "size": [230, 56] },
+    { "id": "orchestration", "type": "backend", "label": "Tool orchestration", "pos": [470, 434], "size": [230, 56] },
+    { "id": "reasoning", "type": "external", "label": "Reasoning model", "sublabel": "branch ranking · pivots", "tag": "operator reasoning", "pos": [850, 165], "size": [230, 120] },
+    { "id": "pen-kit", "type": "frontend", "label": "pi-pen-kit", "sublabel": "Sliver · Metasploit · shells", "tag": "tool layer", "pos": [850, 380], "size": [230, 120] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "cyb3r harness — offensive AI operator runtime", "wraps": ["plan", "policies", "orchestration"] }
+  ],
+  "connections": [
+    { "from": "pi-agent", "to": "plan", "variant": "emphasis" },
+    { "from": "plan", "to": "reasoning", "label": "decide", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "from": "orchestration", "to": "pen-kit", "label": "tools", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    { "dot": "rose", "title": "Goal", "items": ["Make penetration-testing workflows agent-native", "Without losing operator discipline, evidence tracking, or interactive control"] }
+  ]
+}

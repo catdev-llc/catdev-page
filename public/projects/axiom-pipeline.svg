@@ -1,60 +1,150 @@
-<svg width="1400" height="620" viewBox="0 0 1400 620" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1400" height="620" rx="30" fill="#0b0f16"/>
-  <defs>
-    <marker id="arrow-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
-    </marker>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" class="archify-diagram" viewBox="0 0 1310 408" role="img" aria-label="Evidence To Research Draft — The same evidence layer powers chat, research missions, notes, citations, and writing. (architecture diagram)">
+        <style>
+  .archify-diagram {
+    --bg: #020617;
+    --grid: #1e293b;
+    --text: #ffffff;
+    --text-muted: #94a3b8;
+    --text-dim: #475569;
+    --lane-fill: rgba(15, 23, 42, 0.22);
+    --lane-stroke: #334155;
+    --arrow: #64748b;
+    --arrow-emphasis: #34d399;
+    --mask: #0f172a;
+    --frontend-fill: rgba(8, 51, 68, 0.4);
+    --frontend-stroke: #22d3ee;
+    --backend-fill: rgba(6, 78, 59, 0.4);
+    --backend-stroke: #34d399;
+    --database-fill: rgba(76, 29, 149, 0.4);
+    --database-stroke: #a78bfa;
+    --cloud-fill: rgba(120, 53, 15, 0.3);
+    --cloud-stroke: #fbbf24;
+    --security-fill: rgba(136, 19, 55, 0.4);
+    --security-stroke: #fb7185;
+    --messagebus-fill: rgba(251, 146, 60, 0.3);
+    --messagebus-stroke: #fb923c;
+    --external-fill: rgba(30, 41, 59, 0.5);
+    --external-stroke: #94a3b8;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace;
+  }
+  .c-bg { fill: var(--bg); }
+  .c-grid { stroke: var(--grid); fill: none; }
+  .c-mask { fill: var(--mask); stroke: none; }
+  .c-frontend { fill: var(--frontend-fill); stroke: var(--frontend-stroke); }
+  .c-backend { fill: var(--backend-fill); stroke: var(--backend-stroke); }
+  .c-database { fill: var(--database-fill); stroke: var(--database-stroke); }
+  .c-cloud { fill: var(--cloud-fill); stroke: var(--cloud-stroke); }
+  .c-security { fill: var(--security-fill); stroke: var(--security-stroke); }
+  .c-messagebus { fill: var(--messagebus-fill); stroke: var(--messagebus-stroke); }
+  .c-external { fill: var(--external-fill); stroke: var(--external-stroke); }
+  .c-security-group { fill: transparent; stroke: var(--security-stroke); stroke-dasharray: 4, 4; }
+  .c-region { fill: rgba(251, 191, 36, 0.05); stroke: var(--cloud-stroke); stroke-dasharray: 8, 4; }
+  .c-lane { fill: var(--lane-fill); stroke: var(--lane-stroke); stroke-dasharray: 6, 6; }
+  .t-primary { fill: var(--text); }
+  .t-muted { fill: var(--text-muted); }
+  .t-dim { fill: var(--text-dim); }
+  .t-frontend { fill: var(--frontend-stroke); }
+  .t-backend { fill: var(--backend-stroke); }
+  .t-database { fill: var(--database-stroke); }
+  .t-cloud { fill: var(--cloud-stroke); }
+  .t-security { fill: var(--security-stroke); }
+  .t-messagebus { fill: var(--messagebus-stroke); }
+  .t-external { fill: var(--external-stroke); }
+  .a-default { stroke: var(--arrow); fill: none; }
+  .a-emphasis { stroke: var(--arrow-emphasis); fill: none; }
+  .a-security { stroke: var(--security-stroke); fill: none; stroke-dasharray: 5, 5; }
+  .a-dashed { stroke: var(--database-stroke); fill: none; stroke-dasharray: 4, 4; }
+  .m-default { fill: var(--arrow); }
+  .m-emphasis { fill: var(--arrow-emphasis); }
+  .m-security { fill: var(--security-stroke); }
+  .m-dashed { fill: var(--database-stroke); }
+</style>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-security" />
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" class="c-bg"/>
+        <rect width="100%" height="100%" fill="url(#grid)" />
 
-  <g opacity="0.12" stroke="#334155">
-    <path d="M80 120H1320M80 240H1320M80 360H1320M80 480H1320"/>
-    <path d="M160 80V545M320 80V545M480 80V545M640 80V545M800 80V545M960 80V545M1120 80V545M1280 80V545"/>
-  </g>
+        <!-- Boundaries (behind everything) -->
 
-  <text x="70" y="78" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">Evidence To Research Draft</text>
-  <text x="70" y="114" fill="#a7b0c2" font-family="Inter, Arial, sans-serif" font-size="18">The same evidence layer powers chat, research missions, notes, citations, and writing.</text>
 
-  <g font-family="Inter, Arial, sans-serif">
-    <rect x="70" y="230" width="185" height="150" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="102" y="286" fill="#fbbf24" font-size="15" font-weight="800">01 INPUT</text>
-    <text x="102" y="322" fill="#f8fafc" font-size="22" font-weight="800">Sources</text>
-    <text x="102" y="354" fill="#a7b0c2" font-size="15">PDF, web, Word</text>
+        <!-- Connection paths (before components for correct z-order) -->
+        <path d="M 220 285 L 270 285" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 430 285 L 480 285" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 640 285 L 690 285" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 850 285 L 900 285" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 1060 285 L 1110 285" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
 
-    <rect x="290" y="230" width="185" height="150" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="322" y="286" fill="#fbbf24" font-size="15" font-weight="800">02 PARSE</text>
-    <text x="322" y="322" fill="#f8fafc" font-size="22" font-weight="800">Markdown</text>
-    <text x="322" y="354" fill="#a7b0c2" font-size="15">pages, metadata</text>
+        <!-- Components -->
+        <rect x="60" y="230" width="160" height="110" rx="6" class="c-mask"/>
+        <rect x="60" y="230" width="160" height="110" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="140" y="283" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Sources</text>
+        <text x="140" y="299" class="t-muted" font-size="9" text-anchor="middle">PDF · web · Word</text>
+        <text x="140" y="332" class="t-frontend" font-size="7" text-anchor="middle">01 INPUT</text>
 
-    <rect x="510" y="230" width="185" height="150" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="542" y="286" fill="#fbbf24" font-size="15" font-weight="800">03 INDEX</text>
-    <text x="542" y="322" fill="#f8fafc" font-size="22" font-weight="800">Chunks</text>
-    <text x="542" y="354" fill="#a7b0c2" font-size="15">vectors + BM25</text>
+        <rect x="270" y="230" width="160" height="110" rx="6" class="c-mask"/>
+        <rect x="270" y="230" width="160" height="110" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="350" y="283" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Markdown</text>
+        <text x="350" y="299" class="t-muted" font-size="9" text-anchor="middle">pages · metadata</text>
+        <text x="350" y="332" class="t-backend" font-size="7" text-anchor="middle">02 PARSE</text>
 
-    <rect x="730" y="230" width="185" height="150" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="762" y="286" fill="#fbbf24" font-size="15" font-weight="800">04 GRAPH</text>
-    <text x="762" y="322" fill="#f8fafc" font-size="22" font-weight="800">Entities</text>
-    <text x="762" y="354" fill="#a7b0c2" font-size="15">relations, images</text>
+        <rect x="480" y="230" width="160" height="110" rx="6" class="c-mask"/>
+        <rect x="480" y="230" width="160" height="110" rx="6" class="c-database" stroke-width="1.5"/>
+        <text x="560" y="283" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Chunks</text>
+        <text x="560" y="299" class="t-muted" font-size="9" text-anchor="middle">vectors + BM25</text>
+        <text x="560" y="332" class="t-database" font-size="7" text-anchor="middle">03 INDEX</text>
 
-    <rect x="950" y="230" width="185" height="150" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="982" y="286" fill="#fbbf24" font-size="15" font-weight="800">05 AGENTS</text>
-    <text x="982" y="322" fill="#f8fafc" font-size="22" font-weight="800">Mission</text>
-    <text x="982" y="354" fill="#a7b0c2" font-size="15">plan, research</text>
+        <rect x="690" y="230" width="160" height="110" rx="6" class="c-mask"/>
+        <rect x="690" y="230" width="160" height="110" rx="6" class="c-database" stroke-width="1.5"/>
+        <text x="770" y="283" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Entities</text>
+        <text x="770" y="299" class="t-muted" font-size="9" text-anchor="middle">relations · images</text>
+        <text x="770" y="332" class="t-database" font-size="7" text-anchor="middle">04 GRAPH</text>
 
-    <rect x="1170" y="230" width="160" height="150" rx="18" fill="#151b26" stroke="#334155"/>
-    <text x="1202" y="286" fill="#fbbf24" font-size="15" font-weight="800">06 OUTPUT</text>
-    <text x="1202" y="322" fill="#f8fafc" font-size="22" font-weight="800">Draft</text>
-    <text x="1202" y="354" fill="#a7b0c2" font-size="15">cited</text>
+        <rect x="900" y="230" width="160" height="110" rx="6" class="c-mask"/>
+        <rect x="900" y="230" width="160" height="110" rx="6" class="c-backend" stroke-width="1.5"/>
+        <text x="980" y="283" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Mission</text>
+        <text x="980" y="299" class="t-muted" font-size="9" text-anchor="middle">plan · research</text>
+        <text x="980" y="332" class="t-backend" font-size="7" text-anchor="middle">05 AGENTS</text>
 
-    <rect x="310" y="445" width="860" height="64" rx="16" fill="#111827" stroke="#334155"/>
-    <text x="342" y="484" fill="#22d3ee" font-size="18" font-weight="800">Retrieval stays visible:</text>
-    <text x="560" y="484" fill="#a7b0c2" font-size="16">document excerpts, page labels, source metadata, notes, and citation profiles.</text>
-  </g>
+        <rect x="1110" y="230" width="160" height="110" rx="6" class="c-mask"/>
+        <rect x="1110" y="230" width="160" height="110" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="1190" y="283" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Draft</text>
+        <text x="1190" y="299" class="t-muted" font-size="9" text-anchor="middle">cited</text>
+        <text x="1190" y="332" class="t-external" font-size="7" text-anchor="middle">06 OUTPUT</text>
 
-  <g stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M255 305H290" marker-end="url(#arrow-flow)"/>
-    <path d="M475 305H510" marker-end="url(#arrow-flow)"/>
-    <path d="M695 305H730" marker-end="url(#arrow-flow)"/>
-    <path d="M915 305H950" marker-end="url(#arrow-flow)"/>
-    <path d="M1135 305H1170" marker-end="url(#arrow-flow)"/>
-  </g>
-</svg>
+        <!-- Connection labels -->
+
+
+
+
+
+
+        <!-- Legend -->
+        <text x="40" y="379" class="t-primary" font-size="9" font-weight="600">Legend</text>
+        <rect x="40" y="384" width="14" height="9" rx="2" class="c-frontend" stroke-width="1"/>
+        <text x="60" y="392" class="t-muted" font-size="8">Frontend</text>
+        <rect x="138" y="384" width="14" height="9" rx="2" class="c-backend" stroke-width="1"/>
+        <text x="158" y="392" class="t-muted" font-size="8">Backend</text>
+        <rect x="231" y="384" width="14" height="9" rx="2" class="c-database" stroke-width="1"/>
+        <text x="251" y="392" class="t-muted" font-size="8">Database</text>
+        <rect x="329" y="384" width="14" height="9" rx="2" class="c-external" stroke-width="1"/>
+        <text x="349" y="392" class="t-muted" font-size="8">External</text>
+      </svg>

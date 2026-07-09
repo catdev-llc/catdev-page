@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Model Roles In AXIOM",
+    "subtitle": "LLMs are selected by role; retrieval and document intelligence run through dedicated local models."
+  },
+  "components": [
+    { "id": "fast", "type": "external", "label": "Fast", "pos": [120, 300], "size": [205, 54] },
+    { "id": "mid", "type": "external", "label": "Mid", "pos": [120, 375], "size": [205, 54] },
+    { "id": "intelligent", "type": "external", "label": "Intelligent", "pos": [120, 450], "size": [205, 54] },
+    { "id": "verifier", "type": "external", "label": "Verifier", "pos": [120, 525], "size": [205, 54] },
+    { "id": "agent-work", "type": "backend", "label": "Agent work", "sublabel": "different jobs need different models", "pos": [455, 210], "size": [280, 300] },
+    { "id": "provider-layer", "type": "external", "label": "Provider layer", "sublabel": "OpenRouter · OpenAI · DeepSeek · Z.AI · local", "tag": "OpenAI-compatible", "pos": [865, 130], "size": [455, 120] },
+    { "id": "local-ml", "type": "database", "label": "Local ML models", "sublabel": "BGE-M3 · reranker · GLiNER · mREBEL · CLIP · Marker", "tag": "GPU worker · subprocesses", "pos": [865, 410], "size": [455, 150] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "LLM slots — configured per user", "wraps": ["fast", "mid", "intelligent", "verifier"] }
+  ],
+  "connections": [
+    { "from": "fast", "to": "agent-work", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "from": "agent-work", "to": "provider-layer", "label": "calls", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "from": "agent-work", "to": "local-ml", "label": "retrieval", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "LLM roles", "items": ["Fast: cheap routing", "Mid: balanced work", "Intelligent: hard synthesis", "Verifier: quality checks"] },
+    { "dot": "violet", "title": "Local models", "items": ["Embeddings + reranker + GLiNER entities", "mREBEL relations, CLIP image search, Marker PDF parsing"] }
+  ]
+}

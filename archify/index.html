@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>catdev · archify diagrams</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; background: #0a0e27; color: #e7ecf6; font: 15px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 56px 24px 96px; }
+  h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -.02em; }
+  p.lede { color: #8b92a8; margin: 0 0 8px; }
+  p.note { color: #6b7290; font-size: 13px; margin: 0 0 36px; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  li a { display: flex; align-items: baseline; gap: 12px; padding: 14px 16px; border: 1px solid #1f2747; border-radius: 12px; background: #11162e; text-decoration: none; color: #e7ecf6; transition: border-color .15s, background .15s; }
+  li a:hover { border-color: #00d4ff; background: #141a38; }
+  .tag { font: 600 11px ui-monospace, SFMono-Regular, Menlo, monospace; color: #00d4ff; background: rgba(0,212,255,.1); padding: 2px 7px; border-radius: 6px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+  .name { font-weight: 600; }
+  .grp { color: #8b92a8; font-size: 13px; margin-left: auto; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>catdev · archify diagrams</h1>
+    <p class="lede">All 8 project diagrams recreated with <a style="color:#00d4ff" href="https://github.com/tt-a1i/archify">archify</a>.</p>
+    <p class="note">Each opens a self-contained HTML diagram with a dark/light theme toggle and a PNG / JPEG / WebP / SVG export menu.</p>
+    <ul>
+      <li><a href="out/axiom-architecture.html"><span class="tag">architecture</span><span class="name">AXIOM System</span><span class="grp">axiom</span></a></li>
+      <li><a href="out/axiom-models.html"><span class="tag">architecture</span><span class="name">Model Roles In AXIOM</span><span class="grp">axiom</span></a></li>
+      <li><a href="out/axiom-pipeline.html"><span class="tag">architecture</span><span class="name">Evidence To Research Draft</span><span class="grp">axiom</span></a></li>
+      <li><a href="out/cyb3r-system.html"><span class="tag">architecture</span><span class="name">cyb3r Architecture</span><span class="grp">cyb3r</span></a></li>
+      <li><a href="out/cyb3r-training.html"><span class="tag">dataflow</span><span class="name">Training Direction</span><span class="grp">cyb3r</span></a></li>
+      <li><a href="out/hikari-architecture.html"><span class="tag">architecture</span><span class="name">Hikari System</span><span class="grp">hikari</span></a></li>
+      <li><a href="out/hikari-flow.html"><span class="tag">dataflow</span><span class="name">Alarm To Incident Output</span><span class="grp">hikari</span></a></li>
+      <li><a href="out/hikari-simulator.html"><span class="tag">architecture</span><span class="name">Simulator Demo / Testbed</span><span class="grp">hikari</span></a></li>
+    </ul>
+  </div>
+</body>
+</html>

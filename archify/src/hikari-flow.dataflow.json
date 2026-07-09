@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Alarm To Incident Output",
+    "subtitle": "A device alarm becomes a trace-backed incident analysis.",
+    "viewBox": [1080, 720]
+  },
+  "stages": [
+    { "label": "Event" },
+    { "label": "Core" },
+    { "label": "Agent" },
+    { "label": "Tools" },
+    { "label": "Output" }
+  ],
+  "nodes": [
+    { "id": "alarm", "type": "external", "label": "Alarm", "sublabel": "SNMP payload", "stage": 0, "row": 2 },
+    { "id": "core", "type": "backend", "label": "hikari-core", "sublabel": "store + route", "stage": 1, "row": 2 },
+    { "id": "runtime", "type": "frontend", "label": "Runtime", "sublabel": "reason + plan", "stage": 2, "row": 2 },
+    { "id": "connect", "type": "backend", "label": "Connect", "sublabel": "OTDR evidence", "stage": 3, "row": 2 },
+    { "id": "report", "type": "database", "label": "Report", "sublabel": "dispatch-ready", "stage": 4, "row": 2 },
+    { "id": "llm", "type": "external", "label": "LLM provider", "sublabel": "reasoning layer", "stage": 2, "row": 0 },
+    { "id": "device", "type": "external", "label": "ALM / OTDR", "sublabel": "device or simulator", "stage": 3, "row": 4 }
+  ],
+  "flows": [
+    { "from": "alarm", "to": "core", "label": "event", "variant": "emphasis" },
+    { "from": "core", "to": "runtime", "label": "route", "variant": "emphasis" },
+    { "from": "runtime", "to": "connect", "label": "query", "variant": "emphasis" },
+    { "from": "connect", "to": "report", "label": "evidence", "variant": "emphasis" },
+    { "from": "llm", "to": "runtime", "label": "reasoning", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [530, 272] },
+    { "from": "device", "to": "connect", "label": "telemetry", "variant": "emphasis", "fromSide": "top", "toSide": "bottom", "route": "straight", "labelAt": [745, 500] }
+  ],
+  "cards": []
+}
