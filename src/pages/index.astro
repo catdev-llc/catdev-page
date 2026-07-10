@@ -40,7 +40,7 @@ const projects = [
     imageAlt: 'AXIOM logo',
     logo: '/projects/axiom-logo.png',
     logoAlt: 'AXIOM logo',
-    logoMode: 'dark',
+    logoMode: 'plain',
     description:
       'A self-hosted RAG and research-agent platform for document-heavy work. AXIOM can ingest PDFs and web sources, run agentic research missions, keep citations visible, and turn gathered evidence into structured research drafts and papers.',
     details: [
@@ -51,6 +51,7 @@ const projects = [
     tags: ['RAG', 'OpenSearch', 'pgvector', 'GPU workers', 'Go', 'Research'],
     links: [
       { label: 'How AXIOM works', href: '/projects/axiom' },
+      { label: 'GitHub repo', href: 'https://github.com/Cyb3rDudu/axiom' },
     ],
   },
   {
@@ -278,7 +279,11 @@ const signals = [
                 {project.logo && (
                   <div class="mb-5 flex items-center gap-4">
                     <div class={`h-24 w-24 rounded-lg border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 ${
-                      project.logoMode === 'light' ? 'bg-white p-3' : 'bg-black/70 p-3'
+                      project.logoMode === 'light'
+                        ? 'bg-white p-3'
+                        : project.logoMode === 'plain'
+                          ? 'border-transparent bg-transparent p-0'
+                          : 'bg-black/70 p-3'
                     }`}>
                       <img src={project.logo} alt={project.logoAlt} class="max-h-full max-w-full object-contain" loading="lazy" />
                     </div>
@@ -365,7 +370,7 @@ const signals = [
           </div>
           <div class="mt-8 flex flex-wrap gap-4">
             <a href="https://github.com/Cyb3rDudu" target="_blank" rel="noopener noreferrer" class="btn-secondary">GitHub</a>
-            <a href="https://www.linkedin.com/in/%E2%96%BAjan-m%C3%BCller-3b0a18177/" target="_blank" rel="noopener noreferrer" class="btn-secondary">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/jan-mueller-3b0a18177/" target="_blank" rel="noopener noreferrer" class="btn-secondary">LinkedIn</a>
           </div>
         </div>
 
