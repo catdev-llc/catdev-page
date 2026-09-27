@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { services } from '../data/enterprise';
+
+const detail = [
+  { intro: 'Build and modernize the foundations that applications and engineering teams depend on.', groups: [
+    ['Architecture', 'Cloud architecture', 'Application platforms', 'Cloud migration', 'Production infrastructure'],
+    ['Delivery', 'Infrastructure as code', 'CI/CD', 'GitOps', 'Infrastructure automation'],
+    ['Operations', 'Kubernetes', 'Observability', 'Reliability engineering', 'Recovery planning'],
+  ]},
+  { intro: 'Integrate security into architecture and delivery without separating it from how systems actually operate.', groups: [
+    ['Design', 'Security architecture', 'Cloud security', 'Identity and access architecture', 'Infrastructure security'],
+    ['Delivery', 'DevSecOps', 'Application security', 'Software supply chain security', 'Secure software delivery'],
+    ['Assurance', 'Security assessment', 'Security validation', 'Configuration review', 'Remediation engineering'],
+  ]},
+  { intro: 'Provide the engineering capacity needed to take enterprise software from technical evaluation into dependable use.', groups: [
+    ['Evaluate', 'Solution engineering', 'Pre-sales technical support', 'Proof-of-concept delivery', 'Architecture workshops'],
+    ['Deliver', 'Enterprise implementation', 'Integration', 'Migration', 'Professional services'],
+    ['Operate', 'Customer enablement', 'Operational support', 'Managed operations', 'Lifecycle services'],
+  ]},
+];
+---
+
+<Layout title="Services | Catdev Enterprise Technology Engineering" description="Cloud and platform engineering, security engineering, and enterprise technology services from Catdev.">
+  <section class="enterprise-grid border-b border-white/10 pt-36 pb-20 md:pt-44 md:pb-28">
+    <div class="container-custom">
+      <p class="eyebrow">Services</p>
+      <h1 class="max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-6xl">Engineering responsibility from architecture through production.</h1>
+      <p class="section-copy mt-7 max-w-3xl">Catdev brings cloud, security and enterprise software delivery together so important technical decisions remain connected throughout the engagement.</p>
+    </div>
+  </section>
+
+  {services.map((service, index) => (
+    <section class:list={['section-padding', index % 2 === 1 && 'border-y border-white/10 bg-white/[0.02]']}>
+      <div class="container-custom">
+        <div class="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+          <div class="reveal">
+            <p class="font-mono text-sm text-cyan">{service.number}</p>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">{service.title}</h2>
+            <p class="mt-6 text-lg leading-relaxed text-steel">{detail[index].intro}</p>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3 reveal">
+            {detail[index].groups.map(([title, ...items]) => (
+              <div class="rounded-lg border border-white/10 bg-white/[0.025] p-6">
+                <h3 class="font-semibold text-white">{title}</h3>
+                <ul class="mt-5 space-y-3">{items.map((item) => <li class="flex gap-2 text-sm leading-relaxed text-steel"><span class="text-cyan">—</span>{item}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="pb-20 md:pb-28">
+    <div class="container-custom"><div class="rounded-lg border border-cyan/20 bg-deep-space/60 p-8 md:p-12"><h2 class="text-3xl font-semibold text-white">Need a combined engagement?</h2><p class="mt-4 max-w-3xl text-lg leading-relaxed text-steel">Most complex programs cross service boundaries. Catdev can combine platform, security and enterprise implementation work under one technical delivery model.</p><a href="/contact" class="btn-primary mt-7">Discuss your requirements</a></div></div>
+  </section>
+</Layout>

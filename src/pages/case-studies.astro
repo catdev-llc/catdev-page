@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { caseStudies } from '../data/enterprise';
+---
+
+<Layout title="Case Studies | Catdev" description="Selected Catdev experience across financial services, secure delivery, cloud platforms and telecommunications operations.">
+  <section class="enterprise-grid border-b border-white/10 pt-36 pb-20 md:pt-44 md:pb-28"><div class="container-custom"><p class="eyebrow">Case studies</p><h1 class="max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-6xl">Complex environments. Clear engineering responsibility.</h1><p class="section-copy mt-7 max-w-3xl">Selected experience presented without disclosing confidential customer identities. Outcomes are limited to evidence already documented in the project history.</p></div></section>
+  <section class="section-padding"><div class="container-custom space-y-6">
+    {caseStudies.map((study, index) => (
+      <article class="rounded-lg border border-white/10 bg-white/[0.025] p-7 md:p-10 reveal" style={`transition-delay:${index * 70}ms`}>
+        <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+          <div><p class="text-xs font-semibold uppercase tracking-[0.16em] text-cyan">{study.industry}</p><h2 class="mt-4 text-3xl font-semibold leading-tight text-white">{study.title}</h2><div class="mt-6 flex flex-wrap gap-2">{study.tags.map((tag) => <span class="rounded border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs text-steel">{tag}</span>)}</div></div>
+          <dl class="grid gap-6"><div><dt class="text-sm font-semibold text-white">Challenge</dt><dd class="mt-2 leading-relaxed text-steel">{study.challenge}</dd></div><div><dt class="text-sm font-semibold text-white">Engagement</dt><dd class="mt-2 leading-relaxed text-steel">{study.engagement}</dd></div><div class="border-l border-cyan/40 pl-5"><dt class="text-sm font-semibold text-white">Outcome</dt><dd class="mt-2 leading-relaxed text-white/85">{study.outcome}</dd></div></dl>
+        </div>
+      </article>
+    ))}
+  </div></section>
+  <section class="pb-20 md:pb-28"><div class="container-custom"><div class="rounded-lg border border-cyan/20 bg-deep-space/60 p-8 md:flex md:items-center md:justify-between md:gap-10 md:p-10"><div><h2 class="text-3xl font-semibold text-white">A similar technical constraint?</h2><p class="mt-3 text-lg text-steel">Discuss the environment, the risk and the outcome you need.</p></div><a href="/contact" class="btn-primary mt-6 whitespace-nowrap md:mt-0">Discuss a project</a></div></div></section>
+</Layout>

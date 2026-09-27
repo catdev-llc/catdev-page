@@ -1,344 +1,127 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const focusAreas = [
-  'AI systems',
-  'Cybersecurity',
-  'Programming',
-  'DevOps',
-  'Infrastructure',
-  'Agentic workflows',
-];
-
-const projects = [
-  {
-    name: 'Hikari',
-    status: 'Working prototype',
-    theme: 'AI agent for OTDR monitoring',
-    image: null,
-    imageAlt: '',
-    logo: '/projects/hikari-logo.svg',
-    logoAlt: 'Hikari logo',
-    logoMode: 'dark',
-    description:
-      'An autonomous OTDR fault-analysis layer for dark-fiber operations. Hikari ingests ALM telemetry, SNMP traps, REST data, OTDR traces, and event streams, then uses deterministic normalization plus agentic analysis to localize faults and draft incident packages.',
-    details: [
-      'MCP adapter exposing OTDR device operations, alarm queries, port management, trace downloads, and trace analysis',
-      'Event loop for ALM alarms and operator messages, with baseline comparison, confidence scoring, and root-cause hypotheses',
-      'Firmware-derived ALM simulators for local testing of measurements, alarm transitions, monitoring cycles, and fault injection',
-    ],
-    tags: ['MCP', 'OTDR', 'SNMP', 'ALM', 'Fault analysis', 'Simulators'],
-    links: [
-      { label: 'How Hikari works', href: '/projects/hikari' },
-    ],
-  },
-  {
-    name: 'AXIOM',
-    status: 'Research platform',
-    theme: 'Self-hosted AI research',
-    image: '/projects/axiom-logo.png',
-    imageAlt: 'AXIOM logo',
-    logo: '/projects/axiom-logo.png',
-    logoAlt: 'AXIOM logo',
-    logoMode: 'plain',
-    description:
-      'A self-hosted RAG and research-agent platform for document-heavy work. AXIOM can ingest PDFs and web sources, run agentic research missions, keep citations visible, and turn gathered evidence into structured research drafts and papers.',
-    details: [
-      'PDF and web-source research workflows with document Q&A, mission planning, notes, drafts, and writing assistance',
-      'Hybrid retrieval with vector search, BM25/OpenSearch, entity extraction, knowledge graph expansion, and citation profiles',
-      'Self-hosted deployment work includes GPU worker isolation, local hardware support, OpenAI-compatible APIs, and Go backend experiments',
-    ],
-    tags: ['RAG', 'OpenSearch', 'pgvector', 'GPU workers', 'Go', 'Research'],
-    links: [
-      { label: 'How AXIOM works', href: '/projects/axiom' },
-      { label: 'GitHub repo', href: 'https://github.com/Cyb3rDudu/axiom' },
-    ],
-  },
-  {
-    name: 'cyb3r',
-    status: 'Active build',
-    theme: 'AI-assisted security workflows',
-    image: null,
-    imageAlt: '',
-    logo: '/projects/cyb3r-logo.png',
-    logoAlt: 'cyb3r logo',
-    logoMode: 'dark',
-    description:
-      'An AI systems project built around an operator-oriented reasoning model and a Pi-based tool layer. The focus is controlled security research workflows: planning, evidence handling, tool-use discipline, reassessment, and clear operator oversight.',
-    details: [
-      'Pi-based tool integration layer for controlled lab workflows and repeatable operator actions',
-      'QLoRA fine-tuning work for a Qwen 27B model focused on branch ranking, global reassessment, and tool-use discipline',
-      'Training pipeline includes curated security corpora, policy rows, evaluation samples, and Hugging Face release preparation',
-    ],
-    tags: ['Pi', 'QLoRA', 'Qwen', 'Security AI', 'Agent workflows', 'Model training'],
-    links: [
-      { label: 'How cyb3r works', href: '/projects/cyb3r' },
-      { label: 'HF model card', href: 'https://huggingface.co/Cyb3rDudu/cyb3r' },
-      { label: 'cyb3r repo', href: 'https://github.com/Cyb3rDudu/cyb3r-qlora' },
-    ],
-  },
-  {
-    name: 'Theia',
-    status: 'B2B SaaS PoC',
-    theme: 'Agentic product delivery',
-    image: null,
-    imageAlt: '',
-    logo: '/projects/theia-logo.png',
-    logoAlt: 'Theia Fiber logo',
-    logoMode: 'light',
-    description:
-      'A dark-fiber monitoring SaaS proof of concept designed and implemented end-to-end with agentic engineering workflows: product design, frontend, backend, ingestors, infrastructure, operators, and delivery artifacts.',
-    details: [
-      'Svelte/TypeScript frontend with Go backend services and admin workflows',
-      'Single-device ingestor model for ALM devices with gRPC control streams, health checks, and Kubernetes-friendly deployment',
-      'Platform pieces include infra, protobuf contracts, an operator, and an MCP device integration layer',
-    ],
-    tags: ['Svelte', 'Go', 'gRPC', 'Kubernetes', 'OTDR', 'SaaS'],
-    links: [],
-  },
-  {
-    name: 'Container-Compose',
-    status: 'Maintainer',
-    theme: 'Open source container tooling',
-    image: null,
-    imageAlt: '',
-    logo: null,
-    logoAlt: '',
-    logoMode: 'dark',
-    description:
-      'An open-source Swift tool that brings Docker Compose-like workflows to Apple Container. I currently help maintain it while it evolves around service orchestration, env files, dependencies, volumes, networks, and Apple platform behavior.',
-    details: [
-      'Compose file interpretation for Apple Container',
-      'Multi-service orchestration and service dependency handling',
-      'Open-source maintenance, issue triage, review, and implementation work',
-    ],
-    tags: ['Swift', 'Apple Container', 'Compose', 'Open Source'],
-    links: [
-      { label: 'Project repo', href: 'https://github.com/Mcrich23/Container-Compose' },
-    ],
-  },
-];
-
-const experience = [
-  {
-    title: 'Systems that behave',
-    text: 'I care about infrastructure that is understandable under pressure: Kubernetes, Linux, storage, Active Directory, backups, observability, incident response, and the operational details that decide whether recovery is calm or chaotic.',
-  },
-  {
-    title: 'Practical security engineering',
-    text: 'My security work is hands-on: security automation, lab validation, identity and infrastructure risk, web security, and the constraints that keep testing controlled and useful.',
-  },
-  {
-    title: 'AI as engineering material',
-    text: 'I use agents and LLMs as parts of systems, not as magic. That means datasets, tool contracts, eval loops, model behavior, policy layers, and the boring glue that makes AI useful in real workflows.',
-  },
-];
-
-const signals = [
-  {
-    title: 'Security background',
-    text: 'OSCP, OSCE, CPTS, CWES, OSWP, hands-on lab work, security automation, and practical validation workflows.',
-  },
-  {
-    title: 'Production operations',
-    text: 'Kubernetes, Linux, storage, Active Directory, cloud operations, backup strategy, observability, and incident response across real production environments.',
-  },
-  {
-    title: 'AI engineering',
-    text: 'Agent workflows, tool contracts, RAG systems, fine-tuning datasets, evaluation loops, and local/self-hosted inference setups.',
-  },
-  {
-    title: 'Hardware tinkering',
-    text: 'Comfortable around the physical layer too: Raspberry Pi builds, network devices, lab hardware, soldering, firmware-derived simulators, and debugging with tools in hand.',
-  },
-];
+import { caseStudies, engineeringProjects, services, solutions, trustSignals } from '../data/enterprise';
 ---
 
-<Layout
-  title="catdev - Jan Mueller"
-  description="Jan Mueller builds and tinkers with AI, cybersecurity, programming, DevOps, infrastructure, hardware, and agentic systems. Projects include Hikari, AXIOM, cyb3r, Theia, and Container-Compose."
->
-  <section id="top" class="relative min-h-[92vh] overflow-hidden pt-28 flex items-center">
-    <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
-    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/70 to-transparent"></div>
-
-    <div class="container-custom relative">
-      <div class="grid lg:grid-cols-[1.02fr_0.98fr] gap-12 lg:gap-16 items-center">
+<Layout title="Catdev | Enterprise Technology Engineering" description="Catdev provides cloud, security and enterprise technology services—from architecture and implementation to integration and ongoing operations.">
+  <section class="enterprise-grid relative overflow-hidden border-b border-white/10 pt-32 md:pt-40">
+    <div class="absolute left-[58%] top-20 h-80 w-80 rounded-full bg-electric/10 blur-3xl"></div>
+    <div class="container-custom relative pb-20 md:pb-28">
+      <div class="grid items-center gap-14 lg:grid-cols-[1.12fr_0.88fr] lg:gap-20">
         <div class="reveal">
-          <p class="text-cyan font-mono text-sm mb-5">AI / cybersecurity / systems engineering</p>
-          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.03] mb-7">
-            <span class="text-white">I build systems, test assumptions,</span>
-            <span class="text-gradient"> and follow the interesting problems.</span>
+          <p class="eyebrow">Enterprise Technology Engineering</p>
+          <h1 class="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.035em] text-white md:text-7xl">
+            Engineering secure enterprise technology.
           </h1>
-          <p class="text-xl md:text-2xl text-steel leading-relaxed max-w-3xl mb-8">
-            I am Jan Mueller, a multi-interested systems geek working across AI, cybersecurity,
-            programming, DevOps, infrastructure, and hardware-adjacent experiments.
+          <p class="mt-7 max-w-3xl text-xl leading-relaxed text-steel md:text-2xl">
+            Catdev provides cloud, security and enterprise technology services for organizations operating complex and business-critical systems.
           </p>
-
-          <div class="flex flex-wrap gap-3 mb-10">
-            {focusAreas.map(area => (
-              <span class="rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-steel">
-                {area}
-              </span>
-            ))}
-          </div>
-
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#projects" class="btn-primary">See Projects</a>
-            <a href="#collaborate" class="btn-secondary">Collaborate</a>
+          <p class="mt-5 max-w-3xl text-lg leading-relaxed text-steel">
+            From architecture and implementation to integration and ongoing operations, we help organizations modernize infrastructure, strengthen security and deploy enterprise technology successfully.
+          </p>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a href="/services" class="btn-primary">Explore our services</a>
+            <a href="/contact" class="btn-secondary">Discuss a project</a>
           </div>
         </div>
 
-        <div class="reveal" style="transition-delay: 120ms">
-          <div class="rounded-lg border border-white/10 bg-deep-space/70 overflow-hidden shadow-2xl shadow-black/30">
-            <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3 bg-white/[0.03]">
-              <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
-              <span class="h-3 w-3 rounded-full bg-amber-300/80"></span>
-              <span class="h-3 w-3 rounded-full bg-emerald-400/80"></span>
-              <span class="ml-3 text-xs font-mono text-steel">~/catdev/profile</span>
+        <div class="reveal" style="transition-delay: 100ms">
+          <div class="rounded-lg border border-white/10 bg-[#0d1430]/90 p-2 shadow-2xl shadow-black/30">
+            <div class="border-b border-white/10 px-5 py-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-steel">Delivery lifecycle</p>
             </div>
-            <div class="p-5 md:p-7 font-mono text-sm md:text-base leading-relaxed">
-              <p><span class="text-emerald-300">$</span> whoami</p>
-              <p class="text-white mt-1">security engineer / programmer / infra person / AI tinkerer</p>
-              <p class="mt-5"><span class="text-emerald-300">$</span> current-work --summary</p>
-              <div class="mt-3 grid gap-3">
-                <div class="rounded-md bg-midnight/80 border border-emerald-400/20 p-4">
-                  <div class="text-emerald-300">Hikari</div>
-                  <div class="text-steel text-sm">agentic monitoring, MCP device adapters, dark-fiber failure analysis</div>
-                </div>
-                <div class="rounded-md bg-midnight/80 border border-amber-300/20 p-4">
-                  <div class="text-amber-200">AXIOM</div>
-                  <div class="text-steel text-sm">self-hosted RAG, research agents, PDF/web evidence, papers</div>
-                </div>
-                <div class="rounded-md bg-midnight/80 border border-cyan/20 p-4">
-                  <div class="text-cyan">cyb3r</div>
-                  <div class="text-steel text-sm">AI security workflow tooling paired with a reasoning model</div>
-                </div>
-              </div>
-              <p class="mt-5 text-steel">// Open to serious collaboration where systems, security, and AI meet.</p>
+            <ol class="divide-y divide-white/10">
+              {['Architecture', 'Implementation', 'Integration', 'Operations'].map((step, index) => (
+                <li class="flex items-center gap-5 px-5 py-5">
+                  <span class="font-mono text-sm text-cyan">0{index + 1}</span>
+                  <span class="text-lg font-medium text-white">{step}</span>
+                  <span class="ml-auto h-px w-10 bg-gradient-to-r from-cyan/60 to-transparent"></span>
+                </li>
+              ))}
+            </ol>
+            <div class="m-2 rounded-md border border-cyan/20 bg-cyan/[0.05] p-5 text-sm leading-relaxed text-steel">
+              Senior engineering ownership from initial technical decisions through production handover and lifecycle support.
             </div>
           </div>
         </div>
       </div>
+
+      <div class="mt-16 grid border-y border-white/10 sm:grid-cols-3">
+        {trustSignals.map((signal, index) => (
+          <div class:list={['px-0 py-5 sm:px-6', index > 0 && 'border-t border-white/10 sm:border-l sm:border-t-0']}>
+            <p class="font-semibold text-white">{signal.value}</p>
+            <p class="mt-1 text-sm leading-relaxed text-steel">{signal.label}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section id="about" class="section-padding relative">
+  <section class="section-padding" id="services">
     <div class="container-custom">
-      <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-start">
-        <div class="reveal">
-          <p class="text-cyan font-mono text-sm mb-4">profile</p>
-          <h2 class="text-4xl md:text-5xl font-bold mb-6">
-            <span class="text-white">Systems, security, AI,</span>
-            <br />
-            <span class="text-gradient">and the glue between them.</span>
-          </h2>
-          <p class="text-lg text-steel leading-relaxed">
-            My work usually starts where domains overlap: agents that need real tools, infrastructure
-            that has to survive failure, security research that should become usable software, and
-            hardware that needs to be understood before it can be automated.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-5">
-          {experience.map((item, index) => (
-            <div class="card-glass p-6 reveal" style={`transition-delay: ${index * 90}ms`}>
-              <div class="glow-effect"></div>
-              <div class="relative z-10">
-                <h3 class="text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p class="text-steel leading-relaxed text-sm">{item.text}</p>
-              </div>
+      <div class="max-w-3xl reveal">
+        <p class="eyebrow">Core services</p>
+        <h2 class="section-title">Technical depth where enterprise systems meet production reality.</h2>
+        <p class="section-copy mt-6">Three connected service areas cover the platform, its security and the enterprise technology running on it.</p>
+      </div>
+      <div class="mt-12 grid gap-5 lg:grid-cols-3">
+        {services.map((service, index) => (
+          <article class="card-glass flex min-h-full flex-col p-7 reveal" style={`transition-delay:${index * 80}ms`}>
+            <div class="mb-8 flex items-center justify-between">
+              <span class="font-mono text-sm text-cyan">{service.number}</span>
+              <span class="h-px w-16 bg-gradient-to-r from-cyan/50 to-transparent"></span>
             </div>
+            <h3 class="text-2xl font-semibold text-white">{service.title}</h3>
+            <p class="mt-4 leading-relaxed text-steel">{service.summary}</p>
+            <ul class="mt-7 space-y-2.5 border-t border-white/10 pt-6">
+              {service.capabilities.map((item) => <li class="flex gap-3 text-sm text-steel"><span class="text-cyan">—</span>{item}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+      <a href="/services" class="mt-8 inline-flex items-center gap-2 font-semibold text-cyan transition-colors hover:text-white">View service details <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="border-y border-white/10 bg-white/[0.02] section-padding" id="solutions">
+    <div class="container-custom">
+      <div class="grid gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-20">
+        <div class="reveal">
+          <p class="eyebrow">Solutions</p>
+          <h2 class="section-title">Organized around the problem, not the toolchain.</h2>
+          <p class="section-copy mt-6">Focused engagements combine architecture, implementation and operational thinking around a clear customer outcome.</p>
+          <a href="/solutions" class="btn-secondary mt-8">Explore solutions</a>
+        </div>
+        <div class="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-2 reveal">
+          {solutions.map((solution) => (
+            <article class="bg-midnight p-7">
+              <h3 class="text-xl font-semibold text-white">{solution.title}</h3>
+              <p class="mt-3 leading-relaxed text-steel">{solution.summary}</p>
+              <p class="mt-5 border-l border-cyan/40 pl-4 text-sm leading-relaxed text-white/80">{solution.outcome}</p>
+            </article>
           ))}
         </div>
       </div>
     </div>
   </section>
 
-  <section id="projects" class="section-padding relative overflow-hidden">
-    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
-    <div class="container-custom relative">
-      <div class="max-w-4xl mb-14 reveal">
-        <p class="text-cyan font-mono text-sm mb-4">recent projects</p>
-        <h2 class="text-4xl md:text-5xl font-bold mb-5">
-          <span class="text-white">Things I am building,</span>
-          <span class="text-gradient"> maintaining, and testing.</span>
-        </h2>
-        <p class="text-xl text-steel leading-relaxed">
-          A selection of current and recent work across dark-fiber monitoring, research automation,
-          security AI, product prototypes, and open-source infrastructure tooling.
-        </p>
+  <section class="section-padding" id="case-studies">
+    <div class="container-custom">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between reveal">
+        <div class="max-w-3xl">
+          <p class="eyebrow">Selected experience</p>
+          <h2 class="section-title">Evidence from complex delivery environments.</h2>
+        </div>
+        <a href="/case-studies" class="font-semibold text-cyan transition-colors hover:text-white">All case studies →</a>
       </div>
-
-      <div class="grid gap-6">
-        {projects.map((project, index) => (
-          <article class="card-glass p-6 md:p-8 reveal" style={`transition-delay: ${index * 70}ms`}>
-            <div class="glow-effect"></div>
-            <div class="relative z-10 grid lg:grid-cols-[0.85fr_1.15fr] gap-8">
-              <div>
-                {project.logo && (
-                  <div class="mb-5 flex items-center gap-4">
-                    <div class={`h-24 w-24 rounded-lg border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 ${
-                      project.logoMode === 'light'
-                        ? 'bg-white p-3'
-                        : project.logoMode === 'plain'
-                          ? 'border-transparent bg-transparent p-0'
-                          : 'bg-black/70 p-3'
-                    }`}>
-                      <img src={project.logo} alt={project.logoAlt} class="max-h-full max-w-full object-contain" loading="lazy" />
-                    </div>
-                    <div>
-                      <div class="text-sm text-steel">{project.theme}</div>
-                      <div class="text-2xl font-bold text-white">{project.name}</div>
-                    </div>
-                  </div>
-                )}
-                {project.image && !project.logo && project.name !== 'AXIOM' && (
-                  <div class="mb-6 overflow-hidden rounded-lg border border-white/10 bg-midnight/50">
-                    <img src={project.image} alt={project.imageAlt} class="w-full h-auto object-cover" loading="lazy" />
-                  </div>
-                )}
-                {project.image && !project.logo && project.name === 'AXIOM' && (
-                  <div class="mb-6 rounded-lg border border-white/10 bg-midnight/50 p-6 flex items-center justify-center">
-                    <img src={project.image} alt={project.imageAlt} class="h-32 w-32 object-contain" loading="lazy" />
-                  </div>
-                )}
-                <div class="flex flex-wrap items-center gap-3 mb-4">
-                  <span class="rounded-md bg-cyan/10 border border-cyan/25 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan">
-                    {project.status}
-                  </span>
-                  <span class="text-steel text-sm">{project.theme}</span>
-                </div>
-                {!project.logo && <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">{project.name}</h3>}
-                <p class="text-steel leading-relaxed mb-5">{project.description}</p>
-                {project.links.length > 0 && (
-                  <div class="flex flex-wrap gap-3">
-                    {project.links.map(link => (
-                      <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined} class="text-cyan hover:text-white transition-colors text-sm font-semibold">
-                        {link.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <ul class="space-y-3 mb-5">
-                  {project.details.map(detail => (
-                    <li class="flex gap-3 text-sm text-steel leading-relaxed">
-                      <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-300"></span>
-                      <span>{detail}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div class="flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <span class="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs text-steel">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+      <div class="mt-12 grid gap-5 lg:grid-cols-3">
+        {caseStudies.map((study, index) => (
+          <article class="rounded-lg border border-white/10 bg-white/[0.025] p-7 reveal" style={`transition-delay:${index * 80}ms`}>
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-cyan">{study.industry}</p>
+            <h3 class="mt-4 text-2xl font-semibold leading-snug text-white">{study.title}</h3>
+            <div class="mt-6 space-y-5 text-sm leading-relaxed text-steel">
+              <div><span class="mb-1 block font-semibold text-white">Challenge</span>{study.challenge}</div>
+              <div><span class="mb-1 block font-semibold text-white">Outcome</span>{study.outcome}</div>
             </div>
           </article>
         ))}
@@ -346,85 +129,58 @@ const signals = [
     </div>
   </section>
 
-  <section id="proof" class="section-padding relative">
+  <section class="border-y border-white/10 bg-[#080d25] section-padding" id="partners">
     <div class="container-custom">
-      <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <div class="reveal">
-          <p class="text-cyan font-mono text-sm mb-4">background</p>
-          <h2 class="text-4xl md:text-5xl font-bold mb-6">
-            <span class="text-white">Fifteen-plus years around</span>
-            <span class="text-gradient"> production systems and security.</span>
-          </h2>
-          <div class="space-y-5 text-lg text-steel leading-relaxed">
-            <p>
-              My work has crossed software engineering, cloud and infrastructure operations,
-              storage, Kubernetes, Active Directory, security engineering, and recovery planning.
-              That mix keeps me pragmatic: I like systems that can be reasoned about when they fail.
-            </p>
-            <p>
-              I also maintain and contribute to open source, study continuously, and use agentic
-              workflows heavily in my own engineering process. I also like the hands-on edge of
-              computing: small devices, lab networks, soldering, firmware behavior, and simulators
-              that make hardware-dependent systems testable.
-            </p>
-          </div>
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a href="https://github.com/Cyb3rDudu" target="_blank" rel="noopener noreferrer" class="btn-secondary">GitHub</a>
-            <a href="https://www.linkedin.com/in/jan-mueller-3b0a18177/" target="_blank" rel="noopener noreferrer" class="btn-secondary">LinkedIn</a>
+          <p class="eyebrow">Technology partnerships</p>
+          <h2 class="section-title">A technical partner around the product.</h2>
+          <p class="section-copy mt-6">Catdev works with technology vendors that need strong solution engineering, implementation and professional services capabilities around their products.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="/partners" class="btn-primary">Partner with Catdev</a>
+            <a href="/contact" class="btn-secondary">Start a conversation</a>
           </div>
         </div>
-
-        <div class="reveal" style="transition-delay: 120ms">
-          <div class="rounded-lg border border-white/10 bg-white/[0.03] p-6 md:p-8">
-            <h3 class="text-xl font-bold text-white mb-6">Signals</h3>
-            <div class="grid gap-4">
-              {signals.map(signal => (
-                <div class="rounded-lg border border-white/10 bg-midnight/60 p-5">
-                  <h4 class="text-white font-semibold mb-2">{signal.title}</h4>
-                  <p class="text-steel text-sm leading-relaxed">{signal.text}</p>
-                </div>
-              ))}
+        <div class="grid grid-cols-2 gap-3 reveal">
+          {['Pre-sales engineering', 'Proof of concept', 'Enterprise deployment', 'Integration & migration', 'Customer enablement', 'Lifecycle support'].map((item, index) => (
+            <div class="min-h-28 rounded-md border border-white/10 bg-white/[0.03] p-5">
+              <span class="font-mono text-xs text-cyan">0{index + 1}</span>
+              <p class="mt-3 font-medium text-white">{item}</p>
             </div>
-            <div class="mt-6 grid sm:grid-cols-3 gap-3 text-center">
-              <div class="rounded-lg bg-midnight/70 border border-white/10 p-4">
-                <div class="text-2xl font-bold text-white">15+</div>
-                <div class="text-xs text-steel">years in IT</div>
-              </div>
-              <div class="rounded-lg bg-midnight/70 border border-white/10 p-4">
-                <div class="text-2xl font-bold text-white">OSS</div>
-                <div class="text-xs text-steel">maintainer work</div>
-              </div>
-              <div class="rounded-lg bg-midnight/70 border border-white/10 p-4">
-                <div class="text-2xl font-bold text-white">HW</div>
-                <div class="text-xs text-steel">lab and hardware tinkering</div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  <section id="collaborate" class="section-padding relative overflow-hidden">
-    <div class="absolute inset-0 hexagon-pattern opacity-15"></div>
-    <div class="container-custom relative">
-      <div class="rounded-lg border border-cyan/25 bg-deep-space/70 p-8 md:p-12 reveal">
-        <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+  <section class="section-padding" id="engineering-depth">
+    <div class="container-custom">
+      <div class="max-w-3xl reveal">
+        <p class="eyebrow">Proof of engineering depth</p>
+        <h2 class="section-title">Working systems across infrastructure, software and operations.</h2>
+        <p class="section-copy mt-6">Selected projects demonstrate the cross-domain engineering behind Catdev’s enterprise work.</p>
+      </div>
+      <div class="mt-12 divide-y divide-white/10 border-y border-white/10">
+        {engineeringProjects.map((project, index) => (
+          <a href={project.href} class="group grid gap-4 py-7 md:grid-cols-[0.34fr_0.66fr_auto] md:items-center reveal" style={`transition-delay:${index * 70}ms`}>
+            <div><p class="text-2xl font-semibold text-white group-hover:text-cyan">{project.name}</p><p class="mt-1 text-sm text-cyan">{project.discipline}</p></div>
+            <p class="leading-relaxed text-steel">{project.summary}</p>
+            <span class="text-xl text-steel group-hover:text-white" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-20 md:pb-28">
+    <div class="container-custom">
+      <div class="enterprise-grid rounded-lg border border-cyan/20 bg-deep-space/70 p-8 md:p-12 reveal">
+        <div class="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
           <div>
-            <p class="text-cyan font-mono text-sm mb-4">collaboration</p>
-            <h2 class="text-4xl md:text-5xl font-bold mb-5">
-              <span class="text-white">Open to collaborate where</span>
-              <span class="text-gradient"> AI, security, and systems overlap.</span>
-            </h2>
-            <p class="text-xl text-steel leading-relaxed">
-              I am interested in serious technical work: agent tooling, security automation,
-              infrastructure, product prototypes, research systems, and operationally grounded AI.
-            </p>
+            <p class="eyebrow">Start a conversation</p>
+            <h2 class="text-3xl font-semibold tracking-tight text-white md:text-4xl">Bring architecture, implementation and operations into one technical conversation.</h2>
           </div>
-          <div class="flex flex-col gap-4">
-            <a href="/contact" class="btn-primary justify-center">Start a Conversation</a>
-            <a href="mailto:info@catdev.io" class="btn-secondary justify-center">info@catdev.io</a>
-          </div>
+          <a href="/contact" class="btn-primary whitespace-nowrap">Discuss your requirements</a>
         </div>
       </div>
     </div>

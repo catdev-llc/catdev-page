@@ -5,24 +5,24 @@ export default {
     extend: {
       colors: {
         // Primary brand colors
-        'electric': '#2169B3',
-        'ocean': '#094E96',
+        'electric': '#2F6FA8',
+        'ocean': '#1F4F7A',
         // Dark theme
-        'midnight': '#0A0E27',
-        'deep-space': '#151B3B',
-        'steel': '#8B92A8',
+        'midnight': '#080D1D',
+        'deep-space': '#11182C',
+        'steel': '#9AA6B8',
         // Accents
-        'cyan': '#00D4FF',
-        'purple': '#6B4FFF',
+        'cyan': '#66BFD3',
+        'purple': '#536F9D',
       },
       fontFamily: {
         sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(ellipse at top, var(--tw-gradient-stops))',
-        'gradient-hero': 'linear-gradient(135deg, #2169B3 0%, #6B4FFF 100%)',
-        'gradient-accent': 'linear-gradient(90deg, #00D4FF 0%, #2169B3 100%)',
-        'gradient-glow': 'radial-gradient(circle at center, rgba(0, 212, 255, 0.15) 0%, transparent 70%)',
+        'gradient-hero': 'linear-gradient(135deg, #2F6FA8 0%, #536F9D 100%)',
+        'gradient-accent': 'linear-gradient(90deg, #66BFD3 0%, #2F6FA8 100%)',
+        'gradient-glow': 'radial-gradient(circle at center, rgba(102, 191, 211, 0.13) 0%, transparent 70%)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
@@ -55,7 +55,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [],
 }

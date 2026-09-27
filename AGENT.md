@@ -4,9 +4,9 @@ Guidance for coding agents working in this repository.
 
 ## Project Overview
 
-This is the current `catdev` portfolio site. It presents Jan Mueller as an individual builder working across AI, cybersecurity, programming, DevOps, infrastructure, hardware, and agentic systems. It should not drift back into agency-style positioning.
+This is the current Catdev enterprise technology website. It presents CATDEV LLC as a focused, engineering-led company working across cloud and platform engineering, security engineering, and enterprise technology services.
 
-The company/legal entity name is lowercase `catdev`. Treat it as the legal/freelance framework, not as a polished consulting agency brand.
+Keep the positioning company-first without manufacturing scale. Do not invent employees, offices, customers, partnerships, certifications, metrics, SLAs, awards, or regional entities. Existing engineering projects support the proposition as proof of technical depth rather than defining the company as a personal portfolio.
 
 ## Development Commands
 
@@ -26,7 +26,7 @@ npm run preview  # Preview the production build locally
 ## Important Content Rules
 
 - Write for external visitors who do not know the local folders, private context, or implementation history.
-- Keep the tone professional and technical, but personal. This is a CV/portfolio surface, not a company sales page.
+- Keep the tone restrained, technical, senior, and enterprise-oriented. This is a company site, not a CV or personal portfolio.
 - Avoid LLM-looking headings such as "Why it matters".
 - Avoid explaining internal folder paths or why a diagram was changed.
 - Do not add claims about certifications, clients, or availability unless they are already present and accurate.
@@ -37,6 +37,11 @@ npm run preview  # Preview the production build locally
 ```text
 src/pages/index.astro
 src/pages/contact.astro
+src/pages/services.astro
+src/pages/solutions.astro
+src/pages/partners.astro
+src/pages/case-studies.astro
+src/pages/company.astro
 src/pages/imprint.astro
 src/pages/privacy.astro
 src/pages/projects/axiom.astro
@@ -64,7 +69,7 @@ The current expandable diagram behavior is implemented globally in `src/layouts/
 
 ## Design Notes
 
-- The site uses a dark, technical visual language with cyan and restrained accent colors.
+- The site uses a dark, restrained technical visual language with strong typography, whitespace, cyan accents and clear information hierarchy.
 - Keep project logos and diagrams visually balanced.
 - Do not introduce remote analytics, remote fonts, cookie banners, or IP lookups unless explicitly requested.
 - Prefer local assets and static rendering.

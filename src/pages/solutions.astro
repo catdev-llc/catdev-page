@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { solutions } from '../data/enterprise';
+
+const stages = [
+  ['Assess', 'Understand the current architecture, constraints, risks and operating model.'],
+  ['Design', 'Define a pragmatic target state, migration path and technical controls.'],
+  ['Implement', 'Build, integrate and validate the solution in the customer environment.'],
+  ['Enable', 'Document, transfer knowledge and establish the operating lifecycle.'],
+];
+---
+
+<Layout title="Solutions | Catdev" description="Outcome-oriented solutions for cloud modernization, secure software delivery, enterprise integration and private AI infrastructure.">
+  <section class="enterprise-grid border-b border-white/10 pt-36 pb-20 md:pt-44 md:pb-28"><div class="container-custom"><p class="eyebrow">Solutions</p><h1 class="max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-6xl">A controlled path from a complex problem to an operating system.</h1><p class="section-copy mt-7 max-w-3xl">Solution engagements are defined around business and operational outcomes, then supported by the engineering disciplines required to deliver them.</p></div></section>
+
+  <section class="section-padding"><div class="container-custom"><div class="grid gap-5 md:grid-cols-2">
+    {solutions.map((solution, index) => (
+      <article class="card-glass p-8 md:p-9 reveal" style={`transition-delay:${index * 60}ms`}>
+        <p class="font-mono text-sm text-cyan">0{index + 1}</p><h2 class="mt-5 text-3xl font-semibold text-white">{solution.title}</h2><p class="mt-4 text-lg leading-relaxed text-steel">{solution.summary}</p><div class="mt-7 border-l border-cyan/40 pl-5"><p class="text-xs font-semibold uppercase tracking-[0.16em] text-steel">Intended outcome</p><p class="mt-2 leading-relaxed text-white/90">{solution.outcome}</p></div>
+      </article>
+    ))}
+  </div></div></section>
+
+  <section class="border-y border-white/10 bg-white/[0.02] section-padding"><div class="container-custom"><div class="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20"><div><p class="eyebrow">Delivery approach</p><h2 class="section-title">Structure without unnecessary ceremony.</h2><p class="section-copy mt-6">The work is adapted to the environment, but the responsibility stays clear.</p></div><ol class="grid gap-4 sm:grid-cols-2">{stages.map(([title, copy], index) => <li class="rounded-lg border border-white/10 bg-midnight/60 p-6"><span class="font-mono text-sm text-cyan">0{index + 1}</span><h3 class="mt-4 text-xl font-semibold text-white">{title}</h3><p class="mt-3 leading-relaxed text-steel">{copy}</p></li>)}</ol></div></div></section>
+  <section class="section-padding"><div class="container-custom text-center"><p class="eyebrow">Next step</p><h2 class="mx-auto max-w-3xl section-title">Start with the constraint that matters most.</h2><p class="mx-auto mt-5 max-w-2xl section-copy">We can scope an engagement around a migration, security requirement, product deployment or operating challenge.</p><a href="/contact" class="btn-primary mt-8">Discuss a solution</a></div></section>
+</Layout>

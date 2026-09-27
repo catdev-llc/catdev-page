@@ -1,8 +1,8 @@
 # catdev
 
-**Build what comes next.**
+**Enterprise Technology Engineering.**
 
-Modern website for CATDEV LLC — a full-stack engineering company specializing in secure, AI-driven cloud solutions.
+Website for CATDEV LLC — an engineering-led company providing cloud and platform engineering, security engineering, and enterprise technology services.
 
 🌐 **Live:** [catdev.io](https://catdev.io)
 
@@ -15,8 +15,8 @@ Modern website for CATDEV LLC — a full-stack engineering company specializing 
 
 ## Features
 
-- Dark theme with animated gradients
-- Glassmorphism UI components
+- Restrained enterprise-focused visual system
+- Service, solution, partner, case-study, and company routes
 - Scroll-triggered animations
 - Responsive mobile navigation
 - SEO optimized
@@ -54,6 +54,11 @@ src/
 │   └── Layout.astro
 ├── pages/
 │   ├── index.astro
+│   ├── services.astro
+│   ├── solutions.astro
+│   ├── partners.astro
+│   ├── case-studies.astro
+│   ├── company.astro
 │   └── imprint.astro
 └── styles/
     └── global.css
@@ -61,19 +66,11 @@ src/
 
 ## Services
 
-**AI & Intelligent Systems**
-- AI & Agentic Systems
-- Software Development
-
-**Cloud & Infrastructure**
-- Kubernetes & Containers
-- DevOps & Platform Engineering
-- Cloud Migrations
-- Managed Services
+**Cloud & Platform Engineering**
 
 **Security Engineering**
-- Cybersecurity
-- Penetration Testing
+
+**Enterprise Technology Services**
 
 ## Deployment
 

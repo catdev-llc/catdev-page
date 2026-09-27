@@ -12,11 +12,11 @@ const layers = [
   },
   {
     title: 'Reasoning model',
-    text: 'The fine-tuned model provides dedicated penetration-testing reasoning, branch ranking, pivot decisions, rabbit-hole avoidance, and controlled tool-call behavior. Think of it as the CPU of the harness.',
+    text: 'The fine-tuned model provides dedicated security reasoning, branch ranking, pivot decisions, rabbit-hole avoidance, and controlled tool-call behavior. Think of it as the CPU of the harness.',
   },
   {
     title: 'pi-pen-kit tool layer',
-    text: 'pi-pen-kit exposes real offensive tooling to the harness: controlled reverse shells, Sliver, Metasploit, listener/session management, and operator-level C2 workflows.',
+    text: 'pi-pen-kit exposes controlled security-validation tooling to the harness, with listener and session management kept behind explicit operator workflows.',
   },
 ];
 
@@ -30,7 +30,7 @@ const toolExamples = [
 
 const modelGoals = [
   'Structured security reasoning instead of generic assistant behavior',
-  'Global reassessment during multi-step pentest tasks',
+  'Global reassessment during multi-step security validation tasks',
   'Ranking attack branches instead of brute-forcing the first idea',
   'Knowing when to abort low-yield rabbit holes',
   'Preserving tool-call competence while improving operator judgment',
@@ -38,13 +38,13 @@ const modelGoals = [
 ---
 
 <Layout
-  title="cyb3r - offensive AI operator"
-  description="How cyb3r is built: a Pi-based agent harness, a penetration-testing reasoning model, and pi-pen-kit tooling for reverse shells, C2 frameworks, and operator-level AI workflows."
+  title="cyb3r | Controlled security automation"
+  description="How cyb3r is built: a Pi-based agent harness, a security reasoning model, controlled tooling, evidence handling and operator-supervised workflows."
 >
   <section class="relative overflow-hidden pt-32 pb-20">
     <div class="absolute inset-0 hexagon-pattern opacity-20"></div>
     <div class="container-custom relative">
-      <a href="/#projects" class="text-cyan hover:text-white transition-colors text-sm font-semibold">Back to projects</a>
+      <a href="/#engineering-depth" class="text-cyan hover:text-white transition-colors text-sm font-semibold">Back to engineering projects</a>
 
       <div class="mt-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
         <div class="reveal">
@@ -54,18 +54,18 @@ const modelGoals = [
             </div>
             <div>
               <p class="text-cyan font-mono text-sm">cyb3r</p>
-              <p class="text-steel text-sm">offensive AI operator stack</p>
+              <p class="text-steel text-sm">controlled security automation</p>
             </div>
           </div>
 
           <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
             <span class="text-white">An agent harness for</span>
-            <span class="text-gradient"> penetration-testing workflows.</span>
+            <span class="text-gradient"> controlled security workflows.</span>
           </h1>
           <p class="text-xl text-steel leading-relaxed">
-            cyb3r is the system I am building around Pi: an agent runtime, an operator harness,
-            a dedicated reasoning model, and pi-pen-kit tooling that lets AI workflows use real
-            pentesting capabilities without losing operator control.
+            cyb3r is a research system built around Pi: an agent runtime, an operator harness,
+            a dedicated reasoning model, and controlled tooling for repeatable security validation
+            without losing operator oversight.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ const modelGoals = [
         <p class="text-cyan font-mono text-sm mb-4">system model</p>
         <h2 class="text-4xl md:text-5xl font-bold mb-5">The stack has four layers</h2>
         <p class="text-xl text-steel leading-relaxed">
-          I think about cyb3r less as “a model” and more as an operator system.
+          cyb3r is designed less as “a model” and more as an operator system.
           The model matters, but it only becomes useful when it can drive tools,
           preserve context, and reason like an operator.
         </p>
@@ -108,7 +108,7 @@ const modelGoals = [
       <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-start">
         <div class="reveal">
           <p class="text-cyan font-mono text-sm mb-4">pi-pen-kit</p>
-          <h2 class="text-4xl md:text-5xl font-bold mb-6">Pentesting tools as agent-native capabilities</h2>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">Security tools as controlled agent capabilities</h2>
           <p class="text-lg text-steel leading-relaxed mb-6">
             pi-pen-kit is the bridge between cyb3r and the tools an operator actually uses.
             It is not just a list of command wrappers. It keeps interactive state alive so the
@@ -171,7 +171,7 @@ const modelGoals = [
           <div class="rounded-lg border border-red-400/30 bg-red-400/10 p-5">
             <h3 class="text-white font-semibold mb-2">Partners wanted</h3>
             <p class="text-steel text-sm leading-relaxed">
-              Training hardware is currently the limiting factor. I am actively looking for
+              Training hardware is currently the limiting factor. The project is open to
               partners who can help with compute, evaluation, applied security feedback, or
               controlled real-world workflows.
             </p>

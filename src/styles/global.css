@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../../tailwind.config.mjs";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @layer base {
   html {
@@ -9,7 +9,7 @@
 
   body {
     @apply bg-midnight text-white font-sans antialiased;
-    background: radial-gradient(ellipse at top, #151B3B 0%, #0A0E27 100%);
+    background: radial-gradient(ellipse at 70% 0%, #131d38 0%, #080d1d 48%, #060916 100%);
     min-height: 100vh;
   }
 
@@ -29,35 +29,35 @@
   }
 
   .btn-primary {
-    @apply relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white rounded-lg overflow-hidden transition-all duration-300;
-    background: linear-gradient(135deg, #2169B3 0%, #6B4FFF 100%);
-    box-shadow: 0 0 30px rgba(33, 105, 179, 0.3);
+    @apply relative inline-flex items-center justify-center rounded-md px-7 py-3.5 text-base font-semibold text-white overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, #2f6fa8 0%, #405f93 100%);
+    box-shadow: 0 10px 30px rgba(35, 91, 145, 0.27);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 40px rgba(33, 105, 179, 0.5), 0 0 80px rgba(107, 79, 255, 0.3);
+    box-shadow: 0 14px 34px rgba(48, 103, 157, 0.38);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white rounded-lg border border-white/20 transition-all duration-300 hover:bg-white/5 hover:border-white/40;
+    @apply inline-flex items-center justify-center rounded-md border border-white/20 px-7 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-white/5 hover:border-white/40;
   }
 
   .card-glass {
     @apply relative rounded-lg overflow-hidden;
-    background: rgba(21, 27, 59, 0.6);
+    background: rgba(16, 23, 43, 0.76);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .card-glass:hover {
-    border-color: rgba(0, 212, 255, 0.3);
-    box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+    border-color: rgba(102, 191, 211, 0.3);
+    box-shadow: 0 0 40px rgba(62, 130, 176, 0.11);
   }
 
   .glow-effect {
     @apply absolute inset-0 opacity-0 transition-opacity duration-500;
-    background: radial-gradient(circle at center, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(102, 191, 211, 0.13) 0%, transparent 70%);
   }
 
   .card-glass:hover .glow-effect {
@@ -65,16 +65,59 @@
   }
 
   .hexagon-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='%232169B3' stroke-opacity='0.05' stroke-width='1'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='%234c83b2' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E");
     background-size: 60px 60px;
   }
 
   .section-padding {
-    @apply py-24 md:py-32 lg:py-40;
+    @apply py-20 md:py-28 lg:py-32;
   }
 
   .container-custom {
     @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-cyan;
+  }
+
+  .section-title {
+    @apply text-3xl font-semibold leading-tight tracking-tight text-white md:text-5xl;
+  }
+
+  .section-copy {
+    @apply text-lg leading-relaxed text-steel md:text-xl;
+  }
+
+  .enterprise-grid {
+    background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .brand-mark,
+  .brand-wordmark {
+    @apply block shrink-0 bg-[#c8dceb] transition-colors duration-200;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
+
+  .brand-mark {
+    -webkit-mask-image: url('/brand/catdev-mark.png');
+    mask-image: url('/brand/catdev-mark.png');
+  }
+
+  .brand-wordmark {
+    -webkit-mask-image: url('/brand/catdev-wordmark.png');
+    mask-image: url('/brand/catdev-wordmark.png');
+  }
+
+  a:hover > .brand-mark,
+  a:hover > .brand-wordmark {
+    @apply bg-white;
   }
 }
 
@@ -101,20 +144,26 @@
   transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0E27;
+  background: #080d1d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2169B3;
+  background: #2f6fa8;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #094E96;
+  background: #1f4f7a;
 }
