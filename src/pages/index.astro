@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { caseStudies, engineeringProjects, services, solutions, trustSignals } from '../data/enterprise';
+import { caseStudies, services, solutions, trustSignals } from '../data/enterprise';
 ---
 
 <Layout title="Catdev | Enterprise Technology Engineering" description="Catdev provides cloud, security and enterprise technology services—from architecture and implementation to integration and ongoing operations.">
@@ -153,26 +153,7 @@ import { caseStudies, engineeringProjects, services, solutions, trustSignals } f
     </div>
   </section>
 
-  <section class="section-padding" id="engineering-depth">
-    <div class="container-custom">
-      <div class="max-w-3xl reveal">
-        <p class="eyebrow">Proof of engineering depth</p>
-        <h2 class="section-title">Working systems across infrastructure, software and operations.</h2>
-        <p class="section-copy mt-6">Selected projects demonstrate the cross-domain engineering behind Catdev’s enterprise work.</p>
-      </div>
-      <div class="mt-12 divide-y divide-white/10 border-y border-white/10">
-        {engineeringProjects.map((project, index) => (
-          <a href={project.href} class="group grid gap-4 py-7 md:grid-cols-[0.34fr_0.66fr_auto] md:items-center reveal" style={`transition-delay:${index * 70}ms`}>
-            <div><p class="text-2xl font-semibold text-white group-hover:text-cyan">{project.name}</p><p class="mt-1 text-sm text-cyan">{project.discipline}</p></div>
-            <p class="leading-relaxed text-steel">{project.summary}</p>
-            <span class="text-xl text-steel group-hover:text-white" aria-hidden="true">↗</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="pb-20 md:pb-28">
+  <section class="section-padding">
     <div class="container-custom">
       <div class="enterprise-grid rounded-lg border border-cyan/20 bg-deep-space/70 p-8 md:p-12 reveal">
         <div class="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
