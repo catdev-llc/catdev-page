@@ -43,13 +43,9 @@ npm run preview
 src/
 ├── components/
 │   ├── Header.astro
-│   ├── Footer.astro
-│   └── sections/
-│       ├── Hero.astro
-│       ├── Services.astro
-│       ├── Approach.astro
-│       ├── About.astro
-│       └── Contact.astro
+│   └── Footer.astro
+├── data/
+│   └── enterprise.ts
 ├── layouts/
 │   └── Layout.astro
 ├── pages/
@@ -59,10 +55,18 @@ src/
 │   ├── partners.astro
 │   ├── case-studies.astro
 │   ├── company.astro
-│   └── imprint.astro
+│   ├── contact.astro
+│   ├── privacy.astro
+│   ├── imprint.astro
+│   └── projects/
+│       ├── axiom.astro
+│       ├── cyb3r.astro
+│       └── hikari.astro
 └── styles/
     └── global.css
 ```
+
+Supporting project diagrams and their Archify source files live in `public/projects/` and `archify/`.
 
 ## Services
 
